@@ -19,7 +19,7 @@ import httpx
 import streamlit as st
 from PIL import Image, ImageDraw, ImageFont, ImageOps
 
-from drenavision.core.config import get_settings
+from drenavision.core.config import Settings, get_settings
 from drenavision.core.image_io import InvalidImageError, decode_image
 from drenavision.inference.video_codec import prepare_browser_video
 
@@ -159,42 +159,71 @@ def analyze_image(data: bytes, name: str, point: str) -> dict:
 
 
 def analyze_video(source: Path, point: str) -> dict:
+    # A Streamlit session may outlive configuration changes. Read and validate
+    # the current configuration for every job instead of reusing module state.
+    runtime = Settings()
+    if not runtime.model_path.is_file():
+        raise RuntimeError(
+            "O modelo de análise não foi encontrado. Reinicie com iniciar.ps1 -Reiniciar. "
+            "Se o aviso continuar, confira a instalação do modelo no README."
+        )
     token = uuid4().hex
     destination = RESULTS_DIR / "videos" / f"{token}.mp4"
     command = [
         sys.executable,
+        "-X",
+        "utf8",
         str(ROOT / "ferramentas/scripts/process_video.py"),
         "--input",
         str(source),
         "--output",
         str(destination),
         "--model",
-        str(SETTINGS.model_path),
+        str(runtime.model_path),
         "--database",
-        str(SETTINGS.database_path),
+        str(runtime.database_path),
         "--evidence-dir",
-        str(SETTINGS.evidence_dir),
+        str(runtime.evidence_dir),
         "--conf",
-        str(SETTINGS.confidence_threshold),
+        str(runtime.confidence_threshold),
         "--iou",
-        str(SETTINGS.iou_threshold),
+        str(runtime.iou_threshold),
         "--device",
-        SETTINGS.device,
+        runtime.device,
         "--track",
     ]
     if point:
         command.extend(["--point-id", point])
     completed = subprocess.run(
-        command, cwd=ROOT, capture_output=True, text=True, timeout=7200, check=False
+        command,
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        errors="replace",
+        timeout=7200,
+        check=False,
+        creationflags=subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0,
     )
-    if completed.returncode != 0 or not destination.is_file():
+    sidecar = destination.with_suffix(".json")
+    if completed.returncode != 0 or not destination.is_file() or not sidecar.is_file():
         log = RESULTS_DIR / "logs" / f"video_{token}.log"
         log.parent.mkdir(parents=True, exist_ok=True)
-        log.write_text(completed.stderr + completed.stdout, encoding="utf-8")
+        log.write_text(
+            json.dumps(
+                {"command": command, "exit_code": completed.returncode},
+                ensure_ascii=False,
+                indent=2,
+            )
+            + "\n"
+            + completed.stderr
+            + completed.stdout,
+            encoding="utf-8",
+        )
         raise RuntimeError(
             "Não foi possível concluir este vídeo. Tente um clipe mais curto ou outro arquivo. O detalhe foi salvo para a equipe técnica."
         )
-    payload = json.loads(destination.with_suffix(".json").read_text(encoding="utf-8"))
+    payload = json.loads(sidecar.read_text(encoding="utf-8"))
     return {"kind": "video", "payload": payload, "path": str(destination)}
 
 

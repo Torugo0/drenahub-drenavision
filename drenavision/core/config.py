@@ -9,6 +9,14 @@ from pydantic import Field, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
+LEGACY_LOCAL_PATHS = {
+    "artifacts/models/best.pt": "resultados/local/models/best.pt",
+    "artifacts/events/drenavision.db": "resultados/local/events/drenavision.db",
+    "artifacts/events/evidence": "resultados/local/events/evidence",
+    "resultados/models/best.pt": "resultados/local/models/best.pt",
+    "resultados/events/drenavision.db": "resultados/local/events/drenavision.db",
+    "resultados/events/evidence": "resultados/local/events/evidence",
+}
 
 
 class Settings(BaseSettings):
@@ -45,9 +53,20 @@ class Settings(BaseSettings):
     @classmethod
     def resolve_project_path(cls, value: Path) -> Path:
         expanded = value.expanduser()
-        if expanded.is_absolute():
-            return expanded.resolve()
-        return (PROJECT_ROOT / expanded).resolve()
+        resolved = (
+            expanded if expanded.is_absolute() else PROJECT_ROOT / expanded
+        ).resolve()
+        # Accept old default paths after upgrading the repository. Preserve
+        # existing files and custom locations, including external workspaces.
+        if not resolved.exists():
+            try:
+                relative = resolved.relative_to(PROJECT_ROOT).as_posix()
+            except ValueError:
+                return resolved
+            migrated = LEGACY_LOCAL_PATHS.get(relative)
+            if migrated:
+                return (PROJECT_ROOT / migrated).resolve()
+        return resolved
 
     @field_validator("device")
     @classmethod

@@ -58,13 +58,13 @@ drena_hub_avc/
 ├── dados/                  entradas e origem dos dados
 │   ├── examples/           exemplos de foto/vídeo e seus créditos
 │   ├── manifests/          fontes, licenças, divisões e hashes
-│   ├── raw/                downloads originais locais
-│   └── processed/          imagens e rótulos prontos para o modelo
+│   ├── raw/                downloads originais (local; fora do Git)
+│   └── processed/          imagens e rótulos do modelo (local; fora do Git)
 ├── resultados/             tudo que o sistema produz
 │   ├── metrics/            evidências oficiais de treino e avaliação
 │   ├── demo/               exemplos anotados da avaliação
 │   ├── dataset_preview/    amostras para conferir as anotações
-│   └── local/              modelo, vídeos, histórico e saídas locais
+│   └── local/              modelo, vídeos e histórico (fora do Git)
 ├── ferramentas/            recursos para desenvolver e reproduzir
 │   ├── scripts/            comandos de dados, treino e avaliação
 │   ├── configs/            parâmetros do treinamento e da avaliação
@@ -78,6 +78,28 @@ e `docs/`. Dados completos, pesos, histórico e saídas grandes ficam locais;
 fontes, configurações, resultados selecionados e documentação ficam no Git.
 Veja [dados/README.md](dados/README.md) e
 [resultados/README.md](resultados/README.md) para os detalhes internos.
+
+### O que cada pasta contém no Git
+
+Esta tabela descreve os arquivos publicados no repositório. As pastas marcadas
+como locais na árvore acima aparecem depois da preparação ou do uso e não são
+enviadas ao GitHub.
+
+| Pasta | Conteúdo versionado no Git | Conteúdo que fica somente no computador |
+|---|---|---|
+| `drenavision/` | Código Python: `api/` define os endpoints; `core/` contém configuração, contratos e acesso ao histórico; `data/` prepara os datasets; `inference/` executa treino, avaliação, detecção e conversão de vídeo; `ui/` monta a interface. | Caches do Python. O banco e o modelo usados pelo código ficam em `resultados/local/`. |
+| `dados/` | `dataset.yaml` define as classes; `dataset_sources.csv` registra as fontes; `manifests/` guarda origem, divisão treino/validação/teste, hashes e relatórios; `examples/` contém seis vídeos reais, duas fotos, capas e seus créditos em `sources.json`. | `raw/`, `processed/`, `cache/` e `interim/`: downloads completos, dados preparados e arquivos de trabalho. |
+| `resultados/` | `metrics/` preserva métricas reais, curvas, matrizes e exemplos de acertos/erros; `demo/` contém imagens anotadas, a captura da interface e a validação dos exemplos; `dataset_preview/` mostra uma montagem das anotações. | `local/`: pesos do modelo, vídeos analisados, banco SQLite, evidências de uso, logs, caches e execuções completas. |
+| `ferramentas/` | `scripts/` reúne os comandos para preparar exemplos/dados, treinar, avaliar e processar mídia; `configs/` contém `train.yaml` e `evaluate.yaml`; `tests/` reúne os testes automatizados. | Dados e resultados são gravados nos destinos de `dados/` ou `resultados/`, conforme a tarefa; não ficam misturados aos scripts. |
+| `docs/` | `TECNICO.md` explica arquitetura e API; `REPRODUZIR.md` ensina a instalar e repetir o pipeline; `MODEL_CARD.md` registra resultados e limites do modelo; `ENTREGA.md` organiza a avaliação FIAP; o notebook permite executar o pipeline no Colab. | Nenhum modelo, dataset completo ou histórico de uso é armazenado aqui. |
+
+Na raiz também ficam versionados `iniciar.ps1` (inicialização), `requirements*.txt`
+e `pyproject.toml` (dependências e configuração Python), `.env.example` (modelo
+de configuração), `.streamlit/config.toml` (aparência e limite de upload),
+`.gitignore`/`.gitattributes` (regras do Git), `LICENSE`, `CITATION.cff` e
+`THIRD_PARTY_NOTICES.md` (licença, citação e créditos). O ambiente `.venv/`, o
+arquivo pessoal `.env` e os caches não são versionados. O checkpoint `best.pt`
+é distribuído pela release, separadamente do histórico de código do Git.
 
 ## Guia rápido para o avaliador
 

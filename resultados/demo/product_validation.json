@@ -9,6 +9,48 @@
   "iou_threshold": 0.45,
   "tracking": true,
   "model_or_threshold_changed_for_examples": false,
+  "upload_regression": {
+    "verified_at_utc": "2026-11-16T21:36:54Z",
+    "reported_failure": "O subprocesso procurava o checkpoint ausente em artifacts/models/best.pt, antes de abrir o vídeo.",
+    "correction": "Configurações atuais lidas por análise, compatibilidade com caminhos legados locais e verificação do checkpoint antes do subprocesso; serviços reiniciados.",
+    "method": "Envio dos três arquivos pelo seletor da interface, botão Analisar foto ou vídeo, reprodução no navegador e consulta dos eventos na API/histórico.",
+    "completed_uploads": 3,
+    "processed_frames": 700,
+    "model_or_threshold_changed": false,
+    "items": [
+      {
+        "file": "rato_rua.mp4",
+        "event_id": "5a81298e-f021-41cf-b8b8-b3af6641e875",
+        "processed_frames": 240,
+        "duration_seconds": 12,
+        "browser_playback_seconds_observed": 7.7291,
+        "codec": "h264",
+        "output_sha256": "bbfe9760fdec136fc87f70f2f34a204541207b0fb8728af548e81b094d28e9d5",
+        "detections": 0
+      },
+      {
+        "file": "rato_close.mp4",
+        "event_id": "4610c81f-e515-4292-9b17-b3c3d15c0743",
+        "processed_frames": 220,
+        "duration_seconds": 11,
+        "browser_playback_seconds_observed": 11,
+        "codec": "h264",
+        "output_sha256": "1de61a12edcdadf37ddfda9132e6c23ab5a7d7438babaeabf767b7953213a99e",
+        "detections": 0
+      },
+      {
+        "file": "sarjeta_residuos.mp4",
+        "event_id": "184a5179-000d-4199-bb89-05002f99181c",
+        "processed_frames": 240,
+        "duration_seconds": 12,
+        "browser_playback_seconds_observed": 9.7321,
+        "codec": "h264",
+        "output_sha256": "c9e2c842f0ed5c694ef457b368c3dca4d174360a2ef24ebbc8be185f76126b14",
+        "detections": 3
+      }
+    ],
+    "interpretation": "A falha operacional de upload foi corrigida nos três casos. Zero detecções de rato continua sendo limitação do modelo, e não falha de processamento. As marcações da sarjeta exigem revisão visual."
+  },
   "functional_result": {
     "completed_inputs": 8,
     "videos": 6,

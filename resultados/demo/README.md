@@ -46,3 +46,10 @@ um novo treinamento. Os arquivos completos ficam em
 `ralo_lixo.jpg`, de Tdorante10 (CC BY-SA 4.0). A origem, licença e transformação
 da foto estão em `dados/examples/sources.json`; as caixas e a tela foram
 acrescentadas pelo DrenaVision.
+
+`upload_video_validado.jpg` e `upload_sarjeta_validado.jpg` registram a
+reprodução após o envio pelo seletor de arquivos da interface. A seção
+`upload_regression` de `product_validation.json` registra os três testes do
+erro de caminho antigo do modelo: 700 quadros processados, reprodução
+confirmada e eventos no histórico. As filmagens mantêm os créditos e licenças
+por arquivo em `dados/examples/sources.json`.
