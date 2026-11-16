@@ -1,0 +1,35 @@
+{
+  "seed": 42,
+  "images": 432,
+  "images_by_split": {
+    "train": 308,
+    "val": 62,
+    "test": 62
+  },
+  "images_by_source": {
+    "click_trash": 140,
+    "stagnant_water": 152,
+    "irodent": 140
+  },
+  "boxes_by_class": {
+    "obstrucao_visivel": 259,
+    "agua_acumulada": 1488,
+    "animal_visivel": 140
+  },
+  "negative_images": 13,
+  "source_pool_audit": {
+    "stagnant_water": {
+      "usable_candidates": 1974,
+      "exact_duplicates_excluded": 167
+    },
+    "click_trash": {
+      "downloaded_candidates": 140
+    },
+    "irodent": {
+      "usable_candidates": 446,
+      "exact_duplicates_excluded": 0
+    }
+  },
+  "dataset_yaml": "datasets/processed/drenavision/dataset.yaml",
+  "manifest": "datasets/manifests/dataset_manifest.csv"
+}

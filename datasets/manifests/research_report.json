@@ -1,0 +1,183 @@
+{
+  "generated_from": "versioned repository source catalog",
+  "selected": [
+    {
+      "key": "stagnant_water",
+      "title": "Dataset of Stagnant Water and Wet Surface",
+      "landing_url": "https://data.mendeley.com/datasets/y6zyrnxbfm/4",
+      "download_url": "https://data.mendeley.com/public-files/datasets/y6zyrnxbfm/files/b1892735-9b83-4519-9088-1c50d982b14a/file_downloaded",
+      "version": "4",
+      "license_id": "CC-BY-4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "expected_bytes": 330169869,
+      "checksum_algorithm": "sha256",
+      "checksum": "427e336858a996ee967abdbfc94c5582b96f496ed85d3261632183d47dd39f40",
+      "raw_subdir": "stagnant_water",
+      "notes": "1976 pares anotados em YOLO; a classe source 0 (water) e mapeada para agua_acumulada. Raw data e wet surface isolada sao excluidos.",
+      "source_classes": {
+        "0": "water",
+        "1": "wet surface"
+      },
+      "target_mapping": {
+        "0": 1
+      },
+      "excluded": [
+        "Raw data directory",
+        "source class 1 (wet surface)"
+      ],
+      "decision": "selected",
+      "accessed_at": "2026-11-16",
+      "local_archive": {
+        "path": "datasets/raw/stagnant_water/stagnant_water.zip",
+        "exists": true,
+        "bytes": 330169869,
+        "actual_checksum": "427e336858a996ee967abdbfc94c5582b96f496ed85d3261632183d47dd39f40",
+        "checksum_matches": true
+      }
+    },
+    {
+      "key": "click_trash",
+      "title": "CLICK Trash Dataset v2",
+      "landing_url": "https://data.mendeley.com/datasets/htcvvz6fm2/2",
+      "download_url": "https://data.mendeley.com/public-files/datasets/htcvvz6fm2/files/811798c3-3f08-4101-ad81-1d2564c91446/file_downloaded",
+      "version": "2",
+      "license_id": "CC-BY-4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "expected_bytes": null,
+      "checksum_algorithm": "sha256",
+      "checksum": "902fd9665e3ca84222540ed5071d6a6d114ec09e785c2f174509b28fbd2e2d42",
+      "raw_subdir": "click_trash",
+      "notes": "1126 fotografias reais; usa anotacoes YOLO single-class revisadas. O downloader usa HTTP Range e nao transfere o ZIP completo.",
+      "source_classes": {
+        "0": "trash"
+      },
+      "target_mapping": {
+        "0": 0
+      },
+      "excluded": [
+        "13-class label set; single-class reviewed labels are used"
+      ],
+      "decision": "selected",
+      "accessed_at": "2026-11-16",
+      "local_selection_manifest": {
+        "path": "datasets/raw/click_trash/sample/selection.json",
+        "exists": true
+      }
+    },
+    {
+      "key": "irodent",
+      "title": "iRodent: rodents in the wild",
+      "landing_url": "https://doi.org/10.5281/zenodo.8250392",
+      "download_url": "https://zenodo.org/api/records/8250392/files/irodent.tar.gz/content",
+      "version": "1.0",
+      "license_id": "Apache-2.0 record; source images CC-BY-NC",
+      "license_url": "https://creativecommons.org/licenses/by-nc/4.0/",
+      "expected_bytes": 511341662,
+      "checksum_algorithm": "md5",
+      "checksum": "e2d7ac2e4ddffe7c51bd97352f09f7f0",
+      "raw_subdir": "irodent",
+      "notes": "Metadados declaram 443 imagens, mas os JSONs COCO do arquivo indexam 447 (357 train + 90 test). O registro Zenodo declara Apache-2.0, mas as imagens-fonte sao CC BY-NC; uso comercial requer revisao.",
+      "source_classes": {
+        "1": "rodent"
+      },
+      "target_mapping": {
+        "1": 2
+      },
+      "excluded": [
+        "keypoints and masks are not training targets in this detector"
+      ],
+      "decision": "selected",
+      "accessed_at": "2026-11-16",
+      "local_archive": {
+        "path": "datasets/raw/irodent/irodent.tar.gz",
+        "exists": true,
+        "bytes": 511341662,
+        "actual_checksum": "e2d7ac2e4ddffe7c51bd97352f09f7f0",
+        "checksum_matches": true
+      }
+    }
+  ],
+  "investigated_not_selected": [
+    {
+      "title": "drain_data",
+      "provider": "Roboflow Universe",
+      "url": "https://universe.roboflow.com/-jd8tk/drain_data",
+      "license": "Public Domain (as displayed by provider)",
+      "observed": "139 preview images; classes debris and drain; zero dataset versions",
+      "decision": "excluded",
+      "reason": "no exportable dataset version was available on the accessed page",
+      "accessed_at": "2026-11-16"
+    },
+    {
+      "title": "UncleanDrain search results",
+      "provider": "Roboflow Universe",
+      "url": "https://universe.roboflow.com/search?q=UncleanDrain",
+      "license": "varies by result; must be checked per dataset version",
+      "observed": "provider search returned drain-related projects",
+      "decision": "excluded",
+      "reason": "export flow required provider sign-in; no authentication was bypassed",
+      "accessed_at": "2026-11-16"
+    },
+    {
+      "title": "rat detection search results",
+      "provider": "Roboflow Universe",
+      "url": "https://universe.roboflow.com/search?q=rat%20detection",
+      "license": "varies by result; must be checked per dataset version",
+      "observed": "multiple rat detection projects and versions were discoverable",
+      "decision": "excluded",
+      "reason": "export required sign-in; iRodent offered a fixed direct archive and provenance",
+      "accessed_at": "2026-11-16"
+    },
+    {
+      "title": "water leakage search results",
+      "provider": "Roboflow Universe",
+      "url": "https://universe.roboflow.com/search?q=water%20leakage",
+      "license": "varies by result; must be checked per dataset version",
+      "observed": "water and wet-surface projects were discoverable",
+      "decision": "excluded",
+      "reason": "export required sign-in; the versioned Mendeley water archive was reproducible",
+      "accessed_at": "2026-11-16"
+    },
+    {
+      "title": "Open Images V7 — Mouse (/m/04rmv)",
+      "provider": "Google Open Images",
+      "url": "https://storage.googleapis.com/openimages/web/download.html",
+      "class_id": "/m/04rmv",
+      "license": "annotations CC BY 4.0; image licenses are recorded per image",
+      "observed": "bounding-box annotations can be filtered by the Mouse class ID",
+      "decision": "excluded",
+      "reason": "each selected image needs its own rights audit; iRodent was a bounded fixed source",
+      "accessed_at": "2026-11-16"
+    },
+    {
+      "title": "DAMM mouse detection",
+      "provider": "Hugging Face Datasets",
+      "url": "https://huggingface.co/datasets/gauravkaul/DAMM_mouse_detection",
+      "license": "CC BY 4.0",
+      "observed": "COCO-style mouse boxes/masks with many laboratory and video-derived frames",
+      "decision": "excluded",
+      "reason": "correlated lab frames require sequence-aware splitting and are less representative of deployment",
+      "accessed_at": "2026-11-16"
+    },
+    {
+      "title": "26 Class Object Detection Dataset (VIAD-derived)",
+      "provider": "Kaggle",
+      "url": "https://www.kaggle.com/datasets/mohamedgobara/26-class-object-detection-dataset",
+      "license": "Kaggle metadata reports Apache-2.0; upstream VIAD/Roboflow rights were not reconciled",
+      "observed": "includes a Rat class and detection annotations",
+      "decision": "excluded",
+      "reason": "license/provenance conflict, near-duplicate augmentations, and domain gap made reuse insufficiently auditable",
+      "accessed_at": "2026-11-16"
+    },
+    {
+      "title": "Floating Waste and Aquatic Vegetation Image Dataset from Turbid Rivers",
+      "provider": "Mendeley Data",
+      "url": "https://data.mendeley.com/datasets/j26w4m645z/1",
+      "license": "CC BY 4.0",
+      "observed": "YOLO boxes for floating_waste and river_vegetation; photographs and video-derived frames",
+      "decision": "reserve alternative",
+      "reason": "floating river waste is less aligned with solid drain obstruction; correlated frames need grouping",
+      "accessed_at": "2026-11-16"
+    }
+  ]
+}

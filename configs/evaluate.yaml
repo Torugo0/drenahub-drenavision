@@ -1,0 +1,20 @@
+# Avaliacao exclusivamente no split test, nunca usado para ajuste de hiperparametros.
+checkpoint: artifacts/models/best.pt
+data: datasets/processed/drenavision/dataset.yaml
+project: artifacts/evaluation
+name: test_yolo26n_drenavision
+
+imgsz: 640
+batch: 8
+confidence: 0.001
+iou: 0.60
+match_iou: 0.50
+example_confidence: 0.35
+workers: 4
+device: auto
+plots: true
+save_json: true
+error_examples_per_type: 6
+# 0 analisa todo o split test. Use valor positivo apenas para depuracao.
+max_error_images: 0
+

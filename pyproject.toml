@@ -1,0 +1,61 @@
+[build-system]
+requires = ["setuptools>=80", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "drenavision"
+version = "0.1.0"
+description = "Visao computacional para triagem assistida de riscos em drenagem urbana."
+readme = "README.md"
+requires-python = ">=3.11,<3.14"
+license = { text = "AGPL-3.0-only" }
+authors = [{ name = "DrenaHub" }]
+dependencies = [
+  "fastapi==0.163.1",
+  "faster-coco-eval==1.8.0",
+  "lap==0.5.14",
+  "httpx==0.28.1",
+  "numpy==2.2.6",
+  "opencv-python==4.14.0.94",
+  "Pillow==12.0.0",
+  "pydantic==2.14.3",
+  "pydantic-settings==2.16.3",
+  "python-multipart==0.0.34",
+  "PyYAML==6.0.3",
+  "remotezip==0.12.3",
+  "streamlit==1.67.0",
+  "torch==2.14.1",
+  "torchvision==0.29.1",
+  "ultralytics==8.4.215",
+  "uvicorn[standard]==0.54.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest==9.2.0",
+  "pytest-cov==7.0.0",
+  "ruff==0.17.5",
+]
+
+[tool.setuptools.packages.find]
+include = ["app*"]
+
+[tool.pytest.ini_options]
+addopts = "-ra --strict-markers"
+testpaths = ["tests"]
+markers = [
+  "integration: exercises optional heavyweight or service integrations",
+]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 88
+extend-exclude = ["datasets", "artifacts", "runs", ".venv"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM"]
+ignore = ["E501"]
+
+[tool.ruff.lint.per-file-ignores]
+"notebooks/*.ipynb" = ["E402", "I001"]
+

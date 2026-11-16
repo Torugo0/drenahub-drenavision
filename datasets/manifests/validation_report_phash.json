@@ -1,0 +1,45 @@
+{
+  "valid": true,
+  "dataset_root": "datasets/processed/drenavision",
+  "error_count": 0,
+  "warning_count": 0,
+  "statistics": {
+    "images_by_split": {
+      "train": 308,
+      "val": 62,
+      "test": 62
+    },
+    "labels_by_split": {
+      "train": 308,
+      "val": 62,
+      "test": 62
+    },
+    "boxes_by_class": {
+      "obstrucao_visivel": 259,
+      "agua_acumulada": 1488,
+      "animal_visivel": 140
+    },
+    "boxes_by_split_and_class": {
+      "train": {
+        "obstrucao_visivel": 182,
+        "agua_acumulada": 989,
+        "animal_visivel": 100
+      },
+      "val": {
+        "obstrucao_visivel": 40,
+        "agua_acumulada": 223,
+        "animal_visivel": 20
+      },
+      "test": {
+        "obstrucao_visivel": 37,
+        "agua_acumulada": 276,
+        "animal_visivel": 20
+      }
+    },
+    "negative_images": 13,
+    "exact_duplicate_groups": 0,
+    "phash_enabled": true,
+    "phash_threshold": 4
+  },
+  "issues": []
+}

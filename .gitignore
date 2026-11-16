@@ -1,0 +1,57 @@
+# Python and tooling
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Secrets and local overrides
+.env
+.env.*
+!.env.example
+
+# Raw/processed datasets are reproducible but not committed
+datasets/raw/
+datasets/interim/
+datasets/processed/
+datasets/cache/
+!datasets/README.md
+!datasets/dataset.yaml
+!datasets/dataset_sources.csv
+!datasets/manifests/
+!datasets/manifests/**
+
+# Model runs, local evidence and databases
+artifacts/models/*.pt
+artifacts/models/*.onnx
+artifacts/models/*.engine
+*.pt
+*.onnx
+*.engine
+artifacts/runs/
+artifacts/training/
+artifacts/evaluation/
+artifacts/events/
+artifacts/predictions/
+artifacts/videos/
+artifacts/tmp/
+artifacts/*.db*
+artifacts/dataset_preview/*/
+!artifacts/**/.gitkeep
+runs/
+
+# Large media
+*.mp4
+*.avi
+*.mov
+*.mkv
+
+# IDE and OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+

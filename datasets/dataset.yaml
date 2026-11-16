@@ -1,0 +1,12 @@
+# Ultralytics YOLO dataset configuration.
+# Paths are resolved relative to this YAML file.
+path: processed/drenavision
+train: images/train
+val: images/val
+test: images/test
+
+names:
+  0: obstrucao_visivel
+  1: agua_acumulada
+  2: animal_visivel
+
