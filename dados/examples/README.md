@@ -7,7 +7,8 @@ o modelo e produz as marcações quando encontra algo.
 Os clipes têm até 12 segundos, H.264, 20 FPS e áudio removido para abrir nos
 navegadores. As fotos foram reduzidas. Todas as modificações, hashes e links dos
 originais estão em `sources.json`. Os arquivos com `_capa` são quadros reais
-extraídos dos próprios vídeos.
+completos extraídos dos próprios vídeos, sem caixas ou recortes. O instante de
+cada capa está no campo `thumbnail_seconds` do catálogo.
 
 | Exemplo | Autor | Origem | Licença da mídia |
 |---|---|---|---|
@@ -27,15 +28,32 @@ dos arquivos CC BY-SA.
 
 ## Como interpretar
 
-As categorias do catálogo descrevem o conteúdo dos arquivos. Elas não são
-previsões nem rótulos de avaliação. Estes exemplos externos não foram adicionados
-ao treino, validação ou teste do modelo. O rato parcialmente escondido e o
-ambiente doméstico ajudam a observar limites de generalização; uma falha de
-detecção deve permanecer visível.
+Os exemplos têm assuntos diferentes. Somente `rato_close`, `rato_rua` e
+`rato_residuos` são filmagens de roedores conforme a fonte. Os outros três vídeos
+mostram drenagem/água; as duas fotos mostram bueiros com resíduos e não contêm
+rato visível. A classe `animal_visivel` do modelo representa roedores de espécies
+variadas dos dados de treino; uma caixa dessa classe não identifica a espécie.
+
+As categorias descrevem o assunto, sem garantir detecção ou servir como caixas
+de referência. A capa de `rato_rua`, aos 9 s, mantém a cena completa: a ocorrência
+é pequena, parcialmente escondida e pouco legível. Ela permanece como exemplo
+difícil, sem alegar acerto ou criar uma caixa de referência incerta. As capas de
+`rato_close` (0,5 s) e `rato_residuos` (0 s) mostram o assunto mais claramente.
+
+No protocolo de adaptação v2, quadros de `rato_close` e `rato_residuos` foram
+anotados para treino. Recortes sem alvos de `canal_residuos` e `drenagem_chuva`
+viraram negativos de treino. Esses quatro clipes são fontes de adaptação e não
+podem ser apresentados como teste independente do candidato. `rato_rua` continua
+fora do treino como regressão separada; os demais exemplos servem à regressão
+manual. Os splits oficiais de validação/teste usam imagens próprias do dataset.
+O campo `evaluation_role` registra essa distinção por arquivo.
 
 Não há filmagem de um objeto colocado artificialmente no ralo nesta biblioteca.
 Para testar um bueiro com lixo de perto, use as fotografias reais `ralo_lixo.jpg`
-e `bueiro_agua.jpg`; para movimento com resíduos, use `sarjeta_residuos.mp4`.
+e `bueiro_agua.jpg`; para observar água em movimento, use `sarjeta_residuos.mp4`.
+O objeto junto à parede da sarjeta é de natureza incerta; não é ground truth de
+lixo nem prova de presença de animal. Uma falha ou falso alerta deve permanecer
+visível na validação.
 
 ## Recriar os arquivos
 
@@ -43,6 +61,13 @@ Na raiz do repositório, com o ambiente ativado:
 
 ```powershell
 python ferramentas/scripts/prepare_examples.py
+```
+
+Para atualizar somente descrições e capas dos arquivos já existentes, sem
+reencodar nem mudar os hashes dos vídeos/fotos:
+
+```powershell
+python ferramentas/scripts/prepare_examples.py --refresh-catalog
 ```
 
 O comando consulta os créditos/licenças no Wikimedia Commons, verifica o SHA-1

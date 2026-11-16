@@ -1,5 +1,7 @@
 # DrenaVision — DrenaHub
 
+Versão **0.3.0**: painel compacto em azul e detector v2 com anotações de roedores corrigidas.
+
 ## Ficha técnica do MVP
 
 | Campo | Descrição |
@@ -32,8 +34,8 @@ serviços que já estavam abertos.
 
 Há **seis filmagens reais e duas fotografias** de roedores, resíduos e drenagem
 em [dados/examples/](dados/examples/README.md), com origem e licença por arquivo.
-Os vídeos de entrada e os resultados usam MP4 H.264 para reprodução no navegador;
-o resultado mostra também um quadro de destaque com as marcações.
+Os vídeos usam MP4 H.264. O painel organiza envio e resultado lado a lado no
+desktop e limita a altura da mídia; informações técnicas ficam recolhidas.
 
 Os alertas são indicações visuais para uma pessoa verificar. A ausência de
 alerta não comprova que o local está seguro. A classe de animais foi treinada
@@ -90,7 +92,7 @@ enviadas ao GitHub.
 | `drenavision/` | Código Python: `api/` define os endpoints; `core/` contém configuração, contratos e acesso ao histórico; `data/` prepara os datasets; `inference/` executa treino, avaliação, detecção e conversão de vídeo; `ui/` monta a interface. | Caches do Python. O banco e o modelo usados pelo código ficam em `resultados/local/`. |
 | `dados/` | `dataset.yaml` define as classes; `dataset_sources.csv` registra as fontes; `manifests/` guarda origem, divisão treino/validação/teste, hashes e relatórios; `examples/` contém seis vídeos reais, duas fotos, capas e seus créditos em `sources.json`. | `raw/`, `processed/`, `cache/` e `interim/`: downloads completos, dados preparados e arquivos de trabalho. |
 | `resultados/` | `metrics/` preserva métricas reais, curvas, matrizes e exemplos de acertos/erros; `demo/` contém imagens anotadas, a captura da interface e a validação dos exemplos; `dataset_preview/` mostra uma montagem das anotações. | `local/`: pesos do modelo, vídeos analisados, banco SQLite, evidências de uso, logs, caches e execuções completas. |
-| `ferramentas/` | `scripts/` reúne os comandos para preparar exemplos/dados, treinar, avaliar e processar mídia; `configs/` contém `train.yaml` e `evaluate.yaml`; `tests/` reúne os testes automatizados. | Dados e resultados são gravados nos destinos de `dados/` ou `resultados/`, conforme a tarefa; não ficam misturados aos scripts. |
+| `ferramentas/` | `scripts/` prepara exemplos/dados, audita/corrige anotações, treina, avalia e processa mídia; `configs/` contém parâmetros históricos v1 e os atuais `train_v2.yaml`/`evaluate_v2.yaml`; `tests/` reúne os testes automatizados. | Dados e resultados são gravados nos destinos de `dados/` ou `resultados/`, conforme a tarefa; não ficam misturados aos scripts. |
 | `docs/` | `TECNICO.md` explica arquitetura e API; `REPRODUZIR.md` ensina a instalar e repetir o pipeline; `MODEL_CARD.md` registra resultados e limites do modelo; `ENTREGA.md` organiza a avaliação FIAP; o notebook permite executar o pipeline no Colab. | Nenhum modelo, dataset completo ou histórico de uso é armazenado aqui. |
 
 Na raiz também ficam versionados `iniciar.ps1` (inicialização), `requirements*.txt`
@@ -108,40 +110,45 @@ arquivo pessoal `.env` e os caches não são versionados. O checkpoint `best.pt`
 | Produto funcionando | `iniciar.ps1` → foto/vídeo → resultado marcado → histórico |
 | Código da interface e API | `drenavision/ui/` e `drenavision/api/` |
 | Preparação e origem dos dados | `drenavision/data/` e `dados/manifests/` |
-| Treinamento customizado | `ferramentas/configs/train.yaml` e `resultados/metrics/training_manifest.json` |
-| Avaliação independente | `resultados/metrics/evaluation_metrics.json` e exemplos de erro |
+| Treinamento customizado atual | `ferramentas/configs/train_v2.yaml` e `resultados/metrics/v2/training_manifest.json` |
+| Comparação no teste com rótulos corrigidos | `resultados/metrics/v2/comparison.json`, `candidate_test_metrics.json` e `baseline_test_metrics.json` |
+| Histórico v1 | arquivos originais em `resultados/metrics/`; não usar suas caixas de animal como referência atual |
 | Requisitos e pendências FIAP | [ENTREGA.md](docs/ENTREGA.md) |
 
 O modelo e os vídeos de demonstração são distribuídos na
-[release v0.2.0-product](https://github.com/Torugo0/drenahub-drenavision/releases/tag/v0.2.0-product).
+[release v0.3.0-model-v2](https://github.com/Torugo0/drenahub-drenavision/releases/tag/v0.3.0-model-v2).
 O repositório permanece privado nesta etapa; o acesso exige autorização na conta.
 
 ## Resultados reais e alcance
 
-O treinamento usou 432 imagens: 308 para treino, 62 para validação e 62 para
-teste. Foram concluídas 70 épocas, com seleção do melhor modelo na época 50.
+O novo treinamento usou **557/62/62 imagens** de treino/validação/teste e
+concluiu 60 épocas, com melhor checkpoint na época 35. A auditoria encontrou
+305/447 caixas iRodent incorporando pontos ausentes `(0,0,0)`; a nova anotação
+usa o envelope dos pontos visíveis com margem, preservando os dados antigos.
 
-| Resultado no teste separado | Valor |
-|---|---:|
-| Precisão | 0,4447 |
-| Recall | 0,4796 |
-| mAP@50 | 0,3781 |
-| mAP@50–95 | 0,2196 |
+Comparação dos dois modelos nas **mesmas 62 imagens e caixas corrigidas v2**:
 
-Água é a principal limitação medida: recall 0,1159. As fontes públicas ainda
-representam pouco os ralos, grelhas e garagens do uso pretendido. Os exemplos
-facilitam o teste do produto; as métricas vêm exclusivamente da avaliação do
-conjunto de teste. Detalhes, hashes e resultados por classe estão no
-[MODEL_CARD.md](docs/MODEL_CARD.md).
+| Resultado no teste | Modelo v1 reavaliado | Modelo v2 ativo |
+|---|---:|---:|
+| Precisão | 0,2906 | 0,3828 |
+| Recall | 0,2842 | 0,4251 |
+| mAP@50 | 0,2563 | 0,3581 |
+| mAP@50–95 | 0,1490 | 0,1810 |
+| mAP@50 de animal | 0,0183 | 0,3102 |
 
-A [validação dos oito exemplos externos](resultados/demo/product_validation.json)
-processou e decodificou 1.388 quadros sem perda na exportação. A revisão visual
-também mostrou falhas: dois clipes de roedores ficaram sem marcação, a marcação
-animal de maior confiança em outro clipe apontou para uma telha e houve falso
-alerta em espuma/água. As fotos de bueiros tiveram marcações válidas de resíduos,
-mas parte dos resíduos e a água ficaram sem marcação. Portanto, os exemplos
-demonstram a cadeia de análise e os erros do modelo; não garantem detecção em
-qualquer filmagem.
+Os números originais v1 continuam no histórico, mas usavam caixas de animal
+defeituosas e não são comparáveis diretamente aos números acima. A caixa v2
+pode representar apenas parte visível, sem garantia de corpo inteiro.
+[MODEL_CARD.md](docs/MODEL_CARD.md) registra protocolo, hashes e resultados.
+
+A [revisão dos oito exemplos no v2](resultados/metrics/v2/product_validation_v2.json)
+processou os 1.388 quadros sem perda. O rato em close passou a ser marcado,
+mas esse clipe forneceu frames de adaptação e **não é teste independente**.
+Os falsos alertas sobre telha, carro e espuma não se repetiram; o rato na cena
+com resíduos e o clipe difícil `rato_rua` ainda ficaram sem marcação. A foto de
+lixo em Queens regrediu, enquanto a outra foto de bueiro manteve três embalagens
+marcadas. Água e generalização continuam limitadas. Esses erros permanecem
+documentados; a melhora não significa que toda filmagem terá detecção correta.
 
 ## Documentação e licença
 

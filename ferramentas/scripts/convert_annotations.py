@@ -18,15 +18,25 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--raw-root", type=Path, default=Path("dados/raw"))
     parser.add_argument(
-        "--output-root", type=Path, default=Path("dados/processed/drenavision")
+        "--output-root",
+        type=Path,
+        default=Path("dados/processed/drenavision_corrected"),
     )
     parser.add_argument(
         "--manifest",
         type=Path,
-        default=Path("dados/manifests/dataset_manifest.csv"),
+        default=Path("dados/manifests/dataset_manifest_corrected.csv"),
     )
     parser.add_argument("--seed", type=int, default=42)
     args = parser.parse_args()
+    if (
+        args.output_root.resolve() == (ROOT / "dados/processed/drenavision").resolve()
+        or args.manifest.resolve()
+        == (ROOT / "dados/manifests/dataset_manifest.csv").resolve()
+    ):
+        parser.error(
+            "O dataset e manifesto v1 são evidência histórica. Escolha outro --output-root e --manifest para a conversão corrigida."
+        )
     summary = convert_dataset(
         raw_root=args.raw_root,
         output_root=args.output_root,

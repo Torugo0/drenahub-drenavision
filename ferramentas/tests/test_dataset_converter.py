@@ -9,6 +9,7 @@ from drenavision.data.converter import (
     _grouped_select,
     _write_candidate,
     collect_water_candidates,
+    irodent_annotation_box,
     select_irodent,
 )
 from drenavision.data.yolo import YoloBox
@@ -128,3 +129,32 @@ def test_writer_rejects_exact_duplicate_content(tmp_path: Path) -> None:
     _write_candidate(candidate, "train", output, seen)
     with pytest.raises(RuntimeError, match="exact duplicate"):
         _write_candidate(candidate, "val", output, seen)
+
+
+def test_irodent_excludes_invisible_origin_points_from_box():
+    box, note = irodent_annotation_box(
+        {"bbox": [0, 0, 150, 160], "keypoints": [0, 0, 0, 100, 120, 2, 150, 160, 1]},
+        200,
+        200,
+    )
+    assert box.class_id == 2
+    assert box.x_center == pytest.approx(0.625)
+    assert box.y_center == pytest.approx(0.70)
+    assert box.width == pytest.approx(0.30)
+    assert box.height == pytest.approx(0.24)
+    assert json.loads(note)["invisible_keypoints_excluded"] == 1
+
+
+def test_irodent_rejects_insufficient_landmarks_instead_of_learning_background():
+    with pytest.raises(ValueError, match="fewer than two"):
+        irodent_annotation_box(
+            {"bbox": [0, 0, 160, 100], "keypoints": [0, 0, 0, 160, 100, 2]}, 200, 200
+        )
+
+
+def test_irodent_padded_box_is_clipped_at_image_edge():
+    box, _note = irodent_annotation_box(
+        {"bbox": [0, 0, 200, 200], "keypoints": [1, 1, 2, 199, 199, 2]}, 200, 200
+    )
+    assert box.width == 1
+    assert box.height == 1

@@ -32,17 +32,17 @@ def _merged(path: Path, overrides: Mapping[str, Any] | None) -> dict[str, Any]:
 
 @dataclass(frozen=True, slots=True)
 class TrainConfig:
-    model: str = "yolo26n.pt"
-    data: Path = Path("dados/processed/drenavision/dataset.yaml")
+    model: str = "resultados/local/models/yolo26n-base.pt"
+    data: Path = Path("dados/processed/drenavision_v2/dataset.yaml")
     project: Path = Path("resultados/local/training")
-    name: str = "yolo26n_drenavision"
-    published_checkpoint: Path = Path("resultados/local/models/best.pt")
+    name: str = "yolo26n_corrected_v2"
+    published_checkpoint: Path = Path("resultados/local/models/candidate_v2.pt")
     resume: Path | None = None
     epochs: int = 100
     imgsz: int = 640
-    batch: int | float = 8
-    patience: int = 20
-    workers: int = 4
+    batch: int | float = 12
+    patience: int = 25
+    workers: int = 2
     seed: int = 42
     device: str = "auto"
     optimizer: str = "auto"
@@ -79,20 +79,20 @@ class TrainConfig:
 @dataclass(frozen=True, slots=True)
 class EvaluateConfig:
     checkpoint: Path = Path("resultados/local/models/best.pt")
-    data: Path = Path("dados/processed/drenavision/dataset.yaml")
+    data: Path = Path("dados/processed/drenavision_v2/dataset.yaml")
     project: Path = Path("resultados/local/evaluation")
-    name: str = "test_yolo26n_drenavision"
+    name: str = "candidate_v2_on_corrected_v2"
     imgsz: int = 640
     batch: int | float = 8
     confidence: float = 0.001
     iou: float = 0.60
     match_iou: float = 0.50
     example_confidence: float = 0.35
-    workers: int = 4
+    workers: int = 2
     device: str = "auto"
     plots: bool = True
     save_json: bool = True
-    error_examples_per_type: int = 6
+    error_examples_per_type: int = 3
     max_error_images: int = 0
 
     @classmethod

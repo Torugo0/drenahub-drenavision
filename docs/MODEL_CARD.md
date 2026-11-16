@@ -1,8 +1,59 @@
 # Model Card - DrenaVision YOLO26n
 
-## Estado em 16/11/2026
+## Modelo ativo — versão 0.3.0, protocolo v2
 
-Existe um checkpoint customizado real em `resultados/local/models/best.pt`. O treino
+O checkpoint ativo é `resultados/local/models/best.pt`, SHA-256
+`01ea7c578783b2a08fc585051b0768a1e9c0d510cb5652173fab0979f8d7d27a`.
+É um único YOLO26n, sem ensemble. O treino novo partiu do peso pré-treinado,
+concluiu **60 épocas**, parou por early stopping e selecionou a época **35**.
+O v1 foi preservado em `resultados/local/models/best_v1.pt` e nos artefatos
+históricos. Distribuição: [release v0.3.0-model-v2](https://github.com/Torugo0/drenahub-drenavision/releases/tag/v0.3.0-model-v2).
+
+O dataset v2 tem 557/62/62 imagens. Seu fingerprint é
+`af3927e1f3b24de81984cf4a302eb764dd09eb4e0380b7105ffd013ed0496e49`.
+Os dois modelos foram avaliados nas mesmas 62 imagens de **teste**, com as
+caixas v2 derivadas de keypoints visíveis. A seleção corrige um defeito de
+anotação da fonte; não torna a caixa uma anotação humana de corpo inteiro.
+
+| Escopo no teste corrigido | Modelo | Precisão | Recall | mAP@50 | mAP@50–95 |
+|---|---|---:|---:|---:|---:|
+| Agregado | v1 reavaliado | 0,2906 | 0,2842 | 0,2563 | 0,1490 |
+| Agregado | v2 ativo | 0,3828 | 0,4251 | 0,3581 | 0,1810 |
+| Animal | v1 reavaliado | 0,0322 | 0,0500 | 0,0183 | 0,0059 |
+| Animal | v2 ativo | 0,3769 | 0,4500 | 0,3102 | 0,1454 |
+| Resíduos | v2 ativo | 0,5347 | 0,6486 | 0,6233 | 0,3611 |
+| Água | v2 ativo | 0,2368 | 0,1765 | 0,1409 | 0,0364 |
+
+Fontes: [comparação](../resultados/metrics/v2/comparison.json),
+[avaliação do v2](../resultados/metrics/v2/candidate_test_metrics.json),
+[v1 nas caixas corrigidas](../resultados/metrics/v2/baseline_test_metrics.json)
+e [manifesto do treino](../resultados/metrics/v2/training_manifest.json).
+Os valores de **validação** usados para selecionar a época não são métricas
+de teste: o AP de animal no teste separado é 0,3102.
+O tempo de inferência medido para o v2 foi 3,91 ms/imagem na RTX 4060, sem
+upload, persistência ou renderização.
+
+A melhora é parcial. A comparação ganha em localização de animal e mAP
+agregado, mas água segue fraca: seu mAP@50 caiu de 0,1645 para 0,1409.
+Resíduos melhoram em mAP@50, mas pioram em mAP@50–95 (0,4048 → 0,3611).
+Nos exemplos, o close usado na adaptação tem uma caixa de animal nos 220
+quadros; isso é consistência numa fonte de treino, não estimativa independente
+de acurácia. Telha, carro e espuma deixaram de gerar os falsos alertas anteriores,
+mas o rato na cena com lixo continua perdido, `rato_rua` segue sem marcação e
+a foto de lixo em Queens regrediu. A outra foto de bueiro mantém três embalagens
+marcadas. Consulte a [revisão visual v2](../resultados/metrics/v2/product_validation_v2.json),
+que mantém esses erros e a origem de cada exemplo.
+
+## Modelo v1: estado histórico em 16/11/2026
+
+Uma auditoria posterior encontrou um defeito nas caixas de roedores da fonte
+iRodent: pontos ausentes `(0,0,0)` foram incorporados ao retângulo publicado.
+Os números v1 abaixo são preservados como resultado histórico desse protocolo;
+as métricas de animal não comprovam localização correta do corpo do roedor.
+O experimento v2, descrito adiante, usa anotações corrigidas separadas e exige
+comparar os dois modelos no mesmo conjunto de rótulos v2.
+
+O checkpoint customizado v1 foi preservado em `resultados/local/models/best_v1.pt`. O treino
 foi retomado de um run interrompido na epoca 28 e terminou por early stopping
 apos 70 de 100 epocas. O snapshot interrompido foi preservado separadamente e
 nao e apresentado como run concluido.
@@ -16,8 +67,8 @@ nao e apresentado como run concluido.
 - manifesto versionado: `resultados/metrics/training_manifest.json`.
 
 Os hashes diferentes e o avanco de epocas comprovam que houve ajuste de pesos.
-O checkpoint e adequado a demonstracao academica, mas os resultados abaixo nao
-sustentam uso autonomo ou producao.
+Essa execução comprova ajuste de pesos, mas seus resultados de localização
+animal dependem da anotação defeituosa e ficam somente como histórico.
 
 ## Uso pretendido
 
@@ -41,7 +92,7 @@ uma ocorrencia. Toda deteccao recomenda apenas inspecao.
 - resolucao padrao: 640 px;
 - seed obrigatoria: 42;
 - dispositivo: primeira GPU CUDA disponivel, com fallback explicito para CPU;
-- checkpoint publicado: `resultados/local/models/best.pt`;
+- checkpoint histórico: `resultados/local/models/best_v1.pt` (publicado originalmente como `best.pt`);
 - configuracao versionada: `ferramentas/configs/train.yaml`.
 
 Cada treino concluido grava hash SHA-256 dos pesos iniciais, `best.pt` e copia
@@ -81,7 +132,7 @@ automatica. Imagens proprias e negativas representativas continuam essenciais.
 
 ## Protocolo de avaliacao
 
-`python ferramentas/scripts/evaluate.py --config ferramentas/configs/evaluate.yaml` usa apenas `test` e
+O comando histórico `python ferramentas/scripts/evaluate.py --config ferramentas/configs/evaluate.yaml --model resultados/local/models/best_v1.pt` usa apenas `test` v1 e
 exporta:
 
 - precision e recall agregados;
@@ -95,7 +146,7 @@ exporta:
 Valores ausentes devem permanecer como “nao avaliados”; nunca devem ser
 substituidos por zero, estimativas ou resultados sinteticos.
 
-### Resultado real no split de teste
+### Resultado histórico v1 no split de teste
 
 Fonte unica desta tabela:
 `resultados/metrics/evaluation_metrics.json`. A execucao usou
@@ -125,7 +176,7 @@ correta nesse limiar, embora tres imagens tenham ao menos um TP de agua.
 A biblioteca em `dados/examples/` reúne **seis filmagens reais e duas
 fotografias**, com créditos, licenças e hashes em `sources.json`. Não são
 sequências simuladas de fotografias nem entradas previamente marcadas. Esses
-exemplos ficaram fora do treino, validação e teste e não têm caixas de referência
+exemplos ficaram fora do treino, validação e teste **na execução v1** e não têm caixas de referência
 revisadas para calcular novas métricas de precisão, recall ou mAP.
 
 O [relatório de validação do produto](../resultados/demo/product_validation.json)
@@ -150,12 +201,58 @@ garantida de objetos distintos. A validação expõe falhas de generalização e
 mantém necessária a revisão humana, mesmo quando a cadeia de processamento
 funciona corretamente.
 
+## Auditoria e experimento de localização v2
+
+A [auditoria versionada](../resultados/metrics/v2/annotation_audit.json) examinou
+as 447 anotações originais do iRodent (357 imagens nativas de treino e 90 de
+teste). Em **305/447**, a caixa publicada coincide com o envelope de todos os
+keypoints, inclusive os ausentes representados por `(0,0,0)`. Não foi encontrada
+troca COCO `xywh`/`xyxy`, divergência de dimensão ou rotação EXIF nessa fonte.
+Das 100 imagens de roedor usadas no treino v1, 75 tinham caixa na origem;
+isso ajuda a explicar o aprendizado de fundo e os retângulos excessivos.
+
+No v2, `irodent_annotation_box()` deriva um retângulo apenas dos keypoints
+anotados com visibilidade maior que zero. Acrescenta margem de **10% por lado**
+(mínimo de 2 pixels em cada eixo) e limita as coordenadas à imagem. Casos com
+menos de dois pontos visíveis ou geometria de área zero são excluídos: cinco
+anotações da fonte ficaram sem caixa utilizável. A
+[montagem de 12 comparações](../resultados/metrics/v2/irodent_source_vs_v2.jpg)
+mostra a caixa publicada em vermelho e a derivada em azul.
+
+Este alvo é um **envelope de pontos visíveis anotados**. Pode cobrir somente a
+cabeça ou outra parte visível quando há poucos pontos. Não garante um retângulo
+de corpo inteiro e não é ground truth independente revisado por uma pessoa.
+A correção usa a anotação de pose da fonte, sem predição automática como rótulo.
+
+O dataset separado `dados/processed/drenavision_v2/` tem **557/62/62 imagens**
+de treino/validação/teste. Contém 373 imagens iRodent no total, incluindo 234
+imagens adicionais somente do treino nativo. Uma imagem do treino v1 foi
+excluída por pontos insuficientes; os IDs de imagens dos 62 itens de validação
+e 62 de teste foram preservados, com caixas de roedor corrigidas. Dados e
+métricas v1 não foram sobrescritos. Estrutura, hashes, grupos e pHash entre
+splits passaram na validação.
+
+Foram acrescentadas **16 imagens/cortes de adaptação**, apenas ao treino,
+derivadas de `rato_close`, `rato_residuos`, `canal_residuos` e `drenagem_chuva`.
+Esses rótulos vieram de inspeção visual assistida; não são anotação humana
+independente. Portanto esses quatro clipes deixam de ser teste externo para
+o candidato v2. `rato_rua` e `sarjeta_residuos` ficaram fora da adaptação e
+servem como regressão; já foram inspecionados no desenvolvimento e também
+não representam um teste de campo intocado.
+
+O treino `ferramentas/configs/train_v2.yaml` gerou `candidate_v2.pt` separado.
+Após a avaliação comparativa e a revisão dos clipes, os mesmos bytes foram
+promovidos a `best.pt`, com backup do v1. A configuração `evaluate_v2.yaml`
+usa o modelo ativo; `evaluate_v2_baseline.yaml` usa `best_v1.pt` e o mesmo
+dataset corrigido. Os mAP v1 e v2 com rótulos distintos não são diretamente
+comparáveis; a tabela inicial reavalia ambos nos rótulos v2. A promoção e seus
+resultados ficam separados da auditoria inicial, cujo estado era anterior ao treino.
+
 ## Limitacoes e riscos conhecidos
 
 - agua rasa, reflexos, piso brilhante e sombras podem se confundir;
-- `agua_acumulada` teve recall 0,1159 e mAP@50-95 0,0360; e a principal
-  limitacao medida e precisa de mais diversidade, revisao de boxes e dados do
-  dominio real de drenagem;
+- `agua_acumulada` tem recall 0,1765 e mAP@50-95 0,0364 no teste v2; continua
+  limitada e precisa de mais diversidade, revisão de caixas e dados reais de drenagem;
 - residuos parcialmente ocultos ou fora do ralo podem ter baixa cobertura;
 - `animal_visivel` teve somente 20 instancias no teste; as metricas possuem alta
   incerteza e o conjunto e concentrado em roedores;

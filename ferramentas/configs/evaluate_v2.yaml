@@ -1,0 +1,17 @@
+# Compare with evaluate_v2_baseline.yaml: same corrected GT and test images.
+checkpoint: resultados/local/models/best.pt
+data: dados/processed/drenavision_v2/dataset.yaml
+project: resultados/local/evaluation
+name: candidate_v2_on_corrected_v2
+imgsz: 640
+batch: 8
+confidence: 0.001
+iou: 0.60
+match_iou: 0.50
+example_confidence: 0.35
+workers: 2
+device: auto
+plots: true
+save_json: true
+error_examples_per_type: 3
+max_error_images: 0

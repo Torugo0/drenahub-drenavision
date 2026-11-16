@@ -20,7 +20,7 @@ def build_parser() -> argparse.ArgumentParser:
         description="Avalia o checkpoint customizado somente no split test."
     )
     parser.add_argument(
-        "--config", type=Path, default=Path("ferramentas/configs/evaluate.yaml")
+        "--config", type=Path, default=Path("ferramentas/configs/evaluate_v2.yaml")
     )
     parser.add_argument("--model", "--checkpoint", dest="checkpoint", type=Path)
     parser.add_argument("--data", type=Path)

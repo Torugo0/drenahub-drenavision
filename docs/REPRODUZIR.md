@@ -30,13 +30,13 @@ para escolher o wheel. CPU também é aceita, com processamento mais lento.
 
 ### Obter o modelo publicado
 
-O modelo customizado é distribuído na
-[release v0.1.0-model](https://github.com/Torugo0/drenahub-drenavision/releases/tag/v0.1.0-model).
+O modelo ativo v2 é distribuído na
+[release v0.3.0-model-v2](https://github.com/Torugo0/drenahub-drenavision/releases/tag/v0.3.0-model-v2).
 Enquanto o repositório estiver privado, é necessário acesso à conta.
 
 ```powershell
 New-Item -ItemType Directory -Force resultados/local/models | Out-Null
-gh release download v0.1.0-model `
+gh release download v0.3.0-model-v2 `
   --repo Torugo0/drenahub-drenavision `
   --pattern best.pt `
   --dir resultados/local/models
@@ -44,8 +44,10 @@ Get-FileHash resultados/local/models/best.pt -Algorithm SHA256
 ```
 
 Hash esperado do checkpoint desta versão:
-`fe439a3a722e73db5d841cc199026c8d42f4bbf806bf95924c2eb8c09a9f6bf7`.
+`01ea7c578783b2a08fc585051b0768a1e9c0d510cb5652173fab0979f8d7d27a`.
 As entradas de demonstração e os créditos ficam em `dados/examples/`.
+Se já existir `best.pt`, preserve sua cópia antes de substituí-lo. A promoção
+realizada nesta versão manteve o v1 em `best_v1.pt`.
 
 ```powershell
 .\iniciar.ps1
@@ -56,6 +58,11 @@ de iniciar o mesmo serviço pode produzir o erro Windows 10048: a porta já est�
 ocupada. Nesse caso, use a instância que já está aberta.
 
 ## Dados e proveniência
+
+A execução v1 e suas métricas são históricas. A auditoria posterior encontrou
+caixas iRodent com fundo incorporado por keypoints ausentes; consulte a seção
+de protocolo v2 abaixo antes de gerar novos dados. O conversor atual corrige
+essas caixas e não reproduz os rótulos/fingerprint do treinamento v1.
 
 | Classe destino | Fonte | Licença adotada | Conversão |
 |---|---|---|---|
@@ -72,13 +79,18 @@ si só a detecção em ralos reais.
 python ferramentas/scripts/download_datasets.py --source all --seed 42
 python ferramentas/scripts/convert_annotations.py --seed 42
 python ferramentas/scripts/validate_dataset.py `
-  --dataset-root dados/processed/drenavision `
-  --yaml dados/processed/drenavision/dataset.yaml `
-  --manifest dados/manifests/dataset_manifest.csv `
+  --dataset-root dados/processed/drenavision_corrected `
+  --yaml dados/processed/drenavision_corrected/dataset.yaml `
+  --manifest dados/manifests/dataset_manifest_corrected.csv `
   --phash --phash-threshold 4 `
-  --report dados/manifests/validation_report_phash.json
-python ferramentas/scripts/visualize_annotations.py --samples-per-split 6
+  --report dados/manifests/validation_report_corrected.json
+python ferramentas/scripts/visualize_annotations.py --dataset-root dados/processed/drenavision_corrected --output-root resultados/local/dataset_preview_corrected --samples-per-split 6
 ```
+
+Essa conversão isolada grava em `drenavision_corrected/`, sem sobrescrever o
+dataset e manifesto históricos v1. Ela não inclui a expansão e os frames de
+domínio do experimento v2. Para reproduzir o candidato treinado nesta revisão,
+use `prepare_adaptation.py` descrito adiante.
 
 O downloader retoma transferências e reutiliza arquivos verificados. Para CLICK,
 usa HTTP Range e baixa 100/20/20 pares de treino/validação/teste de um ZIP maior.
@@ -90,7 +102,7 @@ O validador confere imagens, labels YOLO, classes, coordenadas, hashes, grupos
 e semelhança perceptual entre splits. Erro impede o treino. Cada imagem tem
 fonte, licença, split, `source_group`, hash, dimensão e contagens no manifesto.
 
-### Preparação medida nesta entrega
+### Preparação histórica medida na entrega v1
 
 | Split | Imagens | Boxes de resíduos | Boxes de água | Boxes de animal |
 |---|---:|---:|---:|---:|
@@ -112,10 +124,15 @@ Outras fontes investigadas constam em `dados/manifests/research_report.json`.
 `drain_data` não tinha versão exportável; alternativas com login, licença
 inconclusiva ou maior distância do domínio não entraram no treinamento.
 
-## Treinamento customizado
+## Treinamento customizado histórico v1
+
+Os comandos e resultados desta seção descrevem o protocolo v1. Para um novo
+experimento com anotações corrigidas e sem sobrescrever os dados v1, use a
+preparação v2 abaixo.
 
 ```powershell
-python ferramentas/scripts/train.py --config ferramentas/configs/train.yaml
+# Referência histórica v1; não execute para treinar o modelo atual:
+# python ferramentas/scripts/train.py --config ferramentas/configs/train.yaml
 ```
 
 Configuração principal: YOLO26n pré-treinado, `imgsz=640`, batch 8, máximo de
@@ -125,16 +142,113 @@ dados, horários e hashes dos pesos inicial/final.
 
 Esta versão foi retomada após a época 28, concluiu 70 épocas e selecionou o
 melhor checkpoint na época 50. O snapshot interrompido permanece separado.
-`training_manifest.json` comprova mudança dos pesos; o pipeline recarrega o
-checkpoint, verifica as classes e publica a cópia em `resultados/local/models/best.pt`.
+Naquela execução, `training_manifest.json` comprovou mudança dos pesos e a
+cópia publicada foi `best.pt`, hoje preservada como `best_v1.pt`. A configuração
+histórica atual gera `candidate_v1_reproduction.pt` e não substitui o ativo.
 
 Se faltar memória, reduza batch e registre nova configuração/run. Use a
 validação para escolher hiperparâmetros. O teste permanece independente.
 
-## Avaliação e erros
+## Preparação e avaliação do modelo v2
+
+A causa documentada em
+[annotation_audit.json](../resultados/metrics/v2/annotation_audit.json) está
+nas caixas originais da fonte iRodent: 305 de 447 retângulos incluem os pontos
+ausentes `(0,0,0)`. A conversão v2 usa somente keypoints com visibilidade maior
+que zero, margem de 10% por lado (mínimo 2 px) e clipping. Cinco anotações com
+menos de dois pontos visíveis são excluídas. O retângulo resultante pode
+representar somente a parte visível anotada, não um corpo inteiro revisado
+independentemente por uma pessoa.
+
+Primeiro gere a auditoria e confira a montagem de 12 imagens:
 
 ```powershell
-python ferramentas/scripts/evaluate.py --config ferramentas/configs/evaluate.yaml
+python ferramentas/scripts/prepare_adaptation.py --audit-only
+```
+
+Saídas: `resultados/local/adaptation/annotation_audit.json` e
+`irodent_source_vs_v2.jpg`. O resumo e uma montagem estão versionados em
+`resultados/metrics/v2/`, com hashes, coordenadas de exemplo, origem e licença.
+
+Para adicionar imagens/cortes de domínio revisados, prepare uma pasta com
+`images/`, `labels/` YOLO e `sources.json` contendo `items`, cada um com
+`file_name`, `source_url`, `source_license`, `source_group`, `annotation_note`
+e `split: "train"`. A adaptação não aceita frames de domínio em validação ou
+teste nem usa predições do detector como rótulo. Os rótulos desta execução
+foram produzidos por inspeção visual assistida e não são revisão humana
+independente.
+
+```powershell
+python -c "from pathlib import Path; import shutil; from ultralytics.utils.downloads import attempt_download_asset; p=Path('resultados/local/models'); p.mkdir(parents=True,exist_ok=True); shutil.copy2(attempt_download_asset(p/'yolo26n.pt'),p/'yolo26n-base.pt')"
+python ferramentas/scripts/prepare_negative_crops.py
+python ferramentas/scripts/prepare_domain_annotations.py
+python ferramentas/scripts/prepare_adaptation.py --domain-root dados/interim/adaptation
+python ferramentas/scripts/train.py --config ferramentas/configs/train_v2.yaml
+```
+
+O primeiro comando mantém o peso inicial oficial do Ultralytics no cache local,
+com o nome esperado pela configuração; ele não usa o checkpoint customizado
+ativo como peso inicial. O preparador de domínio reúne os cinco cortes
+negativos revisados e os onze frames/cortes positivos, todos apenas no treino.
+
+Em um clone novo, execute antes `download_datasets.py --source all --seed 42`.
+O preparador recupera as imagens e labels de resíduos/água diretamente das
+fontes brutas quando o dataset processado v1 não está disponível. Confere o
+SHA-256 da imagem e as contagens de caixas contra o manifesto v1 versionado;
+não é necessário reconstruir o dataset defeituoso para gerar o v2.
+
+O preparador recusa sobrescrever o dataset v1 ou uma pasta v2 já preenchida;
+para outro experimento, escolha `--output-root` e `--audit-dir` novos e ajuste
+a configuração. Mantém os IDs dos splits v1 de validação/teste, corrige suas
+caixas de roedor e expande o treino somente com imagens nativas de treino
+iRodent fora dos grupos/hashes reservados. O manifesto fica dentro do dataset
+em `data_manifest.csv`, com uma cópia em `resultados/local/adaptation/`.
+Validação de estrutura, proveniência, duplicatas, grupos e pHash precede o treino.
+
+Nesta execução foram preparados **557/62/62 itens** de treino/validação/teste,
+373 imagens iRodent no total, 234 imagens nativas de treino adicionais e 16
+imagens/cortes de domínio. Só uma imagem do treino v1 foi removida por
+geometria insuficiente. Os domínios `rato_close`, `rato_residuos`, `canal_residuos`
+e `drenagem_chuva` entraram apenas no treino. `rato_rua` e `sarjeta_residuos`
+ficaram fora da adaptação e servem como regressão já inspecionada durante o
+desenvolvimento, não teste de campo intocado.
+
+O treinamento usa o YOLO26n inicial, seed 42, tamanho 640, batch 12, máximo de
+100 épocas e patience 25. A execução concluída parou na época 60 e selecionou
+a época 35. O destino do treino é `resultados/local/models/candidate_v2.pt`;
+o treino não substitui automaticamente o modelo ativo. Após a comparação,
+esse checkpoint foi promovido a `best.pt`, preservando o antigo em `best_v1.pt`.
+
+Para repetir a comparação no teste corrigido, obtenha o baseline histórico se
+ele não estiver no computador:
+
+```powershell
+if (-not (Test-Path resultados/local/models/best_v1.pt)) {
+  New-Item -ItemType Directory -Force resultados/local/models/v1 | Out-Null
+  gh release download v0.1.0-model --repo Torugo0/drenahub-drenavision --pattern best.pt --dir resultados/local/models/v1
+  Copy-Item resultados/local/models/v1/best.pt resultados/local/models/best_v1.pt
+}
+python ferramentas/scripts/evaluate.py --config ferramentas/configs/evaluate_v2_baseline.yaml
+python ferramentas/scripts/evaluate.py --config ferramentas/configs/evaluate_v2.yaml --model resultados/local/models/candidate_v2.pt
+```
+
+O v1 tem hash `fe439a3a722e73db5d841cc199026c8d42f4bbf806bf95924c2eb8c09a9f6bf7`.
+Ambas as configurações usam `dados/processed/drenavision_v2/dataset.yaml` e
+`split=test`. Consulte os arquivos versionados
+[baseline_test_metrics.json](../resultados/metrics/v2/baseline_test_metrics.json),
+[candidate_test_metrics.json](../resultados/metrics/v2/candidate_test_metrics.json)
+e [comparison.json](../resultados/metrics/v2/comparison.json). O mAP@50 agregado
+nesse teste foi de 0,2563 no baseline para 0,3581 no v2; animal foi de 0,0183
+para 0,3102. Esses números não são o AP de validação usado para escolher a época.
+Água e alguns exemplos regrediram; a [revisão dos clipes](../resultados/metrics/v2/product_validation_v2.json)
+registra ganhos e falhas. Métricas v1 calculadas com caixas antigas permanecem
+como histórico e não são diretamente comparáveis ao protocolo v2.
+
+## Avaliação e erros históricos v1
+
+```powershell
+# Referência histórica: exige os dados v1 preservados.
+# python ferramentas/scripts/evaluate.py --config ferramentas/configs/evaluate.yaml --model resultados/local/models/best_v1.pt
 ```
 
 A avaliação usa `split=test`, checkpoint customizado e mapa exato de classes.
@@ -161,7 +275,19 @@ limiar. Ver [MODEL_CARD.md](MODEL_CARD.md) para protocolo e limitações.
 
 ## Comandos diretos e testes
 
+Os comandos gerais agora usam o protocolo **v2**: `train.py`/`run_training()`
+carregam `train_v2.yaml` e geram somente `candidate_v2.pt`; `evaluate.py`/
+`run_evaluation()` usam `evaluate_v2.yaml`, o `best.pt` ativo e os rótulos v2.
+Validador, visualizador e construtor de sequência também usam o dataset e
+manifesto locais v2 por padrão. As configurações `train.yaml` e `evaluate.yaml`
+são históricas e precisam ser solicitadas explicitamente; a primeira gera
+`candidate_v1_reproduction.pt`, e a segunda exige o backup `best_v1.pt`.
+
 ```powershell
+python ferramentas/scripts/validate_dataset.py --phash
+python ferramentas/scripts/visualize_annotations.py
+python ferramentas/scripts/evaluate.py
+
 python ferramentas/scripts/predict.py `
   --input caminho/foto.jpg --model resultados/local/models/best.pt `
   --output-dir resultados/local/predictions

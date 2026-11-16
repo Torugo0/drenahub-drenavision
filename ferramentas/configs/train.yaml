@@ -1,10 +1,12 @@
+# HISTÓRICO V1: usa as caixas originais iRodent defeituosas, preservadas para auditoria.
+# Para o modelo atual, use train_v2.yaml. Não publica sobre o checkpoint ativo.
 # DrenaVision - fine-tuning reproduzivel. Este arquivo nao prova que o treino ocorreu;
 # a evidencia real e gerada em resultados/local/training/<run>/training_manifest.json.
 model: yolo26n.pt
 data: dados/processed/drenavision/dataset.yaml
 project: resultados/local/training
 name: yolo26n_drenavision
-published_checkpoint: resultados/local/models/best.pt
+published_checkpoint: resultados/local/models/candidate_v1_reproduction.pt
 # Defina por CLI --resume; null inicia um fine-tuning novo.
 resume: null
 

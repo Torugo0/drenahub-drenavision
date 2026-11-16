@@ -27,8 +27,9 @@ USER_AGENT = "DrenaVision-academic-demo/0.2 (attributed public media preparation
 SOURCES = (
     {
         "id": "rato_close",
-        "title": "Rato em close",
-        "description": "Filmagem real de um rato doméstico visto de perto. Serve para experimentar a marcação de animais; o ambiente difere de um bueiro.",
+        "title": "Roedor atrás da grade",
+        "description": "Filmagem de um rato doméstico em close, com parte do corpo encoberta pelas grades. Alguns quadros foram anotados para adaptação; este clipe não é teste independente.",
+        "thumbnail_seconds": 0.5,
         "kind": "video",
         "commons_title": "File:Rat.ogv",
         "original_sha1": "dfed639da4eb3462aec3f0f9d6fcdb17aeae910e",
@@ -37,8 +38,9 @@ SOURCES = (
     },
     {
         "id": "rato_rua",
-        "title": "Rato entre vegetação",
-        "description": "Filmagem real de um rato parcialmente escondido entre vegetação e frutos em Ljubljana. Exemplo difícil para conferir possíveis falhas.",
+        "title": "Roedor parcialmente oculto · difícil",
+        "description": "A fonte identifica um rato entre vegetação e frutos, em Ljubljana. O animal fica pequeno e pouco legível neste trecho; uma caixa ou um acerto não pode ser confirmado só pela capa. Regressão separada do treino.",
+        "thumbnail_seconds": 9.0,
         "kind": "video",
         "commons_title": "File:2022-08-02 LJUBLJANA Grudnovo nabrežje RODENTIA Rattus PODGANA.webm",
         "original_sha1": "86c42571332199b3ad9bed87e408efd6f9ee0ea2",
@@ -47,8 +49,9 @@ SOURCES = (
     },
     {
         "id": "rato_residuos",
-        "title": "Rato entre resíduos",
-        "description": "Filmagem real de um rato se alimentando em Hanói, Vietnã.",
+        "title": "Roedor junto a resíduos",
+        "description": "Filmagem de um rato entre materiais e embalagens em Hanói. O roedor aparece à direita da telha; alguns quadros foram anotados para adaptação. Este clipe não é teste independente.",
+        "thumbnail_seconds": 0.0,
         "kind": "video",
         "commons_title": "File:Manĝanta rato en Hanojo.webm",
         "original_sha1": "6f8f7291b2f62255b975e8d07f9ca57dbd916575",
@@ -58,8 +61,9 @@ SOURCES = (
     },
     {
         "id": "drenagem_chuva",
-        "title": "Água na drenagem",
-        "description": "Filmagem real de água transbordando em um ponto de drenagem de Werrington, Austrália.",
+        "title": "Água transbordando na drenagem",
+        "description": "Água em movimento saindo da drenagem de Werrington, Austrália. Não é exemplo de rato. Recortes de gramado sem alvos foram usados como fundo na adaptação.",
+        "thumbnail_seconds": 5.0,
         "kind": "video",
         "commons_title": "File:Overflowing water drain Werrington March 2022.webm",
         "original_sha1": "1bf24f62111c0b46d8226dd026bf49a137249e1b",
@@ -68,8 +72,9 @@ SOURCES = (
     },
     {
         "id": "canal_residuos",
-        "title": "Canal de drenagem",
-        "description": "Filmagem real do canal de drenagem de Alajo, em Accra, Gana.",
+        "title": "Canal com água e veículos ao fundo",
+        "description": "Canal de Alajo, em Accra, Gana, com água e veículos na margem. Não é exemplo de rato. Recortes dos veículos sem alvos foram usados como fundo na adaptação.",
+        "thumbnail_seconds": 0.0,
         "kind": "video",
         "commons_title": "File:Alajo Storm Drain 011.webm",
         "original_sha1": "7eff318adde6de3d20548682e424fa00170adc69",
@@ -78,18 +83,19 @@ SOURCES = (
     },
     {
         "id": "sarjeta_residuos",
-        "title": "Sarjeta e resíduos",
-        "description": "Filmagem real de uma sarjeta que conduz água ao canal de Alajo, Gana.",
+        "title": "Água correndo pela sarjeta",
+        "description": "Sarjeta que conduz água ao canal de Alajo, Gana. Há um objeto junto à parede, de natureza incerta; este exemplo não confirma lixo nem presença de rato.",
+        "thumbnail_seconds": 0.0,
         "kind": "video",
         "commons_title": "File:Gutter to the Alajo Storm Drain.webm",
         "original_sha1": "28f108c68813ffcdeaebdcc810b3baf08a91dd79",
         "license": "CC BY-SA 4.0",
-        "content_tags": ["obstrucao_visivel", "agua_acumulada"],
+        "content_tags": ["agua_acumulada"],
     },
     {
         "id": "ralo_lixo",
         "title": "Lixo junto ao bueiro",
-        "description": "Fotografia real de um bueiro com resíduos em Queens, Nova York.",
+        "description": "Fotografia de embalagens e outros resíduos junto à grelha de um bueiro, em Queens, Nova York. O assunto é lixo; não há rato visível nesta foto.",
         "kind": "image",
         "commons_title": "File:Sutphin Bl Jamaica Av td (2019-08-18) 14.jpg",
         "original_sha1": "68cffaf67f98fc4a175be3802f6bb7ccb536d412",
@@ -98,8 +104,8 @@ SOURCES = (
     },
     {
         "id": "bueiro_agua",
-        "title": "Bueiro após chuva",
-        "description": "Fotografia real de um ponto de drenagem em Nova Orleans após chuva forte.",
+        "title": "Embalagens e água junto à grelha",
+        "description": "Fotografia de um ponto de drenagem em Nova Orleans após chuva forte, com embalagens e água junto à grelha. Não há rato visível nesta foto.",
         "kind": "image",
         "commons_title": "File:Storm Drain Clogged - Mid-City New Orleans.jpg",
         "original_sha1": "6d267080161c22f02c96d8c28d994284c7c85eeb",
@@ -107,6 +113,25 @@ SOURCES = (
         "content_tags": ["obstrucao_visivel", "agua_acumulada"],
     },
 )
+EVALUATION_ROLES = {
+    "rato_close": "adaptation_training_frames",
+    "rato_residuos": "adaptation_training_frames",
+    "canal_residuos": "adaptation_background_crops",
+    "drenagem_chuva": "adaptation_background_crops",
+    "rato_rua": "separate_difficult_regression_no_training",
+    "sarjeta_residuos": "external_manual_regression",
+    "ralo_lixo": "external_manual_regression",
+    "bueiro_agua": "external_manual_regression",
+}
+
+
+def evaluation_note(source_id: str) -> str:
+    role = EVALUATION_ROLES[source_id]
+    if role.startswith("adaptation_"):
+        return "A fonte integra a adaptação v2 por quadros anotados ou recortes de fundo; não é teste independente. As categorias do catálogo não são rótulos de avaliação."
+    if source_id == "rato_rua":
+        return "Regressão difícil separada do treino, com baixa legibilidade visual. Não possui caixas de referência revisadas; não permite alegar acerto ou calcular IoU sem nova anotação confiável."
+    return "Exemplo para regressão manual, fora dos splits oficiais; não possui caixas de referência revisadas nem garante detecção."
 
 
 def checksum(path: Path, algorithm: str = "sha256") -> str:
@@ -173,7 +198,11 @@ def download_original(info: dict, path: Path, expected_sha1: str) -> None:
 
 
 def prepare_clip(
-    source: Path, output: Path, seconds: float, start_seconds: float = 0
+    source: Path,
+    output: Path,
+    seconds: float,
+    start_seconds: float = 0,
+    thumbnail_seconds: float = 0,
 ) -> dict:
     command = [
         imageio_ffmpeg.get_ffmpeg_exe(),
@@ -213,7 +242,8 @@ def prepare_clip(
         frames = int(capture.get(cv2.CAP_PROP_FRAME_COUNT))
         width = int(capture.get(cv2.CAP_PROP_FRAME_WIDTH))
         height = int(capture.get(cv2.CAP_PROP_FRAME_HEIGHT))
-        capture.set(cv2.CAP_PROP_POS_MSEC, min(4000, frames / fps * 500))
+        selected_seconds = min(thumbnail_seconds, max(0, (frames - 1) / fps))
+        capture.set(cv2.CAP_PROP_POS_MSEC, selected_seconds * 1000)
         ok, frame = capture.read()
         if not ok:
             capture.set(cv2.CAP_PROP_POS_FRAMES, 0)
@@ -233,6 +263,8 @@ def prepare_clip(
             "codec": "H.264",
             "pixel_format": "yuv420p",
             "thumbnail": thumbnail.name,
+            "thumbnail_seconds": selected_seconds,
+            "thumbnail_sha256": checksum(thumbnail),
         }
     finally:
         capture.release()
@@ -263,7 +295,13 @@ def prepare_library(output_dir: Path, cache_dir: Path, seconds: float = 12) -> d
         print(f"Preparando {source['title']}...", flush=True)
         if source["kind"] == "video":
             start_seconds = float(source.get("start_seconds", 0))
-            media_info = prepare_clip(original_path, output, seconds, start_seconds)
+            media_info = prepare_clip(
+                original_path,
+                output,
+                seconds,
+                start_seconds,
+                float(source.get("thumbnail_seconds", 0)),
+            )
             changes = f"Trecho de até {seconds:g} s a partir de {start_seconds:g} s; H.264; máximo 960x720; 20 FPS; áudio removido."
         else:
             media_info = prepare_photo(original_path, output)
@@ -284,7 +322,8 @@ def prepare_library(output_dir: Path, cache_dir: Path, seconds: float = 12) -> d
                 "contains_model_predictions": False,
                 "sha256": checksum(output),
                 "bytes": output.stat().st_size,
-                "evaluation_note": "Exemplo externo para uso manual; não integra treino, validação ou teste e não possui caixas de referência revisadas.",
+                "evaluation_role": EVALUATION_ROLES[source["id"]],
+                "evaluation_note": evaluation_note(source["id"]),
             }
         )
     manifest = {
@@ -301,15 +340,79 @@ def prepare_library(output_dir: Path, cache_dir: Path, seconds: float = 12) -> d
     return manifest
 
 
+def refresh_catalog(output_dir: Path) -> dict:
+    """Review descriptions/covers of existing media without reencoding inputs."""
+    catalog_path = output_dir / "sources.json"
+    manifest = json.loads(catalog_path.read_text(encoding="utf-8"))
+    reviewed_sources = {item["id"]: item for item in SOURCES}
+    for item in manifest["items"]:
+        source = reviewed_sources[item["id"]]
+        path = output_dir / item["path"]
+        if checksum(path) != item["sha256"]:
+            raise ValueError(
+                f"Input changed; review before editing its cover: {item['id']}"
+            )
+        for key in ("title", "description", "content_tags"):
+            item[key] = source[key]
+        item["evaluation_role"] = EVALUATION_ROLES[item["id"]]
+        item["evaluation_note"] = evaluation_note(item["id"])
+        if item["kind"] == "video":
+            seconds = float(source.get("thumbnail_seconds", 0))
+            capture = cv2.VideoCapture(str(path))
+            try:
+                fps = float(capture.get(cv2.CAP_PROP_FPS))
+                frames = int(capture.get(cv2.CAP_PROP_FRAME_COUNT))
+                if fps <= 0 or frames < 1:
+                    raise RuntimeError(f"Video has no valid frames: {item['id']}")
+                seconds = min(seconds, max(0, (frames - 1) / fps))
+                capture.set(cv2.CAP_PROP_POS_MSEC, seconds * 1000)
+                ok, frame = capture.read()
+            finally:
+                capture.release()
+            if not ok:
+                raise RuntimeError(f"Cannot decode reviewed cover: {item['id']}")
+            thumbnail = output_dir / item["thumbnail"]
+            Image.fromarray(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)).save(
+                thumbnail, quality=88
+            )
+            item["thumbnail_seconds"] = seconds
+            item["thumbnail_sha256"] = checksum(thumbnail)
+            item["thumbnail_note"] = (
+                "Quadro real completo, sem caixas, recorte ou resultado do modelo; instante escolhido por revisão visual do assunto."
+            )
+        if checksum(path) != item["sha256"]:
+            raise RuntimeError("Review unexpectedly changed the input media")
+    manifest["catalog_reviewed_at_utc"] = datetime.now(UTC).isoformat()
+    manifest["catalog_review_note"] = (
+        "Descrições, papéis de avaliação e capas revisados; os oito arquivos de entrada e seus hashes permanecem inalterados."
+    )
+    manifest["content_tags_note"] = (
+        "As categorias descrevem o assunto, não previsões nem caixas de referência. Somente três clipes têm roedores como assunto; fotos/cenas de drenagem não são exemplos de rato."
+    )
+    catalog_path.write_text(
+        json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
+    return manifest
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output-dir", type=Path, default=ROOT / "dados/examples")
     parser.add_argument("--cache-dir", type=Path, default=ROOT / "dados/cache/examples")
     parser.add_argument("--seconds", type=float, default=12)
+    parser.add_argument(
+        "--refresh-catalog",
+        action="store_true",
+        help="Atualiza textos e capas dos arquivos existentes, sem baixar ou reencodar vídeos/fotos.",
+    )
     args = parser.parse_args()
     if not 1 <= args.seconds <= 30:
         parser.error("--seconds deve estar entre 1 e 30")
-    prepare_library(args.output_dir, args.cache_dir, args.seconds)
+    if args.refresh_catalog:
+        manifest = refresh_catalog(args.output_dir)
+        print(f"Reviewed {len(manifest['items'])} examples; input media unchanged.")
+    else:
+        prepare_library(args.output_dir, args.cache_dir, args.seconds)
     return 0
 
 

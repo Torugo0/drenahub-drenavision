@@ -6,6 +6,7 @@ import csv
 import hashlib
 import json
 import logging
+import math
 import random
 import re
 import shutil
@@ -266,6 +267,65 @@ def _find_coco_jsons(extracted_root: Path) -> dict[str, tuple[Path, dict[str, ob
     }
 
 
+def irodent_annotation_box(
+    annotation: dict[str, object], image_width: int, image_height: int
+) -> tuple[YoloBox, str]:
+    """Derive a detection box from annotated, visible pose landmarks.
+
+    iRodent's published boxes often include invisible landmarks encoded as
+    (0, 0, 0). Those boxes teach the detector to include unrelated background.
+    Visibility 1/2 is retained; visibility 0 is excluded. The resulting box is
+    an annotation-derived approximation, padded by 10% per side (minimum 2 px),
+    not a hand-reviewed outline and not a model-generated label.
+    """
+
+    raw_points = annotation.get("keypoints")
+    if raw_points is None:
+        return (
+            coco_bbox_to_yolo(annotation["bbox"], image_width, image_height, 2),
+            "published COCO box; no pose keypoints available",
+        )
+    if not isinstance(raw_points, list) or len(raw_points) % 3:
+        raise ValueError("iRodent keypoints must contain x/y/visibility triples")
+    visible: list[tuple[float, float]] = []
+    excluded = 0
+    for offset in range(0, len(raw_points), 3):
+        x, y, visibility = (float(value) for value in raw_points[offset : offset + 3])
+        if not all(math.isfinite(value) for value in (x, y, visibility)):
+            raise ValueError("non-finite iRodent keypoint")
+        if visibility > 0:
+            visible.append((x, y))
+        else:
+            excluded += 1
+    if len(visible) < 2:
+        raise ValueError("fewer than two visible iRodent keypoints")
+    xs, ys = zip(*visible, strict=True)
+    left, top, right, bottom = min(xs), min(ys), max(xs), max(ys)
+    if right <= left or bottom <= top:
+        raise ValueError("visible iRodent keypoints form a zero-area box")
+    pad_x, pad_y = max(2.0, (right - left) * 0.10), max(2.0, (bottom - top) * 0.10)
+    left, top = max(0.0, left - pad_x), max(0.0, top - pad_y)
+    right, bottom = (
+        min(float(image_width), right + pad_x),
+        min(float(image_height), bottom + pad_y),
+    )
+    corrected = [left, top, right - left, bottom - top]
+    box = coco_bbox_to_yolo(corrected, image_width, image_height, 2)
+    note = json.dumps(
+        {
+            "method": "visible-keypoints-v2",
+            "visible_keypoints": len(visible),
+            "invisible_keypoints_excluded": excluded,
+            "source_bbox_xywh": annotation.get("bbox"),
+            "corrected_bbox_xywh": [round(value, 3) for value in corrected],
+            "padding_per_side": "10 percent, minimum 2 pixels",
+        },
+        ensure_ascii=False,
+        separators=(",", ":"),
+    )
+    return box, note
+
+
 def collect_irodent(
     extracted_root: Path, annotation_path: Path | None = None
 ) -> list[SourceCandidate]:
@@ -314,9 +374,12 @@ def collect_irodent(
             with Image.open(image_path) as opened:
                 width, height = opened.size
         boxes: list[YoloBox] = []
+        annotation_notes: list[str] = []
         for annotation in annotations_by_image.get(image_id, []):
             try:
-                boxes.append(coco_bbox_to_yolo(annotation["bbox"], width, height, 2))
+                box, note = irodent_annotation_box(annotation, width, height)
+                boxes.append(box)
+                annotation_notes.append(note)
             except (KeyError, TypeError, ValueError) as exc:
                 LOGGER.warning(
                     "skipping invalid iRodent annotation %s for %s: %s",
@@ -334,7 +397,7 @@ def collect_irodent(
                 source_key="irodent",
                 source_path=f"annotations/{json_path.name}::{file_name}",
                 source_group=f"irodent::{file_name}",
-                annotation_note="published COCO bounding box mapped to animal_visivel",
+                annotation_note="; ".join(annotation_notes),
             )
         )
     if not candidates:
@@ -502,8 +565,8 @@ def write_dataset_yaml(output_root: Path) -> Path:
 
 def convert_dataset(
     raw_root: Path = Path("dados/raw"),
-    output_root: Path = Path("dados/processed/drenavision"),
-    manifest_path: Path = Path("dados/manifests/dataset_manifest.csv"),
+    output_root: Path = Path("dados/processed/drenavision_corrected"),
+    manifest_path: Path = Path("dados/manifests/dataset_manifest_corrected.csv"),
     *,
     seed: int = 42,
 ) -> dict[str, object]:
@@ -558,7 +621,12 @@ def convert_dataset(
         "dataset_yaml": dataset_yaml.as_posix(),
         "manifest": manifest_path.as_posix(),
     }
-    summary_path = manifest_path.with_name("dataset_summary.json")
+    summary_name = (
+        "dataset_summary.json"
+        if manifest_path.name == "dataset_manifest.csv"
+        else f"{manifest_path.stem}_summary.json"
+    )
+    summary_path = manifest_path.with_name(summary_name)
     summary_path.write_text(
         json.dumps(summary, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
     )

@@ -28,7 +28,7 @@ def build_parser() -> argparse.ArgumentParser:
         description="Treina YOLO26n nas tres classes customizadas do DrenaVision."
     )
     parser.add_argument(
-        "--config", type=Path, default=Path("ferramentas/configs/train.yaml")
+        "--config", type=Path, default=Path("ferramentas/configs/train_v2.yaml")
     )
     parser.add_argument("--data", type=Path, help="Sobrescreve dataset.yaml")
     parser.add_argument("--epochs", type=int)

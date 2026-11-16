@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "audit_created_at_utc": "2026-11-16T21:49:26.629495+00:00",
+  "purpose": "Evidence of the iRodent source annotation defect and the separate corrected-label experiment.",
+  "full_local_audit": "resultados/local/adaptation/annotation_audit.json",
+  "full_local_audit_sha256": "ec400bd782119f28a8739f36aaf1b141179a7bacbdb6d743fe00988d755d3d5b",
+  "source_annotation_sha256": {
+    "train.json": "1492c1fe2e4a0be1041cf73b007d78e8ba4e0a2275e3e4c4ef20c6a328b01ce5",
+    "test.json": "7b0c67f48da1fe0ac9490bef0ef8e8207d1867732fdfffcab8f7015a950f61de"
+  },
+  "source_counts": {
+    "native_train_images": 357,
+    "native_test_images": 90,
+    "annotations": 447,
+    "bbox_at_origin_and_equal_to_bound_including_invisible_points": 305,
+    "usable_with_visible_keypoint_envelope": 442,
+    "excluded_fewer_than_two_visible_points": 5
+  },
+  "baseline_v1_affected_images": {
+    "train": {"rodent_images": 100, "source_boxes_at_origin": 75},
+    "val": {"rodent_images": 20, "source_boxes_at_origin": 8},
+    "test": {"rodent_images": 20, "source_boxes_at_origin": 15}
+  },
+  "finding": "For 305 annotations, the published box equals the extrema of all pose landmarks, including missing landmarks represented as (0,0,0). This incorporates unrelated upper-left background. It is not a COCO xyxy/xywh swap or an EXIF dimension mismatch.",
+  "v2_annotation_method": {
+    "method": "Use only annotated landmarks with visibility greater than zero; derive their xy envelope; pad each side by 10 percent of the respective span, minimum 2 pixels; clip to image bounds.",
+    "excluded": "Fewer than two visible landmarks or zero-area visible geometry.",
+    "label_origin": "Derived from source pose annotations, never from detector predictions.",
+    "limitation": "This envelope can cover only a visible head or other annotated part. It does not guarantee a full-body animal rectangle and was not independently annotated by a human reviewer."
+  },
+  "examples_xywh_pixels": [
+    {"native_split": "train", "file_name": "obs_id_00803.jpg", "visible_keypoints": 4, "source": [0, 0, 1244, 1053], "v2": [670.9, 599.8, 625.2, 494.4]},
+    {"native_split": "train", "file_name": "obs_id_00845.jpg", "visible_keypoints": 4, "source": [0, 0, 1208, 1442], "v2": [598.6, 1176.9, 664.8, 289.2]},
+    {"native_split": "train", "file_name": "obs_id_00138.jpg", "visible_keypoints": 9, "source": [0, 0, 1345, 1006], "v2": [883.0, 658.4, 504.0, 379.2]},
+    {"native_split": "test", "file_name": "obs_id_00184.jpg", "visible_keypoints": 9, "source": [0, 0, 1265, 899], "v2": [856.9, 545.9, 445.2, 385.2]}
+  ],
+  "contact_sheet": {
+    "file": "resultados/metrics/v2/irodent_source_vs_v2.jpg",
+    "sha256": "6145869356e27557fedc014e6057228aba0da137c472042ae9d3cfcaa55b02e6",
+    "source_images": ["obs_id_00803.jpg", "obs_id_00845.jpg", "obs_id_00138.jpg", "obs_id_00184.jpg", "new_obs_id_00139.jpg", "obs_id_00677.jpg", "obs_id_00491.jpg", "new_obs_id_00255.jpg", "new_obs_id_00235.jpg", "obs_id_00551.jpg", "new_obs_id_00150.jpg", "new_obs_id_00821.jpg"],
+    "transformations": "Resizing and montage; published box in red; visible-keypoint-derived v2 box in blue."
+  },
+  "v2_dataset": {
+    "dataset_yaml": "dados/processed/drenavision_v2/dataset.yaml",
+    "data_manifest_sha256": "e109a7649b8785184be5312cc20b5f20b08ea62b7cfe8da18330ebb94f74113c",
+    "images_by_split": {"train": 557, "val": 62, "test": 62},
+    "images_by_source": {"click_trash": 140, "stagnant_water": 152, "irodent": 373, "domain_reviewed": 16},
+    "additional_native_training_images": 234,
+    "excluded_baseline_training_images": 1,
+    "baseline_validation_and_test_source_image_ids_preserved": true,
+    "validation": "Structure, provenance, exact hashes, source groups and cross-split pHash threshold 4 passed.",
+    "domain_adaptation": "16 assistant-reviewed training images/crops from rato_close, rato_residuos, canal_residuos and drenagem_chuva. Labels are assisted visual annotations, not independently human-certified ground truth.",
+    "regression_clips_not_adapted": ["rato_rua", "sarjeta_residuos"],
+    "regression_caveat": "These clips were already inspected during product development and are regression cases, not a pristine independent deployment test."
+  },
+  "model_selection_at_audit": "Candidate training and evaluation pending; no candidate performance or promotion claimed by this audit.",
+  "metric_protocol": "Keep v1 metrics as historical results under the original defective source labels. Evaluate baseline and candidate on the same v2 corrected labels for comparison; v1 mAP and v2 mAP are not directly comparable."
+}

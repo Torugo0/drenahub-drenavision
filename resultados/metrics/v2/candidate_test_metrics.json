@@ -1,0 +1,225 @@
+{
+  "status": "completed",
+  "started_at_utc": "2026-11-16T22:01:25.930720Z",
+  "completed_at_utc": "2026-11-16T22:01:39.177871Z",
+  "protocol": "held-out test split; Ultralytics detection metrics",
+  "checkpoint": "resultados/local/models/candidate_v2.pt",
+  "checkpoint_sha256": "01ea7c578783b2a08fc585051b0768a1e9c0d510cb5652173fab0979f8d7d27a",
+  "device": "cuda:0",
+  "dataset": {
+    "dataset_yaml": "dados/processed/drenavision_v2/dataset.yaml",
+    "dataset_yaml_sha256": "ea42c1da0376d20f1ec4d31fb006343711a54de48f3bc2701a60bfb7f8533e8e",
+    "dataset_sha256": "af3927e1f3b24de81984cf4a302eb764dd09eb4e0380b7105ffd013ed0496e49",
+    "files_hashed": 1362,
+    "bytes_hashed": 1151333229,
+    "images_by_split": {
+      "test": 62,
+      "train": 557,
+      "val": 62
+    },
+    "provenance_sha256": {
+      "dados/dataset_sources.csv": "4e03306338cd07a2ef991fb0512abc8dd2530d5b36b124618dc0918d534afc97",
+      "dados/manifests/dataset_manifest.csv": "7e03032b7a8cc38430e20c4682b4319a231f6559c92b95a34563d281a367c3f0",
+      "dados/manifests/dataset_summary.json": "112329c32e65f8d9ba371aaaa4d829dd016f89f4c88eee7a4a1b47c0ca7834ee",
+      "dados/manifests/research_report.json": "d10f7e5f6593ee47c13cb9f85009c1a0dab590b6c8ac9a3ec5a41436127007e9",
+      "dados/manifests/validation_report.json": "3d963db4a92380d1ec0fa2af44d5f3fbb565a9f5fda461d715e5d0d97a6dc82f",
+      "dados/manifests/validation_report_phash.json": "4a7d8fd726c924f38d2197000f7718d02e01bcfc05f680e435340561725fc093",
+      "dados/processed/drenavision_v2/data_manifest.csv": "e109a7649b8785184be5312cc20b5f20b08ea62b7cfe8da18330ebb94f74113c"
+    }
+  },
+  "dataset_validation": {
+    "valid": true,
+    "dataset_root": "dados/processed/drenavision_v2",
+    "error_count": 0,
+    "warning_count": 0,
+    "statistics": {
+      "images_by_split": {
+        "train": 557,
+        "val": 62,
+        "test": 62
+      },
+      "labels_by_split": {
+        "train": 557,
+        "val": 62,
+        "test": 62
+      },
+      "boxes_by_class": {
+        "obstrucao_visivel": 259,
+        "agua_acumulada": 1488,
+        "animal_visivel": 384
+      },
+      "boxes_by_split_and_class": {
+        "train": {
+          "obstrucao_visivel": 182,
+          "agua_acumulada": 989,
+          "animal_visivel": 344
+        },
+        "val": {
+          "obstrucao_visivel": 40,
+          "agua_acumulada": 223,
+          "animal_visivel": 20
+        },
+        "test": {
+          "obstrucao_visivel": 37,
+          "agua_acumulada": 276,
+          "animal_visivel": 20
+        }
+      },
+      "negative_images": 18,
+      "exact_duplicate_groups": 0,
+      "phash_enabled": false,
+      "phash_threshold": null
+    },
+    "issues": []
+  },
+  "arguments": {
+    "data": "dados/processed/drenavision_v2/dataset.yaml",
+    "split": "test",
+    "imgsz": 640,
+    "batch": 8,
+    "conf": 0.001,
+    "iou": 0.6,
+    "workers": 2,
+    "device": 0,
+    "plots": true,
+    "save_json": true,
+    "project": "resultados/local/evaluation",
+    "name": "candidate_v2_on_corrected_v2",
+    "exist_ok": false,
+    "verbose": true
+  },
+  "metrics": {
+    "aggregate": {
+      "precision": 0.38281554254607797,
+      "recall": 0.4250565935423705,
+      "map50": 0.3581374110262212,
+      "map50_95": 0.18097549576847294
+    },
+    "per_class": {
+      "obstrucao_visivel": {
+        "class_id": 0,
+        "precision": 0.5347117314326163,
+        "recall": 0.6486486486486487,
+        "map50": 0.6233378083578542,
+        "map50_95": 0.36113842524618006
+      },
+      "agua_acumulada": {
+        "class_id": 1,
+        "precision": 0.23682248853636637,
+        "recall": 0.17652113197846284,
+        "map50": 0.14091681079515428,
+        "map50_95": 0.03638054621687882
+      },
+      "animal_visivel": {
+        "class_id": 2,
+        "precision": 0.3769124076692513,
+        "recall": 0.45,
+        "map50": 0.31015761392565516,
+        "map50_95": 0.14540751584235984
+      }
+    },
+    "speed_ms_per_image": {
+      "preprocess": 0.8363887096317242,
+      "inference": 3.9118451612657443,
+      "loss": 0.0009822580332477248,
+      "postprocess": 1.617193548437142
+    }
+  },
+  "plots": [
+    "BoxF1_curve.png",
+    "BoxPR_curve.png",
+    "BoxP_curve.png",
+    "BoxR_curve.png",
+    "confusion_matrix.png",
+    "confusion_matrix_normalized.png",
+    "val_batch0_labels.jpg",
+    "val_batch0_pred.jpg",
+    "val_batch1_labels.jpg",
+    "val_batch1_pred.jpg",
+    "val_batch2_labels.jpg",
+    "val_batch2_pred.jpg"
+  ],
+  "error_analysis": {
+    "matching_iou": 0.5,
+    "prediction_confidence": 0.35,
+    "scanned": {
+      "images": 62,
+      "tp": 26,
+      "fp": 14,
+      "fn": 307
+    },
+    "examples": {
+      "true_positive": {
+        "obstrucao_visivel": [
+          "error_examples/true_positive/obstrucao_visivel/00000_click_trash_00c5aac3d4cf1d57.jpg",
+          "error_examples/true_positive/obstrucao_visivel/00001_click_trash_0c989b533293a6a0.jpg",
+          "error_examples/true_positive/obstrucao_visivel/00002_click_trash_17b42f3778cabdd6.jpg"
+        ],
+        "agua_acumulada": [],
+        "animal_visivel": [
+          "error_examples/true_positive/animal_visivel/00022_irodent_1229b33e7eb1e2b9.jpg",
+          "error_examples/true_positive/animal_visivel/00023_irodent_1ce34e1d56fba67e.jpg",
+          "error_examples/true_positive/animal_visivel/00024_irodent_27d984c6a5e23cfd.jpg"
+        ]
+      },
+      "correct": {
+        "obstrucao_visivel": [
+          "error_examples/correct/obstrucao_visivel/00000_click_trash_00c5aac3d4cf1d57.jpg",
+          "error_examples/correct/obstrucao_visivel/00005_click_trash_3a6511081805cc90.jpg",
+          "error_examples/correct/obstrucao_visivel/00009_click_trash_71f6e5520c024e1a.jpg"
+        ],
+        "agua_acumulada": [],
+        "animal_visivel": [
+          "error_examples/correct/animal_visivel/00023_irodent_1ce34e1d56fba67e.jpg",
+          "error_examples/correct/animal_visivel/00024_irodent_27d984c6a5e23cfd.jpg",
+          "error_examples/correct/animal_visivel/00030_irodent_800b0d6100e145c3.jpg"
+        ]
+      },
+      "false_positive": {
+        "obstrucao_visivel": [
+          "error_examples/false_positive/obstrucao_visivel/00002_click_trash_17b42f3778cabdd6.jpg",
+          "error_examples/false_positive/obstrucao_visivel/00003_click_trash_1bc5566a57e7be3b.jpg",
+          "error_examples/false_positive/obstrucao_visivel/00004_click_trash_3293348191c4feb8.jpg"
+        ],
+        "agua_acumulada": [
+          "error_examples/false_positive/agua_acumulada/00049_stagnant_water_7da9000c6d134c96.jpg"
+        ],
+        "animal_visivel": [
+          "error_examples/false_positive/animal_visivel/00021_irodent_0f66ef550db9163f.jpg",
+          "error_examples/false_positive/animal_visivel/00022_irodent_1229b33e7eb1e2b9.jpg",
+          "error_examples/false_positive/animal_visivel/00025_irodent_2d64cb4fdea65cc1.jpg"
+        ]
+      },
+      "false_negative": {
+        "obstrucao_visivel": [
+          "error_examples/false_negative/obstrucao_visivel/00001_click_trash_0c989b533293a6a0.jpg",
+          "error_examples/false_negative/obstrucao_visivel/00003_click_trash_1bc5566a57e7be3b.jpg",
+          "error_examples/false_negative/obstrucao_visivel/00004_click_trash_3293348191c4feb8.jpg"
+        ],
+        "agua_acumulada": [
+          "error_examples/false_negative/agua_acumulada/00040_stagnant_water_04213a44e43bc933.jpg",
+          "error_examples/false_negative/agua_acumulada/00042_stagnant_water_34623cea707f7576.jpg",
+          "error_examples/false_negative/agua_acumulada/00043_stagnant_water_34a6334042f9d44d.jpg"
+        ],
+        "animal_visivel": [
+          "error_examples/false_negative/animal_visivel/00020_irodent_02af19356995e059.jpg",
+          "error_examples/false_negative/animal_visivel/00021_irodent_0f66ef550db9163f.jpg",
+          "error_examples/false_negative/animal_visivel/00025_irodent_2d64cb4fdea65cc1.jpg"
+        ]
+      }
+    },
+    "note": "TP/FP/FN totals cover every scanned candidate. Examples are selected separately by category and class; official aggregate metrics remain those from the complete Ultralytics test evaluation."
+  },
+  "environment": {
+    "python": "3.12.10",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "packages": {
+      "torch": "2.14.1+cu130",
+      "torchvision": "0.29.1+cu130",
+      "ultralytics": "8.4.215",
+      "opencv-python": "4.14.0.94",
+      "PyYAML": "6.0.3",
+      "faster-coco-eval": "1.8.0"
+    }
+  }
+}

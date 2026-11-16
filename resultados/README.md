@@ -21,9 +21,11 @@ por `metrics/` e `demo/`. Para usar a aplicação, o checkpoint fica em
 Os exemplos de entrada ficam em `dados/examples/`; aqui ficam as saídas.
 As pastas locais são ignoradas pelo Git para não publicar histórico ou duplicar
 arquivos grandes. O modelo e os vídeos distribuídos estão na
-[release](https://github.com/Torugo0/drenahub-drenavision/releases/tag/v0.2.0-product).
+[release](https://github.com/Torugo0/drenahub-drenavision/releases/tag/v0.3.0-model-v2).
 
-`metrics/evaluation_metrics.json` é a fonte dos números publicados. Os JSONs
+`metrics/v2/` reúne a avaliação atual e a comparação com o modelo antigo nas
+mesmas caixas corrigidas. `metrics/evaluation_metrics.json` preserva a execução
+v1 histórica, cujas caixas de animal tinham defeito. Os JSONs
 contêm hashes e referências à execução original; seus caminhos históricos
 podem mencionar a organização anterior do repositório. A reorganização das
 pastas não representa um novo treinamento ou uma nova avaliação.

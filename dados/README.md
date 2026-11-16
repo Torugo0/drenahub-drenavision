@@ -1,7 +1,8 @@
 # Dados do DrenaVision
 
-Este diretório guarda apenas configuração, rastreabilidade e manifestos. Os
-arquivos brutos e processados são obtidos localmente e permanecem fora do Git.
+Este diretório guarda configuração, rastreabilidade, manifestos e os exemplos
+de teste em `examples/`. Os datasets completos brutos e processados são
+obtidos localmente e permanecem fora do Git.
 O contrato final é YOLO, com as classes:
 
 | ID | Classe |
@@ -16,10 +17,10 @@ Execute a partir da raiz do repositório:
 
 ```powershell
 python ferramentas/scripts/research_datasets.py --verify-local
-python ferramentas/scripts/download_datasets.py --source water
-python ferramentas/scripts/download_datasets.py --source click --seed 42 --click-train 100 --click-val 20 --click-test 20
-python ferramentas/scripts/download_datasets.py --source irodent
-python ferramentas/scripts/convert_annotations.py --seed 42
+python ferramentas/scripts/download_datasets.py --source all --seed 42
+python ferramentas/scripts/prepare_negative_crops.py
+python ferramentas/scripts/prepare_domain_annotations.py
+python ferramentas/scripts/prepare_adaptation.py --domain-root dados/interim/adaptation
 python ferramentas/scripts/validate_dataset.py
 python ferramentas/scripts/visualize_annotations.py --samples-per-split 6
 ```
@@ -27,7 +28,15 @@ python ferramentas/scripts/visualize_annotations.py --samples-per-split 6
 O download convencional é retomável por HTTP Range. O CLICK é um ZIP de vários
 gigabytes; o script abre o diretório central remotamente e baixa somente 140
 pares selecionados, sem transferir o arquivo completo. Repetir os comandos é
-seguro: arquivos completos e verificados são reutilizados.
+seguro no downloader: arquivos completos e verificados são reutilizados.
+O preparador v2 recusa sobrescrever uma saída já preenchida; para repetir um
+experimento, escolha outro `--output-root` e `--audit-dir`.
+
+A conversão simples `convert_annotations.py` cria `drenavision_corrected` com
+manifesto separado. Ela não substitui a preparação v2 acima nem sobrescreve
+as evidências v1. O v2 corrige caixas de roedores que incorporavam pontos
+ausentes na origem e registra esse protocolo em
+[resultados/metrics/v2](../resultados/metrics/v2/README.md).
 
 Para uma inspeção mais cara de imagens visualmente semelhantes entre splits:
 
@@ -48,20 +57,24 @@ dados/
 ├── manifests/
 │   ├── dataset_manifest.csv       # gerado pela conversão
 │   └── dataset_summary.json       # contagens medidas, nunca estimadas
+├── examples/                       # oito entradas pequenas versionadas + créditos
 ├── raw/                            # ignorado pelo Git
 │   ├── stagnant_water/
 │   ├── click_trash/
 │   └── irodent/
-└── processed/drenavision/          # ignorado pelo Git
+└── processed/drenavision_v2/       # ignorado pelo Git; 557/62/62 imagens
     ├── images/{train,val,test}/
     ├── labels/{train,val,test}/
-    └── dataset.yaml                    # gerado; usado por treino e avaliação
+    ├── dataset.yaml                    # gerado; usado por treino e avaliação
+    └── data_manifest.csv               # proveniência específica do v2
 ```
 
 O `dados/dataset.yaml` versionado é o template legível que aponta para a
-saída padrão. O conversor sempre grava o YAML efetivo ao lado das imagens em
-`dados/processed/drenavision/dataset.yaml`; é esse arquivo portátil, sem
-caminho absoluto, que treino, avaliação e validação consomem por padrão.
+saída v2. O preparador grava o YAML efetivo ao lado das imagens em
+`dados/processed/drenavision_v2/dataset.yaml`; é esse arquivo portátil que
+treino, avaliação e validação consomem por padrão. Os manifests na raiz de
+`dados/manifests/` preservam o histórico v1; o manifesto atual tem uma cópia
+versionada em `resultados/metrics/v2/data_manifest.csv`.
 
 Cada nome processado começa com a fonte e inclui os 16 primeiros caracteres do
 SHA-256 da imagem. O manifesto preserva URL, versão, licença, caminho original,

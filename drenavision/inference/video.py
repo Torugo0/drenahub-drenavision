@@ -12,7 +12,8 @@ from pathlib import Path
 from typing import Any
 from uuid import uuid4
 
-from drenavision.core.constants import PUBLIC_CLASS_LABELS
+from drenavision.core.annotations import place_label
+from drenavision.core.constants import OVERLAY_CLASS_LABELS
 from drenavision.core.schemas import Detection, PredictionEvent
 from drenavision.core.storage import EventRepository, EvidenceStore
 from drenavision.data.constants import CLASS_NAMES
@@ -48,16 +49,21 @@ def annotate_video_frame(frame_bgr: Any, detections: list[Detection]) -> Any:
         except OSError:
             continue
     thickness = max(3, image.width // 220)
+    occupied_labels = []
     for detection in detections:
         x1, y1, x2, y2 = detection.bounding_box
         color = colors[detection.class_id]
         draw.rectangle((x1, y1, x2, y2), outline=color, width=thickness)
-        label = PUBLIC_CLASS_LABELS[detection.class_name]
+        label = OVERLAY_CLASS_LABELS[detection.class_name]
         left, top, right, bottom = draw.textbbox((0, 0), label, font=font)
         text_width = right - left
         text_height = bottom - top
-        label_x = min(max(0, x1), max(0, image.width - text_width - 16))
-        label_y = max(0, y1 - text_height - 16)
+        label_x, label_y = place_label(
+            image.size,
+            (x1, y1, x2, y2),
+            (text_width + 16, text_height + 16),
+            occupied_labels,
+        )
         draw.rectangle(
             (label_x, label_y, label_x + text_width + 16, label_y + text_height + 16),
             fill=color,

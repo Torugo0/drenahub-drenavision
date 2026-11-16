@@ -2,12 +2,12 @@
   "schema_version": 1,
   "prepared_at_utc": "2026-11-16T21:13:35.285143+00:00",
   "purpose": "Entradas reais, sem anotações do modelo, para experimentar a interface.",
-  "content_tags_note": "As categorias descrevem o assunto do arquivo; não são resultados de detecção ou rótulos de avaliação.",
+  "content_tags_note": "As categorias descrevem o assunto, não previsões nem caixas de referência. Somente três clipes têm roedores como assunto; fotos/cenas de drenagem não são exemplos de rato.",
   "items": [
     {
       "id": "rato_close",
-      "title": "Rato em close",
-      "description": "Filmagem real de um rato doméstico visto de perto. Serve para experimentar a marcação de animais; o ambiente difere de um bueiro.",
+      "title": "Roedor atrás da grade",
+      "description": "Filmagem de um rato doméstico em close, com parte do corpo encoberta pelas grades. Alguns quadros foram anotados para adaptação; este clipe não é teste independente.",
       "kind": "video",
       "commons_title": "File:Rat.ogv",
       "original_sha1": "dfed639da4eb3462aec3f0f9d6fcdb17aeae910e",
@@ -33,12 +33,16 @@
       "contains_model_predictions": false,
       "sha256": "e2f305a79477c47e7857eead8aa1be75ddb90bb0eaba975909dcd4595d8092db",
       "bytes": 837177,
-      "evaluation_note": "Exemplo externo para uso manual; não integra treino, validação ou teste e não possui caixas de referência revisadas."
+      "evaluation_note": "A fonte integra a adaptação v2 por quadros anotados ou recortes de fundo; não é teste independente. As categorias do catálogo não são rótulos de avaliação.",
+      "evaluation_role": "adaptation_training_frames",
+      "thumbnail_seconds": 0.5,
+      "thumbnail_sha256": "2c2fecfcc8619e23b071064981be6e8575c06b2612945360239cadc839b15b76",
+      "thumbnail_note": "Quadro real completo, sem caixas, recorte ou resultado do modelo; instante escolhido por revisão visual do assunto."
     },
     {
       "id": "rato_rua",
-      "title": "Rato entre vegetação",
-      "description": "Filmagem real de um rato parcialmente escondido entre vegetação e frutos em Ljubljana. Exemplo difícil para conferir possíveis falhas.",
+      "title": "Roedor parcialmente oculto · difícil",
+      "description": "A fonte identifica um rato entre vegetação e frutos, em Ljubljana. O animal fica pequeno e pouco legível neste trecho; uma caixa ou um acerto não pode ser confirmado só pela capa. Regressão separada do treino.",
       "kind": "video",
       "commons_title": "File:2022-08-02 LJUBLJANA Grudnovo nabrežje RODENTIA Rattus PODGANA.webm",
       "original_sha1": "86c42571332199b3ad9bed87e408efd6f9ee0ea2",
@@ -64,12 +68,16 @@
       "contains_model_predictions": false,
       "sha256": "4f5ae958da80e56adbdaac6f3ca5cc32341176528ef686045d25335634cb5f25",
       "bytes": 3440755,
-      "evaluation_note": "Exemplo externo para uso manual; não integra treino, validação ou teste e não possui caixas de referência revisadas."
+      "evaluation_note": "Regressão difícil separada do treino, com baixa legibilidade visual. Não possui caixas de referência revisadas; não permite alegar acerto ou calcular IoU sem nova anotação confiável.",
+      "evaluation_role": "separate_difficult_regression_no_training",
+      "thumbnail_seconds": 9.0,
+      "thumbnail_sha256": "81c6c0238f82945c049149d0d23bda5fd74252dfa3c01445c5aa2b35faec98b1",
+      "thumbnail_note": "Quadro real completo, sem caixas, recorte ou resultado do modelo; instante escolhido por revisão visual do assunto."
     },
     {
       "id": "rato_residuos",
-      "title": "Rato entre resíduos",
-      "description": "Filmagem real de um rato se alimentando em Hanói, Vietnã.",
+      "title": "Roedor junto a resíduos",
+      "description": "Filmagem de um rato entre materiais e embalagens em Hanói. O roedor aparece à direita da telha; alguns quadros foram anotados para adaptação. Este clipe não é teste independente.",
       "kind": "video",
       "commons_title": "File:Manĝanta rato en Hanojo.webm",
       "original_sha1": "6f8f7291b2f62255b975e8d07f9ca57dbd916575",
@@ -97,12 +105,16 @@
       "contains_model_predictions": false,
       "sha256": "5bd947ce05cc3dab49118747622e29f56d8c7ba1131233fe3ff97cbb02da8030",
       "bytes": 1133711,
-      "evaluation_note": "Exemplo externo para uso manual; não integra treino, validação ou teste e não possui caixas de referência revisadas."
+      "evaluation_note": "A fonte integra a adaptação v2 por quadros anotados ou recortes de fundo; não é teste independente. As categorias do catálogo não são rótulos de avaliação.",
+      "evaluation_role": "adaptation_training_frames",
+      "thumbnail_seconds": 0.0,
+      "thumbnail_sha256": "890a5eec5bdc3871ab1c51272faf1aa3a3cb116d422a98d3f5473284098b2be3",
+      "thumbnail_note": "Quadro real completo, sem caixas, recorte ou resultado do modelo; instante escolhido por revisão visual do assunto."
     },
     {
       "id": "drenagem_chuva",
-      "title": "Água na drenagem",
-      "description": "Filmagem real de água transbordando em um ponto de drenagem de Werrington, Austrália.",
+      "title": "Água transbordando na drenagem",
+      "description": "Água em movimento saindo da drenagem de Werrington, Austrália. Não é exemplo de rato. Recortes de gramado sem alvos foram usados como fundo na adaptação.",
       "kind": "video",
       "commons_title": "File:Overflowing water drain Werrington March 2022.webm",
       "original_sha1": "1bf24f62111c0b46d8226dd026bf49a137249e1b",
@@ -128,12 +140,16 @@
       "contains_model_predictions": false,
       "sha256": "637a527ed9573eabb255b4b1a9c73f554bc0825df90797b0bc3e78a6b2a5a48c",
       "bytes": 5316117,
-      "evaluation_note": "Exemplo externo para uso manual; não integra treino, validação ou teste e não possui caixas de referência revisadas."
+      "evaluation_note": "A fonte integra a adaptação v2 por quadros anotados ou recortes de fundo; não é teste independente. As categorias do catálogo não são rótulos de avaliação.",
+      "evaluation_role": "adaptation_background_crops",
+      "thumbnail_seconds": 5.0,
+      "thumbnail_sha256": "c97db30b8049c3c7c079e51d86bb47b559778037430d2c78f01898e7493eaa52",
+      "thumbnail_note": "Quadro real completo, sem caixas, recorte ou resultado do modelo; instante escolhido por revisão visual do assunto."
     },
     {
       "id": "canal_residuos",
-      "title": "Canal de drenagem",
-      "description": "Filmagem real do canal de drenagem de Alajo, em Accra, Gana.",
+      "title": "Canal com água e veículos ao fundo",
+      "description": "Canal de Alajo, em Accra, Gana, com água e veículos na margem. Não é exemplo de rato. Recortes dos veículos sem alvos foram usados como fundo na adaptação.",
       "kind": "video",
       "commons_title": "File:Alajo Storm Drain 011.webm",
       "original_sha1": "7eff318adde6de3d20548682e424fa00170adc69",
@@ -159,18 +175,21 @@
       "contains_model_predictions": false,
       "sha256": "dd81768eb2c0054db76eaaacb371c12fde876c69d14270e20dbf5c983a5e41b6",
       "bytes": 2080859,
-      "evaluation_note": "Exemplo externo para uso manual; não integra treino, validação ou teste e não possui caixas de referência revisadas."
+      "evaluation_note": "A fonte integra a adaptação v2 por quadros anotados ou recortes de fundo; não é teste independente. As categorias do catálogo não são rótulos de avaliação.",
+      "evaluation_role": "adaptation_background_crops",
+      "thumbnail_seconds": 0.0,
+      "thumbnail_sha256": "5b298d2e8c0ab043ab65df439ae808da8eff494628d36f5ec32f45234d922445",
+      "thumbnail_note": "Quadro real completo, sem caixas, recorte ou resultado do modelo; instante escolhido por revisão visual do assunto."
     },
     {
       "id": "sarjeta_residuos",
-      "title": "Sarjeta e resíduos",
-      "description": "Filmagem real de uma sarjeta que conduz água ao canal de Alajo, Gana.",
+      "title": "Água correndo pela sarjeta",
+      "description": "Sarjeta que conduz água ao canal de Alajo, Gana. Há um objeto junto à parede, de natureza incerta; este exemplo não confirma lixo nem presença de rato.",
       "kind": "video",
       "commons_title": "File:Gutter to the Alajo Storm Drain.webm",
       "original_sha1": "28f108c68813ffcdeaebdcc810b3baf08a91dd79",
       "license": "CC BY-SA 4.0",
       "content_tags": [
-        "obstrucao_visivel",
         "agua_acumulada"
       ],
       "path": "sarjeta_residuos.mp4",
@@ -191,12 +210,16 @@
       "contains_model_predictions": false,
       "sha256": "2570ab692eb696003f70cb028c8f28daf92631dc07e1721fc3e8e770cd531e6d",
       "bytes": 2449351,
-      "evaluation_note": "Exemplo externo para uso manual; não integra treino, validação ou teste e não possui caixas de referência revisadas."
+      "evaluation_note": "Exemplo para regressão manual, fora dos splits oficiais; não possui caixas de referência revisadas nem garante detecção.",
+      "evaluation_role": "external_manual_regression",
+      "thumbnail_seconds": 0.0,
+      "thumbnail_sha256": "6b04ff4b778a8bc060f42fa95781393335ea9b420efa3a8cbc98ff840362113d",
+      "thumbnail_note": "Quadro real completo, sem caixas, recorte ou resultado do modelo; instante escolhido por revisão visual do assunto."
     },
     {
       "id": "ralo_lixo",
       "title": "Lixo junto ao bueiro",
-      "description": "Fotografia real de um bueiro com resíduos em Queens, Nova York.",
+      "description": "Fotografia de embalagens e outros resíduos junto à grelha de um bueiro, em Queens, Nova York. O assunto é lixo; não há rato visível nesta foto.",
       "kind": "image",
       "commons_title": "File:Sutphin Bl Jamaica Av td (2019-08-18) 14.jpg",
       "original_sha1": "68cffaf67f98fc4a175be3802f6bb7ccb536d412",
@@ -217,12 +240,13 @@
       "contains_model_predictions": false,
       "sha256": "b86282a98ff3f921c734956ab2c23d943e13a167e7e1a6d0ecd4593fb83e9645",
       "bytes": 486757,
-      "evaluation_note": "Exemplo externo para uso manual; não integra treino, validação ou teste e não possui caixas de referência revisadas."
+      "evaluation_note": "Exemplo para regressão manual, fora dos splits oficiais; não possui caixas de referência revisadas nem garante detecção.",
+      "evaluation_role": "external_manual_regression"
     },
     {
       "id": "bueiro_agua",
-      "title": "Bueiro após chuva",
-      "description": "Fotografia real de um ponto de drenagem em Nova Orleans após chuva forte.",
+      "title": "Embalagens e água junto à grelha",
+      "description": "Fotografia de um ponto de drenagem em Nova Orleans após chuva forte, com embalagens e água junto à grelha. Não há rato visível nesta foto.",
       "kind": "image",
       "commons_title": "File:Storm Drain Clogged - Mid-City New Orleans.jpg",
       "original_sha1": "6d267080161c22f02c96d8c28d994284c7c85eeb",
@@ -244,7 +268,10 @@
       "contains_model_predictions": false,
       "sha256": "e3a1c147532b104628b5c8025784569cf71843c2d5d1692f34c03ad9ac6eeacd",
       "bytes": 618235,
-      "evaluation_note": "Exemplo externo para uso manual; não integra treino, validação ou teste e não possui caixas de referência revisadas."
+      "evaluation_note": "Exemplo para regressão manual, fora dos splits oficiais; não possui caixas de referência revisadas nem garante detecção.",
+      "evaluation_role": "external_manual_regression"
     }
-  ]
+  ],
+  "catalog_reviewed_at_utc": "2026-11-16T21:58:05.882586+00:00",
+  "catalog_review_note": "Descrições, papéis de avaliação e capas revisados; os oito arquivos de entrada e seus hashes permanecem inalterados."
 }

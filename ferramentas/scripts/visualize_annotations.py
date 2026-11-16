@@ -18,10 +18,10 @@ def main() -> int:
     parser.add_argument(
         "--dataset-root",
         type=Path,
-        default=Path("dados/processed/drenavision"),
+        default=Path("dados/processed/drenavision_v2"),
     )
     parser.add_argument(
-        "--output-root", type=Path, default=Path("resultados/dataset_preview")
+        "--output-root", type=Path, default=Path("resultados/local/dataset_preview_v2")
     )
     parser.add_argument("--samples-per-split", type=int, default=6)
     parser.add_argument("--seed", type=int, default=42)

@@ -1,0 +1,309 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-11-16T22:04:17.318108+00:00",
+  "checkpoint": "resultados/local/models/candidate_v2.pt",
+  "model_sha256": "01ea7c578783b2a08fc585051b0768a1e9c0d510cb5652173fab0979f8d7d27a",
+  "baseline_model_sha256": "fe439a3a722e73db5d841cc199026c8d42f4bbf806bf95924c2eb8c09a9f6bf7",
+  "confidence_threshold": 0.35,
+  "iou_threshold": 0.45,
+  "tracking": true,
+  "model_promoted_by_this_review": false,
+  "promotion_note": "This batch review did not promote a checkpoint itself; the subsequent active-model decision and backup are recorded in comparison.json.",
+  "confidence_changed_to_fit_examples": false,
+  "ui_verification_after_promotion": {
+    "application_version": "0.3.0",
+    "method": "Browser file chooser upload, analyze button, playback through 11 seconds, responsive layout and history checked on the running application.",
+    "input": "dados/examples/rato_close.mp4",
+    "event_id": "f521a499-7497-46fc-9f28-c9e2505a6848",
+    "model_version": "best-01ea7c578783",
+    "animal_markings": 1,
+    "video_duration_seconds": 11,
+    "browser_playback_seconds_observed": 11,
+    "desktop_video_height_pixels": 274,
+    "mobile_viewport_width_pixels": 390,
+    "mobile_main_width_and_scroll_width_pixels": 380,
+    "screenshots": ["frontend_v2_desktop.jpg", "frontend_v2_mobile.jpg"],
+    "note": "This source clip is part of adaptation; the check proves workflow and rendering, not independent model accuracy."
+  },
+  "full_local_report": "resultados/local/validation_examples_v2/validation_report.json",
+  "functional_result": {
+    "completed_inputs": 8,
+    "videos": 6,
+    "images": 2,
+    "processed_and_independently_decoded_frames": 1388,
+    "all_outputs_h264_faststart": true,
+    "exported_frames_lost": 0,
+    "visual_inspection": "All eight posters and both available class highlights inspected; six close-video timestamps additionally inspected in a contact sheet."
+  },
+  "evaluation_protocol": {
+    "adaptation_sources": [
+      "rato_close",
+      "rato_residuos",
+      "canal_residuos",
+      "drenagem_chuva"
+    ],
+    "separate_regression_sources": [
+      "rato_rua",
+      "sarjeta_residuos",
+      "ralo_lixo",
+      "bueiro_agua"
+    ],
+    "ground_truth_note": "Catalog tags are subjects, not ground truth. The close frame IoUs compare with assistant-reviewed adaptation training annotations and cannot estimate independent accuracy.",
+    "counting_note": "Tracker IDs do not guarantee distinct objects; frames with animal predictions do not automatically equal visually verified true-positive frames."
+  },
+  "close_training_frame_consistency": {
+    "frames_with_animal_prediction": 220,
+    "total_frames": 220,
+    "visually_reviewed_timestamps": 6,
+    "timestamps_with_animal_contained": 6,
+    "independent_test": false,
+    "rows": [
+      {
+        "timestamp_seconds": 0,
+        "best_iou_against_training_annotation": 0.9307915488085955,
+        "detected_animal_boxes": 1
+      },
+      {
+        "timestamp_seconds": 2,
+        "best_iou_against_training_annotation": 0.9200970720950336,
+        "detected_animal_boxes": 1
+      },
+      {
+        "timestamp_seconds": 4,
+        "best_iou_against_training_annotation": 0.9297323858498439,
+        "detected_animal_boxes": 1
+      },
+      {
+        "timestamp_seconds": 6,
+        "best_iou_against_training_annotation": 0.9616426834349617,
+        "detected_animal_boxes": 1
+      },
+      {
+        "timestamp_seconds": 8,
+        "best_iou_against_training_annotation": 0.8875164093695022,
+        "detected_animal_boxes": 1
+      },
+      {
+        "timestamp_seconds": 10,
+        "best_iou_against_training_annotation": 0.7916296454317279,
+        "detected_animal_boxes": 1
+      }
+    ],
+    "local_contact_sheet": "resultados/local/validation_examples_v2/rato_close_review_six_frames.jpg"
+  },
+  "conclusion": "Improvement is partial: the adapted close rodent is marked consistently and the giant tile/car/foam false alerts were not repeated. The full Hanoi scene still misses its rodent, the difficult Ljubljana clip stays unmarked, and the Queens litter photo regressed. This review does not support claiming all examples work or that rodent generalization is solved. Final promotion must use the corrected independent validation/test protocol.",
+  "items": [
+    {
+      "id": "rato_close",
+      "kind": "video",
+      "evaluation_role": "adaptation_training_frames",
+      "input": "dados/examples/rato_close.mp4",
+      "input_sha256": "e2f305a79477c47e7857eead8aa1be75ddb90bb0eaba975909dcd4595d8092db",
+      "counts_v1": {
+        "obstrucao_visivel": 0,
+        "agua_acumulada": 0,
+        "animal_visivel": 0
+      },
+      "counts_v2": {
+        "obstrucao_visivel": 0,
+        "agua_acumulada": 0,
+        "animal_visivel": 1
+      },
+      "status": "completed",
+      "visual_review": "O destaque e os seis quadros revisados mostram o roedor dentro da caixa; ela ainda inclui parte das grades/fundo. Há marcação animal em 220/220 quadros, mas isso é repetição temporal de um único animal, não 220 ratos. Fonte usada na adaptação: não é teste independente.",
+      "processed_frames": 220,
+      "frames_with_detections": 220,
+      "frames_with_animal_prediction": 220,
+      "video_validation": {
+        "codec": "h264",
+        "faststart": true,
+        "decoded_frames": 220,
+        "decoded_seconds": 11.0
+      },
+      "output_sha256": "4e9f5199a5d274bd5be64af9903e2cd0066e0995cdb99e492b8b89cedb12bfe5"
+    },
+    {
+      "id": "rato_rua",
+      "kind": "video",
+      "evaluation_role": "separate_difficult_regression_no_training",
+      "input": "dados/examples/rato_rua.mp4",
+      "input_sha256": "4f5ae958da80e56adbdaac6f3ca5cc32341176528ef686045d25335634cb5f25",
+      "counts_v1": {
+        "obstrucao_visivel": 0,
+        "agua_acumulada": 0,
+        "animal_visivel": 0
+      },
+      "counts_v2": {
+        "obstrucao_visivel": 0,
+        "agua_acumulada": 0,
+        "animal_visivel": 0
+      },
+      "status": "completed",
+      "visual_review": "Nenhuma marcação. A fonte identifica rato, mas o animal é pequeno/oculto e pouco legível no trecho; não há caixa de referência confiável nem acerto confirmado. Mantido como regressão difícil fora do treino.",
+      "processed_frames": 240,
+      "frames_with_detections": 0,
+      "frames_with_animal_prediction": 0,
+      "video_validation": {
+        "codec": "h264",
+        "faststart": true,
+        "decoded_frames": 240,
+        "decoded_seconds": 12.0
+      },
+      "output_sha256": "bbfe9760fdec136fc87f70f2f34a204541207b0fb8728af548e81b094d28e9d5"
+    },
+    {
+      "id": "rato_residuos",
+      "kind": "video",
+      "evaluation_role": "adaptation_training_frames",
+      "input": "dados/examples/rato_residuos.mp4",
+      "input_sha256": "5bd947ce05cc3dab49118747622e29f56d8c7ba1131233fe3ff97cbb02da8030",
+      "counts_v1": {
+        "obstrucao_visivel": 2,
+        "agua_acumulada": 0,
+        "animal_visivel": 4
+      },
+      "counts_v2": {
+        "obstrucao_visivel": 0,
+        "agua_acumulada": 0,
+        "animal_visivel": 0
+      },
+      "status": "completed",
+      "visual_review": "Nenhuma marcação em 240 quadros. O roedor está visível à direita no primeiro quadro e continua perdido. A caixa gigante sobre a telha desapareceu, mas a ausência do falso positivo não equivale a detectar o rato. Fonte usada na adaptação por recortes do animal.",
+      "processed_frames": 240,
+      "frames_with_detections": 0,
+      "frames_with_animal_prediction": 0,
+      "video_validation": {
+        "codec": "h264",
+        "faststart": true,
+        "decoded_frames": 240,
+        "decoded_seconds": 12.0
+      },
+      "output_sha256": "a5217adebad09632d2548a645c48af2cf56d38af4a42034c4e868491fab71187"
+    },
+    {
+      "id": "drenagem_chuva",
+      "kind": "video",
+      "evaluation_role": "adaptation_background_crops",
+      "input": "dados/examples/drenagem_chuva.mp4",
+      "input_sha256": "637a527ed9573eabb255b4b1a9c73f554bc0825df90797b0bc3e78a6b2a5a48c",
+      "counts_v1": {
+        "obstrucao_visivel": 0,
+        "agua_acumulada": 0,
+        "animal_visivel": 2
+      },
+      "counts_v2": {
+        "obstrucao_visivel": 0,
+        "agua_acumulada": 2,
+        "animal_visivel": 0
+      },
+      "status": "completed",
+      "visual_review": "Dois quadros contêm caixa de água sobre água real. Não cobre toda a região visível nem permite medir IoU sem referência. O falso alerta animal sobre espuma do v1 não reaparece. Fonte usada na adaptação apenas por recortes de gramado sem alvos.",
+      "processed_frames": 240,
+      "frames_with_detections": 2,
+      "frames_with_animal_prediction": 0,
+      "video_validation": {
+        "codec": "h264",
+        "faststart": true,
+        "decoded_frames": 240,
+        "decoded_seconds": 12.0
+      },
+      "output_sha256": "73f14cc1173a69d6be0fc0fb219e820718c4c1334e668b586c0de15e66654be4"
+    },
+    {
+      "id": "canal_residuos",
+      "kind": "video",
+      "evaluation_role": "adaptation_background_crops",
+      "input": "dados/examples/canal_residuos.mp4",
+      "input_sha256": "dd81768eb2c0054db76eaaacb371c12fde876c69d14270e20dbf5c983a5e41b6",
+      "counts_v1": {
+        "obstrucao_visivel": 1,
+        "agua_acumulada": 0,
+        "animal_visivel": 0
+      },
+      "counts_v2": {
+        "obstrucao_visivel": 0,
+        "agua_acumulada": 0,
+        "animal_visivel": 0
+      },
+      "status": "completed",
+      "visual_review": "Nenhuma marcação. O falso positivo de obstrução sobre automóvel do v1 não reaparece; a água continua sem identificação. Fonte usada na adaptação por recortes de veículos/fundo.",
+      "processed_frames": 208,
+      "frames_with_detections": 0,
+      "frames_with_animal_prediction": 0,
+      "video_validation": {
+        "codec": "h264",
+        "faststart": true,
+        "decoded_frames": 208,
+        "decoded_seconds": 10.4
+      },
+      "output_sha256": "9651b5710e2bcfa8de393cdeecc61fa26dbf744f0e612a7d8aa32d2f87310f9c"
+    },
+    {
+      "id": "sarjeta_residuos",
+      "kind": "video",
+      "evaluation_role": "external_manual_regression",
+      "input": "dados/examples/sarjeta_residuos.mp4",
+      "input_sha256": "2570ab692eb696003f70cb028c8f28daf92631dc07e1721fc3e8e770cd531e6d",
+      "counts_v1": {
+        "obstrucao_visivel": 3,
+        "agua_acumulada": 0,
+        "animal_visivel": 0
+      },
+      "counts_v2": {
+        "obstrucao_visivel": 0,
+        "agua_acumulada": 0,
+        "animal_visivel": 0
+      },
+      "status": "completed",
+      "visual_review": "Nenhuma marcação. Água visível segue sem identificação. A natureza do objeto junto à parede é incerta, portanto não o tratamos como lixo de referência nem classificamos a ausência da caixa como acerto garantido.",
+      "processed_frames": 240,
+      "frames_with_detections": 0,
+      "frames_with_animal_prediction": 0,
+      "video_validation": {
+        "codec": "h264",
+        "faststart": true,
+        "decoded_frames": 240,
+        "decoded_seconds": 12.0
+      },
+      "output_sha256": "500f78d8cf04a4ee18b6fecada9ce228f7a4b045c82881486a24e71ded4435a8"
+    },
+    {
+      "id": "ralo_lixo",
+      "kind": "image",
+      "evaluation_role": "external_manual_regression",
+      "input": "dados/examples/ralo_lixo.jpg",
+      "input_sha256": "b86282a98ff3f921c734956ab2c23d943e13a167e7e1a6d0ecd4593fb83e9645",
+      "counts_v1": {
+        "obstrucao_visivel": 1,
+        "agua_acumulada": 0,
+        "animal_visivel": 0
+      },
+      "counts_v2": {
+        "obstrucao_visivel": 0,
+        "agua_acumulada": 0,
+        "animal_visivel": 0
+      },
+      "status": "completed",
+      "visual_review": "Nenhuma marcação, apesar de resíduos visíveis junto à grelha. Regressão qualitativa em relação ao v1, que destacava um saco plástico. Exemplo externo não usado na adaptação."
+    },
+    {
+      "id": "bueiro_agua",
+      "kind": "image",
+      "evaluation_role": "external_manual_regression",
+      "input": "dados/examples/bueiro_agua.jpg",
+      "input_sha256": "e3a1c147532b104628b5c8025784569cf71843c2d5d1692f34c03ad9ac6eeacd",
+      "counts_v1": {
+        "obstrucao_visivel": 3,
+        "agua_acumulada": 0,
+        "animal_visivel": 0
+      },
+      "counts_v2": {
+        "obstrucao_visivel": 3,
+        "agua_acumulada": 0,
+        "animal_visivel": 0
+      },
+      "status": "completed",
+      "visual_review": "Três embalagens reais são destacadas por caixas de obstrução; água continua perdida. As etiquetas compridas se sobrepõem, um problema de legibilidade separado das caixas do modelo. Exemplo externo não usado na adaptação."
+    }
+  ]
+}

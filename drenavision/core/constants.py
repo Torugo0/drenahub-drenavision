@@ -15,6 +15,12 @@ PUBLIC_CLASS_LABELS: dict[str, str] = {
     "animal_visivel": "Animal visível",
 }
 
+OVERLAY_CLASS_LABELS: dict[str, str] = {
+    "obstrucao_visivel": "Resíduos",
+    "agua_acumulada": "Água",
+    "animal_visivel": "Animal",
+}
+
 DISCLAIMER = (
     "Triagem assistida por IA. A detecção não confirma risco sanitário ou "
     "hidráulico e não substitui inspeção humana qualificada."

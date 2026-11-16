@@ -1,0 +1,21 @@
+# Corrected rodent labels and source-grouped adaptation. Never overwrite v1.
+model: resultados/local/models/yolo26n-base.pt
+data: dados/processed/drenavision_v2/dataset.yaml
+project: resultados/local/training
+name: yolo26n_corrected_v2
+published_checkpoint: resultados/local/models/candidate_v2.pt
+resume: null
+epochs: 100
+imgsz: 640
+batch: 12
+patience: 25
+workers: 2
+seed: 42
+device: auto
+optimizer: auto
+deterministic: true
+amp: true
+cache: false
+pretrained: true
+plots: true
+close_mosaic: 10

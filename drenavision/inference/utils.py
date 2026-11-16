@@ -205,8 +205,10 @@ def strict_dataset_validation(dataset_yaml: Path) -> dict[str, Any]:
 
     dataset_yaml = dataset_yaml.resolve()
     dataset_root = dataset_yaml.parent
-    manifest: Path | None = None
-    if len(dataset_yaml.parents) > 2:
+    manifest: Path | None = dataset_root / "data_manifest.csv"
+    if not manifest.is_file():
+        manifest = None
+    if manifest is None and len(dataset_yaml.parents) > 2:
         candidate = dataset_yaml.parents[2] / "manifests" / "dataset_manifest.csv"
         if candidate.is_file():
             manifest = candidate
@@ -253,6 +255,8 @@ def dataset_fingerprint(preflight: Mapping[str, Any]) -> dict[str, Any]:
             file_count += 1
             total_bytes += size
     provenance_candidates = {
+        yaml_path.parent / "data_manifest.csv",
+        yaml_path.parent / "annotation_audit.json",
         yaml_path.parent / "manifest.jsonl",
         yaml_path.parent / "sources.csv",
         root / "manifest.jsonl",

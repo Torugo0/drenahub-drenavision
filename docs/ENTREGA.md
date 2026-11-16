@@ -9,7 +9,7 @@ de requisitos; escolhas adicionais de arquitetura pertencem ao DrenaVision.
 | Requisito oficial | Evidência/estado |
 |---|---|
 | Detecção de objetos e/ou realidade aumentada | detector de três classes em fotos/vídeos |
-| Treinamento customizado de arquitetura compatível | YOLO26n ajustado; manifesto, logs e hash publicados |
+| Treinamento customizado de arquitetura compatível | YOLO26n v2 ajustado em 60 épocas; manifesto, logs e hash publicados |
 | GitHub com documentação e código completo | este repositório; visibilidade pública ainda pendente |
 | Vídeo da solução funcionando | roteiro abaixo; gravação/publicação pendentes |
 | PDF técnico | etapa posterior; conteúdo exigido no checklist abaixo |
@@ -38,20 +38,31 @@ ambiental ou climático; indicadores de resultado exigem validação em operaç�
 | Tempo | Mostrar | Explicar |
 |---|---|---|
 | 0:00–0:30 | produto, público e três tipos de alerta | apoio à revisão humana de resíduos, água e animal |
-| 0:30–1:10 | fontes, manifesto, splits e treino | dados licenciados, teste separado e pesos customizados |
+| 0:30–1:10 | fontes, auditoria iRodent, manifesto, splits e treino v2 | defeito das caixas originais, keypoints visíveis e pesos customizados |
 | 1:10–2:25 | interface: foto e vídeos variados | enviar/escolher entrada, analisar, ver caixas e alertas |
 | 2:25–3:05 | resultado e histórico | arquivo anotado, ocorrência registrada e encaminhamento |
 | 3:05–3:40 | Swagger e JSON real | integração com evento, UTC, classe, caixa e confiança |
-| 3:40–4:20 | métricas e exemplo de falha | qualidade medida; água tem recall 0,1159 |
+| 3:40–4:20 | comparação no teste corrigido e exemplo de falha | v2: mAP50 0,3581; animal 0,3102; água com recall 0,1765 e limitações |
 | 4:20–4:30 | produto e próximos passos | coleta no domínio real e confirmação humana |
 
 Execute `iniciar.ps1` antes de gravar. Mostre pelo menos um erro real e use os
-valores de `resultados/metrics/evaluation_metrics.json`. Uma sequência montada
+valores de `resultados/metrics/v2/candidate_test_metrics.json` e
+`resultados/metrics/v2/comparison.json`. O arquivo antigo
+`resultados/metrics/evaluation_metrics.json` registra o protocolo histórico
+v1 com caixas de roedor defeituosas. Uma sequência montada
 de fotografias deve ser identificada como tal. Filmagem e sequência de fotos
 não são evidências equivalentes de movimento/rastreamento.
 
 Exemplos escolhidos depois da avaliação servem para demonstrar a interface;
 as métricas continuam sendo calculadas no conjunto completo de teste.
+
+O rato em close tem marcação consistente no modelo ativo, mas forneceu frames
+para adaptação e deve ser apresentado como demonstração de uma fonte de treino.
+Não o apresente como teste independente. Mostre também a falha do rato na cena
+com resíduos ou do clipe `rato_rua`, e a regressão da foto de lixo em Queens.
+O desaparecimento da caixa sobre a telha não significa que o rato dessa cena
+foi encontrado. A revisão completa está em
+`resultados/metrics/v2/product_validation_v2.json`.
 
 ## Checklist
 

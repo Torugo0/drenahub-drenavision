@@ -1,5 +1,6 @@
-# Avaliacao exclusivamente no split test, nunca usado para ajuste de hiperparametros.
-checkpoint: resultados/local/models/best.pt
+# HISTÓRICO V1: avalia o backup antigo nas caixas originais defeituosas.
+# Para os rótulos corrigidos e o modelo ativo, use evaluate_v2.yaml.
+checkpoint: resultados/local/models/best_v1.pt
 data: dados/processed/drenavision/dataset.yaml
 project: resultados/local/evaluation
 name: test_yolo26n_drenavision

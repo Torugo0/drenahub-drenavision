@@ -118,7 +118,7 @@ def _safe_arguments(arguments: Mapping[str, Any]) -> dict[str, Any]:
 
 
 def run_training(
-    config_path: str | Path = "ferramentas/configs/train.yaml",
+    config_path: str | Path = "ferramentas/configs/train_v2.yaml",
     overrides: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Run or resume fine-tuning; publish only after all checks pass."""
@@ -150,7 +150,7 @@ def run_training(
         checkpoint_args = getattr(model, "ckpt", {}).get("train_args", {})
         if int(checkpoint_args.get("epochs", -1)) != config.epochs:
             raise RuntimeError(
-                "meta de epochs do last.pt diverge de ferramentas/configs/train.yaml"
+                "meta de epochs do last.pt diverge da configuração de treinamento"
             )
         resume_snapshot = snapshot_interrupted_run(
             initial_checkpoint, config.project, completed_epoch=resume_epoch

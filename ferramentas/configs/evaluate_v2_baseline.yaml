@@ -1,0 +1,18 @@
+# Baseline v1 evaluated against corrected v2 labels. Never overwrite v1 evidence.
+checkpoint: resultados/local/models/best_v1.pt
+data: dados/processed/drenavision_v2/dataset.yaml
+project: resultados/local/evaluation
+name: baseline_v1_on_corrected_v2
+
+imgsz: 640
+batch: 8
+confidence: 0.001
+iou: 0.60
+match_iou: 0.50
+example_confidence: 0.35
+workers: 0
+device: cpu
+plots: true
+save_json: true
+error_examples_per_type: 6
+max_error_images: 0

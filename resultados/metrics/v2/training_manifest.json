@@ -1,0 +1,132 @@
+{
+  "status": "completed",
+  "training_mode": "fresh",
+  "started_at_utc": "2026-11-16T21:50:38.105496Z",
+  "completed_at_utc": "2026-11-16T21:59:51.259395Z",
+  "target_epochs": 100,
+  "completed_epochs": 60,
+  "stopped_early": true,
+  "base_model": "resultados/local/models/yolo26n-base.pt",
+  "base_checkpoint": "resultados/local/models/yolo26n-base.pt",
+  "base_sha256": "9b09cc8bf347f0fc8a5f7657480587f25db09b34bf33b0652110fb03a8ad4fef",
+  "initial_checkpoint": "resultados/local/models/yolo26n-base.pt",
+  "initial_sha256": "9b09cc8bf347f0fc8a5f7657480587f25db09b34bf33b0652110fb03a8ad4fef",
+  "resume_from_epoch": null,
+  "interrupted_snapshot": null,
+  "last_checkpoint": "resultados/local/training/yolo26n_corrected_v2/weights/last.pt",
+  "last_sha256": "917b42e8e869f3406687eb222067df3d34990f64b2d8e0f1183abcd91c99d8c3",
+  "best_checkpoint": "resultados/local/training/yolo26n_corrected_v2/weights/best.pt",
+  "best_sha256": "01ea7c578783b2a08fc585051b0768a1e9c0d510cb5652173fab0979f8d7d27a",
+  "published_checkpoint": "resultados/local/models/candidate_v2.pt",
+  "published_sha256": "01ea7c578783b2a08fc585051b0768a1e9c0d510cb5652173fab0979f8d7d27a",
+  "weights_changed_during_invocation": true,
+  "weights_changed_from_base": true,
+  "device": "cuda:0",
+  "seed": 42,
+  "dataset": {
+    "dataset_yaml": "dados/processed/drenavision_v2/dataset.yaml",
+    "dataset_yaml_sha256": "ea42c1da0376d20f1ec4d31fb006343711a54de48f3bc2701a60bfb7f8533e8e",
+    "dataset_sha256": "af3927e1f3b24de81984cf4a302eb764dd09eb4e0380b7105ffd013ed0496e49",
+    "files_hashed": 1362,
+    "bytes_hashed": 1151333229,
+    "images_by_split": {
+      "test": 62,
+      "train": 557,
+      "val": 62
+    },
+    "provenance_sha256": {
+      "dados/dataset_sources.csv": "4e03306338cd07a2ef991fb0512abc8dd2530d5b36b124618dc0918d534afc97",
+      "dados/manifests/dataset_manifest.csv": "7e03032b7a8cc38430e20c4682b4319a231f6559c92b95a34563d281a367c3f0",
+      "dados/manifests/dataset_summary.json": "112329c32e65f8d9ba371aaaa4d829dd016f89f4c88eee7a4a1b47c0ca7834ee",
+      "dados/manifests/research_report.json": "d10f7e5f6593ee47c13cb9f85009c1a0dab590b6c8ac9a3ec5a41436127007e9",
+      "dados/manifests/validation_report.json": "3d963db4a92380d1ec0fa2af44d5f3fbb565a9f5fda461d715e5d0d97a6dc82f",
+      "dados/manifests/validation_report_phash.json": "4a7d8fd726c924f38d2197000f7718d02e01bcfc05f680e435340561725fc093",
+      "dados/processed/drenavision_v2/data_manifest.csv": "e109a7649b8785184be5312cc20b5f20b08ea62b7cfe8da18330ebb94f74113c"
+    }
+  },
+  "dataset_validation": {
+    "valid": true,
+    "dataset_root": "dados/processed/drenavision_v2",
+    "error_count": 0,
+    "warning_count": 0,
+    "statistics": {
+      "images_by_split": {
+        "train": 557,
+        "val": 62,
+        "test": 62
+      },
+      "labels_by_split": {
+        "train": 557,
+        "val": 62,
+        "test": 62
+      },
+      "boxes_by_class": {
+        "obstrucao_visivel": 259,
+        "agua_acumulada": 1488,
+        "animal_visivel": 384
+      },
+      "boxes_by_split_and_class": {
+        "train": {
+          "obstrucao_visivel": 182,
+          "agua_acumulada": 989,
+          "animal_visivel": 344
+        },
+        "val": {
+          "obstrucao_visivel": 40,
+          "agua_acumulada": 223,
+          "animal_visivel": 20
+        },
+        "test": {
+          "obstrucao_visivel": 37,
+          "agua_acumulada": 276,
+          "animal_visivel": 20
+        }
+      },
+      "negative_images": 18,
+      "exact_duplicate_groups": 0,
+      "phash_enabled": false,
+      "phash_threshold": null
+    },
+    "issues": []
+  },
+  "train_arguments": {
+    "data": "dados/processed/drenavision_v2/dataset.yaml",
+    "epochs": 100,
+    "imgsz": 640,
+    "batch": 12,
+    "patience": 25,
+    "workers": 2,
+    "seed": 42,
+    "device": 0,
+    "optimizer": "auto",
+    "deterministic": true,
+    "amp": true,
+    "cache": false,
+    "pretrained": true,
+    "plots": true,
+    "close_mosaic": 10,
+    "project": "resultados/local/training",
+    "name": "yolo26n_corrected_v2",
+    "exist_ok": false,
+    "verbose": true
+  },
+  "final_metrics": {
+    "metrics/precision(B)": 0.522456355412705,
+    "metrics/recall(B)": 0.5738610475614295,
+    "metrics/mAP50(B)": 0.5333753839003353,
+    "metrics/mAP50-95(B)": 0.29576223793144707,
+    "fitness": 0.29576223793144707
+  },
+  "environment": {
+    "python": "3.12.10",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "packages": {
+      "torch": "2.14.1+cu130",
+      "torchvision": "0.29.1+cu130",
+      "ultralytics": "8.4.215",
+      "opencv-python": "4.14.0.94",
+      "PyYAML": "6.0.3",
+      "faster-coco-eval": "1.8.0"
+    }
+  }
+}

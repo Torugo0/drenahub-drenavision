@@ -1,0 +1,77 @@
+{
+  "created_at_utc": "2026-11-16T21:50:21.693776+00:00",
+  "protocol": "Original source-image split assignments retained for baseline items; iRodent labels rederived from visible annotated landmarks. Additional images come only from native iRodent train, excluding baseline held-out IDs/groups/hashes. Reviewed domain frames are train-only.",
+  "metric_comparability": "The rodent ground-truth boxes change. Evaluate both baseline and candidate against v2 labels; do not compare v1 mAP to v2 mAP directly.",
+  "dataset_yaml": "dados/processed/drenavision_v2/dataset.yaml",
+  "manifest": "dados/processed/drenavision_v2/data_manifest.csv",
+  "images_by_split": {
+    "train": 557,
+    "val": 62,
+    "test": 62
+  },
+  "images_by_source": {
+    "click_trash": 140,
+    "stagnant_water": 152,
+    "irodent": 373,
+    "domain_reviewed": 16
+  },
+  "boxes_by_class": {
+    "0": 259,
+    "1": 1488,
+    "2": 384
+  },
+  "additional_native_training_images": 234,
+  "excluded_baseline_images": [
+    {
+      "image": "images/train/irodent_5ab3ee975feb37b4.jpg",
+      "split": "train",
+      "reason": "insufficient visible pose landmarks"
+    }
+  ],
+  "domain_root": "dados/interim/adaptation",
+  "validation": {
+    "valid": true,
+    "dataset_root": "dados/processed/drenavision_v2",
+    "error_count": 0,
+    "warning_count": 0,
+    "statistics": {
+      "images_by_split": {
+        "train": 557,
+        "val": 62,
+        "test": 62
+      },
+      "labels_by_split": {
+        "train": 557,
+        "val": 62,
+        "test": 62
+      },
+      "boxes_by_class": {
+        "obstrucao_visivel": 259,
+        "agua_acumulada": 1488,
+        "animal_visivel": 384
+      },
+      "boxes_by_split_and_class": {
+        "train": {
+          "obstrucao_visivel": 182,
+          "agua_acumulada": 989,
+          "animal_visivel": 344
+        },
+        "val": {
+          "obstrucao_visivel": 40,
+          "agua_acumulada": 223,
+          "animal_visivel": 20
+        },
+        "test": {
+          "obstrucao_visivel": 37,
+          "agua_acumulada": 276,
+          "animal_visivel": 20
+        }
+      },
+      "negative_images": 18,
+      "exact_duplicate_groups": 0,
+      "phash_enabled": true,
+      "phash_threshold": 4
+    },
+    "issues": []
+  }
+}

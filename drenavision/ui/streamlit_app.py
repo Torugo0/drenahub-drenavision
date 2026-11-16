@@ -19,9 +19,12 @@ import httpx
 import streamlit as st
 from PIL import Image, ImageDraw, ImageFont, ImageOps
 
+from drenavision.core.annotations import place_label
 from drenavision.core.config import Settings, get_settings
+from drenavision.core.constants import OVERLAY_CLASS_LABELS
 from drenavision.core.image_io import InvalidImageError, decode_image
 from drenavision.inference.video_codec import prepare_browser_video
+from drenavision.ui.styles import EMPTY_RESULT, HERO, PAGE_STYLE
 
 ROOT = Path(__file__).resolve().parents[2]
 SETTINGS = get_settings()
@@ -69,16 +72,18 @@ def annotate(image_bytes: bytes, detections: list[dict]) -> Image.Image:
         except OSError:
             continue
     line_width = max(3, min(image.size) // 180)
+    occupied_labels = []
     for item in detections:
         x1, y1, x2, y2 = item["bounding_box"]
         color = COLORS.get(item["class_name"], "#0F766E")
-        label = LABELS.get(item["class_name"], "Objeto identificado")
+        label = OVERLAY_CLASS_LABELS.get(item["class_name"], "Objeto")
         draw.rectangle((x1, y1, x2, y2), outline=color, width=line_width)
         box = draw.textbbox((0, 0), label, font=font)
         label_width = box[2] + 12
         label_height = box[3] - box[1] + 12
-        left = max(0, min(x1, image.width - label_width))
-        top = max(0, y1 - label_height)
+        left, top = place_label(
+            image.size, (x1, y1, x2, y2), (label_width, label_height), occupied_labels
+        )
         draw.rectangle((left, top, left + label_width, top + label_height), fill=color)
         draw.text((left + 6, top + 6 - box[1]), label, fill="white", font=font)
     return image
@@ -98,31 +103,22 @@ def result_counts(payload: dict, kind: str) -> dict[str, int]:
 def render_alerts(counts: dict[str, int], kind: str) -> None:
     found = [name for name, count in counts.items() if count > 0]
     if found:
-        st.warning(
-            "Atenção: encontramos sinais que precisam de uma verificação no local.",
-            icon="⚠️",
-        )
+        st.warning("Confira os sinais com a equipe responsável.", icon="⚠️")
     else:
-        st.info(
-            "Nenhum sinal foi identificado nesta análise. Confira também a imagem ou o vídeo: a análise pode deixar passar objetos.",
-            icon="🔎",
+        st.info("Nenhum sinal encontrado. Confira também o registro.", icon="🔎")
+    cards = []
+    for name, label in zip(
+        LABELS, ("Resíduos", "Água", "Possível animal"), strict=True
+    ):
+        count = counts[name]
+        value = str(count) if count else "—"
+        suffix = "marcação" if count == 1 else "marcações"
+        cards.append(
+            f'<div class="dv-count {"active" if count else ""}"><span>{label}</span><strong>{value}</strong><small>{suffix if count else "sem marcação"}</small></div>'
         )
-    for column, (name, label) in zip(st.columns(3), LABELS.items(), strict=True):
-        with column, st.container(border=True):
-            value = "Não identificado"
-            if counts[name]:
-                value = (
-                    f"{counts[name]} marcação"
-                    if counts[name] == 1
-                    else f"{counts[name]} marcações"
-                )
-            st.metric(label, value)
-    if kind == "video" and found:
-        st.caption(
-            "As marcações resumem os sinais no vídeo. O mesmo objeto pode voltar a ser contado se sair de vista."
-        )
-    for name in found:
-        st.markdown(f"**{LABELS[name]}:** {ADVICE[name]}")
+    st.markdown(
+        '<div class="dv-counts">' + "".join(cards) + "</div>", unsafe_allow_html=True
+    )
 
 
 def load_examples() -> list[dict]:
@@ -134,7 +130,7 @@ def load_examples() -> list[dict]:
         for item in json.loads(manifest.read_text(encoding="utf-8"))["items"]
         if (EXAMPLES_DIR / item["path"]).is_file()
     ]
-    return sorted(items, key=lambda item: item["id"] != "ralo_lixo")
+    return sorted(items, key=lambda item: item["id"] != "bueiro_agua")
 
 
 def analyze_image(data: bytes, name: str, point: str) -> dict:
@@ -238,52 +234,57 @@ def render_result(result: dict) -> None:
     if kind == "image":
         st.image(
             result["image"],
-            caption="Os contornos mostram o que foi identificado.",
             width="stretch",
+            alt="Foto analisada com as marcações previstas pelo modelo",
         )
         output = BytesIO()
         result["image"].save(output, format="JPEG")
         st.download_button(
-            "Salvar foto com marcações",
+            "Salvar resultado",
             output.getvalue(),
             "drenavision_resultado.jpg",
             "image/jpeg",
             key="download_image",
             on_click="ignore",
+            width="stretch",
         )
     else:
         path = Path(result["path"])
-        poster = path.with_suffix(".jpg")
-        if poster.is_file():
-            st.image(
-                str(poster),
-                caption="Quadro de destaque: confira as marcações antes de reproduzir o vídeo.",
-                width="stretch",
-            )
-        st.markdown("**Vídeo com as marcações — aperte ▶ para assistir**")
-        st.video(str(path), format="video/mp4")
-        for frame in payload.get("review_frames", []):
-            at = float(frame.get("timestamp_seconds", 0))
-            names = sorted(
-                {
-                    LABELS.get(item["class_name"], "Objeto")
-                    for item in frame.get("detections", [])
-                }
-            )
-            if names:
-                st.caption(f"{at:.1f}s — {', '.join(names)}")
+        st.video(
+            str(path),
+            format="video/mp4",
+            alt="Vídeo analisado; aperte reproduzir para conferir as marcações",
+        )
         st.download_button(
-            "Salvar vídeo com marcações",
+            "Salvar resultado",
             path.read_bytes(),
             "drenavision_resultado.mp4",
             "video/mp4",
             key="download_video",
             on_click="ignore",
+            width="stretch",
         )
-    st.caption(
-        "A análise ajuda a escolher o que verificar. A confirmação é feita por uma pessoa no local."
-    )
-    with st.expander("Detalhes para a equipe técnica"):
+        poster = path.with_suffix(".jpg")
+        if poster.is_file():
+            with st.expander("Ver quadro de destaque"):
+                st.image(
+                    str(poster), width="stretch", alt="Quadro destacado da análise"
+                )
+                for frame in payload.get("review_frames", []):
+                    at = float(frame.get("timestamp_seconds", 0))
+                    names = sorted(
+                        {
+                            LABELS.get(item["class_name"], "Objeto")
+                            for item in frame.get("detections", [])
+                        }
+                    )
+                    if names:
+                        st.caption(f"{at:.1f}s · {', '.join(names)}")
+    with st.expander("Relatório técnico"):
+        if kind == "video":
+            st.caption(
+                "As contagens são marcações do rastreador; o mesmo objeto pode receber mais de um identificador ao longo do vídeo."
+            )
         st.json(payload, expanded=False)
         st.download_button(
             "Baixar relatório técnico",
@@ -295,111 +296,12 @@ def render_result(result: dict) -> None:
         )
 
 
-def analysis_page() -> None:
-    st.markdown("### Confira um ponto de drenagem")
-    st.write(
-        "Envie uma foto ou um vídeo. Vamos destacar possíveis resíduos, água acumulada e animais, e indicar o que precisa de atenção."
-    )
-    examples = load_examples()
-    choice = st.radio(
-        "Como deseja começar?",
-        ["Enviar foto ou vídeo", "Experimentar um exemplo", "Tirar uma foto"],
-        horizontal=True,
-    )
-    media = None
-    source_path = None
-    if choice == "Experimentar um exemplo":
-        if not examples:
-            st.info(
-                "Os exemplos ainda não estão disponíveis. Confira a preparação em iniciar.ps1."
-            )
-            return
-        example = st.selectbox(
-            "Escolha uma situação", examples, format_func=lambda item: item["title"]
-        )
-        source_path = EXAMPLES_DIR / example["path"]
-        st.caption(example["description"])
-        thumb = EXAMPLES_DIR / example.get("thumbnail", "")
-        if thumb.is_file():
-            st.image(str(thumb), width=440)
-        st.caption(
-            f"{'Filmagem real' if example.get('is_recorded_video') else 'Fotografia'} · {example['author']} · {example['license']}"
-        )
-        st.markdown(f"[Ver origem e créditos]({example['source_url']})")
-    elif choice == "Tirar uma foto":
-        media = st.camera_input("Fotografe o local que deseja verificar")
-    else:
-        media = st.file_uploader(
-            "Escolha uma foto ou um vídeo",
-            type=["jpg", "jpeg", "png", "mp4", "mov", "avi", "mkv"],
-            key="inspection_upload",
-            help="Fotos: até 12 MB. Vídeos: até 500 MB. Para começar, prefira clipes curtos.",
-        )
-    point = st.text_input(
-        "Onde foi feito o registro? (opcional)",
-        placeholder="Ex.: ralo da garagem, entrada do bloco A",
-        max_chars=80,
-    ).strip()
-    if media is None and source_path is None:
-        st.info(
-            "Escolha um arquivo acima ou experimente um dos exemplos para ver como funciona."
-        )
-        return
-    name = source_path.name if source_path else media.name
-    kind = (
-        "image" if Path(name).suffix.lower() in {".jpg", ".jpeg", ".png"} else "video"
-    )
-    size = source_path.stat().st_size if source_path else media.size
-    limit = SETTINGS.max_image_bytes if kind == "image" else SETTINGS.max_video_bytes
-    if size > limit:
-        st.error(
-            "Este arquivo é muito grande. Escolha uma foto menor ou um trecho mais curto do vídeo."
-        )
-        return
-    data = source_path.read_bytes() if source_path else media.getvalue()
-    identity = hashlib.sha256(data + name.encode() + point.encode()).hexdigest()
-    if st.button("Analisar foto ou vídeo", type="primary", width="stretch"):
-        st.session_state.pop("inspection_result", None)
-        temporary = None
-        try:
-            with st.spinner("Analisando o registro e preparando as marcações…"):
-                if kind == "image":
-                    result = analyze_image(data, name, point)
-                else:
-                    if source_path is None:
-                        temporary = (
-                            RESULTS_DIR
-                            / "tmp"
-                            / f"{uuid4().hex}{Path(name).suffix.lower()}"
-                        )
-                        temporary.parent.mkdir(parents=True, exist_ok=True)
-                        with temporary.open("wb") as target:
-                            shutil.copyfileobj(BytesIO(data), target)
-                    result = analyze_video(source_path or temporary, point)
-                result.update({"identity": identity, "name": name, "point": point})
-                st.session_state["inspection_result"] = result
-        except (
-            RuntimeError,
-            InvalidImageError,
-            OSError,
-            ValueError,
-            subprocess.TimeoutExpired,
-        ) as exc:
-            st.error(
-                str(exc)
-                if isinstance(exc, (RuntimeError, InvalidImageError))
-                else "Não foi possível ler este arquivo. Tente outro registro."
-            )
-        finally:
-            if temporary:
-                temporary.unlink(missing_ok=True)
-    result = st.session_state.get("inspection_result")
-    if result and result["identity"] == identity:
-        render_result(result)
-    with st.expander("Ver arquivo original"):
+def render_original(data: bytes, name: str, kind: str, identity: str) -> None:
+    """Keep the input available without repeating it in the main result."""
+    with st.expander("Conferir arquivo original"):
         if kind == "image":
-            st.image(data, width="stretch")
-        elif st.button("Preparar prévia do original"):
+            st.image(data, width="stretch", alt="Foto original, sem marcações")
+        elif st.button("Abrir prévia original"):
             cache = RESULTS_DIR / "tmp" / "previews"
             cache.mkdir(parents=True, exist_ok=True)
             original = cache / f"{identity}{Path(name).suffix.lower()}"
@@ -407,9 +309,8 @@ def analysis_page() -> None:
             try:
                 if not preview.is_file():
                     original.write_bytes(data)
-                    with st.spinner("Preparando vídeo para reprodução…"):
+                    with st.spinner("Preparando a prévia…"):
                         prepare_browser_video(original, preview)
-                    original.unlink(missing_ok=True)
                 st.session_state["original_preview"] = (identity, str(preview))
             except (OSError, RuntimeError, ValueError):
                 st.info(
@@ -422,14 +323,160 @@ def analysis_page() -> None:
             st.video(cached[1], format="video/mp4")
 
 
+def analysis_page() -> None:
+    with st.container(key="analysis_workspace"):
+        entry, preview = st.columns([0.36, 0.64], gap="large", vertical_alignment="top")
+    media = source_path = data = selected_preview = None
+    name = kind = identity = ""
+    ready = False
+    with entry, st.container(key="inspection_input"):
+        st.subheader("1. Escolha um registro")
+        st.caption("Envie uma foto ou um vídeo do local.")
+        choice = st.radio(
+            "Origem do registro",
+            ["Meu arquivo", "Exemplos", "Câmera"],
+            horizontal=True,
+            label_visibility="collapsed",
+            key="inspection_source",
+        )
+        if choice == "Exemplos":
+            examples = load_examples()
+            if examples:
+                example = st.selectbox(
+                    "Escolha uma situação",
+                    examples,
+                    format_func=lambda item: item["title"],
+                )
+                source_path = EXAMPLES_DIR / example["path"]
+                thumbnail = EXAMPLES_DIR / example.get("thumbnail", "")
+                if thumbnail.is_file():
+                    selected_preview = thumbnail
+                st.caption(example["description"])
+                with st.expander("Sobre este exemplo"):
+                    st.caption(
+                        f"{'Filmagem real' if example.get('is_recorded_video') else 'Fotografia'} · {example['author']} · {example['license']}"
+                    )
+                    st.markdown(f"[Origem e créditos]({example['source_url']})")
+                    st.caption(
+                        "Exemplo para experimentar o produto. A detecção pode falhar."
+                    )
+            else:
+                st.info("Nenhum exemplo está disponível nesta instalação.")
+        elif choice == "Câmera":
+            media = st.camera_input("Fotografe o ponto de drenagem")
+        else:
+            media = st.file_uploader(
+                "Escolha uma foto ou um vídeo",
+                type=["jpg", "jpeg", "png", "mp4", "mov", "avi", "mkv"],
+                key="inspection_upload",
+                help="Fotos até 12 MB e vídeos até 500 MB.",
+            )
+        point = st.text_input(
+            "Nome do local (opcional)", placeholder="Ex.: ralo da garagem", max_chars=80
+        ).strip()
+        if media is not None or source_path is not None:
+            name = source_path.name if source_path else media.name
+            kind = (
+                "image"
+                if Path(name).suffix.lower() in {".jpg", ".jpeg", ".png"}
+                else "video"
+            )
+            size = source_path.stat().st_size if source_path else media.size
+            limit = (
+                SETTINGS.max_image_bytes
+                if kind == "image"
+                else SETTINGS.max_video_bytes
+            )
+            if size <= limit:
+                data = source_path.read_bytes() if source_path else media.getvalue()
+                identity = hashlib.sha256(
+                    data + name.encode() + point.encode()
+                ).hexdigest()
+                ready = True
+            else:
+                st.error(
+                    "Arquivo muito grande. Escolha uma foto menor ou um trecho mais curto."
+                )
+        submitted = st.button(
+            "Analisar foto ou vídeo",
+            type="primary",
+            width="stretch",
+            disabled=not ready,
+        )
+        if submitted:
+            st.session_state.pop("inspection_result", None)
+            temporary = None
+            try:
+                with st.spinner("Analisando o registro…"):
+                    if kind == "image":
+                        result = analyze_image(data, name, point)
+                    else:
+                        if source_path is None:
+                            temporary = (
+                                RESULTS_DIR
+                                / "tmp"
+                                / f"{uuid4().hex}{Path(name).suffix.lower()}"
+                            )
+                            temporary.parent.mkdir(parents=True, exist_ok=True)
+                            with temporary.open("wb") as target:
+                                shutil.copyfileobj(BytesIO(data), target)
+                        result = analyze_video(source_path or temporary, point)
+                    result.update({"identity": identity, "name": name, "point": point})
+                    st.session_state["inspection_result"] = result
+            except (
+                RuntimeError,
+                InvalidImageError,
+                OSError,
+                ValueError,
+                subprocess.TimeoutExpired,
+            ) as exc:
+                st.error(
+                    str(exc)
+                    if isinstance(exc, (RuntimeError, InvalidImageError))
+                    else "Não foi possível ler este arquivo. Tente outro registro."
+                )
+            finally:
+                if temporary:
+                    temporary.unlink(missing_ok=True)
+        st.caption("Resíduos · água acumulada · possíveis animais")
+    with preview, st.container(key="result_panel"):
+        result = st.session_state.get("inspection_result")
+        if ready and result and result["identity"] == identity:
+            render_result(result)
+            render_original(data, name, kind, identity)
+        elif ready and (kind == "image" or selected_preview is not None):
+            st.subheader("Prévia do registro")
+            st.caption(name)
+            st.image(
+                str(selected_preview) if selected_preview is not None else data,
+                width="stretch",
+                alt="Registro original selecionado, antes da análise",
+            )
+            st.caption("Toque em Analisar foto ou vídeo para ver o resultado aqui.")
+        else:
+            st.markdown(EMPTY_RESULT, unsafe_allow_html=True)
+    st.markdown(
+        '<div class="dv-footnote">A análise pode errar ou deixar passar objetos. Uma pessoa confirma a situação no local.</div>',
+        unsafe_allow_html=True,
+    )
+
+
 def history_page() -> None:
     st.subheader("Registros anteriores")
-    point = st.text_input("Buscar pelo nome do local", placeholder="Ex.: garagem")
+    search, pagination = st.columns([0.78, 0.22])
+    with search:
+        point = st.text_input("Buscar pelo nome do local", placeholder="Ex.: garagem")
+    with pagination:
+        page = st.number_input("Página", min_value=1, value=1, step=1)
     try:
         response = api_request(
             "GET",
             "/vision/events",
-            params={"limit": 30, **({"point_id": point} if point else {})},
+            params={
+                "limit": 8,
+                "offset": (page - 1) * 8,
+                **({"point_id": point} if point else {}),
+            },
         )
         response.raise_for_status()
         payload = response.json()
@@ -438,25 +485,25 @@ def history_page() -> None:
             "Não foi possível carregar os registros agora. Confira se iniciar.ps1 está em execução."
         )
         return
+    st.caption(f"{payload['total']} registro(s) · até 8 por página")
     if not payload["items"]:
-        st.info("Seus registros aparecerão aqui depois da primeira análise.")
+        st.info("Nenhum registro encontrado nesta página.")
     for item in payload["items"]:
-        with st.container(border=True):
-            when = (
-                datetime.fromisoformat(item["timestamp"].replace("Z", "+00:00"))
-                .astimezone()
-                .strftime("%d/%m/%Y às %H:%M")
-            )
-            st.markdown(
-                f"**{html.escape(item.get('point_id') or 'Local não informado')}** · {when}"
-            )
-            names = [LABELS.get(name, name) for name in item["detected_classes"]]
-            st.write(
-                "⚠️ Verificar: " + ", ".join(names)
-                if names
-                else "🔎 Nenhum sinal identificado pela análise"
-            )
-            st.caption("Vídeo" if item["input_type"] == "video" else "Foto")
+        when = (
+            datetime.fromisoformat(item["timestamp"].replace("Z", "+00:00"))
+            .astimezone()
+            .strftime("%d/%m/%Y · %H:%M")
+        )
+        names = [LABELS.get(name, name) for name in item["detected_classes"]]
+        text = (
+            "Conferir: " + ", ".join(names)
+            if names
+            else "Nenhum sinal encontrado pela análise"
+        )
+        st.markdown(
+            f'<div class="dv-history"><strong>{html.escape(item.get("point_id") or "Local não informado")}</strong><small> · {when} · {"Vídeo" if item["input_type"] == "video" else "Foto"}</small><p>{html.escape(text)}</p></div>',
+            unsafe_allow_html=True,
+        )
 
 
 def main() -> None:
@@ -466,12 +513,8 @@ def main() -> None:
         layout="wide",
         initial_sidebar_state="collapsed",
     )
-    st.markdown(
-        "<style>.block-container{max-width:1120px;padding-top:2rem} [data-testid=stMetricValue]{font-size:1.5rem} [data-testid=stVideo]{max-height:580px} div[data-testid=stAlert]{border-radius:12px} </style>",
-        unsafe_allow_html=True,
-    )
-    st.title("💧 DrenaVision")
-    st.caption("Um olhar a mais para cuidar dos pontos de drenagem.")
+    st.markdown(PAGE_STYLE, unsafe_allow_html=True)
+    st.markdown(HERO, unsafe_allow_html=True)
     analyze, history, about = st.tabs(
         ["Analisar foto ou vídeo", "Registros anteriores", "Como funciona"]
     )
@@ -480,9 +523,9 @@ def main() -> None:
     with history:
         history_page()
     with about:
-        st.subheader("Do registro à verificação")
+        st.subheader("Três passos para conferir o local")
         st.write(
-            "1. Escolha uma foto, um vídeo ou um exemplo pronto.\n\n2. Toque em **Analisar foto ou vídeo**.\n\n3. Confira os contornos coloridos e os avisos. Quando houver sinais, peça uma verificação à equipe responsável."
+            "1. Envie uma foto ou um vídeo, ou escolha um exemplo.\n\n2. Toque em **Analisar foto ou vídeo**.\n\n3. Confira o resultado e peça uma verificação dos sinais no local."
         )
         st.info(
             "A ferramenta pode errar e deixar passar objetos. As marcações indicam o que a análise encontrou; uma pessoa confirma a situação no local."

@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "decision": "Promote corrected-label v2 for the assisted prototype; retain v1 checkpoint and all historical evidence.",
+  "active_checkpoint": "resultados/local/models/best.pt",
+  "active_sha256": "01ea7c578783b2a08fc585051b0768a1e9c0d510cb5652173fab0979f8d7d27a",
+  "backup_checkpoint": "resultados/local/models/best_v1.pt",
+  "baseline_sha256": "fe439a3a722e73db5d841cc199026c8d42f4bbf806bf95924c2eb8c09a9f6bf7",
+  "dataset_sha256": "af3927e1f3b24de81984cf4a302eb764dd09eb4e0380b7105ffd013ed0496e49",
+  "evaluation": "Both checkpoints evaluated on the same 62 held-out source images with corrected v2 rodent labels; images were not added to training. This is not comparable to the old evaluation against defective source boxes.",
+  "annotation_limit": "Visible-landmark envelopes with padding can describe a head or other visible part, not necessarily the full animal. Only 20 rodent test images; ground truth is not independently human-certified.",
+  "operating_confidence": 0.35,
+  "test_metric_confidence": 0.001,
+  "matching_iou_for_error_mining": 0.5,
+  "baseline": {
+    "metrics_file": "baseline_test_metrics.json",
+    "precision": 0.2905658498611546,
+    "recall": 0.28416242329285807,
+    "map50": 0.2562583596800971,
+    "map50_95": 0.1489863145269177,
+    "animal_map50": 0.01830341357269142,
+    "animal_map50_95": 0.005853529171766626,
+    "false_positives_at_operating_threshold": 29
+  },
+  "v2": {
+    "metrics_file": "candidate_test_metrics.json",
+    "precision": 0.38281554254607797,
+    "recall": 0.4250565935423705,
+    "map50": 0.3581374110262212,
+    "map50_95": 0.18097549576847294,
+    "animal_map50": 0.31015761392565516,
+    "animal_map50_95": 0.14540751584235984,
+    "false_positives_at_operating_threshold": 14
+  },
+  "tradeoffs": [
+    "Animal localization and aggregate AP improved under corrected labels; the test set is small and is not a deployment guarantee.",
+    "Water AP50 decreased from 0.164462 to 0.140917, although water recall increased; water remains a substantial weakness.",
+    "At confidence 0.35, exploratory global TP/FN counts remain 26/307; class redistribution and fewer false positives do not mean all misses are solved.",
+    "The Queens litter image regressed from one true detection to none. The New Orleans litter image retains three visibly correct markings.",
+    "Close rat is now marked in every frame of an adaptation-source clip; this is training-source regression consistency, not independent precision.",
+    "Rat near refuse remains missed; the giant false rat over the roof tile disappeared. The obscured vegetation clip is still unmarked."
+  ],
+  "hardware_note": "Baseline metrics used CPU and candidate used RTX 4060; no latency speedup ratio is claimed between these runs.",
+  "product_validation": "product_validation_v2.json",
+  "training": "training_manifest.json"
+}
