@@ -117,9 +117,7 @@ def create_app(
             version=__version__,
         )
 
-    @app.get(
-        "/vision/classes", response_model=ClassesResponse, tags=["metadata"]
-    )
+    @app.get("/vision/classes", response_model=ClassesResponse, tags=["metadata"])
     @app.get(
         "/v1/classes",
         response_model=ClassesResponse,
@@ -158,9 +156,7 @@ def create_app(
         file: Annotated[UploadFile, File()],
         point_id: Annotated[str | None, Form(max_length=80)] = None,
     ) -> PredictionEvent:
-        service: PredictionService | None = getattr(
-            request.app.state, "service", None
-        )
+        service: PredictionService | None = getattr(request.app.state, "service", None)
         if service is None or not getattr(service.predictor, "is_ready", True):
             raise HTTPException(status_code=503, detail=MODEL_UNAVAILABLE_DETAIL)
         if file.content_type not in SUPPORTED_IMAGE_TYPES:
@@ -185,12 +181,8 @@ def create_app(
                 partial(service.predict_image, image, point_id=normalized_point)
             )
 
-    @app.get(
-        "/vision/events", response_model=EventListResponse, tags=["events"]
-    )
-    @app.get(
-        "/v1/events", response_model=EventListResponse, include_in_schema=False
-    )
+    @app.get("/vision/events", response_model=EventListResponse, tags=["events"])
+    @app.get("/v1/events", response_model=EventListResponse, include_in_schema=False)
     def list_events(
         request: Request,
         limit: int = Query(default=50, ge=1, le=500),

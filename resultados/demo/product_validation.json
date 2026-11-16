@@ -1,0 +1,133 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-11-16T21:18:06.307328+00:00",
+  "purpose": "Validação funcional das oito entradas externas da biblioteca, com revisão visual dos resultados reais.",
+  "reproduce": "python ferramentas/scripts/validate_examples.py",
+  "full_local_report": "resultados/local/validation_examples/validation_report.json",
+  "model_sha256": "fe439a3a722e73db5d841cc199026c8d42f4bbf806bf95924c2eb8c09a9f6bf7",
+  "confidence_threshold": 0.35,
+  "iou_threshold": 0.45,
+  "tracking": true,
+  "model_or_threshold_changed_for_examples": false,
+  "functional_result": {
+    "completed_inputs": 8,
+    "videos": 6,
+    "images": 2,
+    "video_frames_processed_and_independently_decoded": 1388,
+    "all_video_outputs_h264": true,
+    "all_video_outputs_faststart": true,
+    "video_frames_lost_in_export": 0,
+    "all_outputs_have_annotated_still": true,
+    "verification_scope": "Inferência real, inspeção das caixas nos quadros de destaque e decodificação independente por FFmpeg; não representa avaliação estatística nem certifica reprodução em todos os navegadores."
+  },
+  "interpretation": {
+    "prediction_counts": "Marcações/IDs do rastreador. Um mesmo objeto pode receber outro ID quando o rastreamento se perde; números não garantem quantidade de animais ou objetos distintos.",
+    "reference_labels": "As categorias da biblioteca descrevem assuntos. Não há caixas de referência revisadas para calcular precision, recall ou mAP.",
+    "visual_review_scope": "Inspeção de quadros de destaque e capas reais; para rato_rua também foram examinados os quadros de 3, 6 e 9 segundos.",
+    "conclusion": "A cadeia de upload, inferência, marcação e exportação funciona. O modelo apresenta falhas relevantes de generalização: perde roedores e água e gera falsos alertas. Não está validado para decidir sozinho se um local está seguro."
+  },
+  "items": [
+    {
+      "id": "rato_close",
+      "kind": "video",
+      "input": "dados/examples/rato_close.mp4",
+      "input_sha256": "e2f305a79477c47e7857eead8aa1be75ddb90bb0eaba975909dcd4595d8092db",
+      "counts": {"obstrucao_visivel": 0, "agua_acumulada": 0, "animal_visivel": 0},
+      "frames": 220,
+      "duration_seconds": 11.0,
+      "frames_with_detections": 0,
+      "codec": "h264",
+      "faststart": true,
+      "visual_review": "Roedor claramente visível na gaiola, sem marcação. Falso negativo visual; oclusão pelas grades e domínio doméstico diferem dos dados de treino.",
+      "confirmed_animal_detection": false
+    },
+    {
+      "id": "rato_rua",
+      "kind": "video",
+      "input": "dados/examples/rato_rua.mp4",
+      "input_sha256": "4f5ae958da80e56adbdaac6f3ca5cc32341176528ef686045d25335634cb5f25",
+      "counts": {"obstrucao_visivel": 0, "agua_acumulada": 0, "animal_visivel": 0},
+      "frames": 240,
+      "duration_seconds": 12.0,
+      "frames_with_detections": 0,
+      "codec": "h264",
+      "faststart": true,
+      "visual_review": "Roedor pequeno e parcialmente oculto pela vegetação é visível no quadro de 9 s; nenhuma marcação em todo o clipe. Falso negativo visual em cena difícil.",
+      "confirmed_animal_detection": false
+    },
+    {
+      "id": "rato_residuos",
+      "kind": "video",
+      "input": "dados/examples/rato_residuos.mp4",
+      "input_sha256": "5bd947ce05cc3dab49118747622e29f56d8c7ba1131233fe3ff97cbb02da8030",
+      "counts": {"obstrucao_visivel": 2, "agua_acumulada": 0, "animal_visivel": 4},
+      "frames": 240,
+      "duration_seconds": 12.0,
+      "frames_with_detections": 44,
+      "codec": "h264",
+      "faststart": true,
+      "visual_review": "O destaque animal de maior confiança enquadra uma grande telha à esquerda, enquanto o rato aparece à direita. A marcação animal é incorreta nesse destaque e não constitui acerto confirmado de rato. O destaque de obstrução aponta para pequeno resíduo claro no chão.",
+      "confirmed_animal_detection": false
+    },
+    {
+      "id": "drenagem_chuva",
+      "kind": "video",
+      "input": "dados/examples/drenagem_chuva.mp4",
+      "input_sha256": "637a527ed9573eabb255b4b1a9c73f554bc0825df90797b0bc3e78a6b2a5a48c",
+      "counts": {"obstrucao_visivel": 0, "agua_acumulada": 0, "animal_visivel": 2},
+      "frames": 240,
+      "duration_seconds": 12.0,
+      "frames_with_detections": 5,
+      "codec": "h264",
+      "faststart": true,
+      "visual_review": "Água é claramente visível, mas não há detecção de água acumulada. O destaque marca espuma/água como animal: falso positivo visual de animal e falha de detecção de água nessa cena.",
+      "confirmed_animal_detection": false
+    },
+    {
+      "id": "canal_residuos",
+      "kind": "video",
+      "input": "dados/examples/canal_residuos.mp4",
+      "input_sha256": "dd81768eb2c0054db76eaaacb371c12fde876c69d14270e20dbf5c983a5e41b6",
+      "counts": {"obstrucao_visivel": 1, "agua_acumulada": 0, "animal_visivel": 0},
+      "frames": 208,
+      "duration_seconds": 10.4,
+      "frames_with_detections": 2,
+      "codec": "h264",
+      "faststart": true,
+      "visual_review": "O destaque enquadra um automóvel na margem como obstrução. Falso positivo para a tarefa de resíduos na drenagem. A água do canal não foi marcada; água em fluxo não é automaticamente equivalente à classe água acumulada."
+    },
+    {
+      "id": "sarjeta_residuos",
+      "kind": "video",
+      "input": "dados/examples/sarjeta_residuos.mp4",
+      "input_sha256": "2570ab692eb696003f70cb028c8f28daf92631dc07e1721fc3e8e770cd531e6d",
+      "counts": {"obstrucao_visivel": 3, "agua_acumulada": 0, "animal_visivel": 0},
+      "frames": 240,
+      "duration_seconds": 12.0,
+      "frames_with_detections": 21,
+      "codec": "h264",
+      "faststart": true,
+      "visual_review": "A marcação de maior confiança recai sobre pequeno objeto cinza junto à parede/tubulação; o quadro não permite confirmar sua natureza como resíduo. Requer revisão humana; não é apresentado como acerto garantido nem confirmação de entupimento."
+    },
+    {
+      "id": "ralo_lixo",
+      "kind": "image",
+      "input": "dados/examples/ralo_lixo.jpg",
+      "input_sha256": "b86282a98ff3f921c734956ab2c23d943e13a167e7e1a6d0ecd4593fb83e9645",
+      "counts": {"obstrucao_visivel": 1, "agua_acumulada": 0, "animal_visivel": 0},
+      "visual_review": "A caixa destaca saco plástico/resíduo junto à grade. Correspondência visual válida de resíduo; outros resíduos da cena ficaram sem marcação. Não comprova bloqueio hidráulico.",
+      "recommended_positive_demo": true,
+      "annotated_still": "resultados/local/validation_examples/ralo_lixo_annotated.jpg"
+    },
+    {
+      "id": "bueiro_agua",
+      "kind": "image",
+      "input": "dados/examples/bueiro_agua.jpg",
+      "input_sha256": "e3a1c147532b104628b5c8025784569cf71843c2d5d1692f34c03ad9ac6eeacd",
+      "counts": {"obstrucao_visivel": 3, "agua_acumulada": 0, "animal_visivel": 0},
+      "visual_review": "As três caixas enquadram embalagens reais junto ao bueiro. Correspondências visuais válidas de resíduos, mas parte dos resíduos e toda a água visível não foram marcadas.",
+      "recommended_positive_demo": true,
+      "annotated_still": "resultados/local/validation_examples/bueiro_agua_annotated.jpg"
+    }
+  ]
+}

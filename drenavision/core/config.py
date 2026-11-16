@@ -25,9 +25,9 @@ class Settings(BaseSettings):
     environment: str = "development"
     api_host: str = "127.0.0.1"
     api_port: int = Field(default=8000, ge=1, le=65535)
-    model_path: Path = Path("artifacts/models/best.pt")
-    database_path: Path = Path("artifacts/events/drenavision.db")
-    evidence_dir: Path = Path("artifacts/events/evidence")
+    model_path: Path = Path("resultados/local/models/best.pt")
+    database_path: Path = Path("resultados/local/events/drenavision.db")
+    evidence_dir: Path = Path("resultados/local/events/evidence")
     confidence_threshold: float = Field(default=0.35, ge=0.0, le=1.0)
     iou_threshold: float = Field(default=0.45, ge=0.0, le=1.0)
     device: str = "auto"

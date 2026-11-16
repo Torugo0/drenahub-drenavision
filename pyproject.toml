@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "drenavision"
-version = "0.1.0"
+version = "0.2.0"
 description = "Visao computacional para triagem assistida de riscos em drenagem urbana."
 readme = "README.md"
 requires-python = ">=3.11,<3.14"
@@ -15,6 +15,7 @@ dependencies = [
   "faster-coco-eval==1.8.0",
   "lap==0.5.14",
   "httpx==0.28.1",
+  "imageio-ffmpeg==0.8.1",
   "numpy==2.2.6",
   "opencv-python==4.14.0.94",
   "Pillow==12.0.0",
@@ -42,7 +43,8 @@ include = ["drenavision*"]
 
 [tool.pytest.ini_options]
 addopts = "-ra --strict-markers"
-testpaths = ["tests"]
+testpaths = ["ferramentas/tests"]
+cache_dir = "resultados/local/cache/pytest"
 markers = [
   "integration: exercises optional heavyweight or service integrations",
 ]
@@ -50,7 +52,8 @@ markers = [
 [tool.ruff]
 target-version = "py311"
 line-length = 88
-extend-exclude = ["datasets", "artifacts", "runs", ".venv"]
+cache-dir = "resultados/local/cache/ruff"
+extend-exclude = ["dados", "resultados", "runs", ".venv"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "B", "UP", "SIM"]

@@ -14,33 +14,22 @@ htmlcov/
 !.env.example
 
 # Raw/processed datasets are reproducible but not committed
-datasets/raw/
-datasets/interim/
-datasets/processed/
-datasets/cache/
-!datasets/README.md
-!datasets/dataset.yaml
-!datasets/dataset_sources.csv
-!datasets/manifests/
-!datasets/manifests/**
+dados/raw/
+dados/interim/
+dados/processed/
+dados/cache/
+!dados/README.md
+!dados/dataset.yaml
+!dados/dataset_sources.csv
+!dados/manifests/
+!dados/manifests/**
 
 # Model runs, local evidence and databases
-artifacts/models/*.pt
-artifacts/models/*.onnx
-artifacts/models/*.engine
 *.pt
 *.onnx
 *.engine
-artifacts/runs/
-artifacts/training/
-artifacts/evaluation/
-artifacts/events/
-artifacts/predictions/
-artifacts/videos/
-artifacts/tmp/
-artifacts/*.db*
-artifacts/dataset_preview/*/
-!artifacts/**/.gitkeep
+resultados/local/
+resultados/dataset_preview/*/
 runs/
 
 # Large media
@@ -48,6 +37,7 @@ runs/
 *.avi
 *.mov
 *.mkv
+!dados/examples/*.mp4
 
 # IDE and OS
 .vscode/

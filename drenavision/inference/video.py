@@ -12,19 +12,60 @@ from pathlib import Path
 from typing import Any
 from uuid import uuid4
 
+from drenavision.core.constants import PUBLIC_CLASS_LABELS
 from drenavision.core.schemas import Detection, PredictionEvent
 from drenavision.core.storage import EventRepository, EvidenceStore
 from drenavision.data.constants import CLASS_NAMES
 
 from .device import describe_device, select_device
+from .media_io import write_image
 from .predictor import detections_from_result
 from .utils import sha256_file, utc_now_iso, validate_class_map, write_json
+from .video_codec import prepare_browser_video
 
 
 def _serialize_detection(detection: Any) -> dict[str, Any]:
     if hasattr(detection, "model_dump"):
         return detection.model_dump(mode="json")
     return detection.as_dict()
+
+
+def annotate_video_frame(frame_bgr: Any, detections: list[Detection]) -> Any:
+    """Draw readable Portuguese labels and high-contrast boxes for the public UI."""
+
+    import numpy as np
+    from PIL import Image, ImageDraw, ImageFont
+
+    colors = {0: "#F97316", 1: "#0284C7", 2: "#A855F7"}
+    image = Image.fromarray(frame_bgr[:, :, ::-1])
+    draw = ImageDraw.Draw(image)
+    size = max(16, min(36, image.width // 38))
+    font = ImageFont.load_default(size=size)
+    for font_name in ("DejaVuSans.ttf", "C:/Windows/Fonts/segoeui.ttf"):
+        try:
+            font = ImageFont.truetype(font_name, size)
+            break
+        except OSError:
+            continue
+    thickness = max(3, image.width // 220)
+    for detection in detections:
+        x1, y1, x2, y2 = detection.bounding_box
+        color = colors[detection.class_id]
+        draw.rectangle((x1, y1, x2, y2), outline=color, width=thickness)
+        label = PUBLIC_CLASS_LABELS[detection.class_name]
+        left, top, right, bottom = draw.textbbox((0, 0), label, font=font)
+        text_width = right - left
+        text_height = bottom - top
+        label_x = min(max(0, x1), max(0, image.width - text_width - 16))
+        label_y = max(0, y1 - text_height - 16)
+        draw.rectangle(
+            (label_x, label_y, label_x + text_width + 16, label_y + text_height + 16),
+            fill=color,
+        )
+        draw.text(
+            (label_x + 8 - left, label_y + 8 - top), label, fill="white", font=font
+        )
+    return np.asarray(image)[:, :, ::-1].copy()
 
 
 def persist_video_event(
@@ -185,6 +226,9 @@ def process_video(
     untracked_frames = 0
     frames: list[dict[str, Any]] = []
     frame_index = 0
+    best_frame: Any = None
+    best_frame_score = -1.0
+    class_highlights: dict[int, tuple[float, Any, dict[str, Any]]] = {}
     started = time.perf_counter()
     try:
         while True:
@@ -248,8 +292,31 @@ def process_video(
                         ] = item
             if has_untracked:
                 untracked_frames += 1
-            annotated = result.plot()
+            annotated = annotate_video_frame(frame, detections)
             writer.write(annotated)
+            frame_score = sum(item.confidence for item in detections)
+            if frame_score > best_frame_score:
+                best_frame = annotated.copy()
+                best_frame_score = frame_score
+            for class_id in CLASS_NAMES:
+                class_items = [item for item in detections if item.class_id == class_id]
+                if not class_items:
+                    continue
+                score = max(item.confidence for item in class_items)
+                previous_highlight = class_highlights.get(class_id)
+                if previous_highlight is None or score > previous_highlight[0]:
+                    class_highlights[class_id] = (
+                        score,
+                        annotated.copy(),
+                        {
+                            "class_name": CLASS_NAMES[class_id],
+                            "frame_index": frame_index,
+                            "timestamp_seconds": frame_index / fps,
+                            "detections": [
+                                _serialize_detection(item) for item in detections
+                            ],
+                        },
+                    )
             speed = getattr(result, "speed", {})
             inference_ms = (
                 float(speed["inference"])
@@ -277,9 +344,21 @@ def process_video(
         scratch_handle.cleanup()
         raise RuntimeError("video nao contem frames decodificaveis")
     try:
-        shutil.copy2(partial, destination)
+        encoding = prepare_browser_video(partial, destination)
     finally:
         scratch_handle.cleanup()
+
+    # The still frame lets the user see the marked object immediately, even
+    # before pressing play. Highlights are genuine model output from this run.
+    poster_path = destination.with_suffix(".jpg")
+    write_image(poster_path, best_frame)
+    review_frames = []
+    for class_id, (_score, highlighted_frame, details) in class_highlights.items():
+        highlight_path = destination.with_name(
+            f"{destination.stem}_{CLASS_NAMES[class_id]}.jpg"
+        )
+        write_image(highlight_path, highlighted_frame)
+        review_frames.append({**details, "image_filename": highlight_path.name})
 
     counts: dict[str, dict[str, Any]] = {}
     representative_detections: list[dict[str, Any]] = []
@@ -321,6 +400,9 @@ def process_video(
         "model_version": f"{checkpoint.stem}-{sha256_file(checkpoint)[:12]}",
         "model_sha256": sha256_file(checkpoint),
         "input_sha256": sha256_file(source),
+        "output_sha256": sha256_file(destination),
+        "poster_filename": poster_path.name,
+        "review_frames": review_frames,
         "video": {
             "width": width,
             "height": height,
@@ -330,7 +412,8 @@ def process_video(
             "max_frames": max_frames,
             "elapsed_seconds": elapsed,
             "processing_fps": frame_index / elapsed if elapsed > 0 else None,
-            "audio_preserved": False,
+            "duration_seconds": frame_index / fps,
+            **encoding,
         },
         "tracking": {
             "enabled": track,

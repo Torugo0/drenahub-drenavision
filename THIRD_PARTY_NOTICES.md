@@ -77,8 +77,8 @@ pesos de partida. Consulte os termos vigentes no momento da distribuição.
 
 O manifesto gerado registra fonte, versão, URL, licença e hash por imagem. O
 dataset bruto/completo não é versionado. Somente amostras transformadas para
-auditoria e demonstração acadêmica aparecem em `artifacts/dataset_preview/`,
-`artifacts/demo/` e `artifacts/metrics/error_examples/`, com identificador,
+auditoria e demonstração acadêmica aparecem em `resultados/dataset_preview/`,
+`resultados/demo/` e `resultados/metrics/error_examples/`, com identificador,
 atribuição, licença e alterações descritos nos respectivos arquivos `README.md`
 e no manifesto.
 
@@ -99,4 +99,13 @@ Copyright (c) 2026 Equipe DrenaHub
 ```
 
 Consulte o arquivo `LICENSE` para os termos completos.
+
+## Biblioteca de testes do produto
+
+As filmagens reais e fotos de bueiros em `dados/examples/` vêm do Wikimedia
+Commons, com licenças CC BY ou CC BY-SA indicadas por arquivo. Autores, URLs,
+versões das licenças, hashes e modificações estão em `dados/examples/sources.json`
+e no README dessa pasta. Os clipes foram recortados, redimensionados e
+convertidos para H.264 sem som. A seleção é de demonstração, fora dos splits
+usados para calcular as métricas do detector.
 

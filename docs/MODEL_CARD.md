@@ -2,7 +2,7 @@
 
 ## Estado em 16/11/2026
 
-Existe um checkpoint customizado real em `artifacts/models/best.pt`. O treino
+Existe um checkpoint customizado real em `resultados/local/models/best.pt`. O treino
 foi retomado de um run interrompido na epoca 28 e terminou por early stopping
 apos 70 de 100 epocas. O snapshot interrompido foi preservado separadamente e
 nao e apresentado como run concluido.
@@ -13,7 +13,7 @@ nao e apresentado como run concluido.
   `9b09cc8bf347f0fc8a5f7657480587f25db09b34bf33b0652110fb03a8ad4fef`;
 - SHA-256 do `best.pt` publicado:
   `fe439a3a722e73db5d841cc199026c8d42f4bbf806bf95924c2eb8c09a9f6bf7`;
-- manifesto versionado: `artifacts/metrics/training_manifest.json`.
+- manifesto versionado: `resultados/metrics/training_manifest.json`.
 
 Os hashes diferentes e o avanco de epocas comprovam que houve ajuste de pesos.
 O checkpoint e adequado a demonstracao academica, mas os resultados abaixo nao
@@ -41,22 +41,22 @@ uma ocorrencia. Toda deteccao recomenda apenas inspecao.
 - resolucao padrao: 640 px;
 - seed obrigatoria: 42;
 - dispositivo: primeira GPU CUDA disponivel, com fallback explicito para CPU;
-- checkpoint publicado: `artifacts/models/best.pt`;
-- configuracao versionada: `configs/train.yaml`.
+- checkpoint publicado: `resultados/local/models/best.pt`;
+- configuracao versionada: `ferramentas/configs/train.yaml`.
 
 Cada treino concluido grava hash SHA-256 dos pesos iniciais, `best.pt` e copia
 publicada, versoes do ambiente, fingerprint do dataset, argumentos efetivos e
 metricas finais em `training_manifest.json`. Hashes iguais entre peso inicial e
 `best.pt` invalidam a alegacao de fine-tuning.
 
-Uma execucao interrompida pode ser retomada com `scripts/train.py --resume
+Uma execucao interrompida pode ser retomada com `ferramentas/scripts/train.py --resume
 <run>/weights/last.pt`. Antes de continuar, o pipeline copia um snapshot marcado
 como `interrupted`, valida a epoca/meta e so publica o modelo quando a retomada
 avanca e altera os pesos.
 
 ## Dados e separacao
 
-O dataset padrao e `datasets/processed/drenavision/dataset.yaml`. A execucao
+O dataset padrao e `dados/processed/drenavision/dataset.yaml`. A execucao
 exige `train`, `val` e `test`, mapa de classes exato e ao menos uma imagem em
 cada split. O fingerprint inclui imagens, labels e YAML. O agrupamento por
 origem/video e a verificacao de vazamento pertencem ao pipeline de dados e
@@ -81,7 +81,7 @@ automatica. Imagens proprias e negativas representativas continuam essenciais.
 
 ## Protocolo de avaliacao
 
-`python scripts/evaluate.py --config configs/evaluate.yaml` usa apenas `test` e
+`python ferramentas/scripts/evaluate.py --config ferramentas/configs/evaluate.yaml` usa apenas `test` e
 exporta:
 
 - precision e recall agregados;
@@ -98,7 +98,7 @@ substituidos por zero, estimativas ou resultados sinteticos.
 ### Resultado real no split de teste
 
 Fonte unica desta tabela:
-`artifacts/metrics/evaluation_metrics.json`. A execucao usou
+`resultados/metrics/evaluation_metrics.json`. A execucao usou
 62 imagens, 333 instancias anotadas, `imgsz=640` e a mesma RTX 4060. O hash do
 checkpoint conferiu com o publicado.
 
@@ -119,6 +119,36 @@ imagens e, no limiar 0,35 com IoU de pareamento 0,50, contabilizou 32 TP, 23 FP
 e 301 FN. Esses totais exploratorios dependem do limiar e nao substituem as
 metricas oficiais do split completo. Nao houve imagem de agua integralmente
 correta nesse limiar, embora tres imagens tenham ao menos um TP de agua.
+
+## Verificação funcional com exemplos externos
+
+A biblioteca em `dados/examples/` reúne **seis filmagens reais e duas
+fotografias**, com créditos, licenças e hashes em `sources.json`. Não são
+sequências simuladas de fotografias nem entradas previamente marcadas. Esses
+exemplos ficaram fora do treino, validação e teste e não têm caixas de referência
+revisadas para calcular novas métricas de precisão, recall ou mAP.
+
+O [relatório de validação do produto](../resultados/demo/product_validation.json)
+registrou o mesmo checkpoint e limiar 0,35, sem alteração para favorecer os
+exemplos. As oito análises foram concluídas. Os seis vídeos exportados usam
+H.264 com faststart; os 1.388 quadros processados foram decodificados
+independentemente por FFmpeg, sem perda. Cada saída também possui um quadro
+anotado de destaque. Isso verifica inferência/exportação e compatibilidade do
+formato; não certifica reprodução em todos os navegadores.
+
+Na revisão visual, `rato_close` e `rato_rua` continham roedores visíveis, mas
+não tiveram detecções. Em `rato_residuos`, o destaque animal de maior confiança
+enquadrou uma telha, e não o rato; esse resultado não é apresentado como acerto
+confirmado de animal. Em `drenagem_chuva`, espuma/água recebeu alerta de animal;
+em `canal_residuos`, um automóvel foi marcado como obstrução. A marcação de
+`sarjeta_residuos` permaneceu ambígua.
+
+As fotografias `ralo_lixo` e `bueiro_agua` tiveram marcações visualmente válidas
+de resíduos, porém outros resíduos e a água da cena ficaram sem marcação. Os
+contadores do vídeo representam marcações/IDs de rastreamento, não uma contagem
+garantida de objetos distintos. A validação expõe falhas de generalização e
+mantém necessária a revisão humana, mesmo quando a cadeia de processamento
+funciona corretamente.
 
 ## Limitacoes e riscos conhecidos
 
@@ -146,8 +176,8 @@ correta nesse limiar, embora tres imagens tenham ao menos um TP de agua.
 2. concluido: treino com manifesto e hash diferente do peso inicial;
 3. concluido: avaliacao no split de teste separado;
 4. concluido: exportacao de exemplos corretos, FP e FN;
-5. concluido para a demonstracao automatica: sequencia de imagens reais do
-   teste processada como video anotado, com origem e limitacoes declaradas;
+5. concluido para a demonstracao automatica: biblioteca de seis filmagens reais
+   e duas fotografias, com exportacao H.264, origem e falhas documentadas;
 6. pendente para a entrega: gravar a apresentacao narrada e, idealmente,
    acrescentar filmagem propria do dominio de drenagem;
 7. obrigatorio na apresentacao: destacar a baixa qualidade medida para agua e

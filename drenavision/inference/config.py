@@ -33,10 +33,10 @@ def _merged(path: Path, overrides: Mapping[str, Any] | None) -> dict[str, Any]:
 @dataclass(frozen=True, slots=True)
 class TrainConfig:
     model: str = "yolo26n.pt"
-    data: Path = Path("datasets/processed/drenavision/dataset.yaml")
-    project: Path = Path("artifacts/training")
+    data: Path = Path("dados/processed/drenavision/dataset.yaml")
+    project: Path = Path("resultados/local/training")
     name: str = "yolo26n_drenavision"
-    published_checkpoint: Path = Path("artifacts/models/best.pt")
+    published_checkpoint: Path = Path("resultados/local/models/best.pt")
     resume: Path | None = None
     epochs: int = 100
     imgsz: int = 640
@@ -78,9 +78,9 @@ class TrainConfig:
 
 @dataclass(frozen=True, slots=True)
 class EvaluateConfig:
-    checkpoint: Path = Path("artifacts/models/best.pt")
-    data: Path = Path("datasets/processed/drenavision/dataset.yaml")
-    project: Path = Path("artifacts/evaluation")
+    checkpoint: Path = Path("resultados/local/models/best.pt")
+    data: Path = Path("dados/processed/drenavision/dataset.yaml")
+    project: Path = Path("resultados/local/evaluation")
     name: str = "test_yolo26n_drenavision"
     imgsz: int = 640
     batch: int | float = 8
