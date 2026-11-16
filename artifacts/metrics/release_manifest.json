@@ -1,0 +1,23 @@
+{
+  "release_tag": "v0.1.0-model",
+  "repository": "https://github.com/Torugo0/drenahub-drenavision",
+  "visibility_at_creation": "private",
+  "assets": [
+    {
+      "name": "best.pt",
+      "bytes": 5492847,
+      "sha256": "fe439a3a722e73db5d841cc199026c8d42f4bbf806bf95924c2eb8c09a9f6bf7"
+    },
+    {
+      "name": "drenavision_demo_annotated.mp4",
+      "bytes": 613075,
+      "sha256": "900d2e1168b2524f38d4c98de767f038cf3db7805f055d09d41bbe1be0412282"
+    },
+    {
+      "name": "drenavision_demo_annotated.json",
+      "bytes": 36551,
+      "sha256": "494159be7f8f70c0278672455b15aec0b55f06dc8cc0cc641da7822f353cb01b"
+    }
+  ],
+  "license_warning": "Protótipo acadêmico: código AGPL-3.0-only; imagens iRodent tratadas como CC BY-NC 4.0; nenhum uso comercial é autorizado por esta release."
+}

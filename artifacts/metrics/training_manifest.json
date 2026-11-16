@@ -1,0 +1,68 @@
+{
+  "status": "completed",
+  "training_mode": "resume",
+  "started_at_utc": "2026-11-16T20:00:57.120041Z",
+  "completed_at_utc": "2026-11-16T20:06:29.549006Z",
+  "target_epochs": 100,
+  "completed_epochs": 70,
+  "stopped_early": true,
+  "base_model": "yolo26n.pt",
+  "base_checkpoint": "yolo26n.pt",
+  "base_sha256": "9b09cc8bf347f0fc8a5f7657480587f25db09b34bf33b0652110fb03a8ad4fef",
+  "initial_checkpoint": "runs/detect/artifacts/training/yolo26n_drenavision/weights/last.pt",
+  "initial_sha256": "3137befce71b0cffff508d535c457eceb6096dbe51b602fb88c1a45e39b53fa5",
+  "resume_from_epoch": 28,
+  "interrupted_snapshot": "artifacts/training/interrupted/yolo26n_drenavision_after_epoch_28_20261116T200057.359084Z",
+  "last_checkpoint": "runs/detect/artifacts/training/yolo26n_drenavision/weights/last.pt",
+  "last_sha256": "3f1f29d9cf045a17d31822f6d215ed662bafce00dc130c3443239bf79573bc27",
+  "best_checkpoint": "runs/detect/artifacts/training/yolo26n_drenavision/weights/best.pt",
+  "best_sha256": "fe439a3a722e73db5d841cc199026c8d42f4bbf806bf95924c2eb8c09a9f6bf7",
+  "published_checkpoint": "artifacts/models/best.pt",
+  "published_sha256": "fe439a3a722e73db5d841cc199026c8d42f4bbf806bf95924c2eb8c09a9f6bf7",
+  "weights_changed_during_invocation": true,
+  "weights_changed_from_base": true,
+  "device": "cuda:0",
+  "seed": 42,
+  "dataset": {
+    "dataset_yaml": "datasets/processed/drenavision/dataset.yaml",
+    "dataset_yaml_sha256": "581223bc4b268fda79361532cee291daaf2623567c4ae5b2b130a87a59790b09",
+    "dataset_sha256": "e0c605ead9c68936bdd0cdfe5ef400a8e7e398ec7e116b2f51f49d73aeea2772",
+    "files_hashed": 864,
+    "bytes_hashed": 883597843,
+    "images_by_split": {
+      "test": 62,
+      "train": 308,
+      "val": 62
+    },
+    "provenance_sha256": {
+      "datasets/dataset_sources.csv": "4e03306338cd07a2ef991fb0512abc8dd2530d5b36b124618dc0918d534afc97",
+      "datasets/manifests/dataset_manifest.csv": "7e03032b7a8cc38430e20c4682b4319a231f6559c92b95a34563d281a367c3f0",
+      "datasets/manifests/dataset_summary.json": "112329c32e65f8d9ba371aaaa4d829dd016f89f4c88eee7a4a1b47c0ca7834ee",
+      "datasets/manifests/research_report.json": "d10f7e5f6593ee47c13cb9f85009c1a0dab590b6c8ac9a3ec5a41436127007e9",
+      "datasets/manifests/validation_report.json": "3d963db4a92380d1ec0fa2af44d5f3fbb565a9f5fda461d715e5d0d97a6dc82f",
+      "datasets/manifests/validation_report_phash.json": "4a7d8fd726c924f38d2197000f7718d02e01bcfc05f680e435340561725fc093"
+    }
+  },
+  "train_arguments": {
+    "resume": true,
+    "device": 0
+  },
+  "final_metrics": {
+    "metrics/precision(B)": 0.5219629415112909,
+    "metrics/recall(B)": 0.4217862481315396,
+    "metrics/mAP50(B)": 0.4142820294913235,
+    "metrics/mAP50-95(B)": 0.22811480300097556,
+    "fitness": 0.22811480300097556
+  },
+  "environment": {
+    "python": "3.12.10",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "packages": {
+      "torch": "2.14.1+cu130",
+      "torchvision": "0.29.1+cu130",
+      "ultralytics": "8.4.215",
+      "opencv-python": "4.14.0.94",
+      "PyYAML": "6.0.3"
+    }
+  }
+}

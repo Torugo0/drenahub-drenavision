@@ -1,0 +1,13 @@
+{
+  "model_version": "best-fe439a3a722e",
+  "inference_ms": 31.035299999530253,
+  "image": {
+    "width": 2048,
+    "height": 1346
+  },
+  "detections": [],
+  "created_at_utc": "2026-11-16T20:12:51.818632Z",
+  "input_name": "irodent_02af19356995e059.jpg",
+  "input_sha256": "02af19356995e059ad306cd083baacc717bca0d4bf3cd6acb258c2fb131241b7",
+  "annotated_image": "artifacts/predictions/irodent_02af19356995e059_annotated.jpg"
+}

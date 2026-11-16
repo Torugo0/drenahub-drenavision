@@ -1,0 +1,44 @@
+{
+  "model_version": "best-fe439a3a722e",
+  "inference_ms": 14.595200000258046,
+  "image": {
+    "width": 2048,
+    "height": 1536
+  },
+  "detections": [
+    {
+      "class_id": 2,
+      "class_name": "animal_visivel",
+      "confidence": 0.6785708069801331,
+      "bounding_box": [
+        899.9144897460938,
+        0.0,
+        2022.8607177734375,
+        889.6574096679688
+      ],
+      "bounding_box_format": "xyxy_pixels",
+      "track_id": null,
+      "frame_index": null,
+      "timestamp_seconds": null
+    },
+    {
+      "class_id": 2,
+      "class_name": "animal_visivel",
+      "confidence": 0.385866641998291,
+      "bounding_box": [
+        26.248828887939453,
+        8.70810604095459,
+        1351.7283935546875,
+        912.2701416015625
+      ],
+      "bounding_box_format": "xyxy_pixels",
+      "track_id": null,
+      "frame_index": null,
+      "timestamp_seconds": null
+    }
+  ],
+  "created_at_utc": "2026-11-16T20:21:52.165715Z",
+  "input_name": "irodent_311988d4ce1851a6.jpg",
+  "input_sha256": "311988d4ce1851a6d24db71478240bbccc8b9f2ed832cab966d56b7ceae05df0",
+  "annotated_image": "artifacts/predictions/irodent_311988d4ce1851a6_annotated.jpg"
+}

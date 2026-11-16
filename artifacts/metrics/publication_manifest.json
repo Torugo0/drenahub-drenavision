@@ -1,0 +1,37 @@
+{
+  "status": "completed",
+  "evaluation_completed_at_utc": "2026-11-16T20:21:30.238449Z",
+  "checkpoint_sha256": "fe439a3a722e73db5d841cc199026c8d42f4bbf806bf95924c2eb8c09a9f6bf7",
+  "authoritative_metrics": "artifacts/metrics/evaluation_metrics.json",
+  "training_evidence": [
+    "artifacts/metrics/training_manifest.json",
+    "artifacts/metrics/training_results.csv",
+    "artifacts/metrics/training_results.png"
+  ],
+  "published_plots": [
+    "artifacts/metrics/BoxF1_curve.png",
+    "artifacts/metrics/BoxP_curve.png",
+    "artifacts/metrics/BoxPR_curve.png",
+    "artifacts/metrics/BoxR_curve.png",
+    "artifacts/metrics/confusion_matrix.png",
+    "artifacts/metrics/confusion_matrix_normalized.png"
+  ],
+  "published_error_examples": {
+    "true_positive": {
+      "obstrucao_visivel": "click_trash_00c5aac3d4cf1d57",
+      "agua_acumulada": "stagnant_water_78c5a3feac2bba2c",
+      "animal_visivel": "irodent_311988d4ce1851a6"
+    },
+    "false_positive": {
+      "obstrucao_visivel": "click_trash_17b42f3778cabdd6",
+      "agua_acumulada": "stagnant_water_34623cea707f7576",
+      "animal_visivel": "irodent_1229b33e7eb1e2b9"
+    },
+    "false_negative": {
+      "obstrucao_visivel": "click_trash_0c989b533293a6a0",
+      "agua_acumulada": "stagnant_water_04213a44e43bc933",
+      "animal_visivel": "irodent_02af19356995e059"
+    }
+  },
+  "note": "O inventário plots do JSON autoritativo descreve a execução local completa; este manifesto lista o subconjunto versionado."
+}

@@ -1,0 +1,13 @@
+{
+  "model_version": "best-fe439a3a722e",
+  "inference_ms": 14.394800000445684,
+  "image": {
+    "width": 256,
+    "height": 256
+  },
+  "detections": [],
+  "created_at_utc": "2026-11-16T20:12:41.430388Z",
+  "input_name": "stagnant_water_04213a44e43bc933.jpg",
+  "input_sha256": "04213a44e43bc93375d887967c76095301f7826e8125b522e00104037ef51f92",
+  "annotated_image": "artifacts/predictions/stagnant_water_04213a44e43bc933_annotated.jpg"
+}

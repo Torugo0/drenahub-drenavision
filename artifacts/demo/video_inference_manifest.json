@@ -1,0 +1,1293 @@
+{
+  "status": "completed",
+  "created_at_utc": "2026-11-16T20:23:53.629325Z",
+  "model_version": "best-fe439a3a722e",
+  "model_sha256": "fe439a3a722e73db5d841cc199026c8d42f4bbf806bf95924c2eb8c09a9f6bf7",
+  "input_sha256": "b2329c4724cc185ebbfb57b798bce10b9c785b89d3289033dce7cbb1491cb5f6",
+  "video": {
+    "width": 960,
+    "height": 540,
+    "fps": 12.0,
+    "declared_frames": 72,
+    "processed_frames": 72,
+    "max_frames": 18000,
+    "elapsed_seconds": 3.6184784999995827,
+    "processing_fps": 19.8978659124293,
+    "audio_preserved": false
+  },
+  "tracking": {
+    "enabled": true,
+    "tracker": "bytetrack.yaml",
+    "frames_with_untracked_detections": 0,
+    "counting_note": "O total por classe e o maior entre IDs unicos e o pico por quadro; deteccoes nao sao somadas indiscriminadamente entre frames."
+  },
+  "counts": {
+    "obstrucao_visivel": {
+      "count": 2,
+      "method": "unique_track_ids"
+    },
+    "agua_acumulada": {
+      "count": 0,
+      "method": "max_simultaneous_per_frame"
+    },
+    "animal_visivel": {
+      "count": 0,
+      "method": "max_simultaneous_per_frame"
+    }
+  },
+  "representative_detections": [
+    {
+      "class_id": 0,
+      "class_name": "obstrucao_visivel",
+      "confidence": 0.7171443104743958,
+      "bounding_box": [
+        528.4303588867188,
+        418.6142883300781,
+        637.78125,
+        526.724365234375
+      ],
+      "bounding_box_format": "xyxy_pixels",
+      "track_id": 1,
+      "frame_index": 12,
+      "timestamp_seconds": 1.0
+    },
+    {
+      "class_id": 0,
+      "class_name": "obstrucao_visivel",
+      "confidence": 0.6528798937797546,
+      "bounding_box": [
+        383.9794006347656,
+        192.81578063964844,
+        415.8582458496094,
+        235.1989288330078
+      ],
+      "bounding_box_format": "xyxy_pixels",
+      "track_id": 2,
+      "frame_index": 0,
+      "timestamp_seconds": 0.0
+    }
+  ],
+  "device": "cuda:0",
+  "frames": [
+    {
+      "frame_index": 0,
+      "timestamp_seconds": 0.0,
+      "inference_ms": 14.128799999525654,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "obstrucao_visivel",
+          "confidence": 0.6657589077949524,
+          "bounding_box": [
+            519.407958984375,
+            417.08404541015625,
+            636.2159423828125,
+            529.5682983398438
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": 1,
+          "frame_index": 0,
+          "timestamp_seconds": 0.0
+        },
+        {
+          "class_id": 0,
+          "class_name": "obstrucao_visivel",
+          "confidence": 0.6528798937797546,
+          "bounding_box": [
+            383.9794006347656,
+            192.81578063964844,
+            415.8582458496094,
+            235.1989288330078
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": 2,
+          "frame_index": 0,
+          "timestamp_seconds": 0.0
+        }
+      ]
+    },
+    {
+      "frame_index": 1,
+      "timestamp_seconds": 0.08333333333333333,
+      "inference_ms": 19.121599999380123,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "obstrucao_visivel",
+          "confidence": 0.6726593375205994,
+          "bounding_box": [
+            525.5355834960938,
+            418.1107482910156,
+            639.0341186523438,
+            527.5194091796875
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": 1,
+          "frame_index": 1,
+          "timestamp_seconds": 0.08333333333333333
+        },
+        {
+          "class_id": 0,
+          "class_name": "obstrucao_visivel",
+          "confidence": 0.6151047945022583,
+          "bounding_box": [
+            384.2926025390625,
+            193.04029846191406,
+            415.9259948730469,
+            235.09715270996094
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": 2,
+          "frame_index": 1,
+          "timestamp_seconds": 0.08333333333333333
+        }
+      ]
+    },
+    {
+      "frame_index": 2,
+      "timestamp_seconds": 0.16666666666666666,
+      "inference_ms": 16.576899999563466,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "obstrucao_visivel",
+          "confidence": 0.6836904287338257,
+          "bounding_box": [
+            526.7000732421875,
+            418.3719787597656,
+            639.5198364257812,
+            527.2885131835938
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": 1,
+          "frame_index": 2,
+          "timestamp_seconds": 0.16666666666666666
+        },
+        {
+          "class_id": 0,
+          "class_name": "obstrucao_visivel",
+          "confidence": 0.6107346415519714,
+          "bounding_box": [
+            384.3248291015625,
+            193.0433349609375,
+            415.9385681152344,
+            235.0752410888672
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": 2,
+          "frame_index": 2,
+          "timestamp_seconds": 0.16666666666666666
+        }
+      ]
+    },
+    {
+      "frame_index": 3,
+      "timestamp_seconds": 0.25,
+      "inference_ms": 15.300399999432557,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "obstrucao_visivel",
+          "confidence": 0.6810091733932495,
+          "bounding_box": [
+            527.0057373046875,
+            418.4166259765625,
+            639.5272827148438,
+            527.248779296875
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": 1,
+          "frame_index": 3,
+          "timestamp_seconds": 0.25
+        },
+        {
+          "class_id": 0,
+          "class_name": "obstrucao_visivel",
+          "confidence": 0.6095584630966187,
+          "bounding_box": [
+            384.3177185058594,
+            193.0277099609375,
+            415.94378662109375,
+            235.07797241210938
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": 2,
+          "frame_index": 3,
+          "timestamp_seconds": 0.25
+        }
+      ]
+    },
+    {
+      "frame_index": 4,
+      "timestamp_seconds": 0.3333333333333333,
+      "inference_ms": 14.444800000092073,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "obstrucao_visivel",
+          "confidence": 0.6793591976165771,
+          "bounding_box": [
+            527.10693359375,
+            418.4138488769531,
+            639.3944091796875,
+            527.25732421875
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": 1,
+          "frame_index": 4,
+          "timestamp_seconds": 0.3333333333333333
+        },
+        {
+          "class_id": 0,
+          "class_name": "obstrucao_visivel",
+          "confidence": 0.6099725961685181,
+          "bounding_box": [
+            384.3187561035156,
+            193.02931213378906,
+            415.9434509277344,
+            235.07957458496094
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": 2,
+          "frame_index": 4,
+          "timestamp_seconds": 0.3333333333333333
+        }
+      ]
+    },
+    {
+      "frame_index": 5,
+      "timestamp_seconds": 0.4166666666666667,
+      "inference_ms": 16.039399999499437,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "obstrucao_visivel",
+          "confidence": 0.6769838333129883,
+          "bounding_box": [
+            527.1691284179688,
+            418.4048767089844,
+            639.2099609375,
+            527.2693481445312
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": 1,
+          "frame_index": 5,
+          "timestamp_seconds": 0.4166666666666667
+        },
+        {
+          "class_id": 0,
+          "class_name": "obstrucao_visivel",
+          "confidence": 0.6097360849380493,
+          "bounding_box": [
+            384.3111572265625,
+            193.01942443847656,
+            415.94293212890625,
+            235.08126831054688
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": 2,
+          "frame_index": 5,
+          "timestamp_seconds": 0.4166666666666667
+        }
+      ]
+    },
+    {
+      "frame_index": 6,
+      "timestamp_seconds": 0.5,
+      "inference_ms": 18.19009999962873,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "obstrucao_visivel",
+          "confidence": 0.6769838333129883,
+          "bounding_box": [
+            527.2570190429688,
+            418.3958740234375,
+            639.0349731445312,
+            527.2820434570312
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": 1,
+          "frame_index": 6,
+          "timestamp_seconds": 0.5
+        },
+        {
+          "class_id": 0,
+          "class_name": "obstrucao_visivel",
+          "confidence": 0.6097360849380493,
+          "bounding_box": [
+            384.3079833984375,
+            193.0154571533203,
+            415.9417724609375,
+            235.0823211669922
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": 2,
+          "frame_index": 6,
+          "timestamp_seconds": 0.5
+        }
+      ]
+    },
+    {
+      "frame_index": 7,
+      "timestamp_seconds": 0.5833333333333334,
+      "inference_ms": 20.01380000001518,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "obstrucao_visivel",
+          "confidence": 0.6769838333129883,
+          "bounding_box": [
+            527.36328125,
+            418.38836669921875,
+            638.8657836914062,
+            527.292724609375
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": 1,
+          "frame_index": 7,
+          "timestamp_seconds": 0.5833333333333334
+        },
+        {
+          "class_id": 0,
+          "class_name": "obstrucao_visivel",
+          "confidence": 0.6097360849380493,
+          "bounding_box": [
+            384.306640625,
+            193.0137481689453,
+            415.9404602050781,
+            235.0830078125
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": 2,
+          "frame_index": 7,
+          "timestamp_seconds": 0.5833333333333334
+        }
+      ]
+    },
+    {
+      "frame_index": 8,
+      "timestamp_seconds": 0.6666666666666666,
+      "inference_ms": 13.62879999942379,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "obstrucao_visivel",
+          "confidence": 0.6769838333129883,
+          "bounding_box": [
+            527.48046875,
+            418.3824157714844,
+            638.7017211914062,
+            527.3013305664062
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": 1,
+          "frame_index": 8,
+          "timestamp_seconds": 0.6666666666666666
+        },
+        {
+          "class_id": 0,
+          "class_name": "obstrucao_visivel",
+          "confidence": 0.6097360849380493,
+          "bounding_box": [
+            384.3061828613281,
+            193.01290893554688,
+            415.9391784667969,
+            235.08351135253906
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": 2,
+          "frame_index": 8,
+          "timestamp_seconds": 0.6666666666666666
+        }
+      ]
+    },
+    {
+      "frame_index": 9,
+      "timestamp_seconds": 0.75,
+      "inference_ms": 13.852899999619694,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "obstrucao_visivel",
+          "confidence": 0.6769838333129883,
+          "bounding_box": [
+            527.602783203125,
+            418.3776550292969,
+            638.5433959960938,
+            527.3081665039062
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": 1,
+          "frame_index": 9,
+          "timestamp_seconds": 0.75
+        },
+        {
+          "class_id": 0,
+          "class_name": "obstrucao_visivel",
+          "confidence": 0.6097360849380493,
+          "bounding_box": [
+            384.30615234375,
+            193.01246643066406,
+            415.9379577636719,
+            235.08387756347656
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": 2,
+          "frame_index": 9,
+          "timestamp_seconds": 0.75
+        }
+      ]
+    },
+    {
+      "frame_index": 10,
+      "timestamp_seconds": 0.8333333333333334,
+      "inference_ms": 14.378200000464858,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "obstrucao_visivel",
+          "confidence": 0.6769838333129883,
+          "bounding_box": [
+            527.7259521484375,
+            418.37384033203125,
+            638.3917236328125,
+            527.313720703125
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": 1,
+          "frame_index": 10,
+          "timestamp_seconds": 0.8333333333333334
+        },
+        {
+          "class_id": 0,
+          "class_name": "obstrucao_visivel",
+          "confidence": 0.6097360849380493,
+          "bounding_box": [
+            384.3063049316406,
+            193.01217651367188,
+            415.93682861328125,
+            235.08416748046875
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": 2,
+          "frame_index": 10,
+          "timestamp_seconds": 0.8333333333333334
+        }
+      ]
+    },
+    {
+      "frame_index": 11,
+      "timestamp_seconds": 0.9166666666666666,
+      "inference_ms": 13.670500000444008,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "obstrucao_visivel",
+          "confidence": 0.6769838333129883,
+          "bounding_box": [
+            527.8469848632812,
+            418.3707275390625,
+            638.24755859375,
+            527.3182373046875
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": 1,
+          "frame_index": 11,
+          "timestamp_seconds": 0.9166666666666666
+        },
+        {
+          "class_id": 0,
+          "class_name": "obstrucao_visivel",
+          "confidence": 0.6097360849380493,
+          "bounding_box": [
+            384.30657958984375,
+            193.011962890625,
+            415.9357604980469,
+            235.0843963623047
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": 2,
+          "frame_index": 11,
+          "timestamp_seconds": 0.9166666666666666
+        }
+      ]
+    },
+    {
+      "frame_index": 12,
+      "timestamp_seconds": 1.0,
+      "inference_ms": 19.746099999792932,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "obstrucao_visivel",
+          "confidence": 0.7171443104743958,
+          "bounding_box": [
+            528.4303588867188,
+            418.6142883300781,
+            637.78125,
+            526.724365234375
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": 1,
+          "frame_index": 12,
+          "timestamp_seconds": 1.0
+        },
+        {
+          "class_id": 0,
+          "class_name": "obstrucao_visivel",
+          "confidence": 0.5187435150146484,
+          "bounding_box": [
+            383.8983154296875,
+            193.0279998779297,
+            415.6448669433594,
+            235.15835571289062
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": 2,
+          "frame_index": 12,
+          "timestamp_seconds": 1.0
+        }
+      ]
+    },
+    {
+      "frame_index": 13,
+      "timestamp_seconds": 1.0833333333333333,
+      "inference_ms": 18.567699999948672,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "obstrucao_visivel",
+          "confidence": 0.7168627381324768,
+          "bounding_box": [
+            528.6954345703125,
+            418.7004089355469,
+            637.5488891601562,
+            526.50634765625
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": 1,
+          "frame_index": 13,
+          "timestamp_seconds": 1.0833333333333333
+        },
+        {
+          "class_id": 0,
+          "class_name": "obstrucao_visivel",
+          "confidence": 0.5181164145469666,
+          "bounding_box": [
+            383.7232666015625,
+            193.03482055664062,
+            415.5557556152344,
+            235.18646240234375
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": 2,
+          "frame_index": 13,
+          "timestamp_seconds": 1.0833333333333333
+        }
+      ]
+    },
+    {
+      "frame_index": 14,
+      "timestamp_seconds": 1.1666666666666667,
+      "inference_ms": 15.718800000286137,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "obstrucao_visivel",
+          "confidence": 0.7168627381324768,
+          "bounding_box": [
+            528.83984375,
+            418.730224609375,
+            637.4085083007812,
+            526.4296264648438
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": 1,
+          "frame_index": 14,
+          "timestamp_seconds": 1.1666666666666667
+        },
+        {
+          "class_id": 0,
+          "class_name": "obstrucao_visivel",
+          "confidence": 0.5181164145469666,
+          "bounding_box": [
+            383.6397399902344,
+            193.03724670410156,
+            415.54351806640625,
+            235.19671630859375
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": 2,
+          "frame_index": 14,
+          "timestamp_seconds": 1.1666666666666667
+        }
+      ]
+    },
+    {
+      "frame_index": 15,
+      "timestamp_seconds": 1.25,
+      "inference_ms": 14.23369999974966,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "obstrucao_visivel",
+          "confidence": 0.7168627381324768,
+          "bounding_box": [
+            528.9357299804688,
+            418.739013671875,
+            637.306884765625,
+            526.4058837890625
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": 1,
+          "frame_index": 15,
+          "timestamp_seconds": 1.25
+        },
+        {
+          "class_id": 0,
+          "class_name": "obstrucao_visivel",
+          "confidence": 0.5181164145469666,
+          "bounding_box": [
+            383.5923767089844,
+            193.03799438476562,
+            415.5589904785156,
+            235.20018005371094
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": 2,
+          "frame_index": 15,
+          "timestamp_seconds": 1.25
+        }
+      ]
+    },
+    {
+      "frame_index": 16,
+      "timestamp_seconds": 1.3333333333333333,
+      "inference_ms": 13.99550000041927,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "obstrucao_visivel",
+          "confidence": 0.7168627381324768,
+          "bounding_box": [
+            529.0103759765625,
+            418.7401123046875,
+            637.2236938476562,
+            526.4015502929688
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": 1,
+          "frame_index": 16,
+          "timestamp_seconds": 1.3333333333333333
+        },
+        {
+          "class_id": 0,
+          "class_name": "obstrucao_visivel",
+          "confidence": 0.5181164145469666,
+          "bounding_box": [
+            383.5599365234375,
+            193.0381317138672,
+            415.5833740234375,
+            235.2010955810547
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": 2,
+          "frame_index": 16,
+          "timestamp_seconds": 1.3333333333333333
+        }
+      ]
+    },
+    {
+      "frame_index": 17,
+      "timestamp_seconds": 1.4166666666666667,
+      "inference_ms": 14.459100000749459,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "obstrucao_visivel",
+          "confidence": 0.7168627381324768,
+          "bounding_box": [
+            529.0740966796875,
+            418.7385559082031,
+            637.1511840820312,
+            526.4041137695312
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": 1,
+          "frame_index": 17,
+          "timestamp_seconds": 1.4166666666666667
+        },
+        {
+          "class_id": 0,
+          "class_name": "obstrucao_visivel",
+          "confidence": 0.5181164145469666,
+          "bounding_box": [
+            383.5343017578125,
+            193.03805541992188,
+            415.6095886230469,
+            235.2010955810547
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": 2,
+          "frame_index": 17,
+          "timestamp_seconds": 1.4166666666666667
+        }
+      ]
+    },
+    {
+      "frame_index": 18,
+      "timestamp_seconds": 1.5,
+      "inference_ms": 18.897900000411028,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "obstrucao_visivel",
+          "confidence": 0.7168627381324768,
+          "bounding_box": [
+            529.1309814453125,
+            418.7362365722656,
+            637.0861206054688,
+            526.4087524414062
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": 1,
+          "frame_index": 18,
+          "timestamp_seconds": 1.5
+        },
+        {
+          "class_id": 0,
+          "class_name": "obstrucao_visivel",
+          "confidence": 0.5181164145469666,
+          "bounding_box": [
+            383.5122985839844,
+            193.0379180908203,
+            415.635009765625,
+            235.20077514648438
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": 2,
+          "frame_index": 18,
+          "timestamp_seconds": 1.5
+        }
+      ]
+    },
+    {
+      "frame_index": 19,
+      "timestamp_seconds": 1.5833333333333333,
+      "inference_ms": 14.77560000057565,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "obstrucao_visivel",
+          "confidence": 0.7168627381324768,
+          "bounding_box": [
+            529.1826171875,
+            418.7338562011719,
+            637.027099609375,
+            526.4136962890625
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": 1,
+          "frame_index": 19,
+          "timestamp_seconds": 1.5833333333333333
+        },
+        {
+          "class_id": 0,
+          "class_name": "obstrucao_visivel",
+          "confidence": 0.5181164145469666,
+          "bounding_box": [
+            383.49267578125,
+            193.03775024414062,
+            415.65875244140625,
+            235.2003936767578
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": 2,
+          "frame_index": 19,
+          "timestamp_seconds": 1.5833333333333333
+        }
+      ]
+    },
+    {
+      "frame_index": 20,
+      "timestamp_seconds": 1.6666666666666667,
+      "inference_ms": 16.193399999792746,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "obstrucao_visivel",
+          "confidence": 0.7168627381324768,
+          "bounding_box": [
+            529.2299194335938,
+            418.73162841796875,
+            636.973388671875,
+            526.4183959960938
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": 1,
+          "frame_index": 20,
+          "timestamp_seconds": 1.6666666666666667
+        },
+        {
+          "class_id": 0,
+          "class_name": "obstrucao_visivel",
+          "confidence": 0.5181164145469666,
+          "bounding_box": [
+            383.474853515625,
+            193.03761291503906,
+            415.6805725097656,
+            235.1999969482422
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": 2,
+          "frame_index": 20,
+          "timestamp_seconds": 1.6666666666666667
+        }
+      ]
+    },
+    {
+      "frame_index": 21,
+      "timestamp_seconds": 1.75,
+      "inference_ms": 13.562700000875338,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "obstrucao_visivel",
+          "confidence": 0.7168627381324768,
+          "bounding_box": [
+            529.2731323242188,
+            418.7296142578125,
+            636.9244384765625,
+            526.4226684570312
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": 1,
+          "frame_index": 21,
+          "timestamp_seconds": 1.75
+        },
+        {
+          "class_id": 0,
+          "class_name": "obstrucao_visivel",
+          "confidence": 0.5181164145469666,
+          "bounding_box": [
+            383.4586486816406,
+            193.0374755859375,
+            415.70050048828125,
+            235.19964599609375
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": 2,
+          "frame_index": 21,
+          "timestamp_seconds": 1.75
+        }
+      ]
+    },
+    {
+      "frame_index": 22,
+      "timestamp_seconds": 1.8333333333333333,
+      "inference_ms": 13.791299999866169,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "obstrucao_visivel",
+          "confidence": 0.7168627381324768,
+          "bounding_box": [
+            529.312744140625,
+            418.72784423828125,
+            636.8798828125,
+            526.4263916015625
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": 1,
+          "frame_index": 22,
+          "timestamp_seconds": 1.8333333333333333
+        },
+        {
+          "class_id": 0,
+          "class_name": "obstrucao_visivel",
+          "confidence": 0.5181164145469666,
+          "bounding_box": [
+            383.4438171386719,
+            193.037353515625,
+            415.7186279296875,
+            235.19932556152344
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": 2,
+          "frame_index": 22,
+          "timestamp_seconds": 1.8333333333333333
+        }
+      ]
+    },
+    {
+      "frame_index": 23,
+      "timestamp_seconds": 1.9166666666666667,
+      "inference_ms": 13.695800000277814,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "obstrucao_visivel",
+          "confidence": 0.7168627381324768,
+          "bounding_box": [
+            529.348876953125,
+            418.7262878417969,
+            636.8392944335938,
+            526.4297485351562
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": 1,
+          "frame_index": 23,
+          "timestamp_seconds": 1.9166666666666667
+        },
+        {
+          "class_id": 0,
+          "class_name": "obstrucao_visivel",
+          "confidence": 0.5181164145469666,
+          "bounding_box": [
+            383.4302978515625,
+            193.03724670410156,
+            415.7350769042969,
+            235.19903564453125
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": 2,
+          "frame_index": 23,
+          "timestamp_seconds": 1.9166666666666667
+        }
+      ]
+    },
+    {
+      "frame_index": 24,
+      "timestamp_seconds": 2.0,
+      "inference_ms": 14.966099999583093,
+      "detections": []
+    },
+    {
+      "frame_index": 25,
+      "timestamp_seconds": 2.0833333333333335,
+      "inference_ms": 14.592200000151934,
+      "detections": []
+    },
+    {
+      "frame_index": 26,
+      "timestamp_seconds": 2.1666666666666665,
+      "inference_ms": 14.52549999976327,
+      "detections": []
+    },
+    {
+      "frame_index": 27,
+      "timestamp_seconds": 2.25,
+      "inference_ms": 14.261700000133715,
+      "detections": []
+    },
+    {
+      "frame_index": 28,
+      "timestamp_seconds": 2.3333333333333335,
+      "inference_ms": 19.893700000466197,
+      "detections": []
+    },
+    {
+      "frame_index": 29,
+      "timestamp_seconds": 2.4166666666666665,
+      "inference_ms": 18.496299999242183,
+      "detections": []
+    },
+    {
+      "frame_index": 30,
+      "timestamp_seconds": 2.5,
+      "inference_ms": 13.873699999749078,
+      "detections": []
+    },
+    {
+      "frame_index": 31,
+      "timestamp_seconds": 2.5833333333333335,
+      "inference_ms": 13.439800000014657,
+      "detections": []
+    },
+    {
+      "frame_index": 32,
+      "timestamp_seconds": 2.6666666666666665,
+      "inference_ms": 13.960700000097859,
+      "detections": []
+    },
+    {
+      "frame_index": 33,
+      "timestamp_seconds": 2.75,
+      "inference_ms": 13.681600000381877,
+      "detections": []
+    },
+    {
+      "frame_index": 34,
+      "timestamp_seconds": 2.8333333333333335,
+      "inference_ms": 14.530200000081095,
+      "detections": []
+    },
+    {
+      "frame_index": 35,
+      "timestamp_seconds": 2.9166666666666665,
+      "inference_ms": 18.147800000406278,
+      "detections": []
+    },
+    {
+      "frame_index": 36,
+      "timestamp_seconds": 3.0,
+      "inference_ms": 18.461300000126357,
+      "detections": []
+    },
+    {
+      "frame_index": 37,
+      "timestamp_seconds": 3.0833333333333335,
+      "inference_ms": 15.111599999727332,
+      "detections": []
+    },
+    {
+      "frame_index": 38,
+      "timestamp_seconds": 3.1666666666666665,
+      "inference_ms": 13.469600000462378,
+      "detections": []
+    },
+    {
+      "frame_index": 39,
+      "timestamp_seconds": 3.25,
+      "inference_ms": 18.43029999963619,
+      "detections": []
+    },
+    {
+      "frame_index": 40,
+      "timestamp_seconds": 3.3333333333333335,
+      "inference_ms": 19.779200000812125,
+      "detections": []
+    },
+    {
+      "frame_index": 41,
+      "timestamp_seconds": 3.4166666666666665,
+      "inference_ms": 13.36879999962548,
+      "detections": []
+    },
+    {
+      "frame_index": 42,
+      "timestamp_seconds": 3.5,
+      "inference_ms": 16.575500000726606,
+      "detections": []
+    },
+    {
+      "frame_index": 43,
+      "timestamp_seconds": 3.5833333333333335,
+      "inference_ms": 14.303599999948347,
+      "detections": []
+    },
+    {
+      "frame_index": 44,
+      "timestamp_seconds": 3.6666666666666665,
+      "inference_ms": 20.24119999987306,
+      "detections": []
+    },
+    {
+      "frame_index": 45,
+      "timestamp_seconds": 3.75,
+      "inference_ms": 14.002699999764445,
+      "detections": []
+    },
+    {
+      "frame_index": 46,
+      "timestamp_seconds": 3.8333333333333335,
+      "inference_ms": 18.054600000141363,
+      "detections": []
+    },
+    {
+      "frame_index": 47,
+      "timestamp_seconds": 3.9166666666666665,
+      "inference_ms": 17.849399999249727,
+      "detections": []
+    },
+    {
+      "frame_index": 48,
+      "timestamp_seconds": 4.0,
+      "inference_ms": 13.641500000630913,
+      "detections": []
+    },
+    {
+      "frame_index": 49,
+      "timestamp_seconds": 4.083333333333333,
+      "inference_ms": 14.30770000024495,
+      "detections": []
+    },
+    {
+      "frame_index": 50,
+      "timestamp_seconds": 4.166666666666667,
+      "inference_ms": 14.263199999732024,
+      "detections": []
+    },
+    {
+      "frame_index": 51,
+      "timestamp_seconds": 4.25,
+      "inference_ms": 16.410900000664697,
+      "detections": []
+    },
+    {
+      "frame_index": 52,
+      "timestamp_seconds": 4.333333333333333,
+      "inference_ms": 13.660800000252493,
+      "detections": []
+    },
+    {
+      "frame_index": 53,
+      "timestamp_seconds": 4.416666666666667,
+      "inference_ms": 15.233800000714837,
+      "detections": []
+    },
+    {
+      "frame_index": 54,
+      "timestamp_seconds": 4.5,
+      "inference_ms": 15.83810000010999,
+      "detections": []
+    },
+    {
+      "frame_index": 55,
+      "timestamp_seconds": 4.583333333333333,
+      "inference_ms": 14.10779999969236,
+      "detections": []
+    },
+    {
+      "frame_index": 56,
+      "timestamp_seconds": 4.666666666666667,
+      "inference_ms": 14.035799999874143,
+      "detections": []
+    },
+    {
+      "frame_index": 57,
+      "timestamp_seconds": 4.75,
+      "inference_ms": 17.010800000207382,
+      "detections": []
+    },
+    {
+      "frame_index": 58,
+      "timestamp_seconds": 4.833333333333333,
+      "inference_ms": 19.339600000421342,
+      "detections": []
+    },
+    {
+      "frame_index": 59,
+      "timestamp_seconds": 4.916666666666667,
+      "inference_ms": 14.047100000425417,
+      "detections": []
+    },
+    {
+      "frame_index": 60,
+      "timestamp_seconds": 5.0,
+      "inference_ms": 13.696400000299036,
+      "detections": []
+    },
+    {
+      "frame_index": 61,
+      "timestamp_seconds": 5.083333333333333,
+      "inference_ms": 13.935099999798695,
+      "detections": []
+    },
+    {
+      "frame_index": 62,
+      "timestamp_seconds": 5.166666666666667,
+      "inference_ms": 18.214400000033493,
+      "detections": []
+    },
+    {
+      "frame_index": 63,
+      "timestamp_seconds": 5.25,
+      "inference_ms": 19.644500000140397,
+      "detections": []
+    },
+    {
+      "frame_index": 64,
+      "timestamp_seconds": 5.333333333333333,
+      "inference_ms": 16.686400000253343,
+      "detections": []
+    },
+    {
+      "frame_index": 65,
+      "timestamp_seconds": 5.416666666666667,
+      "inference_ms": 14.343400000143447,
+      "detections": []
+    },
+    {
+      "frame_index": 66,
+      "timestamp_seconds": 5.5,
+      "inference_ms": 33.015099999829545,
+      "detections": []
+    },
+    {
+      "frame_index": 67,
+      "timestamp_seconds": 5.583333333333333,
+      "inference_ms": 33.974400000261085,
+      "detections": []
+    },
+    {
+      "frame_index": 68,
+      "timestamp_seconds": 5.666666666666667,
+      "inference_ms": 28.827000000092085,
+      "detections": []
+    },
+    {
+      "frame_index": 69,
+      "timestamp_seconds": 5.75,
+      "inference_ms": 14.104800000495743,
+      "detections": []
+    },
+    {
+      "frame_index": 70,
+      "timestamp_seconds": 5.833333333333333,
+      "inference_ms": 14.052800000172283,
+      "detections": []
+    },
+    {
+      "frame_index": 71,
+      "timestamp_seconds": 5.916666666666667,
+      "inference_ms": 13.581299999714247,
+      "detections": []
+    }
+  ],
+  "event": {
+    "event_id": "c54f4102-2b41-4607-8be0-bc7fddee2ebf",
+    "point_id": "demo-sequencia-teste",
+    "timestamp": "2026-11-16T20:23:53.642948Z",
+    "input_type": "video",
+    "model_version": "best-fe439a3a722e",
+    "detections": [
+      {
+        "class_id": 0,
+        "class_name": "obstrucao_visivel",
+        "confidence": 0.7171443104743958,
+        "bounding_box": [
+          528.4303588867188,
+          418.6142883300781,
+          637.78125,
+          526.724365234375
+        ],
+        "bounding_box_format": "xyxy_pixels",
+        "track_id": 1,
+        "frame_index": 12,
+        "timestamp_seconds": 1.0
+      },
+      {
+        "class_id": 0,
+        "class_name": "obstrucao_visivel",
+        "confidence": 0.6528798937797546,
+        "bounding_box": [
+          383.9794006347656,
+          192.81578063964844,
+          415.8582458496094,
+          235.1989288330078
+        ],
+        "bounding_box_format": "xyxy_pixels",
+        "track_id": 2,
+        "frame_index": 0,
+        "timestamp_seconds": 0.0
+      }
+    ],
+    "inspection_recommended": true,
+    "status": "revisao_recomendada",
+    "evidence_uri": "c54f4102-2b41-4607-8be0-bc7fddee2ebf.json",
+    "inference_ms": 16.34685555561393,
+    "disclaimer": "Triagem assistida por IA. A detecção não confirma risco sanitário ou hidráulico e não substitui inspeção humana qualificada."
+  }
+}

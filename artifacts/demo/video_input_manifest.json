@@ -1,0 +1,47 @@
+{
+  "status": "completed",
+  "created_at_utc": "2026-11-16T20:04:52.019694Z",
+  "truthfulness_note": "Sequencia de imagens reais do split test; nao e video capturado e nao contem caixas ou predicoes.",
+  "is_recorded_video": false,
+  "contains_model_predictions": false,
+  "dataset_manifest": "datasets/manifests/dataset_manifest.csv",
+  "output_video": "artifacts/videos/demo_input_test_sequence.mp4",
+  "output_sha256": "b2329c4724cc185ebbfb57b798bce10b9c785b89d3289033dce7cbb1491cb5f6",
+  "video": {
+    "width": 960,
+    "height": 540,
+    "fps": 12.0,
+    "seconds_per_image": 2.0,
+    "frames_per_image": 24,
+    "total_frames": 72
+  },
+  "slides": [
+    {
+      "class_id": 0,
+      "class_name": "obstrucao_visivel",
+      "ground_truth_boxes": 2,
+      "source_key": "click_trash",
+      "image": "datasets/processed/drenavision/images/test/click_trash_00c5aac3d4cf1d57.jpg",
+      "label": "datasets/processed/drenavision/labels/test/click_trash_00c5aac3d4cf1d57.txt",
+      "image_sha256": "00c5aac3d4cf1d576dabe41f20af431a6d611d1a740254fcfee65d71bdd1e6ab"
+    },
+    {
+      "class_id": 1,
+      "class_name": "agua_acumulada",
+      "ground_truth_boxes": 13,
+      "source_key": "stagnant_water",
+      "image": "datasets/processed/drenavision/images/test/stagnant_water_04213a44e43bc933.jpg",
+      "label": "datasets/processed/drenavision/labels/test/stagnant_water_04213a44e43bc933.txt",
+      "image_sha256": "04213a44e43bc93375d887967c76095301f7826e8125b522e00104037ef51f92"
+    },
+    {
+      "class_id": 2,
+      "class_name": "animal_visivel",
+      "ground_truth_boxes": 1,
+      "source_key": "irodent",
+      "image": "datasets/processed/drenavision/images/test/irodent_02af19356995e059.jpg",
+      "label": "datasets/processed/drenavision/labels/test/irodent_02af19356995e059.txt",
+      "image_sha256": "02af19356995e059ad306cd083baacc717bca0d4bf3cd6acb258c2fb131241b7"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "model_version": "best-fe439a3a722e",
+  "inference_ms": 15.331599999626633,
+  "image": {
+    "width": 3072,
+    "height": 3072
+  },
+  "detections": [
+    {
+      "class_id": 0,
+      "class_name": "obstrucao_visivel",
+      "confidence": 0.893667459487915,
+      "bounding_box": [
+        974.2318725585938,
+        1107.005859375,
+        1161.8265380859375,
+        1339.2164306640625
+      ],
+      "bounding_box_format": "xyxy_pixels",
+      "track_id": null
+    },
+    {
+      "class_id": 0,
+      "class_name": "obstrucao_visivel",
+      "confidence": 0.726265013217926,
+      "bounding_box": [
+        1791.6112060546875,
+        2369.863037109375,
+        2446.195068359375,
+        3045.42724609375
+      ],
+      "bounding_box_format": "xyxy_pixels",
+      "track_id": null
+    }
+  ],
+  "created_at_utc": "2026-11-16T20:12:32.793509Z",
+  "input_name": "click_trash_00c5aac3d4cf1d57.jpg",
+  "input_sha256": "00c5aac3d4cf1d576dabe41f20af431a6d611d1a740254fcfee65d71bdd1e6ab",
+  "annotated_image": "artifacts/predictions/click_trash_00c5aac3d4cf1d57_annotated.jpg"
+}

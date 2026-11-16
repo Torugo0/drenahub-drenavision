@@ -1,0 +1,44 @@
+{
+  "model_version": "best-fe439a3a722e",
+  "inference_ms": 17.906000000039057,
+  "image": {
+    "width": 256,
+    "height": 256
+  },
+  "detections": [
+    {
+      "class_id": 1,
+      "class_name": "agua_acumulada",
+      "confidence": 0.4487603008747101,
+      "bounding_box": [
+        130.15615844726562,
+        143.71934509277344,
+        158.7390899658203,
+        161.992919921875
+      ],
+      "bounding_box_format": "xyxy_pixels",
+      "track_id": null,
+      "frame_index": null,
+      "timestamp_seconds": null
+    },
+    {
+      "class_id": 1,
+      "class_name": "agua_acumulada",
+      "confidence": 0.4203028678894043,
+      "bounding_box": [
+        38.06876754760742,
+        120.2918701171875,
+        58.605377197265625,
+        129.17825317382812
+      ],
+      "bounding_box_format": "xyxy_pixels",
+      "track_id": null,
+      "frame_index": null,
+      "timestamp_seconds": null
+    }
+  ],
+  "created_at_utc": "2026-11-16T20:21:46.608147Z",
+  "input_name": "stagnant_water_78c5a3feac2bba2c.jpg",
+  "input_sha256": "78c5a3feac2bba2cfb366d11fb96cc94167ddd4074a43baf5dd7dbb54e299a4a",
+  "annotated_image": "artifacts/predictions/stagnant_water_78c5a3feac2bba2c_annotated.jpg"
+}
