@@ -14,16 +14,16 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from starlette.concurrency import run_in_threadpool
 
-from app import __version__
-from app.core.config import Settings, get_settings
-from app.core.constants import (
+from drenavision import __version__
+from drenavision.core.config import Settings, get_settings
+from drenavision.core.constants import (
     CLASS_NAMES,
     MODEL_UNAVAILABLE_DETAIL,
     PUBLIC_CLASS_LABELS,
     SUPPORTED_IMAGE_TYPES,
 )
-from app.core.image_io import InvalidImageError, decode_image
-from app.core.schemas import (
+from drenavision.core.image_io import InvalidImageError, decode_image
+from drenavision.core.schemas import (
     ClassDefinition,
     ClassesResponse,
     ErrorResponse,
@@ -31,15 +31,15 @@ from app.core.schemas import (
     HealthResponse,
     PredictionEvent,
 )
-from app.core.service import PredictionService, Predictor
-from app.core.storage import EventRepository, EvidenceStore
+from drenavision.core.service import PredictionService, Predictor
+from drenavision.core.storage import EventRepository, EvidenceStore
 
 LOGGER = logging.getLogger(__name__)
 
 
 def _build_predictor(settings: Settings) -> Predictor | None:
     try:
-        from app.inference.predictor import ModelUnavailableError, YoloPredictor
+        from drenavision.inference.predictor import ModelUnavailableError, YoloPredictor
     except ImportError as exc:
         LOGGER.warning("Prediction runtime unavailable: %s", exc)
         return None
@@ -117,7 +117,9 @@ def create_app(
             version=__version__,
         )
 
-    @app.get("/vision/classes", response_model=ClassesResponse, tags=["metadata"])
+    @app.get(
+        "/vision/classes", response_model=ClassesResponse, tags=["metadata"]
+    )
     @app.get(
         "/v1/classes",
         response_model=ClassesResponse,
@@ -156,7 +158,9 @@ def create_app(
         file: Annotated[UploadFile, File()],
         point_id: Annotated[str | None, Form(max_length=80)] = None,
     ) -> PredictionEvent:
-        service: PredictionService | None = getattr(request.app.state, "service", None)
+        service: PredictionService | None = getattr(
+            request.app.state, "service", None
+        )
         if service is None or not getattr(service.predictor, "is_ready", True):
             raise HTTPException(status_code=503, detail=MODEL_UNAVAILABLE_DETAIL)
         if file.content_type not in SUPPORTED_IMAGE_TYPES:
@@ -181,8 +185,12 @@ def create_app(
                 partial(service.predict_image, image, point_id=normalized_point)
             )
 
-    @app.get("/vision/events", response_model=EventListResponse, tags=["events"])
-    @app.get("/v1/events", response_model=EventListResponse, include_in_schema=False)
+    @app.get(
+        "/vision/events", response_model=EventListResponse, tags=["events"]
+    )
+    @app.get(
+        "/v1/events", response_model=EventListResponse, include_in_schema=False
+    )
     def list_events(
         request: Request,
         limit: int = Query(default=50, ge=1, le=500),

@@ -7,8 +7,8 @@ from collections.abc import Sequence
 from pathlib import Path
 from typing import Any
 
-from app.data.constants import CLASS_NAMES
-from app.data.yolo import read_yolo
+from drenavision.data.constants import CLASS_NAMES
+from drenavision.data.yolo import read_yolo
 
 from .media_io import read_image_bgr, write_image
 from .utils import (

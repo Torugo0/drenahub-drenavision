@@ -86,7 +86,7 @@ Não compare runs com configurações/datasets diferentes sem identificá-los.
 
 ## Colab
 
-Use `notebooks/drenavision_training.ipynb` quando o ambiente local não tiver
+Use `docs/drenavision_training.ipynb` quando o ambiente local não tiver
 GPU adequada. Salve dataset e artefatos no Drive ou baixe-os antes de a sessão
 expirar. O notebook chama os mesmos scripts; não constitui uma implementação
 paralela.

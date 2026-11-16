@@ -4,19 +4,21 @@ from __future__ import annotations
 
 import json
 import os
+import shutil
 import subprocess
 import sys
 from io import BytesIO
 from pathlib import Path
+from typing import BinaryIO
 from uuid import uuid4
 
 import httpx
 import streamlit as st
 from PIL import Image, ImageDraw, ImageFont
 
-from app.core.config import get_settings
-from app.core.constants import DISCLAIMER, PUBLIC_CLASS_LABELS
-from app.core.image_io import InvalidImageError, decode_image
+from drenavision.core.config import get_settings
+from drenavision.core.constants import DISCLAIMER, PUBLIC_CLASS_LABELS
+from drenavision.core.image_io import InvalidImageError, decode_image
 
 ROOT = Path(__file__).resolve().parents[2]
 SETTINGS = get_settings()
@@ -27,6 +29,7 @@ API_URL = os.getenv(
 MODEL_PATH = SETTINGS.model_path
 DATABASE_PATH = SETTINGS.database_path
 EVIDENCE_DIR = SETTINGS.evidence_dir
+DEMO_VIDEO_PATH = ROOT / "artifacts/videos/demo_input_test_sequence.mp4"
 COLORS = {
     "obstrucao_visivel": "#ff6b35",
     "agua_acumulada": "#2d9cdb",
@@ -41,6 +44,21 @@ def api_request(method: str, path: str, **kwargs) -> httpx.Response:
         raise RuntimeError(
             f"API indisponível em {API_URL}. Inicie o serviço FastAPI."
         ) from exc
+
+
+def render_video_preview(upload: BinaryIO, mime_type: str | None = None) -> None:
+    """Render a file-like upload without passing Streamlit a memoryview."""
+
+    video_format = (
+        mime_type if mime_type and mime_type.startswith("video/") else "video/mp4"
+    )
+    upload.seek(0)
+    st.video(
+        upload,
+        format=video_format,
+        alt="Prévia do vídeo enviado para análise",
+    )
+    upload.seek(0)
 
 
 def annotate(image_bytes: bytes, detections: list[dict]) -> Image.Image:
@@ -154,6 +172,14 @@ def video_tab() -> None:
         "O processamento ocorre localmente, quadro a quadro, com rastreamento "
         "opcional. O arquivo original temporário é removido ao final."
     )
+    if DEMO_VIDEO_PATH.is_file():
+        st.download_button(
+            "Baixar vídeo de teste (entrada sem anotações)",
+            data=DEMO_VIDEO_PATH.read_bytes(),
+            file_name=DEMO_VIDEO_PATH.name,
+            mime="video/mp4",
+            use_container_width=True,
+        )
     upload = st.file_uploader(
         "Vídeo MP4, MOV, AVI ou MKV",
         type=["mp4", "mov", "avi", "mkv"],
@@ -168,11 +194,16 @@ def video_tab() -> None:
     )
     if upload is None:
         return
+    if any(marker in upload.name.lower() for marker in ("annotated", "anotado")):
+        st.warning(
+            "Este nome parece ser de um vídeo já processado. Para o teste padrão, "
+            "use demo_input_test_sequence.mp4; o arquivo annotated é a saída."
+        )
     if upload.size > SETTINGS.max_video_bytes:
         limit_mib = SETTINGS.max_video_bytes / (1024 * 1024)
         st.error(f"O vídeo excede o limite configurado de {limit_mib:.0f} MiB.")
         return
-    st.video(upload.getbuffer())
+    render_video_preview(upload, upload.type)
     if not st.button("Processar vídeo", type="primary", use_container_width=True):
         return
     if not MODEL_PATH.is_file():
@@ -190,7 +221,10 @@ def video_tab() -> None:
     token = uuid4().hex
     input_path = temporary_dir / f"{token}{safe_suffix}"
     output_path = output_dir / f"{token}.mp4"
-    input_path.write_bytes(upload.getbuffer())
+    upload.seek(0)
+    with input_path.open("wb") as destination:
+        shutil.copyfileobj(upload, destination, length=1024 * 1024)
+    upload.seek(0)
     command = [
         sys.executable,
         str(ROOT / "scripts/process_video.py"),

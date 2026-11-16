@@ -4,7 +4,7 @@ from pathlib import Path
 
 from PIL import Image
 
-from app.data.validator import validate_dataset
+from drenavision.data.validator import validate_dataset
 
 
 def _build_dataset(root: Path, *, duplicate: bool = False) -> tuple[Path, Path]:

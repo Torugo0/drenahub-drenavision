@@ -201,7 +201,7 @@ Para uma demonstração limpa, use banco e diretório de evidências dedicados:
 $env:DRENAVISION_DATABASE_PATH = "artifacts/demo/events.db"
 $env:DRENAVISION_EVIDENCE_DIR = "artifacts/demo/evidence"
 $env:DRENAVISION_MODEL_PATH = "artifacts/models/best.pt"
-python -m uvicorn app.api.main:app --host 127.0.0.1 --port 8000
+python -m uvicorn drenavision.api.main:app --host 127.0.0.1 --port 8000
 ```
 
 Não apague silenciosamente um histórico usado como evidência. Se reiniciar a
@@ -209,7 +209,7 @@ demonstração, arquive o banco anterior e registre a ação.
 
 ## Notebook Colab
 
-`notebooks/drenavision_training.ipynb` chama os mesmos scripts do repositório;
+`docs/drenavision_training.ipynb` chama os mesmos scripts do repositório;
 ele não reimplementa treino em células opacas. O usuário deve preencher a URL
 do repositório, escolher armazenamento de dados e salvar artefatos fora da
 sessão efêmera. Células não contêm outputs de treino fabricados.

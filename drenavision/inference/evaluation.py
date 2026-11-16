@@ -7,7 +7,7 @@ from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
 
-from app.data.constants import CLASS_NAMES
+from drenavision.data.constants import CLASS_NAMES
 
 from .config import EvaluateConfig
 from .device import describe_device, select_device

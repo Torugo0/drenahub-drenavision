@@ -5,7 +5,7 @@ actually needs a model. Importing this package is therefore safe on API hosts
 where the custom checkpoint has not been provisioned yet.
 """
 
-from app.core.schemas import Detection
+from drenavision.core.schemas import Detection
 
 from .contracts import PredictionResult
 from .errors import (

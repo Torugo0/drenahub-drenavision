@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from pathlib import Path
 
-from app.core.constants import CLASS_NAMES
+from drenavision.core.constants import CLASS_NAMES
 
 EXPECTED_CLASSES = tuple(CLASS_NAMES.values())
 IMAGE_SUFFIXES = {".jpg", ".jpeg", ".png"}

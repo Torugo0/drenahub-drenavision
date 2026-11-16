@@ -5,9 +5,9 @@ from pathlib import Path
 import numpy as np
 import pytest
 
-from app.core.schemas import Detection
-from app.inference.errors import ModelUnavailableError
-from app.inference.predictor import YoloPredictor
+from drenavision.core.schemas import Detection
+from drenavision.inference.errors import ModelUnavailableError
+from drenavision.inference.predictor import YoloPredictor
 
 
 class _Tensor:

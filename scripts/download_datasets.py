@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from app.data.downloader import (  # noqa: E402
+from drenavision.data.downloader import (  # noqa: E402
     download_click_sample,
     download_irodent,
     download_stagnant_water,

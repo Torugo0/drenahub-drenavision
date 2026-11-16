@@ -4,14 +4,14 @@ from pathlib import Path
 import pytest
 from PIL import Image
 
-from app.data.converter import (
+from drenavision.data.converter import (
     SourceCandidate,
     _grouped_select,
     _write_candidate,
     collect_water_candidates,
     select_irodent,
 )
-from app.data.yolo import YoloBox
+from drenavision.data.yolo import YoloBox
 
 
 def _image(path: Path, color: tuple[int, int, int] = (10, 20, 30)) -> None:

@@ -7,9 +7,9 @@ import numpy as np
 from fastapi.testclient import TestClient
 from PIL import Image
 
-from app.api.main import create_app
-from app.core.config import Settings
-from app.core.schemas import Detection
+from drenavision.api.main import create_app
+from drenavision.core.config import Settings
+from drenavision.core.schemas import Detection
 
 
 @dataclass

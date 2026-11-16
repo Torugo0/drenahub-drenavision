@@ -11,9 +11,9 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from app.core.storage import EventRepository, EvidenceStore  # noqa: E402
-from app.inference.utils import write_json  # noqa: E402
-from app.inference.video import persist_video_event, process_video  # noqa: E402
+from drenavision.core.storage import EventRepository, EvidenceStore  # noqa: E402
+from drenavision.inference.utils import write_json  # noqa: E402
+from drenavision.inference.video import persist_video_event, process_video  # noqa: E402
 
 
 def build_parser() -> argparse.ArgumentParser:

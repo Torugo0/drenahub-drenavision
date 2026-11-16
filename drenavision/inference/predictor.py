@@ -8,8 +8,8 @@ import time
 from pathlib import Path
 from typing import Any
 
-from app.core.schemas import Detection
-from app.data.constants import CLASS_NAMES
+from drenavision.core.schemas import Detection
+from drenavision.data.constants import CLASS_NAMES
 
 from .contracts import (
     PredictionResult,

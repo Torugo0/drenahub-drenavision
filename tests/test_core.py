@@ -7,9 +7,9 @@ import numpy as np
 import pytest
 from PIL import Image
 
-from app.core.image_io import InvalidImageError, decode_image, encode_jpeg
-from app.core.schemas import Detection, PredictionEvent
-from app.core.storage import EventRepository, EvidenceStore
+from drenavision.core.image_io import InvalidImageError, decode_image, encode_jpeg
+from drenavision.core.schemas import Detection, PredictionEvent
+from drenavision.core.storage import EventRepository, EvidenceStore
 
 
 def test_decode_and_encode_image_round_trip() -> None:

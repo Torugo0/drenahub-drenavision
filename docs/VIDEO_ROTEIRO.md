@@ -28,11 +28,11 @@ exemplos demonstrativos selecionados em estimativas de desempenho.
 ```powershell
 # Terminal 1
 .\.venv\Scripts\Activate.ps1
-python -m uvicorn app.api.main:app --host 127.0.0.1 --port 8000
+python -m uvicorn drenavision.api.main:app --host 127.0.0.1 --port 8000
 
 # Terminal 2
 .\.venv\Scripts\Activate.ps1
-python -m streamlit run app/ui/streamlit_app.py
+python -m streamlit run drenavision/ui/streamlit_app.py
 ```
 
 Verifique `/health` antes do REC. Ele deve mostrar o modelo carregado. Não use
@@ -88,6 +88,9 @@ um detector genérico ou resposta simulada para contornar HTTP 503.
 - [ ] registrar URL no README e relatório posterior;
 - [ ] manter o link público durante a correção.
 
-Uma versão expandida, com plano alternativo e notas de cada cena, está em
-[DEMO_VIDEO_SCRIPT.md](DEMO_VIDEO_SCRIPT.md).
+O vídeo de entrada local para testar a interface é
+`artifacts/videos/demo_input_test_sequence.mp4`. Use a entrada sem anotações;
+`drenavision_demo_annotated.mp4` já é o resultado processado. Se o arquivo de
+entrada não estiver no clone, baixe-o pela
+[release `v0.1.0-model`](https://github.com/Torugo0/drenahub-drenavision/releases/tag/v0.1.0-model).
 

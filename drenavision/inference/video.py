@@ -12,9 +12,9 @@ from pathlib import Path
 from typing import Any
 from uuid import uuid4
 
-from app.core.schemas import Detection, PredictionEvent
-from app.core.storage import EventRepository, EvidenceStore
-from app.data.constants import CLASS_NAMES
+from drenavision.core.schemas import Detection, PredictionEvent
+from drenavision.core.storage import EventRepository, EvidenceStore
+from drenavision.data.constants import CLASS_NAMES
 
 from .device import describe_device, select_device
 from .predictor import detections_from_result

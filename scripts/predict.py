@@ -11,9 +11,9 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from app.inference.media_io import read_image_bgr, write_image  # noqa: E402
-from app.inference.predictor import YoloPredictor  # noqa: E402
-from app.inference.utils import (  # noqa: E402
+from drenavision.inference.media_io import read_image_bgr, write_image  # noqa: E402
+from drenavision.inference.predictor import YoloPredictor  # noqa: E402
+from drenavision.inference.utils import (  # noqa: E402
     safe_artifact_path,
     sha256_file,
     utc_now_iso,

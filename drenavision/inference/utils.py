@@ -14,7 +14,7 @@ from importlib import metadata
 from pathlib import Path
 from typing import Any
 
-from app.data.constants import CLASS_NAMES, IMAGE_SUFFIXES
+from drenavision.data.constants import CLASS_NAMES, IMAGE_SUFFIXES
 
 from .errors import ClassMapMismatchError, DatasetUnavailableError
 
@@ -201,7 +201,7 @@ def preflight_dataset(
 def strict_dataset_validation(dataset_yaml: Path) -> dict[str, Any]:
     """Run provenance, label, exact-duplicate, and group-leakage checks."""
 
-    from app.data.validator import validate_dataset
+    from drenavision.data.validator import validate_dataset
 
     dataset_yaml = dataset_yaml.resolve()
     dataset_root = dataset_yaml.parent

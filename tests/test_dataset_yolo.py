@@ -2,7 +2,7 @@ from pathlib import Path
 
 import pytest
 
-from app.data.yolo import YoloBox, coco_bbox_to_yolo, read_yolo, write_yolo
+from drenavision.data.yolo import YoloBox, coco_bbox_to_yolo, read_yolo, write_yolo
 
 
 def test_yolo_round_trip_and_empty_negative(tmp_path: Path) -> None:

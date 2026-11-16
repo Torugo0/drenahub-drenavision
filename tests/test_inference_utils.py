@@ -7,14 +7,18 @@ from types import SimpleNamespace
 import numpy as np
 import pytest
 
-from app.core.storage import EventRepository, EvidenceStore
-from app.inference.device import _select_device_from_torch
-from app.inference.errors import ClassMapMismatchError
-from app.inference.evaluation import extract_detection_metrics
-from app.inference.media_io import read_image_bgr, write_image
-from app.inference.training import snapshot_interrupted_run
-from app.inference.utils import box_iou, greedy_class_matches, validate_class_map
-from app.inference.video import persist_video_event
+from drenavision.core.storage import EventRepository, EvidenceStore
+from drenavision.inference.device import _select_device_from_torch
+from drenavision.inference.errors import ClassMapMismatchError
+from drenavision.inference.evaluation import extract_detection_metrics
+from drenavision.inference.media_io import read_image_bgr, write_image
+from drenavision.inference.training import snapshot_interrupted_run
+from drenavision.inference.utils import (
+    box_iou,
+    greedy_class_matches,
+    validate_class_map,
+)
+from drenavision.inference.video import persist_video_event
 
 
 class _Cuda:

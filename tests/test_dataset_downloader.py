@@ -9,8 +9,8 @@ from pathlib import Path
 import pytest
 from PIL import Image
 
-from app.data.constants import SourceSpec
-from app.data.downloader import (
+from drenavision.data.constants import SourceSpec
+from drenavision.data.downloader import (
     download_click_sample,
     download_resumable,
     safe_extract_zip,
@@ -121,7 +121,7 @@ def test_resumable_download_uses_range_and_verifies_checksum(
         captured_headers.update(kwargs["headers"])  # type: ignore[arg-type]
         return FakeResponse()
 
-    monkeypatch.setattr("app.data.downloader.requests.get", fake_get)
+    monkeypatch.setattr("drenavision.data.downloader.requests.get", fake_get)
     result = download_resumable(source, destination, progress=lambda _message: None)
     assert result.read_bytes() == expected
     assert captured_headers["Range"] == "bytes=3-"

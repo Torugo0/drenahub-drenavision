@@ -14,8 +14,8 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from app.data.constants import SOURCES  # noqa: E402
-from app.data.downloader import file_checksum  # noqa: E402
+from drenavision.data.constants import SOURCES  # noqa: E402
+from drenavision.data.downloader import file_checksum  # noqa: E402
 
 MAPPINGS = {
     "stagnant_water": {

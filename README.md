@@ -70,17 +70,62 @@ O sistema falha de forma explícita se `artifacts/models/best.pt` não existir o
 se o mapa de classes do checkpoint for incompatível. Pesos genéricos COCO não
 são apresentados como se reconhecessem as classes DrenaVision.
 
-O checkpoint e o MP4 anotado ficam na
+O checkpoint, o vídeo limpo de teste e a saída anotada ficam na
 [release `v0.1.0-model`](https://github.com/Torugo0/drenahub-drenavision/releases/tag/v0.1.0-model).
 Enquanto o repositório estiver privado, o download exige acesso à conta; depois
 da abertura para correção, teste o link sem autenticação. Com GitHub CLI:
 
 ```powershell
+New-Item -ItemType Directory -Force artifacts/models, artifacts/videos | Out-Null
 gh release download v0.1.0-model `
   --repo Torugo0/drenahub-drenavision `
   --pattern best.pt `
   --dir artifacts/models
+gh release download v0.1.0-model `
+  --repo Torugo0/drenahub-drenavision `
+  --pattern demo_input_test_sequence.mp4 `
+  --dir artifacts/videos
 ```
+
+## Mapa rápido do projeto
+
+```text
+drena_hub_avc/
+├── drenavision/          código Python da solução
+│   ├── api/              endpoints FastAPI
+│   ├── core/             configuração, contratos e histórico SQLite
+│   ├── data/             download, conversão e validação dos datasets
+│   ├── inference/        YOLO, treino, avaliação, imagem e vídeo
+│   └── ui/               interface Streamlit
+├── configs/              parâmetros editáveis de treino e avaliação
+├── scripts/              comandos executáveis do pipeline
+├── datasets/             proveniência e dados locais
+├── artifacts/            modelos, métricas, vídeos e evidências geradas
+├── tests/                testes automatizados
+└── docs/                 documentação técnica e notebook Colab
+```
+
+Regra prática: altere parâmetros em `configs/`, execute tarefas por `scripts/`
+e procure resultados em `artifacts/`. O pacote `drenavision/` contém a
+implementação; normalmente não é necessário entrar nele para apenas executar a
+solução.
+
+| Quero... | Onde encontro |
+|---|---|
+| iniciar a API | `drenavision/api/main.py` |
+| iniciar a interface | `drenavision/ui/streamlit_app.py` |
+| configurar treino/avaliação | `configs/train.yaml` e `configs/evaluate.yaml` |
+| baixar e preparar dados | `scripts/download_datasets.py` e `scripts/convert_annotations.py` |
+| consultar fontes e splits | `datasets/dataset_sources.csv` e `datasets/manifests/` |
+| ver métricas reais | `artifacts/metrics/evaluation_metrics.json` |
+| testar upload de vídeo | `artifacts/videos/demo_input_test_sequence.mp4` |
+| seguir o roteiro da FIAP | `docs/VIDEO_ROTEIRO.md` |
+
+As pastas `datasets/raw`, `datasets/processed`, `artifacts/models`,
+`artifacts/events`, `artifacts/videos`, `artifacts/evaluation` e
+`artifacts/training` são saídas locais ignoradas pelo Git. Não são novos módulos
+do projeto. As evidências pequenas e publicáveis ficam em `artifacts/demo` e
+`artifacts/metrics`. Veja também [artifacts/README.md](artifacts/README.md).
 
 ## Arquitetura
 
@@ -100,9 +145,8 @@ fontes licenciadas -> download -> conversão YOLO -> validação de integridade
                                               evidências e vídeo
 ```
 
-Uma visão operacional está em [docs/ARQUITETURA.md](docs/ARQUITETURA.md), com
-detalhes de responsabilidade e fronteiras em
-[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
+A visão completa de componentes e responsabilidades está em
+[docs/ARQUITETURA.md](docs/ARQUITETURA.md).
 
 ## Início rápido no Windows PowerShell
 
@@ -232,7 +276,7 @@ mesmo histórico da API.
 Terminal 1:
 
 ```powershell
-python -m uvicorn app.api.main:app --host 127.0.0.1 --port 8000
+python -m uvicorn drenavision.api.main:app --host 127.0.0.1 --port 8000
 ```
 
 Verificação e predição:
@@ -254,7 +298,7 @@ Veja [docs/API.md](docs/API.md).
 Terminal 2, com a API já em execução:
 
 ```powershell
-python -m streamlit run app/ui/streamlit_app.py
+python -m streamlit run drenavision/ui/streamlit_app.py
 ```
 
 Abra `http://127.0.0.1:8501`. A interface oferece upload de imagem, captura por
@@ -274,24 +318,6 @@ mesmo checkpoint; não existe modo de demonstração com resultados simulados.
 Uma predição válida sem detecções continua retornando HTTP 200 e
 `"detections": []`. Caminhos absolutos locais não fazem parte da resposta.
 
-## Estrutura principal
-
-```text
-app/
-  api/                 FastAPI e validação de uploads
-  core/                contratos, persistência e serviço de aplicação
-  data/                download, conversão e validação YOLO
-  inference/           treino, avaliação, predição e seleção de dispositivo
-  ui/                  interface Streamlit
-configs/               configurações versionadas de treino e avaliação
-datasets/              manifests e dados locais ignorados pelo Git
-scripts/               CLIs reproduzíveis
-notebooks/             fluxo Colab chamando os mesmos scripts
-tests/                 testes unitários e de contrato
-artifacts/             evidências curadas no Git; pesos, runs, eventos e vídeos ignorados
-docs/                  requisitos, arquitetura, ética e demonstração
-```
-
 ## Reproduzir a demonstração
 
 1. valide o ambiente e execute os testes;
@@ -306,9 +332,8 @@ docs/                  requisitos, arquitetura, ética e demonstração
 9. declare limitações e itens ainda pendentes.
 
 O roteiro canônico está em
-[docs/VIDEO_ROTEIRO.md](docs/VIDEO_ROTEIRO.md), com notas expandidas em
-[docs/DEMO_VIDEO_SCRIPT.md](docs/DEMO_VIDEO_SCRIPT.md). O notebook equivalente
-está em `notebooks/drenavision_training.ipynb`.
+[docs/VIDEO_ROTEIRO.md](docs/VIDEO_ROTEIRO.md). O notebook equivalente está em
+`docs/drenavision_training.ipynb`.
 
 ## Segurança, privacidade e uso responsável
 
@@ -322,8 +347,8 @@ está em `notebooks/drenavision_training.ipynb`.
 - desempenho pode mudar por iluminação, câmera, domínio, clima e classe;
 - revisão humana permanece obrigatória.
 
-Veja o resumo em [docs/LIMITACOES.md](docs/LIMITACOES.md) e a análise completa
-em [docs/ETHICS_AND_LIMITATIONS.md](docs/ETHICS_AND_LIMITATIONS.md).
+Veja a análise de limites técnicos, ética e LGPD em
+[docs/LIMITACOES.md](docs/LIMITACOES.md).
 
 ## Licenças
 
@@ -390,17 +415,16 @@ O checklist operacional completo está em
 |---|---|
 | [FIAP_REQUIREMENTS.md](docs/FIAP_REQUIREMENTS.md) | requisito oficial versus decisão do projeto |
 | [CHECKLIST_FIAP.md](docs/CHECKLIST_FIAP.md) | verificação final e publicação |
-| [ARQUITETURA.md](docs/ARQUITETURA.md) | visão operacional |
-| [ARCHITECTURE.md](docs/ARCHITECTURE.md) | componentes, fluxos e estados de erro |
+| [ARQUITETURA.md](docs/ARQUITETURA.md) | componentes, fluxos e estados de erro |
 | `docs/DATASETS.md` | fontes, licenças, preparação e anotação |
 | [TREINAMENTO.md](docs/TREINAMENTO.md) | execução e prova de fine-tuning |
 | [METRICAS.md](docs/METRICAS.md) | protocolo de avaliação e interpretação |
 | `docs/MODEL_CARD.md` | ficha do checkpoint e resultados reais |
 | [API.md](docs/API.md) | contrato HTTP e exemplos |
 | [REPRODUCIBILITY.md](docs/REPRODUCIBILITY.md) | hashes, ambiente e evidências |
-| [LIMITACOES.md](docs/LIMITACOES.md) | limites essenciais |
-| [ETHICS_AND_LIMITATIONS.md](docs/ETHICS_AND_LIMITATIONS.md) | ética, LGPD e riscos |
+| [LIMITACOES.md](docs/LIMITACOES.md) | limites técnicos, ética, LGPD e riscos |
 | [VIDEO_ROTEIRO.md](docs/VIDEO_ROTEIRO.md) | roteiro canônico e checklist OBS |
+| `docs/drenavision_training.ipynb` | execução equivalente em Colab |
 
 ## Referências essenciais
 
