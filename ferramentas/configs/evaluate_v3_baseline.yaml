@@ -1,0 +1,16 @@
+checkpoint: resultados/local/models/best_v2.pt
+data: dados/processed/drenavision_v3_clean/dataset.yaml
+project: resultados/local/evaluation
+name: baseline_v2_on_water_regions_v3
+imgsz: 640
+batch: 8
+confidence: 0.001
+iou: 0.60
+match_iou: 0.50
+example_confidence: 0.35
+workers: 2
+device: auto
+plots: true
+save_json: true
+error_examples_per_type: 3
+max_error_images: 0

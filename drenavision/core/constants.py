@@ -10,9 +10,9 @@ CLASS_NAMES: dict[int, str] = {
 CLASS_IDS: dict[str, int] = {name: class_id for class_id, name in CLASS_NAMES.items()}
 
 PUBLIC_CLASS_LABELS: dict[str, str] = {
-    "obstrucao_visivel": "Obstrução visível",
-    "agua_acumulada": "Água acumulada",
-    "animal_visivel": "Animal visível",
+    "obstrucao_visivel": "Resíduos ou possível obstrução",
+    "agua_acumulada": "Água visível",
+    "animal_visivel": "Possível animal",
 }
 
 OVERLAY_CLASS_LABELS: dict[str, str] = {

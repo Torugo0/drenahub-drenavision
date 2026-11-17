@@ -6,7 +6,7 @@ title: "DrenaVision: visão computacional para inspeção preventiva de drenagem
 type: software
 authors:
   - name: "Equipe DrenaHub"
-version: 0.1.0
+version: 0.4.0
 date-released: 2026-11-16
 license: AGPL-3.0-only
 keywords:
@@ -17,5 +17,5 @@ keywords:
   - citizen technology
 abstract: >-
   Protótipo acadêmico que realiza triagem visual de obstrução visível, água
-  acumulada e animal visível para apoiar inspeção humana de pontos de drenagem.
+  visível e possíveis animais para apoiar inspeção humana de pontos de drenagem.
 

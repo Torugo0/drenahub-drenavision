@@ -54,6 +54,7 @@ class PredictionResult:
     model_version: str
     image_width: int
     image_height: int
+    image_size: int = 640
 
     @property
     def annotated_bgr(self) -> Any:
@@ -72,5 +73,6 @@ class PredictionResult:
             "model_version": self.model_version,
             "inference_ms": self.inference_ms,
             "image": {"width": self.image_width, "height": self.image_height},
+            "inference": {"imgsz": self.image_size},
             "detections": serialized,
         }

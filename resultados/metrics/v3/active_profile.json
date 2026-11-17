@@ -1,0 +1,61 @@
+{
+  "status": "evaluated_and_verified_in_running_product",
+  "selected_at_utc": "2026-11-16T23:38:47.008600Z",
+  "model_version": "pipeline-1314fcfa94f5f8cf",
+  "master_checkpoint_sha256": "12b9e86f223366c3f2ef8c2308f0e1140cda08c55ab55e281e58d300fd554b4b",
+  "master_release_filename": "best.pt",
+  "water": {
+    "repository": "nvidia/segformer-b1-finetuned-ade-512-512",
+    "revision": "a775b4f5dcb2179e57006dca0e268281306412ef",
+    "license": "NVIDIA Source Code License for SegFormer; non-commercial research/evaluation only",
+    "license_url": "https://raw.githubusercontent.com/NVlabs/SegFormer/master/LICENSE",
+    "file_sha256": {
+      "model.safetensors": "e0802e077c195d9dbaf48c69b94946ef6a3ae5b6665176fedf363e5e63a1ec93",
+      "config.json": "8f1b7bcd2e1835ef0ef3a04a0d4dfe87ff9a6374253e7a3ca1751de812a420ff",
+      "preprocessor_config.json": "8039d1d210abaa7117ad78e58cdfd6141a2ec72c03dae891b3cd76737e422c6c",
+      "download_manifest.json": "d22e86d4ad23c1c65bf4cfebc730d69501e2db98a800d4ce047778ed222a9dc6",
+      "LICENSE-NVIDIA-SegFormer.txt": "b5a6a3804b12c1b4d37e1e45bcc31761a2e69064fd75b48da13d62e30d69b406"
+    },
+    "policy": {
+      "version": "ade-water-mask-v1",
+      "processing_size": 512,
+      "pixel_confidence": 0.95,
+      "min_area_fraction": 0.05,
+      "water_labels": {
+        "21": "water",
+        "26": "sea",
+        "60": "river",
+        "109": "swimming pool",
+        "113": "waterfall",
+        "128": "lake"
+      },
+      "postprocessing": "bilinear logits at bounded processing_size; nearest labels and bilinear water-family posterior to original size; pixel confidence gate; 8-connected components; actual pixel-area gate; no fill/dilation"
+    },
+    "profile_sha256": "808e8206473b83053f7f675b1d559f6d03a3d26079375a7e9eb71b7d4229527e",
+    "model_version": "water-808e8206473b"
+  },
+  "operating_parameters": {
+    "residue_confidence": 0.35,
+    "animal_confidence": 0.6,
+    "water_mode": "augment",
+    "imgsz": 640,
+    "confidence": 0.35,
+    "iou": 0.45
+  },
+  "policy": "Image/video share learned model, confidence and mask policy. Video adds a separately versioned0.5s water-confirmation stage; the frozen image evaluation is unchanged.",
+  "known_case_observations": "Bueiro4litter+2water; Hanoi3/3sampledclearframeswithcompactanimalbox+refuse; Sarjeta2/3sampledframeswater, middlemiss; ralo_lixoremainsunmarked. Ratvegetationdifficult.",
+  "image_evaluation": {
+    "images": 179,
+    "scope": "60 known-source regression +119 additional local held-out images; frozen image profile; source bbox references can be incomplete",
+    "report": "independent_comparison.json"
+  },
+  "video_postprocessing": {
+    "model_version": "pipeline-4d613d5a1d82cb61",
+    "base_pipeline_version": "pipeline-1314fcfa94f5f8cf",
+    "water_confirmation_seconds": 0.5,
+    "scope": "Later video-only engineering check on known clips; does not alter or re-tune179 image predictions. No independent video accuracy claim.",
+    "proof": "video_confirmation_scope.json"
+  },
+  "ui_verification": "ui_verification.json",
+  "verified_at_utc": "2026-11-17T00:18:41.054265Z"
+}

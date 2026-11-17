@@ -1,5 +1,6 @@
-# Compare with evaluate_v2_baseline.yaml: same corrected GT and test images.
-checkpoint: resultados/local/models/best.pt
+# Historical v2: compare against evaluate_v2_baseline.yaml on corrected v2 GT.
+# The preserved v2 checkpoint must never resolve to the active v3 best.pt.
+checkpoint: resultados/local/models/best_v2.pt
 data: dados/processed/drenavision_v2/dataset.yaml
 project: resultados/local/evaluation
 name: candidate_v2_on_corrected_v2

@@ -1,0 +1,1298 @@
+{
+  "status": "completed_with_detection_limitations",
+  "created_at_utc": "2026-11-17T00:01:05.592142+00:00",
+  "model_sha256": "12b9e86f223366c3f2ef8c2308f0e1140cda08c55ab55e281e58d300fd554b4b",
+  "model_version": "pipeline-1314fcfa94f5f8cf",
+  "image_model_version": "pipeline-1314fcfa94f5f8cf",
+  "video_model_version": "pipeline-4d613d5a1d82cb61",
+  "pipeline": {
+    "model_version": "pipeline-1314fcfa94f5f8cf",
+    "master_checkpoint_sha256": "12b9e86f223366c3f2ef8c2308f0e1140cda08c55ab55e281e58d300fd554b4b",
+    "water": {
+      "repository": "nvidia/segformer-b1-finetuned-ade-512-512",
+      "revision": "a775b4f5dcb2179e57006dca0e268281306412ef",
+      "license": "NVIDIA Source Code License for SegFormer; non-commercial research/evaluation only",
+      "license_url": "https://raw.githubusercontent.com/NVlabs/SegFormer/master/LICENSE",
+      "file_sha256": {
+        "model.safetensors": "e0802e077c195d9dbaf48c69b94946ef6a3ae5b6665176fedf363e5e63a1ec93",
+        "config.json": "8f1b7bcd2e1835ef0ef3a04a0d4dfe87ff9a6374253e7a3ca1751de812a420ff",
+        "preprocessor_config.json": "8039d1d210abaa7117ad78e58cdfd6141a2ec72c03dae891b3cd76737e422c6c",
+        "download_manifest.json": "d22e86d4ad23c1c65bf4cfebc730d69501e2db98a800d4ce047778ed222a9dc6",
+        "LICENSE-NVIDIA-SegFormer.txt": "b5a6a3804b12c1b4d37e1e45bcc31761a2e69064fd75b48da13d62e30d69b406"
+      },
+      "policy": {
+        "version": "ade-water-mask-v1",
+        "processing_size": 512,
+        "pixel_confidence": 0.95,
+        "min_area_fraction": 0.05,
+        "water_labels": {
+          "21": "water",
+          "26": "sea",
+          "60": "river",
+          "109": "swimming pool",
+          "113": "waterfall",
+          "128": "lake"
+        },
+        "postprocessing": "bilinear logits at bounded processing_size; nearest labels and bilinear water-family posterior to original size; pixel confidence gate; 8-connected components; actual pixel-area gate; no fill/dilation"
+      },
+      "profile_sha256": "808e8206473b83053f7f675b1d559f6d03a3d26079375a7e9eb71b7d4229527e",
+      "model_version": "water-808e8206473b"
+    },
+    "operating_parameters": {
+      "residue_confidence": 0.35,
+      "animal_confidence": 0.6,
+      "water_mode": "augment",
+      "imgsz": 640,
+      "confidence": 0.35,
+      "iou": 0.45
+    },
+    "video_model_version": "pipeline-4d613d5a1d82cb61",
+    "video_water_confirmation_seconds": 0.5
+  },
+  "confidence_threshold": 0.35,
+  "iou_threshold": 0.45,
+  "image_size": 640,
+  "tracking": true,
+  "protocol": "All eight catalog originals, complete videos without frame sampling; frozen image detector plus separately versioned video-only temporal water confirmation. Original media and image thresholds remain unchanged.",
+  "note": "Known regression/adaptation files, not independent accuracy. Catalog tags describe subjects, not ground truth. Missing subject classes and unexpected predictions need visual review; no precision/recall/mAP is inferred. Animal/residue tracker IDs need not represent distinct objects; water counts are simultaneous visual regions, not distinct puddles.",
+  "items": [
+    {
+      "id": "rato_close",
+      "kind": "video",
+      "input": "dados/examples/rato_close.mp4",
+      "output": "resultados/local/validation_examples_v3_confirmed/rato_close_annotated.mp4",
+      "content_tags": [
+        "animal_visivel"
+      ],
+      "evaluation_role": "adaptation_training_frames",
+      "input_sha256": "e2f305a79477c47e7857eead8aa1be75ddb90bb0eaba975909dcd4595d8092db",
+      "model_version": "pipeline-4d613d5a1d82cb61",
+      "base_pipeline_version": "pipeline-1314fcfa94f5f8cf",
+      "counts": {
+        "obstrucao_visivel": 0,
+        "agua_acumulada": 0,
+        "animal_visivel": 1
+      },
+      "raw_counts": {
+        "obstrucao_visivel": {
+          "count": 0,
+          "method": "max_simultaneous_per_frame"
+        },
+        "agua_acumulada": {
+          "count": 0,
+          "method": "max_simultaneous_per_frame"
+        },
+        "animal_visivel": {
+          "count": 1,
+          "method": "unique_track_ids"
+        }
+      },
+      "water_temporal_policy": {
+        "enabled": true,
+        "confirmation_seconds": 0.5,
+        "fps": 20.0,
+        "required_consecutive_frames": 10,
+        "raw_water_frames": 0,
+        "raw_water_detection_count": 0,
+        "longest_consecutive_water_run": 0,
+        "confirmed": false,
+        "suppressed_frames": 0,
+        "rerendered_from_original": false,
+        "policy": "video-water-longest-run-v1; require a consecutive run of ceil(fps*seconds); otherwise suppress all water for this clip, preserve raw proposals, and redraw from original decoded source frames",
+        "scope": "video-only engineering confirmation; image predictions and the frozen image profile remain unchanged"
+      },
+      "processed_frames": 220,
+      "counting_methods": {
+        "obstrucao_visivel": "max_simultaneous_per_frame",
+        "agua_acumulada": "max_simultaneous_per_frame",
+        "animal_visivel": "unique_track_ids"
+      },
+      "frames_with_detections": 220,
+      "video_validation": {
+        "codec": "h264",
+        "faststart": true,
+        "decoded_frames": 220,
+        "decoded_seconds": 11.0
+      },
+      "poster": "resultados/local/validation_examples_v3_confirmed/rato_close_annotated.jpg",
+      "review_frames": [
+        {
+          "class_name": "animal_visivel",
+          "frame_index": 58,
+          "timestamp_seconds": 2.9,
+          "detections": [
+            {
+              "class_id": 2,
+              "class_name": "animal_visivel",
+              "confidence": 0.8832029104232788,
+              "bounding_box": [
+                176.93824768066406,
+                60.0261116027832,
+                640.0,
+                344.69500732421875
+              ],
+              "bounding_box_format": "xyxy_pixels",
+              "track_id": 1,
+              "frame_index": 58,
+              "timestamp_seconds": 2.9
+            }
+          ],
+          "image_filename": "rato_close_annotated_animal_visivel.jpg"
+        }
+      ],
+      "manifest": "resultados/local/validation_examples_v3_confirmed/rato_close_annotated.json",
+      "frames_with_class": {
+        "obstrucao_visivel": 0,
+        "agua_acumulada": 0,
+        "animal_visivel": 220
+      },
+      "frames_with_retained_water_mask": 0,
+      "frames_with_raw_semantic_water_mask": 0,
+      "raw_water_detection_frames": 0,
+      "max_confidence_by_class": {
+        "obstrucao_visivel": null,
+        "agua_acumulada": null,
+        "animal_visivel": 0.8832029104232788
+      },
+      "missing_content_classes": [],
+      "unexpected_class_predictions": [],
+      "inspection_recommended": true,
+      "output_sha256": "d6b89e92d84a70def0c36e53618f4086b37dd59cef066d11d1c016978c4f4e2c",
+      "status": "completed",
+      "visual_review": "O rato está dentro da caixa nos pôsteres e quadros revisados; houve previsão animal em220/220quadros. A caixa ainda inclui grades/fundo. Fonte usada na adaptação: não é prova de generalização."
+    },
+    {
+      "id": "rato_rua",
+      "kind": "video",
+      "input": "dados/examples/rato_rua.mp4",
+      "output": "resultados/local/validation_examples_v3_confirmed/rato_rua_annotated.mp4",
+      "content_tags": [
+        "animal_visivel"
+      ],
+      "evaluation_role": "separate_difficult_regression_no_training",
+      "input_sha256": "4f5ae958da80e56adbdaac6f3ca5cc32341176528ef686045d25335634cb5f25",
+      "model_version": "pipeline-4d613d5a1d82cb61",
+      "base_pipeline_version": "pipeline-1314fcfa94f5f8cf",
+      "counts": {
+        "obstrucao_visivel": 0,
+        "agua_acumulada": 0,
+        "animal_visivel": 0
+      },
+      "raw_counts": {
+        "obstrucao_visivel": {
+          "count": 0,
+          "method": "max_simultaneous_per_frame"
+        },
+        "agua_acumulada": {
+          "count": 0,
+          "method": "max_simultaneous_per_frame"
+        },
+        "animal_visivel": {
+          "count": 0,
+          "method": "max_simultaneous_per_frame"
+        }
+      },
+      "water_temporal_policy": {
+        "enabled": true,
+        "confirmation_seconds": 0.5,
+        "fps": 20.0,
+        "required_consecutive_frames": 10,
+        "raw_water_frames": 0,
+        "raw_water_detection_count": 0,
+        "longest_consecutive_water_run": 0,
+        "confirmed": false,
+        "suppressed_frames": 0,
+        "rerendered_from_original": false,
+        "policy": "video-water-longest-run-v1; require a consecutive run of ceil(fps*seconds); otherwise suppress all water for this clip, preserve raw proposals, and redraw from original decoded source frames",
+        "scope": "video-only engineering confirmation; image predictions and the frozen image profile remain unchanged"
+      },
+      "processed_frames": 240,
+      "counting_methods": {
+        "obstrucao_visivel": "max_simultaneous_per_frame",
+        "agua_acumulada": "max_simultaneous_per_frame",
+        "animal_visivel": "max_simultaneous_per_frame"
+      },
+      "frames_with_detections": 0,
+      "video_validation": {
+        "codec": "h264",
+        "faststart": true,
+        "decoded_frames": 240,
+        "decoded_seconds": 12.0
+      },
+      "poster": "resultados/local/validation_examples_v3_confirmed/rato_rua_annotated.jpg",
+      "review_frames": [],
+      "manifest": "resultados/local/validation_examples_v3_confirmed/rato_rua_annotated.json",
+      "frames_with_class": {
+        "obstrucao_visivel": 0,
+        "agua_acumulada": 0,
+        "animal_visivel": 0
+      },
+      "frames_with_retained_water_mask": 0,
+      "frames_with_raw_semantic_water_mask": 0,
+      "raw_water_detection_frames": 0,
+      "max_confidence_by_class": {
+        "obstrucao_visivel": null,
+        "agua_acumulada": null,
+        "animal_visivel": null
+      },
+      "missing_content_classes": [
+        "animal_visivel"
+      ],
+      "unexpected_class_predictions": [],
+      "inspection_recommended": false,
+      "output_sha256": "bbfe9760fdec136fc87f70f2f34a204541207b0fb8728af548e81b094d28e9d5",
+      "status": "completed",
+      "visual_review": "Nenhuma marcação em240quadros. O roedor pequeno/oculto continua sem identificação; a ausência de caixas não confirma ausência do animal. Não repetiu os alertas de resíduos sobre vegetação vistos em versões intermediárias."
+    },
+    {
+      "id": "rato_residuos",
+      "kind": "video",
+      "input": "dados/examples/rato_residuos.mp4",
+      "output": "resultados/local/validation_examples_v3_confirmed/rato_residuos_annotated.mp4",
+      "content_tags": [
+        "animal_visivel",
+        "obstrucao_visivel"
+      ],
+      "evaluation_role": "adaptation_training_frames",
+      "input_sha256": "5bd947ce05cc3dab49118747622e29f56d8c7ba1131233fe3ff97cbb02da8030",
+      "model_version": "pipeline-4d613d5a1d82cb61",
+      "base_pipeline_version": "pipeline-1314fcfa94f5f8cf",
+      "counts": {
+        "obstrucao_visivel": 2,
+        "agua_acumulada": 0,
+        "animal_visivel": 4
+      },
+      "raw_counts": {
+        "obstrucao_visivel": {
+          "count": 2,
+          "method": "unique_track_ids"
+        },
+        "agua_acumulada": {
+          "count": 1,
+          "method": "max_simultaneous_per_frame"
+        },
+        "animal_visivel": {
+          "count": 4,
+          "method": "unique_track_ids"
+        }
+      },
+      "water_temporal_policy": {
+        "enabled": true,
+        "confirmation_seconds": 0.5,
+        "fps": 20.0,
+        "required_consecutive_frames": 10,
+        "raw_water_frames": 7,
+        "raw_water_detection_count": 7,
+        "longest_consecutive_water_run": 4,
+        "confirmed": false,
+        "suppressed_frames": 7,
+        "rerendered_from_original": true,
+        "policy": "video-water-longest-run-v1; require a consecutive run of ceil(fps*seconds); otherwise suppress all water for this clip, preserve raw proposals, and redraw from original decoded source frames",
+        "scope": "video-only engineering confirmation; image predictions and the frozen image profile remain unchanged"
+      },
+      "processed_frames": 240,
+      "counting_methods": {
+        "obstrucao_visivel": "unique_track_ids",
+        "agua_acumulada": "max_simultaneous_per_frame",
+        "animal_visivel": "unique_track_ids"
+      },
+      "frames_with_detections": 227,
+      "video_validation": {
+        "codec": "h264",
+        "faststart": true,
+        "decoded_frames": 240,
+        "decoded_seconds": 12.0
+      },
+      "poster": "resultados/local/validation_examples_v3_confirmed/rato_residuos_annotated.jpg",
+      "review_frames": [
+        {
+          "class_name": "obstrucao_visivel",
+          "frame_index": 152,
+          "timestamp_seconds": 7.6,
+          "detections": [
+            {
+              "class_id": 2,
+              "class_name": "animal_visivel",
+              "confidence": 0.7681647539138794,
+              "bounding_box": [
+                453.8319396972656,
+                201.3927001953125,
+                538.35400390625,
+                273.1294860839844
+              ],
+              "bounding_box_format": "xyxy_pixels",
+              "track_id": 6,
+              "frame_index": 152,
+              "timestamp_seconds": 7.6
+            },
+            {
+              "class_id": 0,
+              "class_name": "obstrucao_visivel",
+              "confidence": 0.9158515930175781,
+              "bounding_box": [
+                350.8265686035156,
+                247.07977294921875,
+                640.0,
+                479.5306091308594
+              ],
+              "bounding_box_format": "xyxy_pixels",
+              "track_id": 1,
+              "frame_index": 152,
+              "timestamp_seconds": 7.6
+            }
+          ],
+          "image_filename": "rato_residuos_annotated_obstrucao_visivel.jpg"
+        },
+        {
+          "class_name": "animal_visivel",
+          "frame_index": 32,
+          "timestamp_seconds": 1.6,
+          "detections": [
+            {
+              "class_id": 0,
+              "class_name": "obstrucao_visivel",
+              "confidence": 0.8585005402565002,
+              "bounding_box": [
+                223.55361938476562,
+                205.12689208984375,
+                602.6122436523438,
+                479.7864990234375
+              ],
+              "bounding_box_format": "xyxy_pixels",
+              "track_id": 1,
+              "frame_index": 32,
+              "timestamp_seconds": 1.6
+            },
+            {
+              "class_id": 2,
+              "class_name": "animal_visivel",
+              "confidence": 0.8670563697814941,
+              "bounding_box": [
+                266.7239685058594,
+                163.32749938964844,
+                367.6922912597656,
+                231.34710693359375
+              ],
+              "bounding_box_format": "xyxy_pixels",
+              "track_id": 2,
+              "frame_index": 32,
+              "timestamp_seconds": 1.6
+            }
+          ],
+          "image_filename": "rato_residuos_annotated_animal_visivel.jpg"
+        }
+      ],
+      "manifest": "resultados/local/validation_examples_v3_confirmed/rato_residuos_annotated.json",
+      "frames_with_class": {
+        "obstrucao_visivel": 227,
+        "agua_acumulada": 0,
+        "animal_visivel": 187
+      },
+      "frames_with_retained_water_mask": 0,
+      "frames_with_raw_semantic_water_mask": 7,
+      "raw_water_detection_frames": 7,
+      "max_confidence_by_class": {
+        "obstrucao_visivel": 0.9158515930175781,
+        "agua_acumulada": null,
+        "animal_visivel": 0.8670563697814941
+      },
+      "missing_content_classes": [],
+      "unexpected_class_predictions": [],
+      "inspection_recommended": true,
+      "output_sha256": "a239263286266cf7b20d88d26be99184770230481ba31f19057c2912d690e37d",
+      "status": "completed",
+      "visual_review": "Rato real com caixa compacta nos instantes 0, 6 e 11,95s; previsão animal em187/240quadros e resíduos em227. Os sete alertas brutos de água em desfoque foram preservados no JSON e suprimidos na exibição: maior sequência de quatro quadros, abaixo dos dez exigidos a20FPS. Vídeo/pôster recompostos do original, sem máscara azul residual. Quatro IDs animais não demonstram quatro ratos. Antiga caixa animal sobre a telha não reaparece nos quadros revisados."
+    },
+    {
+      "id": "drenagem_chuva",
+      "kind": "video",
+      "input": "dados/examples/drenagem_chuva.mp4",
+      "output": "resultados/local/validation_examples_v3_confirmed/drenagem_chuva_annotated.mp4",
+      "content_tags": [
+        "agua_acumulada"
+      ],
+      "evaluation_role": "adaptation_background_crops",
+      "input_sha256": "637a527ed9573eabb255b4b1a9c73f554bc0825df90797b0bc3e78a6b2a5a48c",
+      "model_version": "pipeline-4d613d5a1d82cb61",
+      "base_pipeline_version": "pipeline-1314fcfa94f5f8cf",
+      "counts": {
+        "obstrucao_visivel": 0,
+        "agua_acumulada": 2,
+        "animal_visivel": 0
+      },
+      "raw_counts": {
+        "obstrucao_visivel": {
+          "count": 0,
+          "method": "max_simultaneous_per_frame"
+        },
+        "agua_acumulada": {
+          "count": 2,
+          "method": "max_simultaneous_per_frame"
+        },
+        "animal_visivel": {
+          "count": 0,
+          "method": "max_simultaneous_per_frame"
+        }
+      },
+      "water_temporal_policy": {
+        "enabled": true,
+        "confirmation_seconds": 0.5,
+        "fps": 20.0,
+        "required_consecutive_frames": 10,
+        "raw_water_frames": 224,
+        "raw_water_detection_count": 234,
+        "longest_consecutive_water_run": 141,
+        "confirmed": true,
+        "suppressed_frames": 0,
+        "rerendered_from_original": false,
+        "policy": "video-water-longest-run-v1; require a consecutive run of ceil(fps*seconds); otherwise suppress all water for this clip, preserve raw proposals, and redraw from original decoded source frames",
+        "scope": "video-only engineering confirmation; image predictions and the frozen image profile remain unchanged"
+      },
+      "processed_frames": 240,
+      "counting_methods": {
+        "obstrucao_visivel": "max_simultaneous_per_frame",
+        "agua_acumulada": "max_simultaneous_per_frame",
+        "animal_visivel": "max_simultaneous_per_frame"
+      },
+      "frames_with_detections": 224,
+      "video_validation": {
+        "codec": "h264",
+        "faststart": true,
+        "decoded_frames": 240,
+        "decoded_seconds": 12.0
+      },
+      "poster": "resultados/local/validation_examples_v3_confirmed/drenagem_chuva_annotated.jpg",
+      "review_frames": [
+        {
+          "class_name": "agua_acumulada",
+          "frame_index": 194,
+          "timestamp_seconds": 9.7,
+          "detections": [
+            {
+              "class_id": 1,
+              "class_name": "agua_acumulada",
+              "confidence": 0.987151563167572,
+              "bounding_box": [
+                101.0,
+                59.0,
+                661.0,
+                370.0
+              ],
+              "bounding_box_format": "xyxy_pixels",
+              "track_id": null,
+              "frame_index": 194,
+              "timestamp_seconds": 9.7
+            }
+          ],
+          "image_filename": "drenagem_chuva_annotated_agua_acumulada.jpg"
+        }
+      ],
+      "manifest": "resultados/local/validation_examples_v3_confirmed/drenagem_chuva_annotated.json",
+      "frames_with_class": {
+        "obstrucao_visivel": 0,
+        "agua_acumulada": 224,
+        "animal_visivel": 0
+      },
+      "frames_with_retained_water_mask": 53,
+      "frames_with_raw_semantic_water_mask": 53,
+      "raw_water_detection_frames": 224,
+      "max_confidence_by_class": {
+        "obstrucao_visivel": null,
+        "agua_acumulada": 0.987151563167572,
+        "animal_visivel": null
+      },
+      "missing_content_classes": [],
+      "unexpected_class_predictions": [],
+      "inspection_recommended": true,
+      "output_sha256": "83bd88200c495cab1fb3c93eef937b3fda8f0cd59c789b6766d8f78ffa932111",
+      "status": "completed",
+      "visual_review": "As caixas/máscaras dos destaques revisados estão sobre água real de alagamento/escoamento. Há previsão de água em224/240quadros; a máscara semântica aparece em53. A cobertura é parcial e varia com movimento e espuma; não representa duas poças distintas nem volume/risco."
+    },
+    {
+      "id": "canal_residuos",
+      "kind": "video",
+      "input": "dados/examples/canal_residuos.mp4",
+      "output": "resultados/local/validation_examples_v3_confirmed/canal_residuos_annotated.mp4",
+      "content_tags": [
+        "agua_acumulada"
+      ],
+      "evaluation_role": "adaptation_background_crops",
+      "input_sha256": "dd81768eb2c0054db76eaaacb371c12fde876c69d14270e20dbf5c983a5e41b6",
+      "model_version": "pipeline-4d613d5a1d82cb61",
+      "base_pipeline_version": "pipeline-1314fcfa94f5f8cf",
+      "counts": {
+        "obstrucao_visivel": 0,
+        "agua_acumulada": 1,
+        "animal_visivel": 0
+      },
+      "raw_counts": {
+        "obstrucao_visivel": {
+          "count": 0,
+          "method": "max_simultaneous_per_frame"
+        },
+        "agua_acumulada": {
+          "count": 1,
+          "method": "max_simultaneous_per_frame"
+        },
+        "animal_visivel": {
+          "count": 0,
+          "method": "max_simultaneous_per_frame"
+        }
+      },
+      "water_temporal_policy": {
+        "enabled": true,
+        "confirmation_seconds": 0.5,
+        "fps": 20.0,
+        "required_consecutive_frames": 10,
+        "raw_water_frames": 208,
+        "raw_water_detection_count": 208,
+        "longest_consecutive_water_run": 208,
+        "confirmed": true,
+        "suppressed_frames": 0,
+        "rerendered_from_original": false,
+        "policy": "video-water-longest-run-v1; require a consecutive run of ceil(fps*seconds); otherwise suppress all water for this clip, preserve raw proposals, and redraw from original decoded source frames",
+        "scope": "video-only engineering confirmation; image predictions and the frozen image profile remain unchanged"
+      },
+      "processed_frames": 208,
+      "counting_methods": {
+        "obstrucao_visivel": "max_simultaneous_per_frame",
+        "agua_acumulada": "max_simultaneous_per_frame",
+        "animal_visivel": "max_simultaneous_per_frame"
+      },
+      "frames_with_detections": 208,
+      "video_validation": {
+        "codec": "h264",
+        "faststart": true,
+        "decoded_frames": 208,
+        "decoded_seconds": 10.4
+      },
+      "poster": "resultados/local/validation_examples_v3_confirmed/canal_residuos_annotated.jpg",
+      "review_frames": [
+        {
+          "class_name": "agua_acumulada",
+          "frame_index": 156,
+          "timestamp_seconds": 7.8,
+          "detections": [
+            {
+              "class_id": 1,
+              "class_name": "agua_acumulada",
+              "confidence": 0.8339728713035583,
+              "bounding_box": [
+                21.86191177368164,
+                126.5181655883789,
+                384.1380920410156,
+                585.3378295898438
+              ],
+              "bounding_box_format": "xyxy_pixels",
+              "track_id": null,
+              "frame_index": 156,
+              "timestamp_seconds": 7.8
+            }
+          ],
+          "image_filename": "canal_residuos_annotated_agua_acumulada.jpg"
+        }
+      ],
+      "manifest": "resultados/local/validation_examples_v3_confirmed/canal_residuos_annotated.json",
+      "frames_with_class": {
+        "obstrucao_visivel": 0,
+        "agua_acumulada": 208,
+        "animal_visivel": 0
+      },
+      "frames_with_retained_water_mask": 17,
+      "frames_with_raw_semantic_water_mask": 17,
+      "raw_water_detection_frames": 208,
+      "max_confidence_by_class": {
+        "obstrucao_visivel": null,
+        "agua_acumulada": 0.8339728713035583,
+        "animal_visivel": null
+      },
+      "missing_content_classes": [],
+      "unexpected_class_predictions": [],
+      "inspection_recommended": true,
+      "output_sha256": "979c6e41bd57e8a61f9f0316aa20a8c63067e8be6c48ddc2c440047074532b86",
+      "status": "completed",
+      "visual_review": "Água real marcada em208/208quadros; caixas de superfície incluem parte das margens diagonais, enquanto a máscara é conservadora e aparece em17quadros. Não há alerta animal ou de resíduos."
+    },
+    {
+      "id": "sarjeta_residuos",
+      "kind": "video",
+      "input": "dados/examples/sarjeta_residuos.mp4",
+      "output": "resultados/local/validation_examples_v3_confirmed/sarjeta_residuos_annotated.mp4",
+      "content_tags": [
+        "agua_acumulada"
+      ],
+      "evaluation_role": "external_manual_regression",
+      "input_sha256": "2570ab692eb696003f70cb028c8f28daf92631dc07e1721fc3e8e770cd531e6d",
+      "model_version": "pipeline-4d613d5a1d82cb61",
+      "base_pipeline_version": "pipeline-1314fcfa94f5f8cf",
+      "counts": {
+        "obstrucao_visivel": 10,
+        "agua_acumulada": 1,
+        "animal_visivel": 0
+      },
+      "raw_counts": {
+        "obstrucao_visivel": {
+          "count": 10,
+          "method": "unique_track_ids"
+        },
+        "agua_acumulada": {
+          "count": 1,
+          "method": "max_simultaneous_per_frame"
+        },
+        "animal_visivel": {
+          "count": 0,
+          "method": "max_simultaneous_per_frame"
+        }
+      },
+      "water_temporal_policy": {
+        "enabled": true,
+        "confirmation_seconds": 0.5,
+        "fps": 20.0,
+        "required_consecutive_frames": 10,
+        "raw_water_frames": 139,
+        "raw_water_detection_count": 139,
+        "longest_consecutive_water_run": 22,
+        "confirmed": true,
+        "suppressed_frames": 0,
+        "rerendered_from_original": false,
+        "policy": "video-water-longest-run-v1; require a consecutive run of ceil(fps*seconds); otherwise suppress all water for this clip, preserve raw proposals, and redraw from original decoded source frames",
+        "scope": "video-only engineering confirmation; image predictions and the frozen image profile remain unchanged"
+      },
+      "processed_frames": 240,
+      "counting_methods": {
+        "obstrucao_visivel": "unique_track_ids",
+        "agua_acumulada": "max_simultaneous_per_frame",
+        "animal_visivel": "max_simultaneous_per_frame"
+      },
+      "frames_with_detections": 150,
+      "video_validation": {
+        "codec": "h264",
+        "faststart": true,
+        "decoded_frames": 240,
+        "decoded_seconds": 12.0
+      },
+      "poster": "resultados/local/validation_examples_v3_confirmed/sarjeta_residuos_annotated.jpg",
+      "review_frames": [
+        {
+          "class_name": "agua_acumulada",
+          "frame_index": 112,
+          "timestamp_seconds": 5.6,
+          "detections": [
+            {
+              "class_id": 1,
+              "class_name": "agua_acumulada",
+              "confidence": 0.9954820275306702,
+              "bounding_box": [
+                124.0,
+                34.0,
+                238.0,
+                720.0
+              ],
+              "bounding_box_format": "xyxy_pixels",
+              "track_id": null,
+              "frame_index": 112,
+              "timestamp_seconds": 5.6
+            }
+          ],
+          "image_filename": "sarjeta_residuos_annotated_agua_acumulada.jpg"
+        },
+        {
+          "class_name": "obstrucao_visivel",
+          "frame_index": 198,
+          "timestamp_seconds": 9.9,
+          "detections": [
+            {
+              "class_id": 0,
+              "class_name": "obstrucao_visivel",
+              "confidence": 0.5238247513771057,
+              "bounding_box": [
+                7.285575866699219,
+                550.134521484375,
+                35.211761474609375,
+                586.1421508789062
+              ],
+              "bounding_box_format": "xyxy_pixels",
+              "track_id": 18,
+              "frame_index": 198,
+              "timestamp_seconds": 9.9
+            },
+            {
+              "class_id": 1,
+              "class_name": "agua_acumulada",
+              "confidence": 0.9760856032371521,
+              "bounding_box": [
+                181.0,
+                231.0,
+                268.0,
+                694.0
+              ],
+              "bounding_box_format": "xyxy_pixels",
+              "track_id": null,
+              "frame_index": 198,
+              "timestamp_seconds": 9.9
+            }
+          ],
+          "image_filename": "sarjeta_residuos_annotated_obstrucao_visivel.jpg"
+        }
+      ],
+      "manifest": "resultados/local/validation_examples_v3_confirmed/sarjeta_residuos_annotated.json",
+      "frames_with_class": {
+        "obstrucao_visivel": 39,
+        "agua_acumulada": 139,
+        "animal_visivel": 0
+      },
+      "frames_with_retained_water_mask": 137,
+      "frames_with_raw_semantic_water_mask": 137,
+      "raw_water_detection_frames": 139,
+      "max_confidence_by_class": {
+        "obstrucao_visivel": 0.5238247513771057,
+        "agua_acumulada": 0.9954820275306702,
+        "animal_visivel": null
+      },
+      "missing_content_classes": [],
+      "unexpected_class_predictions": [
+        "obstrucao_visivel"
+      ],
+      "inspection_recommended": true,
+      "output_sha256": "4c1b167f27d9f7b406bfdf7d4d3c034d239a514c51a6d3b148e61f281d9e67ef",
+      "status": "completed",
+      "visual_review": "Água real marcada em139/240quadros; nos instantes0e11,95s a marcação acompanha o escoamento, mas falta aos6s. Dez IDs de resíduos não são dez objetos: vários repetem o mesmo pequeno resíduo branco à esquerda; três representantes marcam um ponto da tubulação fixa e são falsos positivos de resíduo nesta revisão."
+    },
+    {
+      "id": "ralo_lixo",
+      "kind": "image",
+      "input": "dados/examples/ralo_lixo.jpg",
+      "output": "resultados/local/validation_examples_v3_confirmed/ralo_lixo_annotated.jpg",
+      "content_tags": [
+        "obstrucao_visivel"
+      ],
+      "evaluation_role": "external_manual_regression",
+      "input_sha256": "b86282a98ff3f921c734956ab2c23d943e13a167e7e1a6d0ecd4593fb83e9645",
+      "model_version": "pipeline-1314fcfa94f5f8cf",
+      "base_pipeline_version": "pipeline-1314fcfa94f5f8cf",
+      "counts": {
+        "obstrucao_visivel": 0,
+        "agua_acumulada": 0,
+        "animal_visivel": 0
+      },
+      "detections": [],
+      "max_confidence_by_class": {
+        "obstrucao_visivel": null,
+        "agua_acumulada": null,
+        "animal_visivel": null
+      },
+      "missing_content_classes": [
+        "obstrucao_visivel"
+      ],
+      "unexpected_class_predictions": [],
+      "inspection_recommended": false,
+      "output_sha256": "8f0f680fc55fc079b12c9e87ac46ac564807cf43c0f6c743bde2d32911012edd",
+      "status": "completed",
+      "visual_review": "A foto permanece sem marcações, apesar dos sacos e embalagens visíveis junto à grelha. Falha de detecção preservada e documentada; não é acerto de cena limpa."
+    },
+    {
+      "id": "bueiro_agua",
+      "kind": "image",
+      "input": "dados/examples/bueiro_agua.jpg",
+      "output": "resultados/local/validation_examples_v3_confirmed/bueiro_agua_annotated.jpg",
+      "content_tags": [
+        "obstrucao_visivel",
+        "agua_acumulada"
+      ],
+      "evaluation_role": "external_manual_regression",
+      "input_sha256": "e3a1c147532b104628b5c8025784569cf71843c2d5d1692f34c03ad9ac6eeacd",
+      "model_version": "pipeline-1314fcfa94f5f8cf",
+      "base_pipeline_version": "pipeline-1314fcfa94f5f8cf",
+      "counts": {
+        "obstrucao_visivel": 4,
+        "agua_acumulada": 2,
+        "animal_visivel": 0
+      },
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "obstrucao_visivel",
+          "confidence": 0.8824224472045898,
+          "bounding_box": [
+            494.703369140625,
+            238.25384521484375,
+            709.913818359375,
+            359.1204833984375
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": null,
+          "frame_index": null,
+          "timestamp_seconds": null
+        },
+        {
+          "class_id": 0,
+          "class_name": "obstrucao_visivel",
+          "confidence": 0.7348634600639343,
+          "bounding_box": [
+            788.087158203125,
+            314.0870361328125,
+            889.9249267578125,
+            393.62774658203125
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": null,
+          "frame_index": null,
+          "timestamp_seconds": null
+        },
+        {
+          "class_id": 0,
+          "class_name": "obstrucao_visivel",
+          "confidence": 0.6332384347915649,
+          "bounding_box": [
+            734.54833984375,
+            305.4084777832031,
+            788.7417602539062,
+            366.4703674316406
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": null,
+          "frame_index": null,
+          "timestamp_seconds": null
+        },
+        {
+          "class_id": 0,
+          "class_name": "obstrucao_visivel",
+          "confidence": 0.4394856095314026,
+          "bounding_box": [
+            956.8455810546875,
+            292.5600891113281,
+            1156.7750244140625,
+            409.6261291503906
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": null,
+          "frame_index": null,
+          "timestamp_seconds": null
+        },
+        {
+          "class_id": 1,
+          "class_name": "agua_acumulada",
+          "confidence": 0.9977023601531982,
+          "bounding_box": [
+            0.0,
+            336.0,
+            1600.0,
+            778.0
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": null,
+          "frame_index": null,
+          "timestamp_seconds": null
+        },
+        {
+          "class_id": 1,
+          "class_name": "agua_acumulada",
+          "confidence": 0.9905313849449158,
+          "bounding_box": [
+            1073.0,
+            0.0,
+            1600.0,
+            297.0
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": null,
+          "frame_index": null,
+          "timestamp_seconds": null
+        }
+      ],
+      "max_confidence_by_class": {
+        "obstrucao_visivel": 0.8824224472045898,
+        "agua_acumulada": 0.9977023601531982,
+        "animal_visivel": null
+      },
+      "missing_content_classes": [],
+      "unexpected_class_predictions": [],
+      "inspection_recommended": true,
+      "output_sha256": "7726162b8d14870182962862e96ec6684640b6dd1e40257f83747d6e2c6a5194",
+      "status": "completed",
+      "visual_review": "Quatro embalagens reais e duas regiões de água/reflexo são destacadas. Máscara acompanha a superfície em torno dos resíduos e a região refletida superior direita; caixas são envelopes e não quatro itens removíveis ou duas poças fisicamente independentes."
+    }
+  ],
+  "completed_at_utc": "2026-11-17T00:02:53.115887+00:00",
+  "summary": {
+    "examples": 8,
+    "successful_examples": 8,
+    "processed_video_frames": 1388,
+    "all_outputs_match_pipeline": true,
+    "base_pipeline_version": "pipeline-1314fcfa94f5f8cf",
+    "video_model_version": "pipeline-4d613d5a1d82cb61"
+  },
+  "manual_visual_protocol": {
+    "all_eight_posters_inspected": true,
+    "selected_class_highlights_inspected": true,
+    "hanoi_and_sarjeta_additional_instants_seconds": [
+      0,
+      6,
+      11.95
+    ],
+    "hanoi_false_water_instant_seconds": 7.55,
+    "sarjeta_all_ten_residue_track_representatives_inspected": true,
+    "all_1388_frames_manually_classified": false,
+    "note": "Inference/decoding covers all1388frames. Manual semantic review covers posters, highlights and listed samples, not exhaustive frame-level true-positive ground truth. No precision/recall/mAP is claimed for this catalog."
+  },
+  "manually_reviewed_at_utc": "2026-11-17T00:04:18.906757+00:00",
+  "temporal_comparison_with_preserved_raw_run": [
+    {
+      "id": "rato_close",
+      "source_unchanged": true,
+      "nonwater_predictions_exactly_equal": true,
+      "raw_water_predictions_exactly_preserved": true,
+      "frame_count_unchanged": true,
+      "temporal_policy": {
+        "enabled": true,
+        "confirmation_seconds": 0.5,
+        "fps": 20.0,
+        "required_consecutive_frames": 10,
+        "raw_water_frames": 0,
+        "raw_water_detection_count": 0,
+        "longest_consecutive_water_run": 0,
+        "confirmed": false,
+        "suppressed_frames": 0,
+        "rerendered_from_original": false,
+        "policy": "video-water-longest-run-v1; require a consecutive run of ceil(fps*seconds); otherwise suppress all water for this clip, preserve raw proposals, and redraw from original decoded source frames",
+        "scope": "video-only engineering confirmation; image predictions and the frozen image profile remain unchanged"
+      }
+    },
+    {
+      "id": "rato_rua",
+      "source_unchanged": true,
+      "nonwater_predictions_exactly_equal": true,
+      "raw_water_predictions_exactly_preserved": true,
+      "frame_count_unchanged": true,
+      "temporal_policy": {
+        "enabled": true,
+        "confirmation_seconds": 0.5,
+        "fps": 20.0,
+        "required_consecutive_frames": 10,
+        "raw_water_frames": 0,
+        "raw_water_detection_count": 0,
+        "longest_consecutive_water_run": 0,
+        "confirmed": false,
+        "suppressed_frames": 0,
+        "rerendered_from_original": false,
+        "policy": "video-water-longest-run-v1; require a consecutive run of ceil(fps*seconds); otherwise suppress all water for this clip, preserve raw proposals, and redraw from original decoded source frames",
+        "scope": "video-only engineering confirmation; image predictions and the frozen image profile remain unchanged"
+      }
+    },
+    {
+      "id": "rato_residuos",
+      "source_unchanged": true,
+      "nonwater_predictions_exactly_equal": true,
+      "raw_water_predictions_exactly_preserved": true,
+      "frame_count_unchanged": true,
+      "temporal_policy": {
+        "enabled": true,
+        "confirmation_seconds": 0.5,
+        "fps": 20.0,
+        "required_consecutive_frames": 10,
+        "raw_water_frames": 7,
+        "raw_water_detection_count": 7,
+        "longest_consecutive_water_run": 4,
+        "confirmed": false,
+        "suppressed_frames": 7,
+        "rerendered_from_original": true,
+        "policy": "video-water-longest-run-v1; require a consecutive run of ceil(fps*seconds); otherwise suppress all water for this clip, preserve raw proposals, and redraw from original decoded source frames",
+        "scope": "video-only engineering confirmation; image predictions and the frozen image profile remain unchanged"
+      }
+    },
+    {
+      "id": "drenagem_chuva",
+      "source_unchanged": true,
+      "nonwater_predictions_exactly_equal": true,
+      "raw_water_predictions_exactly_preserved": true,
+      "frame_count_unchanged": true,
+      "temporal_policy": {
+        "enabled": true,
+        "confirmation_seconds": 0.5,
+        "fps": 20.0,
+        "required_consecutive_frames": 10,
+        "raw_water_frames": 224,
+        "raw_water_detection_count": 234,
+        "longest_consecutive_water_run": 141,
+        "confirmed": true,
+        "suppressed_frames": 0,
+        "rerendered_from_original": false,
+        "policy": "video-water-longest-run-v1; require a consecutive run of ceil(fps*seconds); otherwise suppress all water for this clip, preserve raw proposals, and redraw from original decoded source frames",
+        "scope": "video-only engineering confirmation; image predictions and the frozen image profile remain unchanged"
+      }
+    },
+    {
+      "id": "canal_residuos",
+      "source_unchanged": true,
+      "nonwater_predictions_exactly_equal": true,
+      "raw_water_predictions_exactly_preserved": true,
+      "frame_count_unchanged": true,
+      "temporal_policy": {
+        "enabled": true,
+        "confirmation_seconds": 0.5,
+        "fps": 20.0,
+        "required_consecutive_frames": 10,
+        "raw_water_frames": 208,
+        "raw_water_detection_count": 208,
+        "longest_consecutive_water_run": 208,
+        "confirmed": true,
+        "suppressed_frames": 0,
+        "rerendered_from_original": false,
+        "policy": "video-water-longest-run-v1; require a consecutive run of ceil(fps*seconds); otherwise suppress all water for this clip, preserve raw proposals, and redraw from original decoded source frames",
+        "scope": "video-only engineering confirmation; image predictions and the frozen image profile remain unchanged"
+      }
+    },
+    {
+      "id": "sarjeta_residuos",
+      "source_unchanged": true,
+      "nonwater_predictions_exactly_equal": true,
+      "raw_water_predictions_exactly_preserved": true,
+      "frame_count_unchanged": true,
+      "temporal_policy": {
+        "enabled": true,
+        "confirmation_seconds": 0.5,
+        "fps": 20.0,
+        "required_consecutive_frames": 10,
+        "raw_water_frames": 139,
+        "raw_water_detection_count": 139,
+        "longest_consecutive_water_run": 22,
+        "confirmed": true,
+        "suppressed_frames": 0,
+        "rerendered_from_original": false,
+        "policy": "video-water-longest-run-v1; require a consecutive run of ceil(fps*seconds); otherwise suppress all water for this clip, preserve raw proposals, and redraw from original decoded source frames",
+        "scope": "video-only engineering confirmation; image predictions and the frozen image profile remain unchanged"
+      }
+    },
+    {
+      "id": "ralo_lixo",
+      "source_unchanged": true,
+      "annotated_photo_bytes_identical": true
+    },
+    {
+      "id": "bueiro_agua",
+      "source_unchanged": true,
+      "annotated_photo_bytes_identical": true
+    }
+  ],
+  "raw_reference_directory": "resultados/local/validation_examples_v3",
+  "video_only_confirmation_note": "Temporal engineering policy added after the image-profile independent evaluation, not a retuning of image thresholds. Require longest consecutive water-presence run >=ceil(fps*0.5); otherwise suppress all water in the video while preserving raw proposals and reconstructing from original frames. This can suppress genuine very brief water and does not guarantee removal of all local blips when another persistent water sequence exists.",
+  "known_false_or_unsupported_alerts": {
+    "hanoi_raw_blur_water": {
+      "count_frames": 7,
+      "review": "Seven raw blur-related water proposals preserved for audit; none displayed after video-only confirmation. Original raw validation remains unchanged.",
+      "frames": [
+        {
+          "frame_index": 151,
+          "timestamp_seconds": 7.55,
+          "detections": [
+            {
+              "class_id": 1,
+              "class_name": "agua_acumulada",
+              "confidence": 0.9833362698554993,
+              "bounding_box": [
+                355.0,
+                272.0,
+                640.0,
+                480.0
+              ],
+              "bounding_box_format": "xyxy_pixels",
+              "track_id": null,
+              "frame_index": 151,
+              "timestamp_seconds": 7.55
+            }
+          ]
+        },
+        {
+          "frame_index": 156,
+          "timestamp_seconds": 7.8,
+          "detections": [
+            {
+              "class_id": 1,
+              "class_name": "agua_acumulada",
+              "confidence": 0.9777318835258484,
+              "bounding_box": [
+                457.0,
+                233.0,
+                640.0,
+                480.0
+              ],
+              "bounding_box_format": "xyxy_pixels",
+              "track_id": null,
+              "frame_index": 156,
+              "timestamp_seconds": 7.8
+            }
+          ]
+        },
+        {
+          "frame_index": 157,
+          "timestamp_seconds": 7.85,
+          "detections": [
+            {
+              "class_id": 1,
+              "class_name": "agua_acumulada",
+              "confidence": 0.9754930138587952,
+              "bounding_box": [
+                397.0,
+                297.0,
+                640.0,
+                480.0
+              ],
+              "bounding_box_format": "xyxy_pixels",
+              "track_id": null,
+              "frame_index": 157,
+              "timestamp_seconds": 7.85
+            }
+          ]
+        },
+        {
+          "frame_index": 158,
+          "timestamp_seconds": 7.9,
+          "detections": [
+            {
+              "class_id": 1,
+              "class_name": "agua_acumulada",
+              "confidence": 0.9750152230262756,
+              "bounding_box": [
+                398.0,
+                297.0,
+                640.0,
+                480.0
+              ],
+              "bounding_box_format": "xyxy_pixels",
+              "track_id": null,
+              "frame_index": 158,
+              "timestamp_seconds": 7.9
+            }
+          ]
+        },
+        {
+          "frame_index": 159,
+          "timestamp_seconds": 7.95,
+          "detections": [
+            {
+              "class_id": 1,
+              "class_name": "agua_acumulada",
+              "confidence": 0.9816046953201294,
+              "bounding_box": [
+                388.0,
+                372.0,
+                640.0,
+                480.0
+              ],
+              "bounding_box_format": "xyxy_pixels",
+              "track_id": null,
+              "frame_index": 159,
+              "timestamp_seconds": 7.95
+            }
+          ]
+        },
+        {
+          "frame_index": 181,
+          "timestamp_seconds": 9.05,
+          "detections": [
+            {
+              "class_id": 1,
+              "class_name": "agua_acumulada",
+              "confidence": 0.9761523604393005,
+              "bounding_box": [
+                332.0,
+                334.0,
+                640.0,
+                480.0
+              ],
+              "bounding_box_format": "xyxy_pixels",
+              "track_id": null,
+              "frame_index": 181,
+              "timestamp_seconds": 9.05
+            }
+          ]
+        },
+        {
+          "frame_index": 182,
+          "timestamp_seconds": 9.1,
+          "detections": [
+            {
+              "class_id": 1,
+              "class_name": "agua_acumulada",
+              "confidence": 0.9767211079597473,
+              "bounding_box": [
+                331.0,
+                331.0,
+                640.0,
+                480.0
+              ],
+              "bounding_box_format": "xyxy_pixels",
+              "track_id": null,
+              "frame_index": 182,
+              "timestamp_seconds": 9.1
+            }
+          ]
+        }
+      ],
+      "displayed_after_video_confirmation": 0,
+      "raw_highlight": "resultados/local/validation_examples_v3/rato_residuos_annotated_agua_acumulada.jpg"
+    },
+    "sarjeta_fixed_pipe_as_residue": {
+      "review": "Three representative tracker IDs are on the same fixed pipe/outlet area, not loose residue; false residue alerts in sampled representatives.",
+      "representatives": [
+        {
+          "class_id": 0,
+          "class_name": "obstrucao_visivel",
+          "confidence": 0.4042479693889618,
+          "bounding_box": [
+            258.1462097167969,
+            147.95787048339844,
+            286.62152099609375,
+            173.3521270751953
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": 21,
+          "frame_index": 206,
+          "timestamp_seconds": 10.3
+        },
+        {
+          "class_id": 0,
+          "class_name": "obstrucao_visivel",
+          "confidence": 0.511606752872467,
+          "bounding_box": [
+            244.57110595703125,
+            147.77908325195312,
+            273.6477355957031,
+            171.80506896972656
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": 23,
+          "frame_index": 228,
+          "timestamp_seconds": 11.4
+        },
+        {
+          "class_id": 0,
+          "class_name": "obstrucao_visivel",
+          "confidence": 0.3701917231082916,
+          "bounding_box": [
+            248.9656524658203,
+            135.41827392578125,
+            279.1000061035156,
+            161.26976013183594
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": 27,
+          "frame_index": 239,
+          "timestamp_seconds": 11.95
+        }
+      ],
+      "contact_sheet": "resultados/local/validation_examples_v3/sarjeta_residue_track_review.jpg"
+    }
+  },
+  "counting_limitations": {
+    "hanoi_animal_ids": 4,
+    "hanoi_reviewed_visible_subjects_note": "One visible rat in each reviewed clear frame; four reacquired tracker IDs do not establish four animals.",
+    "sarjeta_residue_ids": 10,
+    "sarjeta_note": "Repeated IDs for a small left-side white item plus false outlet marks; cannot infer ten distinct waste items."
+  },
+  "additional_contact_sheets": [
+    "review_actual_cases_confirmed.jpg",
+    "hanoi_temporal_before_after.jpg"
+  ],
+  "conclusion": "All eight originals process and play correctly. Images retain frozen profile1314; videos use separately versioned temporal profile4d613. Hanoi unsupported brief water is removed from displayed output, with unchanged animal/residue proposals. Water/rat improvements coexist with difficult-rat/litter misses, intermittent water and pipe false alerts. No image/test policy was changed."
+}

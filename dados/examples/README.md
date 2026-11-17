@@ -48,6 +48,14 @@ fora do treino como regressão separada; os demais exemplos servem à regressão
 manual. Os splits oficiais de validação/teste usam imagens próprias do dataset.
 O campo `evaluation_role` registra essa distinção por arquivo.
 
+No v3, cinco quadros completos de `rato_residuos` substituem os pequenos
+recortes, e quatro quadros de cada vídeo `drenagem_chuva`/`canal_residuos`
+recebem caixas de água para treino. Os quatro clipes continuam sendo fontes
+de adaptação. `rato_rua`, `sarjeta_residuos` e as duas fotos permanecem fora
+desse treino; foram observados no desenvolvimento e são regressão conhecida.
+O teste adicional de 119 imagens usa outros arquivos e é descrito em
+`docs/VALIDACAO_V3.md`.
+
 Não há filmagem de um objeto colocado artificialmente no ralo nesta biblioteca.
 Para testar um bueiro com lixo de perto, use as fotografias reais `ralo_lixo.jpg`
 e `bueiro_agua.jpg`; para observar água em movimento, use `sarjeta_residuos.mp4`.

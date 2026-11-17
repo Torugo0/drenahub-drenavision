@@ -89,7 +89,25 @@ Se uma imagem específica for exibida, mantenha o identificador no manifesto e
 inclua atribuição compatível. Transformações como conversão para YOLO, seleção
 de classes, mudança de nome e divisão de split devem ser informadas.
 
-## Código DrenaVision
+## Segmentação de água — NVIDIA SegFormer B1
+
+O perfil 0.4.0 usa [nvidia/segformer-b1-finetuned-ade-512-512](https://huggingface.co/nvidia/segformer-b1-finetuned-ade-512-512),
+revisão `a775b4f5dcb2179e57006dca0e268281306412ef`, treinado em ADE20K.
+Crédito: NVIDIA e autores de SegFormer/ADE20K, conforme o model card oficial.
+Pesos e código de origem têm a [NVIDIA Source Code License](https://github.com/NVlabs/SegFormer/blob/master/LICENSE),
+limitada à pesquisa e avaliação não comercial, com condições de redistribuição.
+Não são MIT nem relicenciados pelo AGPL do aplicativo. A licença acompanha a
+pasta/ZIP de cinco arquivos do modelo e está preservada com seus bytes originais
+em `resultados/metrics/v3/water_model_source/`.
+
+O binário oficial é verificado por SHA-256, lido com `weights_only=True` e
+convertido para safetensors. A aplicação usa apenas safetensors local e
+configuração verificados. A seleção de seis nomes de classes aquáticas,
+limiares, componentes conectados e máscara azul são adaptações do DrenaVision.
+O projeto foi validado como protótipo acadêmico; nenhum documento autoriza
+comercialização sem resolver essa licença e as restrições dos demais dados.
+
+## Código original do projeto
 
 Salvo indicação em contrário, o código original deste repositório é:
 

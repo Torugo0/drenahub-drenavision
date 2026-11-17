@@ -1,320 +1,252 @@
 # Instalação e reprodução
 
-Execute os comandos na raiz do repositório. Para apenas usar o produto com o
-modelo pronto, siga a instalação e depois rode `iniciar.ps1`. As demais etapas
-permitem auditar e repetir o trabalho de visão computacional.
+Execute os comandos na raiz do repositório. A versão 0.4.0 usa o detector YOLO
+v3 e o segmentador de água SegFormer B1. Para abrir o produto, basta instalar as
+dependências e obter os modelos. Baixar datasets é uma etapa de reprodução
+acadêmica, separada do uso normal.
 
-## Instalação
+## Instalar o ambiente
 
-Ambiente de referência: Windows, Python 3.12, RTX 4060, PyTorch 2.14.1,
-torchvision 0.29.1, Ultralytics 8.4.215 e OpenCV 4.14.0.94. As versões de topo
-estão fixadas em `requirements.txt`.
+Ambiente de referência: Windows, Python 3.12 e RTX 4060. PyTorch 2.14.1,
+torchvision 0.29.1, Ultralytics 8.4.215 e Transformers 4.57.3 estão fixados,
+com as demais versões testadas, nos arquivos `requirements*.txt`.
 
 ```powershell
 py -3.12 -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install --upgrade pip
 python -m pip install -r requirements-dev.txt
-Copy-Item .env.example .env
+if (-not (Test-Path .env)) { Copy-Item .env.example .env }
 ```
 
-Neste host foi usado o wheel oficial CUDA 13.0 do PyTorch:
+Neste computador foi usado o wheel oficial CUDA 13.0:
 
 ```powershell
 python -m pip install --force-reinstall --no-deps -r requirements-cuda.txt
 python -c "import torch; print(torch.__version__, torch.cuda.is_available(), torch.version.cuda)"
 ```
 
-Em outro hardware, use o [seletor oficial](https://pytorch.org/get-started/locally/)
-para escolher o wheel. CPU também é aceita, com processamento mais lento.
+CPU também é aceita, com processamento mais lento. Em outro hardware, consulte
+o [seletor oficial do PyTorch](https://pytorch.org/get-started/locally/). A
+instalação CUDA acima descreve este treinamento e não é obrigatória para todo
+computador.
 
-### Obter o modelo publicado
+## Obter os modelos e iniciar
 
-O modelo ativo v2 é distribuído na
-[release v0.3.0-model-v2](https://github.com/Torugo0/drenahub-drenavision/releases/tag/v0.3.0-model-v2).
-Enquanto o repositório estiver privado, é necessário acesso à conta.
+Os arquivos estão na
+[release v0.4.0-pipeline-v3](https://github.com/Torugo0/drenahub-drenavision/releases/tag/v0.4.0-pipeline-v3).
+O acesso a um repositório privado exige uma conta autorizada. Os comandos abaixo
+usam o GitHub CLI autenticado. Também é possível baixar os assets pela página
+da release. Em uma atualização, preserve seus modelos e `.env` anteriores.
 
 ```powershell
+New-Item -ItemType Directory -Force resultados/local/release/v0.4.0 | Out-Null
 New-Item -ItemType Directory -Force resultados/local/models | Out-Null
-gh release download v0.3.0-model-v2 `
+New-Item -ItemType Directory -Force dados/examples | Out-Null
+gh release download v0.4.0-pipeline-v3 `
   --repo Torugo0/drenahub-drenavision `
-  --pattern best.pt `
-  --dir resultados/local/models
-Get-FileHash resultados/local/models/best.pt -Algorithm SHA256
+  --pattern best.pt --pattern best_v2.pt `
+  --pattern water_model.zip --pattern exemplos_reais.zip `
+  --dir resultados/local/release/v0.4.0
+Copy-Item resultados/local/release/v0.4.0/best.pt resultados/local/models/best.pt
+Copy-Item resultados/local/release/v0.4.0/best_v2.pt resultados/local/models/best_v2.pt
+Expand-Archive resultados/local/release/v0.4.0/water_model.zip `
+  -DestinationPath resultados/local/models/water_segformer_b1_ade
+Expand-Archive resultados/local/release/v0.4.0/exemplos_reais.zip `
+  -DestinationPath dados/examples -Force
+python ferramentas/scripts/prepare_water_model.py
 ```
 
-Hash esperado do checkpoint desta versão:
-`01ea7c578783b2a08fc585051b0768a1e9c0d510cb5652173fab0979f8d7d27a`.
-As entradas de demonstração e os créditos ficam em `dados/examples/`.
-Se já existir `best.pt`, preserve sua cópia antes de substituí-lo. A promoção
-realizada nesta versão manteve o v1 em `best_v1.pt`.
+`best_v2.pt` é necessário para repetir o treino; o uso normal utiliza `best.pt`
+e a pasta do segmentador. O ZIP de água tem exatamente cinco arquivos na raiz:
+`model.safetensors`, `config.json`, `preprocessor_config.json`,
+`download_manifest.json` e `LICENSE-NVIDIA-SegFormer.txt`. Não crie uma pasta
+extra dentro de `water_segformer_b1_ade/` ao extrair. O preparador verifica uma
+instalação correta; se ela estiver ausente, obtém a revisão oficial fixada e
+reproduz os mesmos cinco arquivos. A API não baixa modelos durante análises.
+
+O SegFormer NVIDIA acompanha licença de **pesquisa e avaliação não comercial**.
+Esta distribuição acadêmica não concede uso comercial dos pesos. A licença
+integral e a origem estão no pacote e em
+`resultados/metrics/v3/water_model_source/`.
+
+| Artefato | SHA-256 esperado |
+|---|---|
+| YOLO v3 ativo, `best.pt` | `12b9e86f223366c3f2ef8c2308f0e1140cda08c55ab55e281e58d300fd554b4b` |
+| Inicial histórico v2, `best_v2.pt` | `01ea7c578783b2a08fc585051b0768a1e9c0d510cb5652173fab0979f8d7d27a` |
+| Água B1, `model.safetensors` | `e0802e077c195d9dbaf48c69b94946ef6a3ae5b6665176fedf363e5e63a1ec93` |
 
 ```powershell
+Get-FileHash resultados/local/models/best.pt -Algorithm SHA256
+Get-FileHash resultados/local/models/best_v2.pt -Algorithm SHA256
 .\iniciar.ps1
 ```
 
-O iniciador usa as portas 8000 (API) e 8501 (interface). Uma segunda tentativa
-de iniciar o mesmo serviço pode produzir o erro Windows 10048: a porta já está
-ocupada. Nesse caso, use a instância que já está aberta.
+Abra a [interface](http://127.0.0.1:8501) ou a
+[documentação da API](http://127.0.0.1:8000/docs). Para reiniciar instâncias
+antigas, execute:
 
-## Dados e proveniência
+```powershell
+.\iniciar.ps1 -Reiniciar
+```
 
-A execução v1 e suas métricas são históricas. A auditoria posterior encontrou
-caixas iRodent com fundo incorporado por keypoints ausentes; consulte a seção
-de protocolo v2 abaixo antes de gerar novos dados. O conversor atual corrige
-essas caixas e não reproduz os rótulos/fingerprint do treinamento v1.
+Se já tinha `.env`, confira o perfil atual: confiança geral/resíduos 0,35,
+animal 0,60, IoU 0,45, imagem YOLO 640, água com pixel 0,95, área mínima 0,05 e
+modo `augment`. Imagens usam `pipeline-1314fcfa94f5f8cf`; vídeos acrescentam
+confirmação de água por 0,5 s e usam `pipeline-4d613d5a1d82cb61`.
+O perfil completo está em
+[active_profile.json](../resultados/metrics/v3/active_profile.json). Um treino
+repetido pode gerar outro hash; não atribua a versão publicada a pesos novos.
 
-| Classe destino | Fonte | Licença adotada | Conversão |
-|---|---|---|---|
-| `obstrucao_visivel` | [CLICK Trash v2](https://data.mendeley.com/datasets/htcvvz6fm2/2), Manjit Baishya | CC BY 4.0 | `trash` → ID 0 |
-| `agua_acumulada` | [Stagnant Water v4](https://data.mendeley.com/datasets/y6zyrnxbfm/4), Kailas Patil e Sonali Bhutad | CC BY 4.0 | `water` → ID 1; `wet surface` excluída |
-| `animal_visivel` | [iRodent v1.0](https://doi.org/10.5281/zenodo.8250392), Ye et al. | CC BY-NC por cautela | `rodent` → ID 2 |
+## Preparar os dados v3 em um clone novo
 
-O registro Zenodo do iRodent indica Apache-2.0, enquanto os metadados internos
-e imagens-fonte indicam CC BY-NC. O projeto mantém a condição mais restritiva.
-Os dados públicos representam lixo, água parada e roedores; não validam por
-si só a detecção em ralos reais.
+CLICK Trash v2 e Stagnant Water v4 usam CC BY 4.0. O registro iRodent indica
+Apache-2.0, mas metadados/imagens de origem indicam CC BY-NC; o projeto mantém a
+condição mais restritiva. Clipes e fotos conservam autores, URLs e licenças em
+`dados/examples/sources.json`. As regras estão em [VALIDACAO_V3.md](VALIDACAO_V3.md).
+
+Use o ZIP de exemplos da release para reprodução exata: ele preserva os bytes
+dos MP4 revisados. `prepare_examples.py` pode reconstruir uma biblioteca das
+fontes originais, mas diferenças de FFmpeg entre plataformas podem mudar os
+bytes. Os preparadores de contexto recusam vídeos com hash diferente do revisado.
+
+Primeiro obtenha as fontes e reconstrua o v2, base imutável da revisão v3.
+Não é necessário reconstruir o v1 defeituoso: o preparador v2 recupera imagens
+e labels brutos pelos IDs/hashes do manifesto v1 versionado.
 
 ```powershell
 python ferramentas/scripts/download_datasets.py --source all --seed 42
-python ferramentas/scripts/convert_annotations.py --seed 42
-python ferramentas/scripts/validate_dataset.py `
-  --dataset-root dados/processed/drenavision_corrected `
-  --yaml dados/processed/drenavision_corrected/dataset.yaml `
-  --manifest dados/manifests/dataset_manifest_corrected.csv `
-  --phash --phash-threshold 4 `
-  --report dados/manifests/validation_report_corrected.json
-python ferramentas/scripts/visualize_annotations.py --dataset-root dados/processed/drenavision_corrected --output-root resultados/local/dataset_preview_corrected --samples-per-split 6
-```
-
-Essa conversão isolada grava em `drenavision_corrected/`, sem sobrescrever o
-dataset e manifesto históricos v1. Ela não inclui a expansão e os frames de
-domínio do experimento v2. Para reproduzir o candidato treinado nesta revisão,
-use `prepare_adaptation.py` descrito adiante.
-
-O downloader retoma transferências e reutiliza arquivos verificados. Para CLICK,
-usa HTTP Range e baixa 100/20/20 pares de treino/validação/teste de um ZIP maior.
-O conversor preserva splits nativos quando existem, agrupa imagens relacionadas,
-aplica seed 42 e usa SHA-256 nos nomes finais. Não transforma classificação
-em caixas artificiais e não usa predição automática como ground truth.
-
-O validador confere imagens, labels YOLO, classes, coordenadas, hashes, grupos
-e semelhança perceptual entre splits. Erro impede o treino. Cada imagem tem
-fonte, licença, split, `source_group`, hash, dimensão e contagens no manifesto.
-
-### Preparação histórica medida na entrega v1
-
-| Split | Imagens | Boxes de resíduos | Boxes de água | Boxes de animal |
-|---|---:|---:|---:|---:|
-| Treino | 308 | 182 | 989 | 100 |
-| Validação | 62 | 40 | 223 | 20 |
-| Teste | 62 | 37 | 276 | 20 |
-
-São 432 imagens, 1.887 caixas e 13 imagens negativas. A validação registrou
-zero erros/avisos, zero duplicatas SHA-256 e zero vazamentos perceptuais no
-pHash com distância ≤ 4. O relatório real fica em `dados/manifests/`.
-
-Na água, a preparação removeu 167 imagens duplicadas antes da amostragem,
-um rótulo sem imagem e três caixas de área zero. Imagens só de superfície
-molhada entraram como negativos. No iRodent, os arquivos contêm 447 imagens,
-apesar de o registro mencionar 443; uma anotação de área zero foi descartada.
-As discrepâncias ficam registradas nos relatórios de aquisição/conversão.
-
-Outras fontes investigadas constam em `dados/manifests/research_report.json`.
-`drain_data` não tinha versão exportável; alternativas com login, licença
-inconclusiva ou maior distância do domínio não entraram no treinamento.
-
-## Treinamento customizado histórico v1
-
-Os comandos e resultados desta seção descrevem o protocolo v1. Para um novo
-experimento com anotações corrigidas e sem sobrescrever os dados v1, use a
-preparação v2 abaixo.
-
-```powershell
-# Referência histórica v1; não execute para treinar o modelo atual:
-# python ferramentas/scripts/train.py --config ferramentas/configs/train.yaml
-```
-
-Configuração principal: YOLO26n pré-treinado, `imgsz=640`, batch 8, máximo de
-100 épocas, `patience=20`, seed 42 e dispositivo `auto`. O treino exige os três
-splits válidos e registra argumentos, versões, dispositivo, fingerprint dos
-dados, horários e hashes dos pesos inicial/final.
-
-Esta versão foi retomada após a época 28, concluiu 70 épocas e selecionou o
-melhor checkpoint na época 50. O snapshot interrompido permanece separado.
-Naquela execução, `training_manifest.json` comprovou mudança dos pesos e a
-cópia publicada foi `best.pt`, hoje preservada como `best_v1.pt`. A configuração
-histórica atual gera `candidate_v1_reproduction.pt` e não substitui o ativo.
-
-Se faltar memória, reduza batch e registre nova configuração/run. Use a
-validação para escolher hiperparâmetros. O teste permanece independente.
-
-## Preparação e avaliação do modelo v2
-
-A causa documentada em
-[annotation_audit.json](../resultados/metrics/v2/annotation_audit.json) está
-nas caixas originais da fonte iRodent: 305 de 447 retângulos incluem os pontos
-ausentes `(0,0,0)`. A conversão v2 usa somente keypoints com visibilidade maior
-que zero, margem de 10% por lado (mínimo 2 px) e clipping. Cinco anotações com
-menos de dois pontos visíveis são excluídas. O retângulo resultante pode
-representar somente a parte visível anotada, não um corpo inteiro revisado
-independentemente por uma pessoa.
-
-Primeiro gere a auditoria e confira a montagem de 12 imagens:
-
-```powershell
-python ferramentas/scripts/prepare_adaptation.py --audit-only
-```
-
-Saídas: `resultados/local/adaptation/annotation_audit.json` e
-`irodent_source_vs_v2.jpg`. O resumo e uma montagem estão versionados em
-`resultados/metrics/v2/`, com hashes, coordenadas de exemplo, origem e licença.
-
-Para adicionar imagens/cortes de domínio revisados, prepare uma pasta com
-`images/`, `labels/` YOLO e `sources.json` contendo `items`, cada um com
-`file_name`, `source_url`, `source_license`, `source_group`, `annotation_note`
-e `split: "train"`. A adaptação não aceita frames de domínio em validação ou
-teste nem usa predições do detector como rótulo. Os rótulos desta execução
-foram produzidos por inspeção visual assistida e não são revisão humana
-independente.
-
-```powershell
-python -c "from pathlib import Path; import shutil; from ultralytics.utils.downloads import attempt_download_asset; p=Path('resultados/local/models'); p.mkdir(parents=True,exist_ok=True); shutil.copy2(attempt_download_asset(p/'yolo26n.pt'),p/'yolo26n-base.pt')"
 python ferramentas/scripts/prepare_negative_crops.py
 python ferramentas/scripts/prepare_domain_annotations.py
 python ferramentas/scripts/prepare_adaptation.py --domain-root dados/interim/adaptation
-python ferramentas/scripts/train.py --config ferramentas/configs/train_v2.yaml
 ```
 
-O primeiro comando mantém o peso inicial oficial do Ultralytics no cache local,
-com o nome esperado pela configuração; ele não usa o checkpoint customizado
-ativo como peso inicial. O preparador de domínio reúne os cinco cortes
-negativos revisados e os onze frames/cortes positivos, todos apenas no treino.
+Isso gera `dados/processed/drenavision_v2/` com 557/62/62 imagens. O v2 corrige
+caixas iRodent que incorporavam keypoints ausentes `(0,0,0)`, usando pontos
+visíveis e margem de 10%. Pode cobrir só a parte anotada do animal; não é uma
+referência humana independente de corpo inteiro.
 
-Em um clone novo, execute antes `download_datasets.py --source all --seed 42`.
-O preparador recupera as imagens e labels de resíduos/água diretamente das
-fontes brutas quando o dataset processado v1 não está disponível. Confere o
-SHA-256 da imagem e as contagens de caixas contra o manifesto v1 versionado;
-não é necessário reconstruir o dataset defeituoso para gerar o v2.
-
-O preparador recusa sobrescrever o dataset v1 ou uma pasta v2 já preenchida;
-para outro experimento, escolha `--output-root` e `--audit-dir` novos e ajuste
-a configuração. Mantém os IDs dos splits v1 de validação/teste, corrige suas
-caixas de roedor e expande o treino somente com imagens nativas de treino
-iRodent fora dos grupos/hashes reservados. O manifesto fica dentro do dataset
-em `data_manifest.csv`, com uma cópia em `resultados/local/adaptation/`.
-Validação de estrutura, proveniência, duplicatas, grupos e pHash precede o treino.
-
-Nesta execução foram preparados **557/62/62 itens** de treino/validação/teste,
-373 imagens iRodent no total, 234 imagens nativas de treino adicionais e 16
-imagens/cortes de domínio. Só uma imagem do treino v1 foi removida por
-geometria insuficiente. Os domínios `rato_close`, `rato_residuos`, `canal_residuos`
-e `drenagem_chuva` entraram apenas no treino. `rato_rua` e `sarjeta_residuos`
-ficaram fora da adaptação e servem como regressão já inspecionada durante o
-desenvolvimento, não teste de campo intocado.
-
-O treinamento usa o YOLO26n inicial, seed 42, tamanho 640, batch 12, máximo de
-100 épocas e patience 25. A execução concluída parou na época 60 e selecionou
-a época 35. O destino do treino é `resultados/local/models/candidate_v2.pt`;
-o treino não substitui automaticamente o modelo ativo. Após a comparação,
-esse checkpoint foi promovido a `best.pt`, preservando o antigo em `best_v1.pt`.
-
-Para repetir a comparação no teste corrigido, obtenha o baseline histórico se
-ele não estiver no computador:
+Em seguida prepare os quadros completos e o conjunto limpo:
 
 ```powershell
-if (-not (Test-Path resultados/local/models/best_v1.pt)) {
-  New-Item -ItemType Directory -Force resultados/local/models/v1 | Out-Null
-  gh release download v0.1.0-model --repo Torugo0/drenahub-drenavision --pattern best.pt --dir resultados/local/models/v1
-  Copy-Item resultados/local/models/v1/best.pt resultados/local/models/best_v1.pt
-}
-python ferramentas/scripts/evaluate.py --config ferramentas/configs/evaluate_v2_baseline.yaml
-python ferramentas/scripts/evaluate.py --config ferramentas/configs/evaluate_v2.yaml --model resultados/local/models/candidate_v2.pt
-```
-
-O v1 tem hash `fe439a3a722e73db5d841cc199026c8d42f4bbf806bf95924c2eb8c09a9f6bf7`.
-Ambas as configurações usam `dados/processed/drenavision_v2/dataset.yaml` e
-`split=test`. Consulte os arquivos versionados
-[baseline_test_metrics.json](../resultados/metrics/v2/baseline_test_metrics.json),
-[candidate_test_metrics.json](../resultados/metrics/v2/candidate_test_metrics.json)
-e [comparison.json](../resultados/metrics/v2/comparison.json). O mAP@50 agregado
-nesse teste foi de 0,2563 no baseline para 0,3581 no v2; animal foi de 0,0183
-para 0,3102. Esses números não são o AP de validação usado para escolher a época.
-Água e alguns exemplos regrediram; a [revisão dos clipes](../resultados/metrics/v2/product_validation_v2.json)
-registra ganhos e falhas. Métricas v1 calculadas com caixas antigas permanecem
-como histórico e não são diretamente comparáveis ao protocolo v2.
-
-## Avaliação e erros históricos v1
-
-```powershell
-# Referência histórica: exige os dados v1 preservados.
-# python ferramentas/scripts/evaluate.py --config ferramentas/configs/evaluate.yaml --model resultados/local/models/best_v1.pt
-```
-
-A avaliação usa `split=test`, checkpoint customizado e mapa exato de classes.
-Produz métricas globais/por classe, matriz, curvas, exemplos de erro e hashes.
-A execução completa vai para `resultados/local/evaluation/`; a seleção versionada
-fica em `resultados/metrics/`.
-
-| Classe | Objetos no teste | Precisão | Recall | mAP@50 | mAP@50–95 |
-|---|---:|---:|---:|---:|---:|
-| Resíduos | 37 | 0,5091 | 0,6728 | 0,5860 | 0,4046 |
-| Água | 276 | 0,3999 | 0,1159 | 0,1642 | 0,0360 |
-| Animal | 20 | 0,4250 | 0,6500 | 0,3843 | 0,2181 |
-| Agregado | 333 | 0,4447 | 0,4796 | 0,3781 | 0,2196 |
-
-Fonte: `resultados/metrics/evaluation_metrics.json`; 62 imagens, tamanho 640,
-batch 8 e RTX 4060. Inferência do modelo: 3,39 ms/imagem, sem I/O, rede ou tela.
-Precisão mede a fração de marcações corretas; recall mede a fração dos objetos
-anotados encontrados. mAP resume qualidade de detecção e localização.
-
-Os exemplos de erro incluem TP, FP e FN por classe. No limiar 0,35 e IoU 0,50,
-a mineração exploratória contou 32 TP, 23 FP e 301 FN; esses totais não
-substituem o AP oficial. Não houve imagem de água inteiramente correta nesse
-limiar. Ver [MODEL_CARD.md](MODEL_CARD.md) para protocolo e limitações.
-
-## Comandos diretos e testes
-
-Os comandos gerais agora usam o protocolo **v2**: `train.py`/`run_training()`
-carregam `train_v2.yaml` e geram somente `candidate_v2.pt`; `evaluate.py`/
-`run_evaluation()` usam `evaluate_v2.yaml`, o `best.pt` ativo e os rótulos v2.
-Validador, visualizador e construtor de sequência também usam o dataset e
-manifesto locais v2 por padrão. As configurações `train.yaml` e `evaluate.yaml`
-são históricas e precisam ser solicitadas explicitamente; a primeira gera
-`candidate_v1_reproduction.pt`, e a segunda exige o backup `best_v1.pt`.
-
-```powershell
-python ferramentas/scripts/validate_dataset.py --phash
+python ferramentas/scripts/prepare_rat_context_v3.py
+python ferramentas/scripts/prepare_water_v3.py --extra-negative 0
+python ferramentas/scripts/prepare_v3_dataset.py `
+  --domain-root dados/interim/rat_context_v3 `
+  --domain-root dados/interim/water_v3 `
+  --fetch-click `
+  --output dados/processed/drenavision_v3_clean `
+  --audit-dir resultados/local/preparation_v3_clean
+python ferramentas/scripts/validate_dataset.py --phash `
+  --report resultados/local/preparation_v3_clean/validation_report.json
 python ferramentas/scripts/visualize_annotations.py
-python ferramentas/scripts/evaluate.py
+```
 
+`--fetch-click` baixa/verifica 250 pares nativos de treino por HTTP Range,
+sem baixar o ZIP inteiro. Os 100 já usados são deduplicados, deixando 150 novos.
+A água recebe 400 imagens positivas e oito quadros de contexto adicionais.
+Cinco recortes pequenos do rato junto ao lixo são substituídos por cinco
+quadros completos com rato e pilha de resíduos revisados. Não entram os 24
+negativos de superfície molhada inicialmente considerados. Oito negativos
+antigos de treino e dois de cada partição protegida também são removidos: a
+fonte pode conter água visível mesmo com rótulo vazio.
+
+O resultado medido tem **1.107/60/60 imagens**. As restantes de validação e teste
+mantêm pixels e partições. Caixas de água originais que se tocam ou sobrepõem
+formam componentes; o retângulo pode conter espaços secos e não é uma máscara.
+A montagem verifica hashes, grupos e pHash. Se uma pasta processada já estiver
+preenchida, escolha outro destino vazio e ajuste a configuração; preserve os
+arquivos e relatórios históricos.
+
+## Repetir treinamento e avaliação
+
+O v3 parte de `best_v2.pt`, não do ativo `best.pt`. Usa tamanho 640, batch 12,
+seed 42, máximo de 80 épocas e patience 20. A execução publicada concluiu
+**63 épocas**, selecionando a **época 43**. Outro ambiente pode gerar pesos
+diferentes; registre suas versões, manifests e hashes.
+
+```powershell
+python ferramentas/scripts/train.py --config ferramentas/configs/train_v3.yaml
+python ferramentas/scripts/evaluate.py `
+  --config ferramentas/configs/evaluate_v3.yaml `
+  --model resultados/local/models/candidate_v3.pt `
+  --name candidate_v3_reproduction_test
+```
+
+O treino exporta `candidate_v3.pt` e não substitui o ativo automaticamente.
+`evaluate.py` usa o teste e mede **somente YOLO**, sem B1 nem os limiares por
+classe do produto. A coleta de AP usa confiança 0,001 e NMS 0,60, diferentes dos
+limiares da interface. O pipeline completo tem seu perfil em `active_profile.json`
+e avaliação própria. Fontes podem omitir água em fotos de animais ou outros
+animais presentes; interprete as métricas com os limites documentados.
+
+A calibração de água usa exclusivamente 59 imagens claras de validação revisadas
+antes de consultar previsões; uma imagem incerta fica separada. O primeiro grid
+falhou no piso de especificidade e foi preservado. A extensão do grid na mesma
+validação escolheu pixel 0,95/área 0,05, sem usar o teste adicional para escolher
+parâmetros. Consulte
+[water_presence_calibration.json](../resultados/metrics/v3/water_presence_calibration.json).
+`calibrate_water.py` exige a referência selada e o benchmark YOLO de validação;
+não muda rótulos nem procura parâmetros no teste.
+
+O conjunto adicional é reconstruído pela lista selada, sem nova amostragem dos
+negativos:
+
+```powershell
+python ferramentas/scripts/prepare_extra_test.py
+python ferramentas/scripts/prepare_extra_test.py --verify-only `
+  --exclude-dataset dados/processed/drenavision_v3_clean
+```
+
+São 119 imagens: 69 do teste nativo iRodent, 40 de água e dez negativos revisados.
+Elas ficam fora do treino e da calibração, mas pertencem às mesmas fontes
+públicas; não equivalem a estudo de campo. Após consultá-las, uma nova escolha
+de parâmetros exige outra avaliação reservada.
+
+## Comandos diretos
+
+Defaults de treino, avaliação YOLO, validação, visualização e sequência usam
+`drenavision_v3_clean`. Para analisar entradas com o perfil publicado:
+
+```powershell
 python ferramentas/scripts/predict.py `
   --input caminho/foto.jpg --model resultados/local/models/best.pt `
+  --water-model resultados/local/models/water_segformer_b1_ade `
+  --water-pixel-confidence 0.95 --water-min-area-fraction 0.05 `
+  --animal-conf 0.60 --water-mode augment `
   --output-dir resultados/local/predictions
-
 python ferramentas/scripts/process_video.py `
   --input caminho/video.mp4 --output resultados/local/videos/analise.mp4 `
-  --model resultados/local/models/best.pt --track `
+  --model resultados/local/models/best.pt `
+  --water-model resultados/local/models/water_segformer_b1_ade `
+  --water-pixel-confidence 0.95 --water-min-area-fraction 0.05 `
+  --animal-conf 0.60 --water-mode augment --water-confirmation-seconds 0.5 --track `
   --database resultados/local/events/drenavision.db `
   --evidence-dir resultados/local/events/evidence --point-id garagem-demo-01
-
 python -m pytest -q
 python -m ruff check .
 ```
 
-API/interface, quando necessário iniciar individualmente:
+Os exemplos em vídeo são filmagens reais. `build_demo_video.py` cria uma
+sequência de fotografias do teste, identificada como sequência; não deve ser
+apresentada como uma nova filmagem independente.
 
-```powershell
-python -m uvicorn drenavision.api.main:app --host 127.0.0.1 --port 8000
-python -m streamlit run drenavision/ui/streamlit_app.py
-```
+## Histórico e evidências
 
-## Evidência de uma execução
+Configurações antigas precisam ser solicitadas explicitamente. `train.yaml`
+exporta `candidate_v1_reproduction.pt`; `evaluate.yaml` usa `best_v1.pt` e dados
+v1. `train_v2.yaml` exporta `candidate_v2.pt`; `evaluate_v2.yaml` usa o backup
+`best_v2.pt` e rótulos v2. Não troque checkpoints/labels históricos pelos atuais
+para reproduzir números antigos.
 
-Preserve commit, configuração efetiva, seed, versões (`pip freeze`), hardware,
-fontes, fingerprints e hashes. O checkpoint e o manifesto de avaliação devem
-apontar para os mesmos dados/modelo. Evite sobrescrever runs e histórico usados
-como evidência. Uma nova decisão orientada pelo teste exige novo teste reservado.
+Avaliações v1/v2 continuam em `resultados/metrics/` e `resultados/metrics/v2/`.
+As regras de caixas mudaram entre protocolos: compare checkpoints nos mesmos
+rótulos, sem comparar diretamente mAP antigo e novo. Preserve commit,
+configuração, seed, versões, dispositivo, fingerprints, hashes e relatórios
+completos em `resultados/local/`.
 
-O [notebook Colab](drenavision_training.ipynb) chama os mesmos scripts. Salve
-dados e resultados antes de a sessão expirar. Não contém saídas fabricadas.
+O [notebook Colab](drenavision_training.ipynb) chama os mesmos preparadores e o
+treino v3. Seus outputs estão vazios; foi validado por análise de sintaxe e Ruff,
+**não executado no Colab nesta entrega**. Uma execução futura deve obter fontes
+e assets autorizados, verificar hashes, passar pelas validações e salvar os
+artefatos antes de a sessão expirar.

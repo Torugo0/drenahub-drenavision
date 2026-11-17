@@ -1,0 +1,315 @@
+{
+  "schema_version": 1,
+  "protocol": "B1-only water-presence calibration on59clearVALimages; sealedtest unused",
+  "status": "validation_profile_selected_not_a_test_accuracy_claim",
+  "reference": {
+    "path": "C:/Users/Vitor/OneDrive/Área de Trabalho/drena_hub_avc/resultados/metrics/v3/val_water_presence_review.json",
+    "sha256": "9735e2e01718608fe07389d0dc4c487b01217c30a97d14bd9d2740682f97be7c",
+    "counts": {
+      "yes": 24,
+      "no": 35,
+      "uncertain": 1
+    }
+  },
+  "model": {
+    "repository": "nvidia/segformer-b1-finetuned-ade-512-512",
+    "revision": "a775b4f5dcb2179e57006dca0e268281306412ef",
+    "license": "NVIDIA Source Code License for SegFormer; non-commercial research/evaluation only",
+    "license_url": "https://raw.githubusercontent.com/NVlabs/SegFormer/master/LICENSE",
+    "file_sha256": {
+      "model.safetensors": "e0802e077c195d9dbaf48c69b94946ef6a3ae5b6665176fedf363e5e63a1ec93",
+      "config.json": "8f1b7bcd2e1835ef0ef3a04a0d4dfe87ff9a6374253e7a3ca1751de812a420ff",
+      "preprocessor_config.json": "8039d1d210abaa7117ad78e58cdfd6141a2ec72c03dae891b3cd76737e422c6c",
+      "download_manifest.json": "d22e86d4ad23c1c65bf4cfebc730d69501e2db98a800d4ce047778ed222a9dc6",
+      "LICENSE-NVIDIA-SegFormer.txt": "b5a6a3804b12c1b4d37e1e45bcc31761a2e69064fd75b48da13d62e30d69b406"
+    },
+    "policy": {
+      "version": "ade-water-mask-v1",
+      "processing_size": 512,
+      "pixel_confidence": 0.95,
+      "min_area_fraction": 0.05,
+      "water_labels": {
+        "21": "water",
+        "26": "sea",
+        "60": "river",
+        "109": "swimming pool",
+        "113": "waterfall",
+        "128": "lake"
+      },
+      "postprocessing": "bilinear logits at bounded processing_size; nearest labels and bilinear water-family posterior to original size; pixel confidence gate; 8-connected components; actual pixel-area gate; no fill/dilation"
+    },
+    "profile_sha256": "808e8206473b83053f7f675b1d559f6d03a3d26079375a7e9eb71b7d4229527e",
+    "model_version": "water-808e8206473b"
+  },
+  "yolo": {
+    "benchmark_sha256": "b7dd725f9cec91c4db911626f3e9e786a0141b163bb50fd04d1aba310ee2519f",
+    "variant": "v3_s640_full",
+    "checkpoint": "resultados/local/models/candidate_v3.pt",
+    "checkpoint_sha256": "12b9e86f223366c3f2ef8c2308f0e1140cda08c55ab55e281e58d300fd554b4b",
+    "confidence": 0.35,
+    "nms_iou": 0.45,
+    "imgsz": 640
+  },
+  "yolo_only_metrics": {
+    "images": 59,
+    "tp": 19,
+    "fp": 0,
+    "fn": 5,
+    "tn": 35,
+    "precision": 1.0,
+    "recall": 0.7916666666666666,
+    "specificity": 1.0,
+    "f1": 0.8837209302325582
+  },
+  "first_grid": {
+    "grid": {
+      "pixel_confidence": [
+        0.4,
+        0.5,
+        0.6,
+        0.7
+      ],
+      "min_area_fraction": [
+        0.001,
+        0.003,
+        0.01
+      ],
+      "processing_size": 512,
+      "morphology": "none"
+    },
+    "profiles": 24,
+    "eligible_profiles": 0,
+    "chosen": null,
+    "reason": "No profile met the predeclared specificity>=0.90 floor; preserved without relaxing it",
+    "maximum_specificity": 0.8857142857142857,
+    "full_report": "resultados\\local\\water_calibration_v3\\calibration_report.json",
+    "report_sha256": "b0c94f44859b8d8c74c8cb11d89535dff44a76b8dd85ad9e4c9c77e0b5e3d260"
+  },
+  "second_grid": {
+    "grid": {
+      "pixel_confidence": [
+        0.4,
+        0.5,
+        0.6,
+        0.7,
+        0.8,
+        0.9,
+        0.95
+      ],
+      "min_area_fraction": [
+        0.001,
+        0.003,
+        0.01,
+        0.02,
+        0.03,
+        0.05
+      ],
+      "processing_size": 512,
+      "morphology": "none"
+    },
+    "profiles": 84,
+    "eligible_profiles": 40,
+    "chosen": {
+      "pixel_confidence": 0.95,
+      "min_area_fraction": 0.05,
+      "fusion_policy": "augment_yolo_water_union",
+      "metrics": {
+        "images": 59,
+        "tp": 23,
+        "fp": 0,
+        "fn": 1,
+        "tn": 35,
+        "precision": 1.0,
+        "recall": 0.9583333333333334,
+        "specificity": 1.0,
+        "f1": 0.9787234042553191
+      }
+    },
+    "selection_rule": "Specificity>=0.90; maximize presenceF1, then specificity, precision, replacement simplicity, higher pixel threshold and larger minimum component area. If none meet specificity floor, no acceptable profile is selected.",
+    "cached_inputs_same_hashes_as_first": true,
+    "new_neural_forwards": 0,
+    "full_report": "resultados\\local\\water_calibration_v3_extended\\calibration_report.json",
+    "report_sha256": "ffc85ce8bb584e804d5046c3e900d59df10dc567c54333fe05ad6ca9b2a1c874"
+  },
+  "image_presence_fusion_note": "Selected augmentation is an image-presence OR between YOLOwater and semanticwater. This does not validate merging bounding envelopes. Production can prefer actual semantic regions and fall back to actual YOLOwater boxes when no semantic region exists, preserving ORpresence without duplicate water boxes.",
+  "remaining_validation_misses": [
+    {
+      "filename": "stagnant_water_5564d59d685ec379.jpg",
+      "image_sha256": "5564d59d685ec379ce3fab745e694f75783e8eeac288751cb328b7030f9e4d06",
+      "truth": "yes"
+    }
+  ],
+  "diagnosed_false_water_on_rodent_fur": [
+    {
+      "review_index": 11,
+      "filename": "irodent_25ae1fa7667bad3a.jpg",
+      "image_sha256": "25ae1fa7667bad3a99df4b38e3bd38dd1fbb359c12fed6bb8c909f985309ee6d",
+      "sealed_truth": "no",
+      "visual_note": "Roedor sobre vegetação e folhas secas; nenhuma superfície de água visível.",
+      "semantic_argmax_water_pixels": 1080748,
+      "semantic_argmax_water_fraction": 0.37188793824876676,
+      "water_posterior_quantiles_over_semantic_water_pixels": {
+        "0": 0.19816021621227264,
+        "0.1": 0.37616416811943054,
+        "0.25": 0.45661699771881104,
+        "0.5": 0.5895344614982605,
+        "0.75": 0.7410345077514648,
+        "0.9": 0.847231388092041,
+        "0.95": 0.8959122896194458,
+        "0.99": 0.9684131741523743,
+        "1": 0.9922927618026733
+      },
+      "threshold_stats": {
+        "0.7": {
+          "mask_pixels": 337222,
+          "mask_fraction": 0.11603888631959126,
+          "largest_component_pixels": 113438,
+          "largest_component_fraction": 0.039034283606412964,
+          "component_count": 26,
+          "mask_file": "resultados\\local\\water_calibration_v3\\fp_diagnostic_masks\\11_p0.7.png",
+          "mask_sha256": "a444b537198d21e3f1892b6e414dbf5865713e7ba643cc484137fa4321978ee3"
+        },
+        "0.9": {
+          "mask_pixels": 50658,
+          "mask_fraction": 0.017431537394291756,
+          "largest_component_pixels": 45051,
+          "largest_component_fraction": 0.01550215545718816,
+          "component_count": 13,
+          "mask_file": "resultados\\local\\water_calibration_v3\\fp_diagnostic_masks\\11_p0.9.png",
+          "mask_sha256": "9249abfe6ce7dbfb8641ad54d2e685812d484d728d018cf9ae0197d60cc861cc"
+        }
+      }
+    },
+    {
+      "review_index": 27,
+      "filename": "irodent_622bae6e8b9cbf53.jpg",
+      "image_sha256": "622bae6e8b9cbf539bde0202e02aad8980dd78079044e2c348e486c8ed238b45",
+      "sealed_truth": "no",
+      "visual_note": "Roedor em recipiente branco; base sem lâmina de água visível na resolução original. Pequenas gotas na parede não são superfície contínua de água.",
+      "semantic_argmax_water_pixels": 276873,
+      "semantic_argmax_water_fraction": 0.10385333833458364,
+      "water_posterior_quantiles_over_semantic_water_pixels": {
+        "0": 0.14328216016292572,
+        "0.1": 0.3600826561450958,
+        "0.25": 0.45084404945373535,
+        "0.5": 0.546682596206665,
+        "0.75": 0.7137542366981506,
+        "0.9": 0.8424579501152039,
+        "0.95": 0.8939343690872192,
+        "0.99": 0.9434975981712341,
+        "1": 0.9627577662467957
+      },
+      "threshold_stats": {
+        "0.7": {
+          "mask_pixels": 74010,
+          "mask_fraction": 0.027760690172543137,
+          "largest_component_pixels": 61824,
+          "largest_component_fraction": 0.02318979744936234,
+          "component_count": 9,
+          "mask_file": "resultados\\local\\water_calibration_v3\\fp_diagnostic_masks\\27_p0.7.png",
+          "mask_sha256": "a9c49edef30389cae33600684fc07cf97c314a3ff990ab5fecb9b0161339c9d7"
+        },
+        "0.9": {
+          "mask_pixels": 12549,
+          "mask_fraction": 0.004707051762940735,
+          "largest_component_pixels": 9762,
+          "largest_component_fraction": 0.0036616654163540885,
+          "component_count": 3,
+          "mask_file": "resultados\\local\\water_calibration_v3\\fp_diagnostic_masks\\27_p0.9.png",
+          "mask_sha256": "73751c4c66fc3b5a064fcffa06ecf40584cb160f9c4fea0e036248e876ec93a4"
+        }
+      }
+    },
+    {
+      "review_index": 30,
+      "filename": "irodent_717bad5bb0a84efc.jpg",
+      "image_sha256": "717bad5bb0a84efc7553620edeffde0fcbd180de61a86648c78efb9f90db86ed",
+      "sealed_truth": "no",
+      "visual_note": "Roedor entre folhas e caules verdes; não há água livre visível.",
+      "semantic_argmax_water_pixels": 114003,
+      "semantic_argmax_water_fraction": 0.13475531914893618,
+      "water_posterior_quantiles_over_semantic_water_pixels": {
+        "0": 0.16130901873111725,
+        "0.1": 0.3481772243976593,
+        "0.25": 0.46871131658554077,
+        "0.5": 0.6557899713516235,
+        "0.75": 0.8190584182739258,
+        "0.9": 0.8786288499832153,
+        "0.95": 0.9049443006515503,
+        "0.99": 0.9368157982826233,
+        "1": 0.9610216021537781
+      },
+      "threshold_stats": {
+        "0.7": {
+          "mask_pixels": 49970,
+          "mask_fraction": 0.059066193853427894,
+          "largest_component_pixels": 49648,
+          "largest_component_fraction": 0.058685579196217495,
+          "component_count": 10,
+          "mask_file": "resultados\\local\\water_calibration_v3\\fp_diagnostic_masks\\30_p0.7.png",
+          "mask_sha256": "45f8817375a9f6d7d8b781384054b2edc981c8dd243b1d6813d68e4391f2e1e1"
+        },
+        "0.9": {
+          "mask_pixels": 6563,
+          "mask_fraction": 0.007757683215130024,
+          "largest_component_pixels": 6271,
+          "largest_component_fraction": 0.007412529550827423,
+          "component_count": 10,
+          "mask_file": "resultados\\local\\water_calibration_v3\\fp_diagnostic_masks\\30_p0.9.png",
+          "mask_sha256": "23ed23c2abc3e5609485bab1542eea439dfd8c8f80761378319b59569e67a3b5"
+        }
+      }
+    },
+    {
+      "review_index": 52,
+      "filename": "irodent_d7bb0eae3509e116.jpg",
+      "image_sha256": "d7bb0eae3509e116f91373ee13eb8febc9d503f3e793d5493e134be0979791eb",
+      "sealed_truth": "no",
+      "visual_note": "Roedor em gramado; nenhuma superfície de água visível.",
+      "semantic_argmax_water_pixels": 441731,
+      "semantic_argmax_water_fraction": 0.17652293797953963,
+      "water_posterior_quantiles_over_semantic_water_pixels": {
+        "0": 0.1760191023349762,
+        "0.1": 0.3626740276813507,
+        "0.25": 0.44833120703697205,
+        "0.5": 0.560759961605072,
+        "0.75": 0.6781575679779053,
+        "0.9": 0.7644139528274536,
+        "0.95": 0.8066191673278809,
+        "0.99": 0.8529930114746094,
+        "1": 0.8955289125442505
+      },
+      "threshold_stats": {
+        "0.7": {
+          "mask_pixels": 94025,
+          "mask_fraction": 0.037573929028132995,
+          "largest_component_pixels": 64985,
+          "largest_component_fraction": 0.025969069693094628,
+          "component_count": 18,
+          "mask_file": "resultados\\local\\water_calibration_v3\\fp_diagnostic_masks\\52_p0.7.png",
+          "mask_sha256": "1e24f9ec66894beacd4870af0d456d96a72e1993d828aad618d50c179b760038"
+        },
+        "0.9": {
+          "mask_pixels": 0,
+          "mask_fraction": 0.0,
+          "largest_component_pixels": 0,
+          "largest_component_fraction": 0.0,
+          "component_count": 0,
+          "mask_file": "resultados\\local\\water_calibration_v3\\fp_diagnostic_masks\\52_p0.9.png",
+          "mask_sha256": "54fc89d3997b3a95c43c95bec4e4d9078658a98416258abf07db7fff570ec200"
+        }
+      }
+    }
+  ],
+  "chosen_masks": {
+    "count": 59,
+    "directory": "resultados\\local\\water_calibration_v3_extended\\chosen_val_masks",
+    "note": "Real thresholded neural mask pixels; no morphology, gap filling or invented boxes"
+  },
+  "caveats": [
+    "Presence is image-level, assistant-reviewed validation truth; this does not establish pixel IoU, bounding-box IoU or calibrated risk.",
+    "Parameter/model-fusion selection makes these validation scores optimistic; the119-image sealed test remains separate and unused here.",
+    "No morphology, gap filling, per-image threshold or known-regression model selection is applied.",
+    "Water components are predicted surface regions, not distinct puddles, water volume or sanitary risk."
+  ]
+}

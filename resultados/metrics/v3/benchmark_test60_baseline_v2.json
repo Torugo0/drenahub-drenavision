@@ -1,0 +1,4121 @@
+{
+  "created_at_utc": "2026-11-16T23:42:24.387223Z",
+  "status": "completed",
+  "device": "cuda:0",
+  "coordinate_format": "xyxy pixels in the original complete image/frame",
+  "protocol": {
+    "split": "test",
+    "selection": "all split images",
+    "per_class_limit": 0,
+    "seed": 42,
+    "confidence": 0.35,
+    "nms_iou": 0.45,
+    "matching_iou": 0.5,
+    "tile_size": 0,
+    "tile_overlap": 0.2,
+    "prediction_engine": "pure_yolo",
+    "water_model": null,
+    "water_pixel_confidence": null,
+    "water_min_area_fraction": null,
+    "water_mode": null,
+    "animal_confidence": null,
+    "residue_confidence": null,
+    "expected_profile": null
+  },
+  "caveats": [
+    "TP/FP/FN compare predictions with the stored source annotations, not independently certified deployment truth.",
+    "Single-source datasets can omit other categories present; unmatched detections require visual review before being called real-world false positives.",
+    "Water annotations can describe containers/breeding sites rather than complete visible water surfaces; inspect source notes.",
+    "Rodent source boxes derived from visible pose points can cover only part of the body.",
+    "Product topic tags are not reference boxes and do not produce TP/FP/FN or accuracy claims.",
+    "Detection counts are boxes per sampled frame, not unique animals or objects.",
+    "Use validation for model selection; inspecting the test set makes future claims exploratory."
+  ],
+  "sample_count": 60,
+  "labelled_image_count": 60,
+  "product_frame_or_image_count": 0,
+  "samples": [
+    {
+      "id": "test/click_trash_00c5aac3d4cf1d57",
+      "group": "labelled_split",
+      "input": "dados/processed/drenavision_v3_clean/images/test/click_trash_00c5aac3d4cf1d57.jpg",
+      "sha256": "00c5aac3d4cf1d576dabe41f20af431a6d611d1a740254fcfee65d71bdd1e6ab",
+      "width": 3072,
+      "height": 3072,
+      "split": "test",
+      "source_key": "click_trash",
+      "source_group": "click::trash (1105)",
+      "annotation_note": "reviewed single-class YOLO trash annotation",
+      "label_sha256": "a3f32cf2acc2887522abb2b383269f391d5fb8d481d25cee2bc7b1b6627b5965",
+      "truth": [
+        {
+          "class_id": 0,
+          "bounding_box": [
+            1793.0035200000002,
+            2383.01184,
+            2448.0153600000003,
+            2994.0019199999997
+          ]
+        },
+        {
+          "class_id": 0,
+          "bounding_box": [
+            976.9881600000001,
+            1108.992,
+            1161.0009599999998,
+            1334.9990400000002
+          ]
+        }
+      ]
+    },
+    {
+      "id": "test/click_trash_0c989b533293a6a0",
+      "group": "labelled_split",
+      "input": "dados/processed/drenavision_v3_clean/images/test/click_trash_0c989b533293a6a0.jpg",
+      "sha256": "0c989b533293a6a043d12a1940e992401f4a92ea90f781a06d6bd810478c3ab7",
+      "width": 3024,
+      "height": 3024,
+      "split": "test",
+      "source_key": "click_trash",
+      "source_group": "click::trash (448)",
+      "annotation_note": "reviewed single-class YOLO trash annotation",
+      "label_sha256": "90b416c6dfa601df653d2ef653b6e06adc117de3737bb6933d443c3564d25357",
+      "truth": [
+        {
+          "class_id": 0,
+          "bounding_box": [
+            991.9929599999998,
+            958.0031999999999,
+            2338.0056,
+            2085.98544
+          ]
+        },
+        {
+          "class_id": 0,
+          "bounding_box": [
+            2907.9993600000003,
+            0.0,
+            3023.00208,
+            180.9864
+          ]
+        },
+        {
+          "class_id": 0,
+          "bounding_box": [
+            1276.00704,
+            1514.99376,
+            1773.00144,
+            1892.99376
+          ]
+        }
+      ]
+    },
+    {
+      "id": "test/click_trash_17b42f3778cabdd6",
+      "group": "labelled_split",
+      "input": "dados/processed/drenavision_v3_clean/images/test/click_trash_17b42f3778cabdd6.jpg",
+      "sha256": "17b42f3778cabdd655e90c9f119ae21d4e25ae6b06234cfdd310b7d8d00b0be5",
+      "width": 3468,
+      "height": 3468,
+      "split": "test",
+      "source_key": "click_trash",
+      "source_group": "click::trash (728)",
+      "annotation_note": "reviewed single-class YOLO trash annotation",
+      "label_sha256": "f6ee0b5ec8abd80e2ba5e30c2740fc11cb22c7c6f899df0bce31cccdfc130565",
+      "truth": [
+        {
+          "class_id": 0,
+          "bounding_box": [
+            1049.00064,
+            562.9951200000002,
+            2024.99988,
+            1678.9975200000001
+          ]
+        }
+      ]
+    },
+    {
+      "id": "test/click_trash_1bc5566a57e7be3b",
+      "group": "labelled_split",
+      "input": "dados/processed/drenavision_v3_clean/images/test/click_trash_1bc5566a57e7be3b.jpg",
+      "sha256": "1bc5566a57e7be3b5b85cb8d3a99c55d6c10b98b75f03e844917780bd731e82d",
+      "width": 3072,
+      "height": 3072,
+      "split": "test",
+      "source_key": "click_trash",
+      "source_group": "click::trash (131)",
+      "annotation_note": "reviewed single-class YOLO trash annotation",
+      "label_sha256": "baf6ce1ab34044c09fb1a3245f8ed220040a6ea5378892c45ced0eed341f5dce",
+      "truth": [
+        {
+          "class_id": 0,
+          "bounding_box": [
+            1494.00576,
+            1162.99776,
+            1738.0147200000001,
+            1427.98848
+          ]
+        },
+        {
+          "class_id": 0,
+          "bounding_box": [
+            2677.98528,
+            298.99775999999997,
+            2827.008,
+            360.99072
+          ]
+        }
+      ]
+    },
+    {
+      "id": "test/click_trash_3293348191c4feb8",
+      "group": "labelled_split",
+      "input": "dados/processed/drenavision_v3_clean/images/test/click_trash_3293348191c4feb8.jpg",
+      "sha256": "3293348191c4feb8f5583dfc61018a34badc0ec9fa9222f86a1693ae21340112",
+      "width": 3468,
+      "height": 3468,
+      "split": "test",
+      "source_key": "click_trash",
+      "source_group": "click::trash (593)",
+      "annotation_note": "reviewed single-class YOLO trash annotation",
+      "label_sha256": "775035d9d653dc0d763f00b03f971fd8ec1466cbe9a0de2583586f964a2902a5",
+      "truth": [
+        {
+          "class_id": 0,
+          "bounding_box": [
+            1635.952704,
+            1516.294566,
+            1788.738912,
+            1909.867482
+          ]
+        }
+      ]
+    },
+    {
+      "id": "test/click_trash_3a6511081805cc90",
+      "group": "labelled_split",
+      "input": "dados/processed/drenavision_v3_clean/images/test/click_trash_3a6511081805cc90.jpg",
+      "sha256": "3a6511081805cc908ca553178388260e08417f06cc9fca1b8552d3ea77773b16",
+      "width": 3024,
+      "height": 3024,
+      "split": "test",
+      "source_key": "click_trash",
+      "source_group": "click::trash (542)",
+      "annotation_note": "reviewed single-class YOLO trash annotation",
+      "label_sha256": "cc4486211447e3de1ecf06baa77f21db98061359d0aa795eced41c04c4010691",
+      "truth": [
+        {
+          "class_id": 0,
+          "bounding_box": [
+            889.9934399999999,
+            1166.99184,
+            1498.9968000000001,
+            1877.99472
+          ]
+        }
+      ]
+    },
+    {
+      "id": "test/click_trash_453100dd56522b6f",
+      "group": "labelled_split",
+      "input": "dados/processed/drenavision_v3_clean/images/test/click_trash_453100dd56522b6f.jpg",
+      "sha256": "453100dd56522b6f3f258dd0fc980a24d51695247dbd40a9fced0b188d460843",
+      "width": 1902,
+      "height": 1902,
+      "split": "test",
+      "source_key": "click_trash",
+      "source_group": "click::trash (256)",
+      "annotation_note": "reviewed single-class YOLO trash annotation",
+      "label_sha256": "b906d7dbb65df64ce75c4f3af7156c591e69348d1b3b4405187cbcf7882999cf",
+      "truth": [
+        {
+          "class_id": 0,
+          "bounding_box": [
+            919.0083599999999,
+            635.00172,
+            1339.0079999999998,
+            1115.00946
+          ]
+        }
+      ]
+    },
+    {
+      "id": "test/click_trash_5a2ed3663253d2f4",
+      "group": "labelled_split",
+      "input": "dados/processed/drenavision_v3_clean/images/test/click_trash_5a2ed3663253d2f4.jpg",
+      "sha256": "5a2ed3663253d2f4b14f329b924d6252bbffbaeb29341aadb9279e86401999ee",
+      "width": 3468,
+      "height": 3468,
+      "split": "test",
+      "source_key": "click_trash",
+      "source_group": "click::trash (705)",
+      "annotation_note": "reviewed single-class YOLO trash annotation",
+      "label_sha256": "7fff66687afa946428a9dc3b2adb988fd799a0a2a6c4787379b0c8e3a996c89c",
+      "truth": [
+        {
+          "class_id": 0,
+          "bounding_box": [
+            1466.99868,
+            1482.0151200000003,
+            1972.00884,
+            2717.0045999999998
+          ]
+        },
+        {
+          "class_id": 0,
+          "bounding_box": [
+            1464.9872400000002,
+            1482.98616,
+            1972.00884,
+            2724.00996
+          ]
+        },
+        {
+          "class_id": 0,
+          "bounding_box": [
+            1300.9855200000002,
+            633.9850799999999,
+            2332.99296,
+            1501.9908
+          ]
+        }
+      ]
+    },
+    {
+      "id": "test/click_trash_636cdeffa7673f48",
+      "group": "labelled_split",
+      "input": "dados/processed/drenavision_v3_clean/images/test/click_trash_636cdeffa7673f48.jpg",
+      "sha256": "636cdeffa7673f487252897b388e06e3a459f94f2d4e29271edac3704e4d5944",
+      "width": 3468,
+      "height": 3468,
+      "split": "test",
+      "source_key": "click_trash",
+      "source_group": "click::trash (553)",
+      "annotation_note": "reviewed single-class YOLO trash annotation",
+      "label_sha256": "cc918304aaa2f34bdf54d8552e8d36de211fba0c2c8bc24c668f52ea51dd158d",
+      "truth": [
+        {
+          "class_id": 0,
+          "bounding_box": [
+            1421.98404,
+            754.01256,
+            2185.9844399999997,
+            1490.99724
+          ]
+        },
+        {
+          "class_id": 0,
+          "bounding_box": [
+            1071.99348,
+            1500.01404,
+            1755.0160799999999,
+            2116.0002
+          ]
+        },
+        {
+          "class_id": 0,
+          "bounding_box": [
+            902.99784,
+            1795.0021199999999,
+            1530.0122399999998,
+            2405.99436
+          ]
+        },
+        {
+          "class_id": 0,
+          "bounding_box": [
+            579.98832,
+            2017.99452,
+            1538.99436,
+            3029.9916
+          ]
+        },
+        {
+          "class_id": 0,
+          "bounding_box": [
+            314.99844,
+            2674.0014,
+            973.9878,
+            3093.0051599999997
+          ]
+        },
+        {
+          "class_id": 0,
+          "bounding_box": [
+            1413.00192,
+            1071.99348,
+            2082.0137999999997,
+            1489.99152
+          ]
+        },
+        {
+          "class_id": 0,
+          "bounding_box": [
+            1529.00652,
+            759.00648,
+            2179.01376,
+            1203.01452
+          ]
+        }
+      ]
+    },
+    {
+      "id": "test/click_trash_71f6e5520c024e1a",
+      "group": "labelled_split",
+      "input": "dados/processed/drenavision_v3_clean/images/test/click_trash_71f6e5520c024e1a.jpg",
+      "sha256": "71f6e5520c024e1aed1a04e35c999ad84fb9d6f0c3036567b585ace501e1346f",
+      "width": 3024,
+      "height": 3024,
+      "split": "test",
+      "source_key": "click_trash",
+      "source_group": "click::trash (480)",
+      "annotation_note": "reviewed single-class YOLO trash annotation",
+      "label_sha256": "9ca99a7845cfeaff9286d492105a6aaaf04eb29e3d4f6b1a76ad9762a87a3785",
+      "truth": [
+        {
+          "class_id": 0,
+          "bounding_box": [
+            988.9992,
+            1227.98592,
+            1595.0087999999998,
+            1720.98864
+          ]
+        }
+      ]
+    },
+    {
+      "id": "test/click_trash_9a8c3c9df43fad2e",
+      "group": "labelled_split",
+      "input": "dados/processed/drenavision_v3_clean/images/test/click_trash_9a8c3c9df43fad2e.jpg",
+      "sha256": "9a8c3c9df43fad2e7b917f156aa0531b2e19252ab538c50f2b523b42ee9444e4",
+      "width": 3072,
+      "height": 3072,
+      "split": "test",
+      "source_key": "click_trash",
+      "source_group": "click::trash (570)",
+      "annotation_note": "reviewed single-class YOLO trash annotation",
+      "label_sha256": "f1f55c4f1377bb4955fa503c297936ce8a030a1b5eecfdee942fe0325a957cc6",
+      "truth": [
+        {
+          "class_id": 0,
+          "bounding_box": [
+            1450.99776,
+            1291.008,
+            1747.99872,
+            1726.9862399999997
+          ]
+        }
+      ]
+    },
+    {
+      "id": "test/click_trash_aa2c8b8c4d02ce97",
+      "group": "labelled_split",
+      "input": "dados/processed/drenavision_v3_clean/images/test/click_trash_aa2c8b8c4d02ce97.jpg",
+      "sha256": "aa2c8b8c4d02ce97e451fa6d1d1764b10ad0cfb248fed5ce11055ecfd1876b1c",
+      "width": 3468,
+      "height": 3468,
+      "split": "test",
+      "source_key": "click_trash",
+      "source_group": "click::trash (611)",
+      "annotation_note": "reviewed single-class YOLO trash annotation",
+      "label_sha256": "b821a60828ce36ec4f7ec07572d4130b64fa03adb2b9cca1611c30e06e7f2b63",
+      "truth": [
+        {
+          "class_id": 0,
+          "bounding_box": [
+            1542.01152,
+            1695.99072,
+            2191.9840799999997,
+            2094.01308
+          ]
+        }
+      ]
+    },
+    {
+      "id": "test/click_trash_ad30aaa7502bc6bb",
+      "group": "labelled_split",
+      "input": "dados/processed/drenavision_v3_clean/images/test/click_trash_ad30aaa7502bc6bb.jpg",
+      "sha256": "ad30aaa7502bc6bba27fdf16aa73c042e25ac2275dcacd57b087283c6cd7aa54",
+      "width": 4000,
+      "height": 3000,
+      "split": "test",
+      "source_key": "click_trash",
+      "source_group": "click::trash (818)",
+      "annotation_note": "reviewed single-class YOLO trash annotation",
+      "label_sha256": "6fdcde5a3fc7cb23753b563120f3efa9d8afb224c2d2f8aab4638d10c9fec1cc",
+      "truth": [
+        {
+          "class_id": 0,
+          "bounding_box": [
+            1889.0,
+            1398.0,
+            2263.0,
+            1623.99
+          ]
+        }
+      ]
+    },
+    {
+      "id": "test/click_trash_bd6650607a295623",
+      "group": "labelled_split",
+      "input": "dados/processed/drenavision_v3_clean/images/test/click_trash_bd6650607a295623.jpg",
+      "sha256": "bd6650607a295623cce08095e941aea399f1d444340782e9a872588d201170d5",
+      "width": 1806,
+      "height": 1806,
+      "split": "test",
+      "source_key": "click_trash",
+      "source_group": "click::trash (192)",
+      "annotation_note": "reviewed single-class YOLO trash annotation",
+      "label_sha256": "aa636986040fcadcb24de909977ca0519a2eaacd81f47169643bccba49e11035",
+      "truth": [
+        {
+          "class_id": 0,
+          "bounding_box": [
+            652.99542,
+            773.0041200000001,
+            951.99678,
+            989.9950200000001
+          ]
+        }
+      ]
+    },
+    {
+      "id": "test/click_trash_c2be896420a43935",
+      "group": "labelled_split",
+      "input": "dados/processed/drenavision_v3_clean/images/test/click_trash_c2be896420a43935.jpg",
+      "sha256": "c2be896420a43935d2e585479216a10240d0e97055c0cc9e634bcf8a4104c447",
+      "width": 3024,
+      "height": 3024,
+      "split": "test",
+      "source_key": "click_trash",
+      "source_group": "click::trash (441)",
+      "annotation_note": "reviewed single-class YOLO trash annotation",
+      "label_sha256": "067d6b3667977eb01fc5c85aea087c4ef2120f8f2247b348b39cdc487f721d57",
+      "truth": [
+        {
+          "class_id": 0,
+          "bounding_box": [
+            967.01472,
+            893.9851200000002,
+            1290.0081599999999,
+            1636.01424
+          ]
+        }
+      ]
+    },
+    {
+      "id": "test/click_trash_cb260b30e7e68512",
+      "group": "labelled_split",
+      "input": "dados/processed/drenavision_v3_clean/images/test/click_trash_cb260b30e7e68512.jpg",
+      "sha256": "cb260b30e7e68512c8a8b2d8c156fc3c123a348ed75e22f27575e003c0edcfff",
+      "width": 4096,
+      "height": 3072,
+      "split": "test",
+      "source_key": "click_trash",
+      "source_group": "click::trash (779)",
+      "annotation_note": "reviewed single-class YOLO trash annotation",
+      "label_sha256": "fc727246622ca099ce2c41706802f585b78807be8384286a8e2119df6d6114b8",
+      "truth": [
+        {
+          "class_id": 0,
+          "bounding_box": [
+            1707.008,
+            1963.0079999999998,
+            1888.0102399999998,
+            2164.00896
+          ]
+        },
+        {
+          "class_id": 0,
+          "bounding_box": [
+            2603.0080000000003,
+            1912.9958399999998,
+            2714.99264,
+            2035.99872
+          ]
+        },
+        {
+          "class_id": 0,
+          "bounding_box": [
+            1589.00224,
+            2827.99104,
+            1808.01536,
+            3017.0112000000004
+          ]
+        },
+        {
+          "class_id": 0,
+          "bounding_box": [
+            1948.0166399999998,
+            1385.99424,
+            2233.0163199999997,
+            1577.9942400000002
+          ]
+        }
+      ]
+    },
+    {
+      "id": "test/click_trash_cbfe38e0f062cff7",
+      "group": "labelled_split",
+      "input": "dados/processed/drenavision_v3_clean/images/test/click_trash_cbfe38e0f062cff7.jpg",
+      "sha256": "cbfe38e0f062cff7289adbbe989190e6d3c3680686084357845af986908cdfac",
+      "width": 1902,
+      "height": 1902,
+      "split": "test",
+      "source_key": "click_trash",
+      "source_group": "click::trash (327)",
+      "annotation_note": "reviewed single-class YOLO trash annotation",
+      "label_sha256": "94790ead5f899be8df11b3afb20992627dcadba9c1134f92f1b65de8e4c8bbbe",
+      "truth": [
+        {
+          "class_id": 0,
+          "bounding_box": [
+            761.9982600000001,
+            1063.00878,
+            1355.99286,
+            1443.0093599999998
+          ]
+        }
+      ]
+    },
+    {
+      "id": "test/click_trash_cce090e99de9e9d4",
+      "group": "labelled_split",
+      "input": "dados/processed/drenavision_v3_clean/images/test/click_trash_cce090e99de9e9d4.jpg",
+      "sha256": "cce090e99de9e9d494f39c4f86412601f4ebb017e3f24488ca576d746c2972b2",
+      "width": 3072,
+      "height": 3072,
+      "split": "test",
+      "source_key": "click_trash",
+      "source_group": "click::trash (136)",
+      "annotation_note": "reviewed single-class YOLO trash annotation",
+      "label_sha256": "217e7e122aee296c561416f8dbf31798ad2327de4aa837b7787fbd56845c57da",
+      "truth": [
+        {
+          "class_id": 0,
+          "bounding_box": [
+            1579.9910399999999,
+            1237.0022399999998,
+            1963.0079999999998,
+            1363.99872
+          ]
+        }
+      ]
+    },
+    {
+      "id": "test/click_trash_d12fbfa39d8bd081",
+      "group": "labelled_split",
+      "input": "dados/processed/drenavision_v3_clean/images/test/click_trash_d12fbfa39d8bd081.jpg",
+      "sha256": "d12fbfa39d8bd081c25e48ab0d2614f0161eb7022510f211a7c685d77abeaeaf",
+      "width": 1466,
+      "height": 1466,
+      "split": "test",
+      "source_key": "click_trash",
+      "source_group": "click::trash (225)",
+      "annotation_note": "reviewed single-class YOLO trash annotation",
+      "label_sha256": "636d15ddc701938084542858117ed44e2e972d476904e5352d79849676174aa2",
+      "truth": [
+        {
+          "class_id": 0,
+          "bounding_box": [
+            414.9952800000001,
+            666.0038000000001,
+            1300.00482,
+            1103.00374
+          ]
+        }
+      ]
+    },
+    {
+      "id": "test/click_trash_fc43e2c2b3fb402e",
+      "group": "labelled_split",
+      "input": "dados/processed/drenavision_v3_clean/images/test/click_trash_fc43e2c2b3fb402e.jpg",
+      "sha256": "fc43e2c2b3fb402e9678a378a50b15b04ae230222067428e64a389b26aabbc8c",
+      "width": 2329,
+      "height": 2329,
+      "split": "test",
+      "source_key": "click_trash",
+      "source_group": "click::trash (258)",
+      "annotation_note": "reviewed single-class YOLO trash annotation",
+      "label_sha256": "20b4c9b473dcea0183acf93ff06fdfe9125e1db09339812cfa1583c6c5fcb7ef",
+      "truth": [
+        {
+          "class_id": 0,
+          "bounding_box": [
+            1181.99079,
+            1004.0086100000001,
+            1798.01129,
+            1435.9915300000002
+          ]
+        },
+        {
+          "class_id": 0,
+          "bounding_box": [
+            987.0069099999998,
+            858.0036,
+            1472.9993399999998,
+            1223.00448
+          ]
+        },
+        {
+          "class_id": 0,
+          "bounding_box": [
+            242.80756599999998,
+            1174.221246,
+            459.111112,
+            1339.57093
+          ]
+        }
+      ]
+    },
+    {
+      "id": "test/irodent_02af19356995e059",
+      "group": "labelled_split",
+      "input": "dados/processed/drenavision_v3_clean/images/test/irodent_02af19356995e059.jpg",
+      "sha256": "02af19356995e059ad306cd083baacc717bca0d4bf3cd6acb258c2fb131241b7",
+      "width": 2048,
+      "height": 1346,
+      "split": "test",
+      "source_key": "irodent",
+      "source_group": "irodent::new_obs_id_0097.jpg",
+      "annotation_note": "{\"method\":\"visible-keypoints-v2\",\"visible_keypoints\":5,\"invisible_keypoints_excluded\":15,\"source_bbox_xywh\":[877,779,177,70],\"corrected_bbox_xywh\":[859.3,772.0,212.4,84.0],\"padding_per_side\":\"10 percent, minimum 2 pixels\"}",
+      "label_sha256": "0e1037291d6d3a954eb9a72ca2a860fa2be6400a582e3bf66aeef8ee8b1708bd",
+      "truth": [
+        {
+          "class_id": 2,
+          "bounding_box": [
+            859.300864,
+            772.000319,
+            1071.700992,
+            856.0001410000001
+          ]
+        }
+      ]
+    },
+    {
+      "id": "test/irodent_0f66ef550db9163f",
+      "group": "labelled_split",
+      "input": "dados/processed/drenavision_v3_clean/images/test/irodent_0f66ef550db9163f.jpg",
+      "sha256": "0f66ef550db9163fe1d00f4e7326836683e4c547ee87518a60d4aa45c7f6f78e",
+      "width": 1536,
+      "height": 2048,
+      "split": "test",
+      "source_key": "irodent",
+      "source_group": "irodent::obs_id_00139.jpg",
+      "annotation_note": "{\"method\":\"visible-keypoints-v2\",\"visible_keypoints\":3,\"invisible_keypoints_excluded\":17,\"source_bbox_xywh\":[0,0,667,1134],\"corrected_bbox_xywh\":[554.8,831.5,122.4,330.0],\"padding_per_side\":\"10 percent, minimum 2 pixels\"}",
+      "label_sha256": "0ee3532e2f5c876beb424f4a1851d13d98fc80bec494b5ecb0bcc4caa4dec3e0",
+      "truth": [
+        {
+          "class_id": 2,
+          "bounding_box": [
+            554.8001280000001,
+            831.499264,
+            677.2008960000001,
+            1161.499648
+          ]
+        }
+      ]
+    },
+    {
+      "id": "test/irodent_1229b33e7eb1e2b9",
+      "group": "labelled_split",
+      "input": "dados/processed/drenavision_v3_clean/images/test/irodent_1229b33e7eb1e2b9.jpg",
+      "sha256": "1229b33e7eb1e2b9550c1d6829dda616df074e44fa6ffa61c89bf2b3cca297b6",
+      "width": 2048,
+      "height": 1365,
+      "split": "test",
+      "source_key": "irodent",
+      "source_group": "irodent::obs_id_00240.jpg",
+      "annotation_note": "{\"method\":\"visible-keypoints-v2\",\"visible_keypoints\":5,\"invisible_keypoints_excluded\":15,\"source_bbox_xywh\":[0,0,1037,803],\"corrected_bbox_xywh\":[866.5,641.3,186.0,176.4],\"padding_per_side\":\"10 percent, minimum 2 pixels\"}",
+      "label_sha256": "db5eeeadf6951db8cdd4b44cbb30c7c8361b7df9b3dd406898756e5d612028d9",
+      "truth": [
+        {
+          "class_id": 2,
+          "bounding_box": [
+            866.5006079999999,
+            641.2995225000001,
+            1052.4999679999999,
+            817.6998375000001
+          ]
+        }
+      ]
+    },
+    {
+      "id": "test/irodent_1ce34e1d56fba67e",
+      "group": "labelled_split",
+      "input": "dados/processed/drenavision_v3_clean/images/test/irodent_1ce34e1d56fba67e.jpg",
+      "sha256": "1ce34e1d56fba67e4b08258c8a2f0649e11f215e9712a4d445dc34ac0e8175aa",
+      "width": 1660,
+      "height": 1165,
+      "split": "test",
+      "source_key": "irodent",
+      "source_group": "irodent::new_obs_id_00295.jpg",
+      "annotation_note": "{\"method\":\"visible-keypoints-v2\",\"visible_keypoints\":8,\"invisible_keypoints_excluded\":12,\"source_bbox_xywh\":[555,564,716,371],\"corrected_bbox_xywh\":[483.4,526.9,859.2,445.2],\"padding_per_side\":\"10 percent, minimum 2 pixels\"}",
+      "label_sha256": "b1c4a33896920f55a3c46c0aee663831e08425b18eb6ea0866708b79e3f78f7a",
+      "truth": [
+        {
+          "class_id": 2,
+          "bounding_box": [
+            483.4003000000001,
+            526.900375,
+            1342.5997,
+            972.1004650000001
+          ]
+        }
+      ]
+    },
+    {
+      "id": "test/irodent_27d984c6a5e23cfd",
+      "group": "labelled_split",
+      "input": "dados/processed/drenavision_v3_clean/images/test/irodent_27d984c6a5e23cfd.jpg",
+      "sha256": "27d984c6a5e23cfd7c8ebf611de46df71e7b6a7e9d8b640bf0663dca1c2adbc6",
+      "width": 1315,
+      "height": 829,
+      "split": "test",
+      "source_key": "irodent",
+      "source_group": "irodent::obs_id_00107.jpg",
+      "annotation_note": "{\"method\":\"visible-keypoints-v2\",\"visible_keypoints\":6,\"invisible_keypoints_excluded\":14,\"source_bbox_xywh\":[0,0,805,546],\"corrected_bbox_xywh\":[604.8,300.7,218.4,267.6],\"padding_per_side\":\"10 percent, minimum 2 pixels\"}",
+      "label_sha256": "50af998f05f74c68ebe3d69138ddf8ca8b38574b0c6e740a0d367d80eb969116",
+      "truth": [
+        {
+          "class_id": 2,
+          "bounding_box": [
+            604.8000599999999,
+            300.6994394999999,
+            823.2005199999999,
+            568.2998105
+          ]
+        }
+      ]
+    },
+    {
+      "id": "test/irodent_2d64cb4fdea65cc1",
+      "group": "labelled_split",
+      "input": "dados/processed/drenavision_v3_clean/images/test/irodent_2d64cb4fdea65cc1.jpg",
+      "sha256": "2d64cb4fdea65cc159287209df253b726e909af5d6c44b714a9b8b866d108bfd",
+      "width": 2048,
+      "height": 1367,
+      "split": "test",
+      "source_key": "irodent",
+      "source_group": "irodent::new_obs_id_00141.jpg",
+      "annotation_note": "{\"method\":\"visible-keypoints-v2\",\"visible_keypoints\":10,\"invisible_keypoints_excluded\":10,\"source_bbox_xywh\":[1032,615,217,224],\"corrected_bbox_xywh\":[1010.3,592.6,260.4,268.8],\"padding_per_side\":\"10 percent, minimum 2 pixels\"}",
+      "label_sha256": "ed46f860f5b3f53bb41fdaaaa644c5d61961ac2050cdcdac7027d852f20ffdf8",
+      "truth": [
+        {
+          "class_id": 2,
+          "bounding_box": [
+            1010.3009279999999,
+            592.6006515,
+            1270.700032,
+            861.4006965000001
+          ]
+        }
+      ]
+    },
+    {
+      "id": "test/irodent_311988d4ce1851a6",
+      "group": "labelled_split",
+      "input": "dados/processed/drenavision_v3_clean/images/test/irodent_311988d4ce1851a6.jpg",
+      "sha256": "311988d4ce1851a6d24db71478240bbccc8b9f2ed832cab966d56b7ceae05df0",
+      "width": 2048,
+      "height": 1536,
+      "split": "test",
+      "source_key": "irodent",
+      "source_group": "irodent::obs_id_00184.jpg",
+      "annotation_note": "{\"method\":\"visible-keypoints-v2\",\"visible_keypoints\":9,\"invisible_keypoints_excluded\":11,\"source_bbox_xywh\":[0,0,1265,899],\"corrected_bbox_xywh\":[856.9,545.9,445.2,385.2],\"padding_per_side\":\"10 percent, minimum 2 pixels\"}",
+      "label_sha256": "59678bf79bca93beda4cc0aaa8f933ba04e91062d7fe735ecb39881de08ec421",
+      "truth": [
+        {
+          "class_id": 2,
+          "bounding_box": [
+            856.900608,
+            545.899776,
+            1302.1009920000001,
+            931.0993920000001
+          ]
+        }
+      ]
+    },
+    {
+      "id": "test/irodent_5c3791cf9837f69f",
+      "group": "labelled_split",
+      "input": "dados/processed/drenavision_v3_clean/images/test/irodent_5c3791cf9837f69f.jpg",
+      "sha256": "5c3791cf9837f69fd6d34a5082b96fbbbbb37073f45c5f4d0eb555b0c8dc3a31",
+      "width": 2048,
+      "height": 1511,
+      "split": "test",
+      "source_key": "irodent",
+      "source_group": "irodent::new_obs_id_00209.jpg",
+      "annotation_note": "{\"method\":\"visible-keypoints-v2\",\"visible_keypoints\":13,\"invisible_keypoints_excluded\":7,\"source_bbox_xywh\":[687,449,535,702],\"corrected_bbox_xywh\":[633.5,378.8,642.0,842.4],\"padding_per_side\":\"10 percent, minimum 2 pixels\"}",
+      "label_sha256": "d8be6ec72465072cce73376bae9a85b030922776f9ac8787315f1906fd280042",
+      "truth": [
+        {
+          "class_id": 2,
+          "bounding_box": [
+            633.498624,
+            378.800145,
+            1275.4995199999998,
+            1221.200777
+          ]
+        }
+      ]
+    },
+    {
+      "id": "test/irodent_5c424e240ff802d9",
+      "group": "labelled_split",
+      "input": "dados/processed/drenavision_v3_clean/images/test/irodent_5c424e240ff802d9.jpg",
+      "sha256": "5c424e240ff802d99087a5280888f272ea3572a989b410e2a1194fae89295581",
+      "width": 1152,
+      "height": 2048,
+      "split": "test",
+      "source_key": "irodent",
+      "source_group": "irodent::obs_id_00526.jpg",
+      "annotation_note": "{\"method\":\"visible-keypoints-v2\",\"visible_keypoints\":6,\"invisible_keypoints_excluded\":14,\"source_bbox_xywh\":[0,0,981,1065],\"corrected_bbox_xywh\":[620.2,662.4,393.6,439.2],\"padding_per_side\":\"10 percent, minimum 2 pixels\"}",
+      "label_sha256": "8f88524fbffd1aec38efb5a6115d2d409cf42032607f8c618e8d867719589892",
+      "truth": [
+        {
+          "class_id": 2,
+          "bounding_box": [
+            620.19936,
+            662.4,
+            1013.7997439999999,
+            1101.599744
+          ]
+        }
+      ]
+    },
+    {
+      "id": "test/irodent_7df7a4acb1ca7043",
+      "group": "labelled_split",
+      "input": "dados/processed/drenavision_v3_clean/images/test/irodent_7df7a4acb1ca7043.jpg",
+      "sha256": "7df7a4acb1ca704300687800f7dfd33d5c4df6acfcf1967619a0b24d9d1db068",
+      "width": 894,
+      "height": 605,
+      "split": "test",
+      "source_key": "irodent",
+      "source_group": "irodent::obs_id_00847.jpg",
+      "annotation_note": "{\"method\":\"visible-keypoints-v2\",\"visible_keypoints\":10,\"invisible_keypoints_excluded\":10,\"source_bbox_xywh\":[0,0,482,391],\"corrected_bbox_xywh\":[396.2,259.0,93.6,144.0],\"padding_per_side\":\"10 percent, minimum 2 pixels\"}",
+      "label_sha256": "373d94a3fae1cb1d638913981467cfccdc2b696d9fb8ba8a46d0cb4602eddad7",
+      "truth": [
+        {
+          "class_id": 2,
+          "bounding_box": [
+            396.200238,
+            258.9995925,
+            489.80025,
+            402.99987749999997
+          ]
+        }
+      ]
+    },
+    {
+      "id": "test/irodent_800b0d6100e145c3",
+      "group": "labelled_split",
+      "input": "dados/processed/drenavision_v3_clean/images/test/irodent_800b0d6100e145c3.jpg",
+      "sha256": "800b0d6100e145c3a92795377c29b3a901072a24c0b8c73e630f009956e6bfcd",
+      "width": 2048,
+      "height": 1536,
+      "split": "test",
+      "source_key": "irodent",
+      "source_group": "irodent::obs_id_00362.jpg",
+      "annotation_note": "{\"method\":\"visible-keypoints-v2\",\"visible_keypoints\":10,\"invisible_keypoints_excluded\":10,\"source_bbox_xywh\":[0,0,1191,814],\"corrected_bbox_xywh\":[765.3,460.9,464.4,385.2],\"padding_per_side\":\"10 percent, minimum 2 pixels\"}",
+      "label_sha256": "3a004e84d90b6ec0f52e1677d4938f7cab44d956dd827fc93434e70ea073e013",
+      "truth": [
+        {
+          "class_id": 2,
+          "bounding_box": [
+            765.300736,
+            460.900608,
+            1229.70112,
+            846.100224
+          ]
+        }
+      ]
+    },
+    {
+      "id": "test/irodent_9282ac488a0ca3d2",
+      "group": "labelled_split",
+      "input": "dados/processed/drenavision_v3_clean/images/test/irodent_9282ac488a0ca3d2.jpg",
+      "sha256": "9282ac488a0ca3d25d310af59f04db6d75c1a8efd10ea4888c8c316b38915e43",
+      "width": 2048,
+      "height": 1365,
+      "split": "test",
+      "source_key": "irodent",
+      "source_group": "irodent::obs_id_008.jpg",
+      "annotation_note": "{\"method\":\"visible-keypoints-v2\",\"visible_keypoints\":11,\"invisible_keypoints_excluded\":9,\"source_bbox_xywh\":[0,0,1314,1079],\"corrected_bbox_xywh\":[842.1,684.1,514.8,430.8],\"padding_per_side\":\"10 percent, minimum 2 pixels\"}",
+      "label_sha256": "6944d68bb0b87752f59dcd2ebf9cf3a4c4ab20006b699ddfc7406e93368a1bc9",
+      "truth": [
+        {
+          "class_id": 2,
+          "bounding_box": [
+            842.0997120000001,
+            684.0997799999999,
+            1356.899328,
+            1114.89924
+          ]
+        }
+      ]
+    },
+    {
+      "id": "test/irodent_a25a7577d3934a1f",
+      "group": "labelled_split",
+      "input": "dados/processed/drenavision_v3_clean/images/test/irodent_a25a7577d3934a1f.jpg",
+      "sha256": "a25a7577d3934a1f79847edf30fb042ff9af79df0671d1ad4f3f64f2cc16e9cf",
+      "width": 1024,
+      "height": 709,
+      "split": "test",
+      "source_key": "irodent",
+      "source_group": "irodent::new_obs_id_00253.jpg",
+      "annotation_note": "{\"method\":\"visible-keypoints-v2\",\"visible_keypoints\":7,\"invisible_keypoints_excluded\":13,\"source_bbox_xywh\":[475,250,123,181],\"corrected_bbox_xywh\":[462.7,231.9,147.6,217.2],\"padding_per_side\":\"10 percent, minimum 2 pixels\"}",
+      "label_sha256": "138eabcde3ec4b6af0f2898b1141fa05bcf8bc73357b63f691109a960a200bd3",
+      "truth": [
+        {
+          "class_id": 2,
+          "bounding_box": [
+            462.700032,
+            231.9000745,
+            610.300416,
+            449.1000975
+          ]
+        }
+      ]
+    },
+    {
+      "id": "test/irodent_a9cbcacbdfa82279",
+      "group": "labelled_split",
+      "input": "dados/processed/drenavision_v3_clean/images/test/irodent_a9cbcacbdfa82279.jpg",
+      "sha256": "a9cbcacbdfa8227953140c1912dcdae191925fedcfe218102c453f96bc863f3f",
+      "width": 1024,
+      "height": 732,
+      "split": "test",
+      "source_key": "irodent",
+      "source_group": "irodent::obs_id_00596.jpg",
+      "annotation_note": "{\"method\":\"visible-keypoints-v2\",\"visible_keypoints\":11,\"invisible_keypoints_excluded\":9,\"source_bbox_xywh\":[0,0,631,440],\"corrected_bbox_xywh\":[227.3,243.1,440.4,214.8],\"padding_per_side\":\"10 percent, minimum 2 pixels\"}",
+      "label_sha256": "bb03f6559d78d80a75f99d6b47a5f613f9f2123063b03cfb71f82089556c2e77",
+      "truth": [
+        {
+          "class_id": 2,
+          "bounding_box": [
+            227.300352,
+            243.099762,
+            667.700224,
+            457.900038
+          ]
+        }
+      ]
+    },
+    {
+      "id": "test/irodent_b3ee6ae0980509ae",
+      "group": "labelled_split",
+      "input": "dados/processed/drenavision_v3_clean/images/test/irodent_b3ee6ae0980509ae.jpg",
+      "sha256": "b3ee6ae0980509aee7acb3b895bb8a66ce0d9d02e82764a529eb4ba623949ab2",
+      "width": 2048,
+      "height": 1365,
+      "split": "test",
+      "source_key": "irodent",
+      "source_group": "irodent::obs_id_00290.jpg",
+      "annotation_note": "{\"method\":\"visible-keypoints-v2\",\"visible_keypoints\":3,\"invisible_keypoints_excluded\":17,\"source_bbox_xywh\":[0,0,1737,858],\"corrected_bbox_xywh\":[464.3,674.3,1388.4,200.4],\"padding_per_side\":\"10 percent, minimum 2 pixels\"}",
+      "label_sha256": "322a60e7f132bdc853d66394ccedc4bca504f16eb23ad19dcfbe3ddd7772b4ee",
+      "truth": [
+        {
+          "class_id": 2,
+          "bounding_box": [
+            464.300032,
+            674.2997625,
+            1852.700672,
+            874.6995075
+          ]
+        }
+      ]
+    },
+    {
+      "id": "test/irodent_c1e4b5a150c4b7f5",
+      "group": "labelled_split",
+      "input": "dados/processed/drenavision_v3_clean/images/test/irodent_c1e4b5a150c4b7f5.jpg",
+      "sha256": "c1e4b5a150c4b7f5b907d3fc27fa2e94593b6143788af7b3151e4e4e8fb156ba",
+      "width": 2048,
+      "height": 1365,
+      "split": "test",
+      "source_key": "irodent",
+      "source_group": "irodent::obs_id_00655.jpg",
+      "annotation_note": "{\"method\":\"visible-keypoints-v2\",\"visible_keypoints\":10,\"invisible_keypoints_excluded\":10,\"source_bbox_xywh\":[0,0,1232,967],\"corrected_bbox_xywh\":[929.5,655.7,330.0,339.6],\"padding_per_side\":\"10 percent, minimum 2 pixels\"}",
+      "label_sha256": "adfad4eab005013c7665e07586af858655a9bf3e637a07613991a41ac543cc4b",
+      "truth": [
+        {
+          "class_id": 2,
+          "bounding_box": [
+            929.50016,
+            655.7002725000001,
+            1259.500544,
+            995.2999875
+          ]
+        }
+      ]
+    },
+    {
+      "id": "test/irodent_c8f861d43c739613",
+      "group": "labelled_split",
+      "input": "dados/processed/drenavision_v3_clean/images/test/irodent_c8f861d43c739613.jpg",
+      "sha256": "c8f861d43c739613519a421414de7d4051fe2535412df3fc969961ad729f9864",
+      "width": 2048,
+      "height": 1536,
+      "split": "test",
+      "source_key": "irodent",
+      "source_group": "irodent::obs_id_00510.jpg",
+      "annotation_note": "{\"method\":\"visible-keypoints-v2\",\"visible_keypoints\":10,\"invisible_keypoints_excluded\":10,\"source_bbox_xywh\":[0,0,1395,963],\"corrected_bbox_xywh\":[424.8,660.5,1058.4,330.0],\"padding_per_side\":\"10 percent, minimum 2 pixels\"}",
+      "label_sha256": "ac19879c102aa1426094a08a73b47b8befed818d7fc05758b54a3f39841d19a4",
+      "truth": [
+        {
+          "class_id": 2,
+          "bounding_box": [
+            424.7992320000001,
+            660.499968,
+            1483.199488,
+            990.500352
+          ]
+        }
+      ]
+    },
+    {
+      "id": "test/irodent_d4482c3c256e1ef8",
+      "group": "labelled_split",
+      "input": "dados/processed/drenavision_v3_clean/images/test/irodent_d4482c3c256e1ef8.jpg",
+      "sha256": "d4482c3c256e1ef899a7c4dcb8c48cdeb2292b6109106483a6ea5a9966c2b2b8",
+      "width": 2048,
+      "height": 1355,
+      "split": "test",
+      "source_key": "irodent",
+      "source_group": "irodent::obs_id_00595.jpg",
+      "annotation_note": "{\"method\":\"visible-keypoints-v2\",\"visible_keypoints\":4,\"invisible_keypoints_excluded\":16,\"source_bbox_xywh\":[0,0,1037,902],\"corrected_bbox_xywh\":[423.2,735.9,669.6,181.2],\"padding_per_side\":\"10 percent, minimum 2 pixels\"}",
+      "label_sha256": "4ba7e4933bfe69788898b2e73308b17e4cdd9a72e49523da051c390241aa3906",
+      "truth": [
+        {
+          "class_id": 2,
+          "bounding_box": [
+            423.19974399999995,
+            735.8998225000001,
+            1092.7994879999999,
+            917.0999075
+          ]
+        }
+      ]
+    },
+    {
+      "id": "test/irodent_ebb23262d99ea7e1",
+      "group": "labelled_split",
+      "input": "dados/processed/drenavision_v3_clean/images/test/irodent_ebb23262d99ea7e1.jpg",
+      "sha256": "ebb23262d99ea7e1765639833ef7b0888a4e5942798ffdf4399c57af941d89b3",
+      "width": 2048,
+      "height": 1449,
+      "split": "test",
+      "source_key": "irodent",
+      "source_group": "irodent::obs_id_00722.jpg",
+      "annotation_note": "{\"method\":\"visible-keypoints-v2\",\"visible_keypoints\":11,\"invisible_keypoints_excluded\":9,\"source_bbox_xywh\":[0,0,1144,797],\"corrected_bbox_xywh\":[869.0,468.1,300.0,358.8],\"padding_per_side\":\"10 percent, minimum 2 pixels\"}",
+      "label_sha256": "b7b08a6677bab366810254cd76cce33389d272c2204f92800afcec8e54828108",
+      "truth": [
+        {
+          "class_id": 2,
+          "bounding_box": [
+            869.0012159999999,
+            468.1001744999999,
+            1169.000448,
+            826.9001054999999
+          ]
+        }
+      ]
+    },
+    {
+      "id": "test/irodent_ee1f7a4fb944857a",
+      "group": "labelled_split",
+      "input": "dados/processed/drenavision_v3_clean/images/test/irodent_ee1f7a4fb944857a.jpg",
+      "sha256": "ee1f7a4fb944857ad0991591830ab174ed0fe0752450f07f55b531db7ac93026",
+      "width": 2048,
+      "height": 1365,
+      "split": "test",
+      "source_key": "irodent",
+      "source_group": "irodent::obs_id_00132.jpg",
+      "annotation_note": "{\"method\":\"visible-keypoints-v2\",\"visible_keypoints\":5,\"invisible_keypoints_excluded\":15,\"source_bbox_xywh\":[0,0,1324,716],\"corrected_bbox_xywh\":[709.1,423.4,670.8,319.2],\"padding_per_side\":\"10 percent, minimum 2 pixels\"}",
+      "label_sha256": "73bc080094cd171bbc3f34c910ef396de0098143bf6dbcd2f8a9fced68ea48db",
+      "truth": [
+        {
+          "class_id": 2,
+          "bounding_box": [
+            709.1005439999999,
+            423.399795,
+            1379.900416,
+            742.5995849999999
+          ]
+        }
+      ]
+    },
+    {
+      "id": "test/stagnant_water_04213a44e43bc933",
+      "group": "labelled_split",
+      "input": "dados/processed/drenavision_v3_clean/images/test/stagnant_water_04213a44e43bc933.jpg",
+      "sha256": "04213a44e43bc93375d887967c76095301f7826e8125b522e00104037ef51f92",
+      "width": 256,
+      "height": 256,
+      "split": "test",
+      "source_key": "stagnant_water",
+      "source_group": "Outdoor/Water and wet surface/Side view::block-180",
+      "annotation_note": "source YOLO class water retained; wet-surface boxes dropped; v3: union bounds of intersecting/touching source water-box components; no positive gap bridging",
+      "label_sha256": "46a0b69907f5fb4df0e8d4681205876224196da12668de31d7a2862efd1db639",
+      "truth": [
+        {
+          "class_id": 1,
+          "bounding_box": [
+            1.0001919999999984,
+            152.0,
+            196.0,
+            225.99987199999998
+          ]
+        }
+      ]
+    },
+    {
+      "id": "test/stagnant_water_34623cea707f7576",
+      "group": "labelled_split",
+      "input": "dados/processed/drenavision_v3_clean/images/test/stagnant_water_34623cea707f7576.jpg",
+      "sha256": "34623cea707f757602c5a9b740e089ed6284067ed4b6f685a99b646aa50eaf4a",
+      "width": 256,
+      "height": 256,
+      "split": "test",
+      "source_key": "stagnant_water",
+      "source_group": "Outdoor/Water and wet surface/Side view::block-180",
+      "annotation_note": "source YOLO class water retained; wet-surface boxes dropped; v3: union bounds of intersecting/touching source water-box components; no positive gap bridging",
+      "label_sha256": "ebda56aca3ce01aff9316505b8b5880341dca8b143832b07d13497fb5788ee70",
+      "truth": [
+        {
+          "class_id": 1,
+          "bounding_box": [
+            76.999808,
+            115.99987200000001,
+            109.00006400000001,
+            134.0
+          ]
+        },
+        {
+          "class_id": 1,
+          "bounding_box": [
+            198.0,
+            88.99993599999999,
+            210.0,
+            96.0
+          ]
+        },
+        {
+          "class_id": 1,
+          "bounding_box": [
+            101.999872,
+            75.999872,
+            116.999936,
+            86.999936
+          ]
+        },
+        {
+          "class_id": 1,
+          "bounding_box": [
+            123.99987199999998,
+            135.000064,
+            166.999936,
+            166.00012800000002
+          ]
+        }
+      ]
+    },
+    {
+      "id": "test/stagnant_water_34a6334042f9d44d",
+      "group": "labelled_split",
+      "input": "dados/processed/drenavision_v3_clean/images/test/stagnant_water_34a6334042f9d44d.jpg",
+      "sha256": "34a6334042f9d44de1285d2b176f42c20ef7ca82d5a267892b4694066a5e4d1c",
+      "width": 256,
+      "height": 256,
+      "split": "test",
+      "source_key": "stagnant_water",
+      "source_group": "Outdoor/Water and wet surface/Side view::block-180",
+      "annotation_note": "source YOLO class water retained; wet-surface boxes dropped; v3: union bounds of intersecting/touching source water-box components; no positive gap bridging",
+      "label_sha256": "8b12fe7f64258385dae4c62fcfad7f5bdda705a0304ecf86e60c0ced5f5007e9",
+      "truth": [
+        {
+          "class_id": 1,
+          "bounding_box": [
+            68.999936,
+            124.00000000000001,
+            227.000064,
+            162.00012800000002
+          ]
+        }
+      ]
+    },
+    {
+      "id": "test/stagnant_water_4eb2313c261d7c5a",
+      "group": "labelled_split",
+      "input": "dados/processed/drenavision_v3_clean/images/test/stagnant_water_4eb2313c261d7c5a.jpg",
+      "sha256": "4eb2313c261d7c5ab8cd630ff9db1e6d65ee97cbb9d1398abf57a09ed5d366c5",
+      "width": 256,
+      "height": 256,
+      "split": "test",
+      "source_key": "stagnant_water",
+      "source_group": "Outdoor/Water and wet surface/Side view::block-27",
+      "annotation_note": "source YOLO class water retained; wet-surface boxes dropped; v3: union bounds of intersecting/touching source water-box components; no positive gap bridging",
+      "label_sha256": "edbe9bc8b7da44557deadfa18db9924982ea91636bbbeee4915bc90ef7e99fe8",
+      "truth": [
+        {
+          "class_id": 1,
+          "bounding_box": [
+            2.9998080000000016,
+            39.00006400000001,
+            239.000064,
+            238.00012800000002
+          ]
+        }
+      ]
+    },
+    {
+      "id": "test/stagnant_water_59643e4cc12ca4d3",
+      "group": "labelled_split",
+      "input": "dados/processed/drenavision_v3_clean/images/test/stagnant_water_59643e4cc12ca4d3.jpg",
+      "sha256": "59643e4cc12ca4d3e7da7231b72f858df35a8e740cfe35446105e13061dde708",
+      "width": 256,
+      "height": 256,
+      "split": "test",
+      "source_key": "stagnant_water",
+      "source_group": "Outdoor/Water and wet surface/Side view::block-180",
+      "annotation_note": "source YOLO class water retained; wet-surface boxes dropped; v3: union bounds of intersecting/touching source water-box components; no positive gap bridging",
+      "label_sha256": "97a78a03f9149e7f39acfb94d0c2be932ae8f6f4443e66e81d2408514dbcc37b",
+      "truth": [
+        {
+          "class_id": 1,
+          "bounding_box": [
+            32.0,
+            110.000128,
+            231.000064,
+            224.999936
+          ]
+        },
+        {
+          "class_id": 1,
+          "bounding_box": [
+            133.000064,
+            82.0,
+            144.00012800000002,
+            86.99993599999999
+          ]
+        },
+        {
+          "class_id": 1,
+          "bounding_box": [
+            192.999936,
+            88.0,
+            207.000064,
+            96.0
+          ]
+        },
+        {
+          "class_id": 1,
+          "bounding_box": [
+            208.999936,
+            92.0,
+            224.0,
+            99.00006400000001
+          ]
+        },
+        {
+          "class_id": 1,
+          "bounding_box": [
+            242.0,
+            79.000064,
+            254.999936,
+            86.000128
+          ]
+        },
+        {
+          "class_id": 1,
+          "bounding_box": [
+            183.000064,
+            0.9999359999999999,
+            207.000064,
+            1.9998719999999999
+          ]
+        },
+        {
+          "class_id": 1,
+          "bounding_box": [
+            222.00012800000002,
+            40.000128,
+            232.0,
+            45.000064
+          ]
+        },
+        {
+          "class_id": 1,
+          "bounding_box": [
+            232.0,
+            126.00012799999999,
+            256.0,
+            174.000128
+          ]
+        },
+        {
+          "class_id": 1,
+          "bounding_box": [
+            180.0,
+            34.000128000000004,
+            211.000064,
+            44.0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "test/stagnant_water_5d1a03fa07e92d13",
+      "group": "labelled_split",
+      "input": "dados/processed/drenavision_v3_clean/images/test/stagnant_water_5d1a03fa07e92d13.jpg",
+      "sha256": "5d1a03fa07e92d136720ce04fe8502c46b329f9d1345e128b6c9b6a081cfa667",
+      "width": 256,
+      "height": 256,
+      "split": "test",
+      "source_key": "stagnant_water",
+      "source_group": "Outdoor/Water and wet surface/Side view::block-27",
+      "annotation_note": "source YOLO class water retained; wet-surface boxes dropped; v3: union bounds of intersecting/touching source water-box components; no positive gap bridging",
+      "label_sha256": "c2c019675180c7396c7e94702af84077dd381726359879faacfa40ae0075de1e",
+      "truth": [
+        {
+          "class_id": 1,
+          "bounding_box": [
+            32.999808,
+            46.00012800000002,
+            202.0,
+            255.000064
+          ]
+        }
+      ]
+    },
+    {
+      "id": "test/stagnant_water_71862d3fe3a3fdc3",
+      "group": "labelled_split",
+      "input": "dados/processed/drenavision_v3_clean/images/test/stagnant_water_71862d3fe3a3fdc3.jpg",
+      "sha256": "71862d3fe3a3fdc398d5ca9a4d3ec298abe4ea41cf1b030bda379348e243b551",
+      "width": 256,
+      "height": 256,
+      "split": "test",
+      "source_key": "stagnant_water",
+      "source_group": "Outdoor/Water and wet surface/Side view::block-27",
+      "annotation_note": "source YOLO class water retained; wet-surface boxes dropped; v3: union bounds of intersecting/touching source water-box components; no positive gap bridging",
+      "label_sha256": "8fdf1a5103c728850c641dcef07eb6cae917669a16ecdefc796ff7576120975c",
+      "truth": [
+        {
+          "class_id": 1,
+          "bounding_box": [
+            0.999935999999991,
+            35.000192,
+            256.0,
+            217.000064
+          ]
+        }
+      ]
+    },
+    {
+      "id": "test/stagnant_water_78c5a3feac2bba2c",
+      "group": "labelled_split",
+      "input": "dados/processed/drenavision_v3_clean/images/test/stagnant_water_78c5a3feac2bba2c.jpg",
+      "sha256": "78c5a3feac2bba2cfb366d11fb96cc94167ddd4074a43baf5dd7dbb54e299a4a",
+      "width": 256,
+      "height": 256,
+      "split": "test",
+      "source_key": "stagnant_water",
+      "source_group": "Outdoor/Water and wet surface/Side view::block-180",
+      "annotation_note": "source YOLO class water retained; wet-surface boxes dropped; v3: union bounds of intersecting/touching source water-box components; no positive gap bridging",
+      "label_sha256": "0dc1372b0b39035a327b9a8b022a74fb1c6a6da1114a4ef7909c6b69d58fa528",
+      "truth": [
+        {
+          "class_id": 1,
+          "bounding_box": [
+            40.0,
+            114.0,
+            103.00006400000001,
+            133.000064
+          ]
+        },
+        {
+          "class_id": 1,
+          "bounding_box": [
+            127.00006400000001,
+            142.00012800000002,
+            144.0,
+            159.000064
+          ]
+        },
+        {
+          "class_id": 1,
+          "bounding_box": [
+            146.000128,
+            144.0,
+            154.000128,
+            160.999936
+          ]
+        },
+        {
+          "class_id": 1,
+          "bounding_box": [
+            156.0,
+            145.99987199999998,
+            171.000064,
+            160.0
+          ]
+        },
+        {
+          "class_id": 1,
+          "bounding_box": [
+            7.000063999999998,
+            124.00000000000001,
+            39.000063999999995,
+            137.00019200000003
+          ]
+        }
+      ]
+    },
+    {
+      "id": "test/stagnant_water_7da9000c6d134c96",
+      "group": "labelled_split",
+      "input": "dados/processed/drenavision_v3_clean/images/test/stagnant_water_7da9000c6d134c96.jpg",
+      "sha256": "7da9000c6d134c960ad5dbd4a7a311c4185fb9e088d7b075991fc0388f05a7f9",
+      "width": 256,
+      "height": 256,
+      "split": "test",
+      "source_key": "stagnant_water",
+      "source_group": "Outdoor/Water and wet surface/Side view::block-180",
+      "annotation_note": "source YOLO class water retained; wet-surface boxes dropped; v3: union bounds of intersecting/touching source water-box components; no positive gap bridging",
+      "label_sha256": "3f5adeb2a9250391e515649c988095d1b98ff8ffacff5dd86c626235d52edbe5",
+      "truth": [
+        {
+          "class_id": 1,
+          "bounding_box": [
+            47.00006400000001,
+            116.00012799999999,
+            202.999808,
+            200.000128
+          ]
+        },
+        {
+          "class_id": 1,
+          "bounding_box": [
+            202.99993600000002,
+            127.999872,
+            232.999808,
+            184.000128
+          ]
+        },
+        {
+          "class_id": 1,
+          "bounding_box": [
+            233.99987199999998,
+            152.000128,
+            255.000064,
+            187.000192
+          ]
+        },
+        {
+          "class_id": 1,
+          "bounding_box": [
+            0.9999360000000017,
+            156.000256,
+            46.000128000000004,
+            177.999872
+          ]
+        },
+        {
+          "class_id": 1,
+          "bounding_box": [
+            164.0,
+            76.999936,
+            181.99987199999998,
+            84.999936
+          ]
+        },
+        {
+          "class_id": 1,
+          "bounding_box": [
+            182.00012800000002,
+            76.0,
+            215.000064,
+            84.0
+          ]
+        },
+        {
+          "class_id": 1,
+          "bounding_box": [
+            18.999935999999998,
+            84.0,
+            78.99993599999999,
+            100.99993599999999
+          ]
+        },
+        {
+          "class_id": 1,
+          "bounding_box": [
+            30.000128,
+            104.999936,
+            64.0,
+            119.000064
+          ]
+        }
+      ]
+    },
+    {
+      "id": "test/stagnant_water_857db630032f82c5",
+      "group": "labelled_split",
+      "input": "dados/processed/drenavision_v3_clean/images/test/stagnant_water_857db630032f82c5.jpg",
+      "sha256": "857db630032f82c511a288457a2a8f58b48a058782f05cbf4f1e77b0a9274e31",
+      "width": 256,
+      "height": 256,
+      "split": "test",
+      "source_key": "stagnant_water",
+      "source_group": "Outdoor/Water and wet surface/Side view::block-27",
+      "annotation_note": "source YOLO class water retained; wet-surface boxes dropped; v3: union bounds of intersecting/touching source water-box components; no positive gap bridging",
+      "label_sha256": "dd1501138a060a9682793ac02761fa517dbca2bd24d509b9fc119728056ae52f",
+      "truth": [
+        {
+          "class_id": 1,
+          "bounding_box": [
+            152.999936,
+            17.000064000000002,
+            215.000064,
+            53.000064
+          ]
+        },
+        {
+          "class_id": 1,
+          "bounding_box": [
+            66.00012799999999,
+            54.000128000000004,
+            202.000128,
+            256.0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "test/stagnant_water_9b29fe6a7afe67a8",
+      "group": "labelled_split",
+      "input": "dados/processed/drenavision_v3_clean/images/test/stagnant_water_9b29fe6a7afe67a8.jpg",
+      "sha256": "9b29fe6a7afe67a80d743238b407ba17bc23c1c553591451481710b732a2a1b3",
+      "width": 256,
+      "height": 256,
+      "split": "test",
+      "source_key": "stagnant_water",
+      "source_group": "Outdoor/Water and wet surface/Side view::block-27",
+      "annotation_note": "source YOLO class water retained; wet-surface boxes dropped; v3: union bounds of intersecting/touching source water-box components; no positive gap bridging",
+      "label_sha256": "44f3377b512b0268a5465c38d2a6bc760755281324de554ade98c24ae407c20b",
+      "truth": [
+        {
+          "class_id": 1,
+          "bounding_box": [
+            10.0,
+            4.0,
+            246.999936,
+            245.999872
+          ]
+        },
+        {
+          "class_id": 1,
+          "bounding_box": [
+            128.0,
+            165.00019200000003,
+            160.0,
+            256.0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "test/stagnant_water_9dff2e1e2064b62d",
+      "group": "labelled_split",
+      "input": "dados/processed/drenavision_v3_clean/images/test/stagnant_water_9dff2e1e2064b62d.jpg",
+      "sha256": "9dff2e1e2064b62da3f1e4ed4c7c2004fe39eaabcad9f9c38247701d4ed3b998",
+      "width": 256,
+      "height": 256,
+      "split": "test",
+      "source_key": "stagnant_water",
+      "source_group": "Outdoor/Water/Side view::block-180",
+      "annotation_note": "source YOLO class water retained; wet-surface boxes dropped; v3: union bounds of intersecting/touching source water-box components; no positive gap bridging",
+      "label_sha256": "dedf5c50267a4712b4a5b92186342e953a62b2092e42aaf5a8e34d039d076ab6",
+      "truth": [
+        {
+          "class_id": 1,
+          "bounding_box": [
+            68.0,
+            113.000064,
+            76.0,
+            124.000128
+          ]
+        },
+        {
+          "class_id": 1,
+          "bounding_box": [
+            78.000128,
+            104.99993599999999,
+            96.999936,
+            128.0
+          ]
+        },
+        {
+          "class_id": 1,
+          "bounding_box": [
+            91.999872,
+            118.000128,
+            110.999936,
+            134.00012800000002
+          ]
+        },
+        {
+          "class_id": 1,
+          "bounding_box": [
+            56.999936,
+            82.999936,
+            73.999872,
+            95.999872
+          ]
+        },
+        {
+          "class_id": 1,
+          "bounding_box": [
+            60.0,
+            98.0,
+            68.0,
+            110.0
+          ]
+        },
+        {
+          "class_id": 1,
+          "bounding_box": [
+            105.000064,
+            83.00006400000001,
+            116.000128,
+            92.0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "test/stagnant_water_9e473f8b57ad0972",
+      "group": "labelled_split",
+      "input": "dados/processed/drenavision_v3_clean/images/test/stagnant_water_9e473f8b57ad0972.jpg",
+      "sha256": "9e473f8b57ad097252bf108c7e7427f90d0306f8bbe10ee1a3b9d18d8b1a434c",
+      "width": 256,
+      "height": 256,
+      "split": "test",
+      "source_key": "stagnant_water",
+      "source_group": "Outdoor/Water and wet surface/Side view::block-27",
+      "annotation_note": "source YOLO class water retained; wet-surface boxes dropped; v3: union bounds of intersecting/touching source water-box components; no positive gap bridging",
+      "label_sha256": "3a3fd37b7c7731b7e051f59d181bcfd3c820f24052674e5ca08325514bbfbd81",
+      "truth": [
+        {
+          "class_id": 1,
+          "bounding_box": [
+            0.999935999999991,
+            101.00006400000001,
+            226.999808,
+            154.0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "test/stagnant_water_a2fb392f53156f14",
+      "group": "labelled_split",
+      "input": "dados/processed/drenavision_v3_clean/images/test/stagnant_water_a2fb392f53156f14.jpg",
+      "sha256": "a2fb392f53156f14f338e04ab39498fcaaa104972729f01f96695f9af4dc1da7",
+      "width": 256,
+      "height": 256,
+      "split": "test",
+      "source_key": "stagnant_water",
+      "source_group": "Outdoor/Water and wet surface/Side view::block-180",
+      "annotation_note": "source YOLO class water retained; wet-surface boxes dropped; v3: union bounds of intersecting/touching source water-box components; no positive gap bridging",
+      "label_sha256": "a04e8a3e86c9340378e1bbbe342fc45c875f104c37306e327b7745c0168c985e",
+      "truth": [
+        {
+          "class_id": 1,
+          "bounding_box": [
+            0.9999360000000053,
+            110.000256,
+            158.00012800000002,
+            205.000064
+          ]
+        },
+        {
+          "class_id": 1,
+          "bounding_box": [
+            73.000064,
+            138.00012800000002,
+            84.000128,
+            156.0
+          ]
+        },
+        {
+          "class_id": 1,
+          "bounding_box": [
+            124.999808,
+            202.0,
+            144.999808,
+            230.0
+          ]
+        },
+        {
+          "class_id": 1,
+          "bounding_box": [
+            144.999936,
+            192.999808,
+            171.99974400000002,
+            219.999872
+          ]
+        },
+        {
+          "class_id": 1,
+          "bounding_box": [
+            176.0,
+            185.000064,
+            192.0,
+            198.0
+          ]
+        },
+        {
+          "class_id": 1,
+          "bounding_box": [
+            177.000192,
+            157.000192,
+            214.999808,
+            189.000192
+          ]
+        },
+        {
+          "class_id": 1,
+          "bounding_box": [
+            192.0,
+            48.0,
+            208.0,
+            54.000128000000004
+          ]
+        },
+        {
+          "class_id": 1,
+          "bounding_box": [
+            74.0,
+            111.00006400000001,
+            86.0,
+            120.0
+          ]
+        },
+        {
+          "class_id": 1,
+          "bounding_box": [
+            10.0,
+            120.0,
+            22.0,
+            127.00006400000001
+          ]
+        }
+      ]
+    },
+    {
+      "id": "test/stagnant_water_a916599ef367530e",
+      "group": "labelled_split",
+      "input": "dados/processed/drenavision_v3_clean/images/test/stagnant_water_a916599ef367530e.jpg",
+      "sha256": "a916599ef367530eee6716869c8040ea0a7a6ebfc21b00fcc4f8dcdd2cdbc452",
+      "width": 256,
+      "height": 256,
+      "split": "test",
+      "source_key": "stagnant_water",
+      "source_group": "Outdoor/Water and wet surface/Side view::block-27",
+      "annotation_note": "source YOLO class water retained; wet-surface boxes dropped; v3: union bounds of intersecting/touching source water-box components; no positive gap bridging",
+      "label_sha256": "2bfd493311cab29024306846f03f4b1aadf5972245db3b193be261c84a957793",
+      "truth": [
+        {
+          "class_id": 1,
+          "bounding_box": [
+            0.9998080000000016,
+            59.000064,
+            251.999872,
+            172.999936
+          ]
+        }
+      ]
+    },
+    {
+      "id": "test/stagnant_water_af92f3d325c0a0ce",
+      "group": "labelled_split",
+      "input": "dados/processed/drenavision_v3_clean/images/test/stagnant_water_af92f3d325c0a0ce.jpg",
+      "sha256": "af92f3d325c0a0ce0d6427b3de9b5f9296a4274544954123de29267999401d9d",
+      "width": 256,
+      "height": 256,
+      "split": "test",
+      "source_key": "stagnant_water",
+      "source_group": "Outdoor/Water and wet surface/Top view::block-138",
+      "annotation_note": "source YOLO class water retained; wet-surface boxes dropped; v3: union bounds of intersecting/touching source water-box components; no positive gap bridging",
+      "label_sha256": "574187850a4346eda17fd527b200d7530e8b82132da7ddd821b10de9ae8b07e5",
+      "truth": [
+        {
+          "class_id": 1,
+          "bounding_box": [
+            43.00006400000001,
+            57.000192,
+            100.0,
+            108.0
+          ]
+        },
+        {
+          "class_id": 1,
+          "bounding_box": [
+            117.000192,
+            128.0,
+            135.000064,
+            144.999936
+          ]
+        },
+        {
+          "class_id": 1,
+          "bounding_box": [
+            92.00025600000001,
+            12.0,
+            128.0,
+            52.0
+          ]
+        },
+        {
+          "class_id": 1,
+          "bounding_box": [
+            108.999936,
+            147.000192,
+            150.999808,
+            192.000128
+          ]
+        },
+        {
+          "class_id": 1,
+          "bounding_box": [
+            151.999744,
+            142.999808,
+            206.999808,
+            211.00006399999998
+          ]
+        }
+      ]
+    },
+    {
+      "id": "test/stagnant_water_b760952be5c048c6",
+      "group": "labelled_split",
+      "input": "dados/processed/drenavision_v3_clean/images/test/stagnant_water_b760952be5c048c6.jpg",
+      "sha256": "b760952be5c048c67435cd9b53095921a3184149267dd8fe0739dbda14540074",
+      "width": 256,
+      "height": 256,
+      "split": "test",
+      "source_key": "stagnant_water",
+      "source_group": "Outdoor/Water and wet surface/Side view::block-27",
+      "annotation_note": "source YOLO class water retained; wet-surface boxes dropped; v3: union bounds of intersecting/touching source water-box components; no positive gap bridging",
+      "label_sha256": "452272c3312a51efeac7b0086282db31dbd718b9ab637edb8e473c9d5ffb4244",
+      "truth": [
+        {
+          "class_id": 1,
+          "bounding_box": [
+            4.0,
+            73.000064,
+            210.000128,
+            191.99987199999998
+          ]
+        }
+      ]
+    },
+    {
+      "id": "test/stagnant_water_bf23068c8c36b06a",
+      "group": "labelled_split",
+      "input": "dados/processed/drenavision_v3_clean/images/test/stagnant_water_bf23068c8c36b06a.jpg",
+      "sha256": "bf23068c8c36b06a2cf6d7d2f0f0a2c965510920871eb879a3053bb8f3fb6ee1",
+      "width": 256,
+      "height": 256,
+      "split": "test",
+      "source_key": "stagnant_water",
+      "source_group": "Outdoor/Water and wet surface/Side view::block-180",
+      "annotation_note": "source YOLO class water retained; wet-surface boxes dropped; v3: union bounds of intersecting/touching source water-box components; no positive gap bridging",
+      "label_sha256": "718d01befe36e220413f5c7fa2d4d0684d370562265819f70483805afddeb4af",
+      "truth": [
+        {
+          "class_id": 1,
+          "bounding_box": [
+            35.000192,
+            122.999808,
+            256.0,
+            233.999872
+          ]
+        }
+      ]
+    },
+    {
+      "id": "test/stagnant_water_c29eafc68cddb8d7",
+      "group": "labelled_split",
+      "input": "dados/processed/drenavision_v3_clean/images/test/stagnant_water_c29eafc68cddb8d7.jpg",
+      "sha256": "c29eafc68cddb8d7bc087b088ad603b809de4b698fb0b712c879b8940a859202",
+      "width": 256,
+      "height": 256,
+      "split": "test",
+      "source_key": "stagnant_water",
+      "source_group": "Outdoor/Water/Side view::block-180",
+      "annotation_note": "source YOLO class water retained; wet-surface boxes dropped; v3: union bounds of intersecting/touching source water-box components; no positive gap bridging",
+      "label_sha256": "a90d076bea71aefff560b7bac4228921bdcd3c5b65e69c9f5bb75aa1bbc69ed5",
+      "truth": [
+        {
+          "class_id": 1,
+          "bounding_box": [
+            14.0,
+            128.999936,
+            96.000128,
+            150.00012800000002
+          ]
+        }
+      ]
+    },
+    {
+      "id": "test/stagnant_water_cfef17c6faa0d9b7",
+      "group": "labelled_split",
+      "input": "dados/processed/drenavision_v3_clean/images/test/stagnant_water_cfef17c6faa0d9b7.jpg",
+      "sha256": "cfef17c6faa0d9b75ae3d5dec5629a695e0de2be620a479aaf9fbbaf1b873b72",
+      "width": 256,
+      "height": 256,
+      "split": "test",
+      "source_key": "stagnant_water",
+      "source_group": "Outdoor/Water and wet surface/Side view::block-27",
+      "annotation_note": "source YOLO class water retained; wet-surface boxes dropped; v3: union bounds of intersecting/touching source water-box components; no positive gap bridging",
+      "label_sha256": "5b8d0a867113d9eedf74b9841010d0c4de0c449706d44a63c4583ccd4039a44d",
+      "truth": [
+        {
+          "class_id": 1,
+          "bounding_box": [
+            9.000064000000009,
+            84.99993599999999,
+            254.0,
+            172.0
+          ]
+        }
+      ]
+    }
+  ],
+  "video_decoding": [],
+  "saved_demo_reference_coverage": [
+    {
+      "saved_prediction": "resultados/demo/click_trash_00c5aac3d4cf1d57_prediction.json",
+      "input_name": "click_trash_00c5aac3d4cf1d57.jpg",
+      "input_sha256": "00c5aac3d4cf1d576dabe41f20af431a6d611d1a740254fcfee65d71bdd1e6ab",
+      "covered_sample_id": "test/click_trash_00c5aac3d4cf1d57",
+      "note": "Original input is tested once. Annotated output is never fed back as input."
+    },
+    {
+      "saved_prediction": "resultados/demo/irodent_02af19356995e059_prediction.json",
+      "input_name": "irodent_02af19356995e059.jpg",
+      "input_sha256": "02af19356995e059ad306cd083baacc717bca0d4bf3cd6acb258c2fb131241b7",
+      "covered_sample_id": "test/irodent_02af19356995e059",
+      "note": "Original input is tested once. Annotated output is never fed back as input."
+    },
+    {
+      "saved_prediction": "resultados/demo/irodent_311988d4ce1851a6_prediction.json",
+      "input_name": "irodent_311988d4ce1851a6.jpg",
+      "input_sha256": "311988d4ce1851a6d24db71478240bbccc8b9f2ed832cab966d56b7ceae05df0",
+      "covered_sample_id": "test/irodent_311988d4ce1851a6",
+      "note": "Original input is tested once. Annotated output is never fed back as input."
+    },
+    {
+      "saved_prediction": "resultados/demo/stagnant_water_04213a44e43bc933_prediction.json",
+      "input_name": "stagnant_water_04213a44e43bc933.jpg",
+      "input_sha256": "04213a44e43bc93375d887967c76095301f7826e8125b522e00104037ef51f92",
+      "covered_sample_id": "test/stagnant_water_04213a44e43bc933",
+      "note": "Original input is tested once. Annotated output is never fed back as input."
+    },
+    {
+      "saved_prediction": "resultados/demo/stagnant_water_78c5a3feac2bba2c_prediction.json",
+      "input_name": "stagnant_water_78c5a3feac2bba2c.jpg",
+      "input_sha256": "78c5a3feac2bba2cfb366d11fb96cc94167ddd4074a43baf5dd7dbb54e299a4a",
+      "covered_sample_id": "test/stagnant_water_78c5a3feac2bba2c",
+      "note": "Original input is tested once. Annotated output is never fed back as input."
+    }
+  ],
+  "variants": [
+    {
+      "name": "v2_s640_full",
+      "checkpoint": "resultados/local/models/best_v2.pt",
+      "checkpoint_sha256": "01ea7c578783b2a08fc585051b0768a1e9c0d510cb5652173fab0979f8d7d27a",
+      "model_version": "best_v2-01ea7c578783",
+      "operating_parameters": {
+        "confidence": 0.35,
+        "iou": 0.45,
+        "imgsz": 640
+      },
+      "water_provenance": null,
+      "imgsz": 640,
+      "tile_size": 0,
+      "elapsed_seconds_inference_and_io": 4.829407199998968,
+      "per_class": {
+        "obstrucao_visivel": {
+          "tp": 19,
+          "fp": 6,
+          "fn": 18,
+          "precision": 0.76,
+          "recall": 0.5135135135135135,
+          "f1": 0.6129032258064516
+        },
+        "agua_acumulada": {
+          "tp": 0,
+          "fp": 1,
+          "fn": 61,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "animal_visivel": {
+          "tp": 7,
+          "fp": 7,
+          "fn": 13,
+          "precision": 0.5,
+          "recall": 0.35,
+          "f1": 0.4117647058823529
+        }
+      },
+      "macro_f1": 0.3415559772296015,
+      "rows": [
+        {
+          "sample_id": "test/click_trash_00c5aac3d4cf1d57",
+          "predictions": [
+            {
+              "class_id": 0,
+              "confidence": 0.4463740289211273,
+              "bounding_box": [
+                960.2894897460938,
+                1112.0587158203125,
+                1151.090087890625,
+                1334.10888671875
+              ]
+            },
+            {
+              "class_id": 0,
+              "confidence": 0.37567952275276184,
+              "bounding_box": [
+                1804.404541015625,
+                2361.72021484375,
+                2472.65625,
+                3000.045166015625
+              ]
+            }
+          ],
+          "score": {
+            "per_class": {
+              "obstrucao_visivel": {
+                "tp": 2,
+                "fp": 0,
+                "fn": 0
+              },
+              "agua_acumulada": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "animal_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              }
+            },
+            "matched_truth_indexes": [
+              0,
+              1
+            ],
+            "matched_prediction_indexes": [
+              0,
+              1
+            ]
+          }
+        },
+        {
+          "sample_id": "test/click_trash_0c989b533293a6a0",
+          "predictions": [
+            {
+              "class_id": 0,
+              "confidence": 0.5659045577049255,
+              "bounding_box": [
+                988.949462890625,
+                886.2282104492188,
+                2326.778564453125,
+                2082.42626953125
+              ]
+            }
+          ],
+          "score": {
+            "per_class": {
+              "obstrucao_visivel": {
+                "tp": 1,
+                "fp": 0,
+                "fn": 2
+              },
+              "agua_acumulada": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "animal_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              }
+            },
+            "matched_truth_indexes": [
+              0
+            ],
+            "matched_prediction_indexes": [
+              0
+            ]
+          }
+        },
+        {
+          "sample_id": "test/click_trash_17b42f3778cabdd6",
+          "predictions": [
+            {
+              "class_id": 0,
+              "confidence": 0.6962038278579712,
+              "bounding_box": [
+                1028.0804443359375,
+                573.20361328125,
+                2037.3450927734375,
+                1647.25927734375
+              ]
+            },
+            {
+              "class_id": 0,
+              "confidence": 0.5470855236053467,
+              "bounding_box": [
+                910.7190551757812,
+                1741.6234130859375,
+                1063.8536376953125,
+                1929.5703125
+              ]
+            }
+          ],
+          "score": {
+            "per_class": {
+              "obstrucao_visivel": {
+                "tp": 1,
+                "fp": 1,
+                "fn": 0
+              },
+              "agua_acumulada": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "animal_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              }
+            },
+            "matched_truth_indexes": [
+              0
+            ],
+            "matched_prediction_indexes": [
+              0
+            ]
+          }
+        },
+        {
+          "sample_id": "test/click_trash_1bc5566a57e7be3b",
+          "predictions": [
+            {
+              "class_id": 0,
+              "confidence": 0.7334641218185425,
+              "bounding_box": [
+                1481.8131103515625,
+                1144.5146484375,
+                1745.353759765625,
+                1431.38818359375
+              ]
+            },
+            {
+              "class_id": 0,
+              "confidence": 0.4710630476474762,
+              "bounding_box": [
+                1019.2491455078125,
+                2261.61279296875,
+                1186.6395263671875,
+                2518.360595703125
+              ]
+            }
+          ],
+          "score": {
+            "per_class": {
+              "obstrucao_visivel": {
+                "tp": 1,
+                "fp": 1,
+                "fn": 1
+              },
+              "agua_acumulada": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "animal_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              }
+            },
+            "matched_truth_indexes": [
+              0
+            ],
+            "matched_prediction_indexes": [
+              0
+            ]
+          }
+        },
+        {
+          "sample_id": "test/click_trash_3293348191c4feb8",
+          "predictions": [
+            {
+              "class_id": 0,
+              "confidence": 0.7361124753952026,
+              "bounding_box": [
+                1377.7066650390625,
+                1524.85205078125,
+                1813.1739501953125,
+                1917.5318603515625
+              ]
+            }
+          ],
+          "score": {
+            "per_class": {
+              "obstrucao_visivel": {
+                "tp": 0,
+                "fp": 1,
+                "fn": 1
+              },
+              "agua_acumulada": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "animal_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              }
+            },
+            "matched_truth_indexes": [],
+            "matched_prediction_indexes": []
+          }
+        },
+        {
+          "sample_id": "test/click_trash_3a6511081805cc90",
+          "predictions": [
+            {
+              "class_id": 0,
+              "confidence": 0.4765055775642395,
+              "bounding_box": [
+                881.0606689453125,
+                1178.0887451171875,
+                1484.7569580078125,
+                1878.4613037109375
+              ]
+            }
+          ],
+          "score": {
+            "per_class": {
+              "obstrucao_visivel": {
+                "tp": 1,
+                "fp": 0,
+                "fn": 0
+              },
+              "agua_acumulada": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "animal_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              }
+            },
+            "matched_truth_indexes": [
+              0
+            ],
+            "matched_prediction_indexes": [
+              0
+            ]
+          }
+        },
+        {
+          "sample_id": "test/click_trash_453100dd56522b6f",
+          "predictions": [],
+          "score": {
+            "per_class": {
+              "obstrucao_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 1
+              },
+              "agua_acumulada": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "animal_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              }
+            },
+            "matched_truth_indexes": [],
+            "matched_prediction_indexes": []
+          }
+        },
+        {
+          "sample_id": "test/click_trash_5a2ed3663253d2f4",
+          "predictions": [
+            {
+              "class_id": 0,
+              "confidence": 0.5546429753303528,
+              "bounding_box": [
+                1364.744384765625,
+                869.9628295898438,
+                2015.3486328125,
+                2772.963134765625
+              ]
+            }
+          ],
+          "score": {
+            "per_class": {
+              "obstrucao_visivel": {
+                "tp": 1,
+                "fp": 0,
+                "fn": 2
+              },
+              "agua_acumulada": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "animal_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              }
+            },
+            "matched_truth_indexes": [
+              1
+            ],
+            "matched_prediction_indexes": [
+              0
+            ]
+          }
+        },
+        {
+          "sample_id": "test/click_trash_636cdeffa7673f48",
+          "predictions": [
+            {
+              "class_id": 0,
+              "confidence": 0.703527569770813,
+              "bounding_box": [
+                1517.3519287109375,
+                761.7191772460938,
+                2163.70751953125,
+                1410.33447265625
+              ]
+            }
+          ],
+          "score": {
+            "per_class": {
+              "obstrucao_visivel": {
+                "tp": 1,
+                "fp": 0,
+                "fn": 6
+              },
+              "agua_acumulada": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "animal_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              }
+            },
+            "matched_truth_indexes": [
+              0
+            ],
+            "matched_prediction_indexes": [
+              0
+            ]
+          }
+        },
+        {
+          "sample_id": "test/click_trash_71f6e5520c024e1a",
+          "predictions": [
+            {
+              "class_id": 0,
+              "confidence": 0.7305723428726196,
+              "bounding_box": [
+                980.1342163085938,
+                1225.81591796875,
+                1608.0928955078125,
+                1720.6639404296875
+              ]
+            }
+          ],
+          "score": {
+            "per_class": {
+              "obstrucao_visivel": {
+                "tp": 1,
+                "fp": 0,
+                "fn": 0
+              },
+              "agua_acumulada": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "animal_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              }
+            },
+            "matched_truth_indexes": [
+              0
+            ],
+            "matched_prediction_indexes": [
+              0
+            ]
+          }
+        },
+        {
+          "sample_id": "test/click_trash_9a8c3c9df43fad2e",
+          "predictions": [
+            {
+              "class_id": 0,
+              "confidence": 0.8531084060668945,
+              "bounding_box": [
+                1449.1976318359375,
+                1297.1241455078125,
+                1750.5596923828125,
+                1723.5750732421875
+              ]
+            }
+          ],
+          "score": {
+            "per_class": {
+              "obstrucao_visivel": {
+                "tp": 1,
+                "fp": 0,
+                "fn": 0
+              },
+              "agua_acumulada": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "animal_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              }
+            },
+            "matched_truth_indexes": [
+              0
+            ],
+            "matched_prediction_indexes": [
+              0
+            ]
+          }
+        },
+        {
+          "sample_id": "test/click_trash_aa2c8b8c4d02ce97",
+          "predictions": [
+            {
+              "class_id": 0,
+              "confidence": 0.8243491053581238,
+              "bounding_box": [
+                1524.889892578125,
+                1664.4305419921875,
+                2345.532470703125,
+                2167.5908203125
+              ]
+            }
+          ],
+          "score": {
+            "per_class": {
+              "obstrucao_visivel": {
+                "tp": 1,
+                "fp": 0,
+                "fn": 0
+              },
+              "agua_acumulada": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "animal_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              }
+            },
+            "matched_truth_indexes": [
+              0
+            ],
+            "matched_prediction_indexes": [
+              0
+            ]
+          }
+        },
+        {
+          "sample_id": "test/click_trash_ad30aaa7502bc6bb",
+          "predictions": [
+            {
+              "class_id": 0,
+              "confidence": 0.4618341624736786,
+              "bounding_box": [
+                1992.21875,
+                1390.827880859375,
+                2092.717041015625,
+                1606.144775390625
+              ]
+            }
+          ],
+          "score": {
+            "per_class": {
+              "obstrucao_visivel": {
+                "tp": 0,
+                "fp": 1,
+                "fn": 1
+              },
+              "agua_acumulada": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "animal_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              }
+            },
+            "matched_truth_indexes": [],
+            "matched_prediction_indexes": []
+          }
+        },
+        {
+          "sample_id": "test/click_trash_bd6650607a295623",
+          "predictions": [
+            {
+              "class_id": 0,
+              "confidence": 0.7940412759780884,
+              "bounding_box": [
+                642.4341430664062,
+                780.6072387695312,
+                957.62548828125,
+                989.1228637695312
+              ]
+            }
+          ],
+          "score": {
+            "per_class": {
+              "obstrucao_visivel": {
+                "tp": 1,
+                "fp": 0,
+                "fn": 0
+              },
+              "agua_acumulada": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "animal_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              }
+            },
+            "matched_truth_indexes": [
+              0
+            ],
+            "matched_prediction_indexes": [
+              0
+            ]
+          }
+        },
+        {
+          "sample_id": "test/click_trash_c2be896420a43935",
+          "predictions": [],
+          "score": {
+            "per_class": {
+              "obstrucao_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 1
+              },
+              "agua_acumulada": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "animal_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              }
+            },
+            "matched_truth_indexes": [],
+            "matched_prediction_indexes": []
+          }
+        },
+        {
+          "sample_id": "test/click_trash_cb260b30e7e68512",
+          "predictions": [
+            {
+              "class_id": 0,
+              "confidence": 0.8083144426345825,
+              "bounding_box": [
+                1584.573486328125,
+                2815.921630859375,
+                1826.3531494140625,
+                3010.690673828125
+              ]
+            },
+            {
+              "class_id": 0,
+              "confidence": 0.5783997774124146,
+              "bounding_box": [
+                1700.9906005859375,
+                1975.855712890625,
+                1879.7984619140625,
+                2150.4638671875
+              ]
+            },
+            {
+              "class_id": 0,
+              "confidence": 0.43929412961006165,
+              "bounding_box": [
+                2599.129638671875,
+                1902.267578125,
+                2725.48095703125,
+                2028.5120849609375
+              ]
+            }
+          ],
+          "score": {
+            "per_class": {
+              "obstrucao_visivel": {
+                "tp": 3,
+                "fp": 0,
+                "fn": 1
+              },
+              "agua_acumulada": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "animal_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              }
+            },
+            "matched_truth_indexes": [
+              0,
+              1,
+              2
+            ],
+            "matched_prediction_indexes": [
+              0,
+              1,
+              2
+            ]
+          }
+        },
+        {
+          "sample_id": "test/click_trash_cbfe38e0f062cff7",
+          "predictions": [
+            {
+              "class_id": 0,
+              "confidence": 0.6525403261184692,
+              "bounding_box": [
+                754.458251953125,
+                1049.049560546875,
+                1368.5540771484375,
+                1448.76904296875
+              ]
+            }
+          ],
+          "score": {
+            "per_class": {
+              "obstrucao_visivel": {
+                "tp": 1,
+                "fp": 0,
+                "fn": 0
+              },
+              "agua_acumulada": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "animal_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              }
+            },
+            "matched_truth_indexes": [
+              0
+            ],
+            "matched_prediction_indexes": [
+              0
+            ]
+          }
+        },
+        {
+          "sample_id": "test/click_trash_cce090e99de9e9d4",
+          "predictions": [
+            {
+              "class_id": 0,
+              "confidence": 0.5315658450126648,
+              "bounding_box": [
+                1.963769555091858,
+                1265.774169921875,
+                211.2887420654297,
+                1389.5587158203125
+              ]
+            }
+          ],
+          "score": {
+            "per_class": {
+              "obstrucao_visivel": {
+                "tp": 0,
+                "fp": 1,
+                "fn": 1
+              },
+              "agua_acumulada": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "animal_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              }
+            },
+            "matched_truth_indexes": [],
+            "matched_prediction_indexes": []
+          }
+        },
+        {
+          "sample_id": "test/click_trash_d12fbfa39d8bd081",
+          "predictions": [
+            {
+              "class_id": 0,
+              "confidence": 0.5917931795120239,
+              "bounding_box": [
+                613.1539306640625,
+                725.5860595703125,
+                1309.3116455078125,
+                1021.7027587890625
+              ]
+            }
+          ],
+          "score": {
+            "per_class": {
+              "obstrucao_visivel": {
+                "tp": 1,
+                "fp": 0,
+                "fn": 0
+              },
+              "agua_acumulada": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "animal_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              }
+            },
+            "matched_truth_indexes": [
+              0
+            ],
+            "matched_prediction_indexes": [
+              0
+            ]
+          }
+        },
+        {
+          "sample_id": "test/click_trash_fc43e2c2b3fb402e",
+          "predictions": [
+            {
+              "class_id": 0,
+              "confidence": 0.5908603668212891,
+              "bounding_box": [
+                232.16067504882812,
+                1172.034912109375,
+                457.7510681152344,
+                1345.814453125
+              ]
+            },
+            {
+              "class_id": 0,
+              "confidence": 0.35297250747680664,
+              "bounding_box": [
+                1007.1307373046875,
+                874.892822265625,
+                1778.11669921875,
+                1452.36083984375
+              ]
+            }
+          ],
+          "score": {
+            "per_class": {
+              "obstrucao_visivel": {
+                "tp": 2,
+                "fp": 0,
+                "fn": 1
+              },
+              "agua_acumulada": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "animal_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              }
+            },
+            "matched_truth_indexes": [
+              0,
+              2
+            ],
+            "matched_prediction_indexes": [
+              0,
+              1
+            ]
+          }
+        },
+        {
+          "sample_id": "test/irodent_02af19356995e059",
+          "predictions": [],
+          "score": {
+            "per_class": {
+              "obstrucao_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "agua_acumulada": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "animal_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 1
+              }
+            },
+            "matched_truth_indexes": [],
+            "matched_prediction_indexes": []
+          }
+        },
+        {
+          "sample_id": "test/irodent_0f66ef550db9163f",
+          "predictions": [
+            {
+              "class_id": 2,
+              "confidence": 0.8159450888633728,
+              "bounding_box": [
+                469.8614196777344,
+                855.7076416015625,
+                728.0321655273438,
+                1175.537353515625
+              ]
+            }
+          ],
+          "score": {
+            "per_class": {
+              "obstrucao_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "agua_acumulada": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "animal_visivel": {
+                "tp": 0,
+                "fp": 1,
+                "fn": 1
+              }
+            },
+            "matched_truth_indexes": [],
+            "matched_prediction_indexes": []
+          }
+        },
+        {
+          "sample_id": "test/irodent_1229b33e7eb1e2b9",
+          "predictions": [
+            {
+              "class_id": 2,
+              "confidence": 0.5947476625442505,
+              "bounding_box": [
+                830.9765625,
+                628.9390869140625,
+                1270.9886474609375,
+                1004.1854858398438
+              ]
+            },
+            {
+              "class_id": 2,
+              "confidence": 0.4325636327266693,
+              "bounding_box": [
+                843.4013671875,
+                626.6568603515625,
+                1058.7342529296875,
+                931.3783569335938
+              ]
+            }
+          ],
+          "score": {
+            "per_class": {
+              "obstrucao_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "agua_acumulada": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "animal_visivel": {
+                "tp": 1,
+                "fp": 1,
+                "fn": 0
+              }
+            },
+            "matched_truth_indexes": [
+              0
+            ],
+            "matched_prediction_indexes": [
+              1
+            ]
+          }
+        },
+        {
+          "sample_id": "test/irodent_1ce34e1d56fba67e",
+          "predictions": [
+            {
+              "class_id": 2,
+              "confidence": 0.7185731530189514,
+              "bounding_box": [
+                459.97998046875,
+                539.5084838867188,
+                1335.2373046875,
+                961.7330932617188
+              ]
+            }
+          ],
+          "score": {
+            "per_class": {
+              "obstrucao_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "agua_acumulada": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "animal_visivel": {
+                "tp": 1,
+                "fp": 0,
+                "fn": 0
+              }
+            },
+            "matched_truth_indexes": [
+              0
+            ],
+            "matched_prediction_indexes": [
+              0
+            ]
+          }
+        },
+        {
+          "sample_id": "test/irodent_27d984c6a5e23cfd",
+          "predictions": [
+            {
+              "class_id": 2,
+              "confidence": 0.5804663300514221,
+              "bounding_box": [
+                582.00341796875,
+                272.8565673828125,
+                829.4091186523438,
+                568.8530883789062
+              ]
+            }
+          ],
+          "score": {
+            "per_class": {
+              "obstrucao_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "agua_acumulada": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "animal_visivel": {
+                "tp": 1,
+                "fp": 0,
+                "fn": 0
+              }
+            },
+            "matched_truth_indexes": [
+              0
+            ],
+            "matched_prediction_indexes": [
+              0
+            ]
+          }
+        },
+        {
+          "sample_id": "test/irodent_2d64cb4fdea65cc1",
+          "predictions": [
+            {
+              "class_id": 2,
+              "confidence": 0.39435070753097534,
+              "bounding_box": [
+                992.1596069335938,
+                592.2413940429688,
+                1565.3814697265625,
+                933.766845703125
+              ]
+            }
+          ],
+          "score": {
+            "per_class": {
+              "obstrucao_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "agua_acumulada": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "animal_visivel": {
+                "tp": 0,
+                "fp": 1,
+                "fn": 1
+              }
+            },
+            "matched_truth_indexes": [],
+            "matched_prediction_indexes": []
+          }
+        },
+        {
+          "sample_id": "test/irodent_311988d4ce1851a6",
+          "predictions": [
+            {
+              "class_id": 2,
+              "confidence": 0.6827955842018127,
+              "bounding_box": [
+                860.4482421875,
+                484.6293029785156,
+                1393.4525146484375,
+                911.9142456054688
+              ]
+            },
+            {
+              "class_id": 0,
+              "confidence": 0.3923109173774719,
+              "bounding_box": [
+                1817.415283203125,
+                153.5699462890625,
+                1926.423828125,
+                218.20542907714844
+              ]
+            }
+          ],
+          "score": {
+            "per_class": {
+              "obstrucao_visivel": {
+                "tp": 0,
+                "fp": 1,
+                "fn": 0
+              },
+              "agua_acumulada": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "animal_visivel": {
+                "tp": 1,
+                "fp": 0,
+                "fn": 0
+              }
+            },
+            "matched_truth_indexes": [
+              0
+            ],
+            "matched_prediction_indexes": [
+              0
+            ]
+          }
+        },
+        {
+          "sample_id": "test/irodent_5c3791cf9837f69f",
+          "predictions": [],
+          "score": {
+            "per_class": {
+              "obstrucao_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "agua_acumulada": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "animal_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 1
+              }
+            },
+            "matched_truth_indexes": [],
+            "matched_prediction_indexes": []
+          }
+        },
+        {
+          "sample_id": "test/irodent_5c424e240ff802d9",
+          "predictions": [
+            {
+              "class_id": 2,
+              "confidence": 0.6677452325820923,
+              "bounding_box": [
+                128.07217407226562,
+                702.6795654296875,
+                1076.1629638671875,
+                1142.0673828125
+              ]
+            }
+          ],
+          "score": {
+            "per_class": {
+              "obstrucao_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "agua_acumulada": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "animal_visivel": {
+                "tp": 0,
+                "fp": 1,
+                "fn": 1
+              }
+            },
+            "matched_truth_indexes": [],
+            "matched_prediction_indexes": []
+          }
+        },
+        {
+          "sample_id": "test/irodent_7df7a4acb1ca7043",
+          "predictions": [],
+          "score": {
+            "per_class": {
+              "obstrucao_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "agua_acumulada": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "animal_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 1
+              }
+            },
+            "matched_truth_indexes": [],
+            "matched_prediction_indexes": []
+          }
+        },
+        {
+          "sample_id": "test/irodent_800b0d6100e145c3",
+          "predictions": [
+            {
+              "class_id": 2,
+              "confidence": 0.6728968620300293,
+              "bounding_box": [
+                740.30078125,
+                535.0064697265625,
+                1209.6580810546875,
+                837.5896606445312
+              ]
+            }
+          ],
+          "score": {
+            "per_class": {
+              "obstrucao_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "agua_acumulada": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "animal_visivel": {
+                "tp": 1,
+                "fp": 0,
+                "fn": 0
+              }
+            },
+            "matched_truth_indexes": [
+              0
+            ],
+            "matched_prediction_indexes": [
+              0
+            ]
+          }
+        },
+        {
+          "sample_id": "test/irodent_9282ac488a0ca3d2",
+          "predictions": [
+            {
+              "class_id": 2,
+              "confidence": 0.7109917998313904,
+              "bounding_box": [
+                807.7981567382812,
+                701.3572387695312,
+                1358.4884033203125,
+                1133.907958984375
+              ]
+            }
+          ],
+          "score": {
+            "per_class": {
+              "obstrucao_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "agua_acumulada": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "animal_visivel": {
+                "tp": 1,
+                "fp": 0,
+                "fn": 0
+              }
+            },
+            "matched_truth_indexes": [
+              0
+            ],
+            "matched_prediction_indexes": [
+              0
+            ]
+          }
+        },
+        {
+          "sample_id": "test/irodent_a25a7577d3934a1f",
+          "predictions": [
+            {
+              "class_id": 2,
+              "confidence": 0.6981789469718933,
+              "bounding_box": [
+                379.8072814941406,
+                178.6238555908203,
+                617.3145141601562,
+                464.05615234375
+              ]
+            }
+          ],
+          "score": {
+            "per_class": {
+              "obstrucao_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "agua_acumulada": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "animal_visivel": {
+                "tp": 0,
+                "fp": 1,
+                "fn": 1
+              }
+            },
+            "matched_truth_indexes": [],
+            "matched_prediction_indexes": []
+          }
+        },
+        {
+          "sample_id": "test/irodent_a9cbcacbdfa82279",
+          "predictions": [],
+          "score": {
+            "per_class": {
+              "obstrucao_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "agua_acumulada": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "animal_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 1
+              }
+            },
+            "matched_truth_indexes": [],
+            "matched_prediction_indexes": []
+          }
+        },
+        {
+          "sample_id": "test/irodent_b3ee6ae0980509ae",
+          "predictions": [],
+          "score": {
+            "per_class": {
+              "obstrucao_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "agua_acumulada": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "animal_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 1
+              }
+            },
+            "matched_truth_indexes": [],
+            "matched_prediction_indexes": []
+          }
+        },
+        {
+          "sample_id": "test/irodent_c1e4b5a150c4b7f5",
+          "predictions": [],
+          "score": {
+            "per_class": {
+              "obstrucao_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "agua_acumulada": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "animal_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 1
+              }
+            },
+            "matched_truth_indexes": [],
+            "matched_prediction_indexes": []
+          }
+        },
+        {
+          "sample_id": "test/irodent_c8f861d43c739613",
+          "predictions": [],
+          "score": {
+            "per_class": {
+              "obstrucao_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "agua_acumulada": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "animal_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 1
+              }
+            },
+            "matched_truth_indexes": [],
+            "matched_prediction_indexes": []
+          }
+        },
+        {
+          "sample_id": "test/irodent_d4482c3c256e1ef8",
+          "predictions": [
+            {
+              "class_id": 2,
+              "confidence": 0.5995703339576721,
+              "bounding_box": [
+                881.1435546875,
+                571.4353637695312,
+                1586.7509765625,
+                878.5111083984375
+              ]
+            }
+          ],
+          "score": {
+            "per_class": {
+              "obstrucao_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "agua_acumulada": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "animal_visivel": {
+                "tp": 0,
+                "fp": 1,
+                "fn": 1
+              }
+            },
+            "matched_truth_indexes": [],
+            "matched_prediction_indexes": []
+          }
+        },
+        {
+          "sample_id": "test/irodent_ebb23262d99ea7e1",
+          "predictions": [
+            {
+              "class_id": 2,
+              "confidence": 0.687092125415802,
+              "bounding_box": [
+                885.6345825195312,
+                494.3153076171875,
+                1168.2474365234375,
+                836.0438232421875
+              ]
+            }
+          ],
+          "score": {
+            "per_class": {
+              "obstrucao_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "agua_acumulada": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "animal_visivel": {
+                "tp": 1,
+                "fp": 0,
+                "fn": 0
+              }
+            },
+            "matched_truth_indexes": [
+              0
+            ],
+            "matched_prediction_indexes": [
+              0
+            ]
+          }
+        },
+        {
+          "sample_id": "test/irodent_ee1f7a4fb944857a",
+          "predictions": [
+            {
+              "class_id": 2,
+              "confidence": 0.6202536225318909,
+              "bounding_box": [
+                516.3428344726562,
+                456.998779296875,
+                1397.3580322265625,
+                1090.432861328125
+              ]
+            }
+          ],
+          "score": {
+            "per_class": {
+              "obstrucao_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "agua_acumulada": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "animal_visivel": {
+                "tp": 0,
+                "fp": 1,
+                "fn": 1
+              }
+            },
+            "matched_truth_indexes": [],
+            "matched_prediction_indexes": []
+          }
+        },
+        {
+          "sample_id": "test/stagnant_water_04213a44e43bc933",
+          "predictions": [],
+          "score": {
+            "per_class": {
+              "obstrucao_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "agua_acumulada": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 1
+              },
+              "animal_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              }
+            },
+            "matched_truth_indexes": [],
+            "matched_prediction_indexes": []
+          }
+        },
+        {
+          "sample_id": "test/stagnant_water_34623cea707f7576",
+          "predictions": [],
+          "score": {
+            "per_class": {
+              "obstrucao_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "agua_acumulada": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 4
+              },
+              "animal_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              }
+            },
+            "matched_truth_indexes": [],
+            "matched_prediction_indexes": []
+          }
+        },
+        {
+          "sample_id": "test/stagnant_water_34a6334042f9d44d",
+          "predictions": [],
+          "score": {
+            "per_class": {
+              "obstrucao_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "agua_acumulada": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 1
+              },
+              "animal_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              }
+            },
+            "matched_truth_indexes": [],
+            "matched_prediction_indexes": []
+          }
+        },
+        {
+          "sample_id": "test/stagnant_water_4eb2313c261d7c5a",
+          "predictions": [],
+          "score": {
+            "per_class": {
+              "obstrucao_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "agua_acumulada": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 1
+              },
+              "animal_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              }
+            },
+            "matched_truth_indexes": [],
+            "matched_prediction_indexes": []
+          }
+        },
+        {
+          "sample_id": "test/stagnant_water_59643e4cc12ca4d3",
+          "predictions": [],
+          "score": {
+            "per_class": {
+              "obstrucao_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "agua_acumulada": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 9
+              },
+              "animal_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              }
+            },
+            "matched_truth_indexes": [],
+            "matched_prediction_indexes": []
+          }
+        },
+        {
+          "sample_id": "test/stagnant_water_5d1a03fa07e92d13",
+          "predictions": [],
+          "score": {
+            "per_class": {
+              "obstrucao_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "agua_acumulada": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 1
+              },
+              "animal_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              }
+            },
+            "matched_truth_indexes": [],
+            "matched_prediction_indexes": []
+          }
+        },
+        {
+          "sample_id": "test/stagnant_water_71862d3fe3a3fdc3",
+          "predictions": [],
+          "score": {
+            "per_class": {
+              "obstrucao_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "agua_acumulada": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 1
+              },
+              "animal_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              }
+            },
+            "matched_truth_indexes": [],
+            "matched_prediction_indexes": []
+          }
+        },
+        {
+          "sample_id": "test/stagnant_water_78c5a3feac2bba2c",
+          "predictions": [],
+          "score": {
+            "per_class": {
+              "obstrucao_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "agua_acumulada": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 5
+              },
+              "animal_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              }
+            },
+            "matched_truth_indexes": [],
+            "matched_prediction_indexes": []
+          }
+        },
+        {
+          "sample_id": "test/stagnant_water_7da9000c6d134c96",
+          "predictions": [
+            {
+              "class_id": 1,
+              "confidence": 0.37781232595443726,
+              "bounding_box": [
+                25.323347091674805,
+                108.2425765991211,
+                48.66572952270508,
+                118.3671875
+              ]
+            }
+          ],
+          "score": {
+            "per_class": {
+              "obstrucao_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "agua_acumulada": {
+                "tp": 0,
+                "fp": 1,
+                "fn": 8
+              },
+              "animal_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              }
+            },
+            "matched_truth_indexes": [],
+            "matched_prediction_indexes": []
+          }
+        },
+        {
+          "sample_id": "test/stagnant_water_857db630032f82c5",
+          "predictions": [],
+          "score": {
+            "per_class": {
+              "obstrucao_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "agua_acumulada": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 2
+              },
+              "animal_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              }
+            },
+            "matched_truth_indexes": [],
+            "matched_prediction_indexes": []
+          }
+        },
+        {
+          "sample_id": "test/stagnant_water_9b29fe6a7afe67a8",
+          "predictions": [],
+          "score": {
+            "per_class": {
+              "obstrucao_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "agua_acumulada": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 2
+              },
+              "animal_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              }
+            },
+            "matched_truth_indexes": [],
+            "matched_prediction_indexes": []
+          }
+        },
+        {
+          "sample_id": "test/stagnant_water_9dff2e1e2064b62d",
+          "predictions": [],
+          "score": {
+            "per_class": {
+              "obstrucao_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "agua_acumulada": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 6
+              },
+              "animal_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              }
+            },
+            "matched_truth_indexes": [],
+            "matched_prediction_indexes": []
+          }
+        },
+        {
+          "sample_id": "test/stagnant_water_9e473f8b57ad0972",
+          "predictions": [],
+          "score": {
+            "per_class": {
+              "obstrucao_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "agua_acumulada": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 1
+              },
+              "animal_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              }
+            },
+            "matched_truth_indexes": [],
+            "matched_prediction_indexes": []
+          }
+        },
+        {
+          "sample_id": "test/stagnant_water_a2fb392f53156f14",
+          "predictions": [],
+          "score": {
+            "per_class": {
+              "obstrucao_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "agua_acumulada": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 9
+              },
+              "animal_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              }
+            },
+            "matched_truth_indexes": [],
+            "matched_prediction_indexes": []
+          }
+        },
+        {
+          "sample_id": "test/stagnant_water_a916599ef367530e",
+          "predictions": [],
+          "score": {
+            "per_class": {
+              "obstrucao_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "agua_acumulada": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 1
+              },
+              "animal_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              }
+            },
+            "matched_truth_indexes": [],
+            "matched_prediction_indexes": []
+          }
+        },
+        {
+          "sample_id": "test/stagnant_water_af92f3d325c0a0ce",
+          "predictions": [],
+          "score": {
+            "per_class": {
+              "obstrucao_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "agua_acumulada": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 5
+              },
+              "animal_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              }
+            },
+            "matched_truth_indexes": [],
+            "matched_prediction_indexes": []
+          }
+        },
+        {
+          "sample_id": "test/stagnant_water_b760952be5c048c6",
+          "predictions": [],
+          "score": {
+            "per_class": {
+              "obstrucao_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "agua_acumulada": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 1
+              },
+              "animal_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              }
+            },
+            "matched_truth_indexes": [],
+            "matched_prediction_indexes": []
+          }
+        },
+        {
+          "sample_id": "test/stagnant_water_bf23068c8c36b06a",
+          "predictions": [],
+          "score": {
+            "per_class": {
+              "obstrucao_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "agua_acumulada": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 1
+              },
+              "animal_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              }
+            },
+            "matched_truth_indexes": [],
+            "matched_prediction_indexes": []
+          }
+        },
+        {
+          "sample_id": "test/stagnant_water_c29eafc68cddb8d7",
+          "predictions": [],
+          "score": {
+            "per_class": {
+              "obstrucao_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "agua_acumulada": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 1
+              },
+              "animal_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              }
+            },
+            "matched_truth_indexes": [],
+            "matched_prediction_indexes": []
+          }
+        },
+        {
+          "sample_id": "test/stagnant_water_cfef17c6faa0d9b7",
+          "predictions": [],
+          "score": {
+            "per_class": {
+              "obstrucao_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              },
+              "agua_acumulada": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 1
+              },
+              "animal_visivel": {
+                "tp": 0,
+                "fp": 0,
+                "fn": 0
+              }
+            },
+            "matched_truth_indexes": [],
+            "matched_prediction_indexes": []
+          }
+        }
+      ],
+      "contact_sheets": [
+        "resultados/local/benchmark_v3/final_test60_baseline_v2/v2_s640_full/contact_01.jpg",
+        "resultados/local/benchmark_v3/final_test60_baseline_v2/v2_s640_full/contact_02.jpg",
+        "resultados/local/benchmark_v3/final_test60_baseline_v2/v2_s640_full/contact_03.jpg",
+        "resultados/local/benchmark_v3/final_test60_baseline_v2/v2_s640_full/contact_04.jpg",
+        "resultados/local/benchmark_v3/final_test60_baseline_v2/v2_s640_full/contact_05.jpg"
+      ]
+    }
+  ],
+  "completed_at_utc": "2026-11-16T23:42:32.697112Z"
+}

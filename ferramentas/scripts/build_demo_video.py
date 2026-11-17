@@ -326,17 +326,17 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--dataset-root",
         type=Path,
-        default=Path("dados/processed/drenavision_v2"),
+        default=Path("dados/processed/drenavision_v3_clean"),
     )
     parser.add_argument(
         "--manifest",
         type=Path,
-        default=Path("dados/processed/drenavision_v2/data_manifest.csv"),
+        default=Path("dados/processed/drenavision_v3_clean/data_manifest.csv"),
     )
     parser.add_argument(
         "--output",
         type=Path,
-        default=Path("resultados/local/videos/demo_input_v2_sequence.mp4"),
+        default=Path("resultados/local/videos/demo_input_v3_sequence.mp4"),
     )
     parser.add_argument("--seconds-per-image", type=float, default=2.0)
     parser.add_argument("--fps", type=float, default=12.0)

@@ -33,7 +33,7 @@
       "contains_model_predictions": false,
       "sha256": "e2f305a79477c47e7857eead8aa1be75ddb90bb0eaba975909dcd4595d8092db",
       "bytes": 837177,
-      "evaluation_note": "A fonte integra a adaptação v2 por quadros anotados ou recortes de fundo; não é teste independente. As categorias do catálogo não são rótulos de avaliação.",
+      "evaluation_note": "A fonte integra a adaptação v2/v3 por quadros anotados e/ou recortes de fundo; no v3, chuva e canal também fornecem quadros completos de água. Não é teste independente. As categorias do catálogo não são rótulos de avaliação.",
       "evaluation_role": "adaptation_training_frames",
       "thumbnail_seconds": 0.5,
       "thumbnail_sha256": "2c2fecfcc8619e23b071064981be6e8575c06b2612945360239cadc839b15b76",
@@ -105,7 +105,7 @@
       "contains_model_predictions": false,
       "sha256": "5bd947ce05cc3dab49118747622e29f56d8c7ba1131233fe3ff97cbb02da8030",
       "bytes": 1133711,
-      "evaluation_note": "A fonte integra a adaptação v2 por quadros anotados ou recortes de fundo; não é teste independente. As categorias do catálogo não são rótulos de avaliação.",
+      "evaluation_note": "A fonte integra a adaptação v2/v3 por quadros anotados e/ou recortes de fundo; no v3, chuva e canal também fornecem quadros completos de água. Não é teste independente. As categorias do catálogo não são rótulos de avaliação.",
       "evaluation_role": "adaptation_training_frames",
       "thumbnail_seconds": 0.0,
       "thumbnail_sha256": "890a5eec5bdc3871ab1c51272faf1aa3a3cb116d422a98d3f5473284098b2be3",
@@ -140,8 +140,8 @@
       "contains_model_predictions": false,
       "sha256": "637a527ed9573eabb255b4b1a9c73f554bc0825df90797b0bc3e78a6b2a5a48c",
       "bytes": 5316117,
-      "evaluation_note": "A fonte integra a adaptação v2 por quadros anotados ou recortes de fundo; não é teste independente. As categorias do catálogo não são rótulos de avaliação.",
-      "evaluation_role": "adaptation_background_crops",
+      "evaluation_note": "A fonte integra a adaptação v2/v3 por quadros anotados e/ou recortes de fundo; no v3, chuva e canal também fornecem quadros completos de água. Não é teste independente. As categorias do catálogo não são rótulos de avaliação.",
+      "evaluation_role": "adaptation_training_frames",
       "thumbnail_seconds": 5.0,
       "thumbnail_sha256": "c97db30b8049c3c7c079e51d86bb47b559778037430d2c78f01898e7493eaa52",
       "thumbnail_note": "Quadro real completo, sem caixas, recorte ou resultado do modelo; instante escolhido por revisão visual do assunto."
@@ -175,8 +175,8 @@
       "contains_model_predictions": false,
       "sha256": "dd81768eb2c0054db76eaaacb371c12fde876c69d14270e20dbf5c983a5e41b6",
       "bytes": 2080859,
-      "evaluation_note": "A fonte integra a adaptação v2 por quadros anotados ou recortes de fundo; não é teste independente. As categorias do catálogo não são rótulos de avaliação.",
-      "evaluation_role": "adaptation_background_crops",
+      "evaluation_note": "A fonte integra a adaptação v2/v3 por quadros anotados e/ou recortes de fundo; no v3, chuva e canal também fornecem quadros completos de água. Não é teste independente. As categorias do catálogo não são rótulos de avaliação.",
+      "evaluation_role": "adaptation_training_frames",
       "thumbnail_seconds": 0.0,
       "thumbnail_sha256": "5b298d2e8c0ab043ab65df439ae808da8eff494628d36f5ec32f45234d922445",
       "thumbnail_note": "Quadro real completo, sem caixas, recorte ou resultado do modelo; instante escolhido por revisão visual do assunto."
@@ -273,5 +273,6 @@
     }
   ],
   "catalog_reviewed_at_utc": "2026-11-16T21:58:05.882586+00:00",
-  "catalog_review_note": "Descrições, papéis de avaliação e capas revisados; os oito arquivos de entrada e seus hashes permanecem inalterados."
+  "catalog_review_note": "Descrições, papéis de avaliação e capas revisados; os oito arquivos de entrada e seus hashes permanecem inalterados.",
+  "catalog_metadata_updated_at_utc": "2026-11-17T00:15:02.866826Z"
 }

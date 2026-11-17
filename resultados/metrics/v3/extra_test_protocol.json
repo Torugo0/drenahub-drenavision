@@ -1,0 +1,17 @@
+{
+  "status": "sealed_before_first_inference",
+  "accepted_images": 119,
+  "native_irodent_test_images": 69,
+  "new_source_assigned_water_positive_images": 40,
+  "blinded_reviewed_wet_surface_negatives": 10,
+  "excluded_uncertain_source_negative_images": 10,
+  "manifest_sha256": "284bd96609452df61bd465af1e9d58525b0f63600f1eca0cb73d1cca8f27caad",
+  "blinded_review_sha256": "2614b594dfe6abdd152f0e72505f21b0206cf47c29c7f4139a960c83ec8a15d0",
+  "source_irodent_annotation_sha256": "7b0c67f48da1fe0ac9490bef0ef8e8207d1867732fdfffcab8f7015a950f61de",
+  "selection_note": "Sealed identities from the prepared 119-image pool; do not rerun randomized source-negative selection after training-policy changes. Original exploratory selection excluded the old planned 400+24 water training inputs; final overlap is rechecked against the actual clean training dataset.",
+  "label_note": "Exact six-decimal YOLO label hashes pin visible-keypoint-derived rodent envelopes and connected original water-component envelopes. These references are not certified full-body boxes or segmentation masks.",
+  "negative_note": "Ten retained wet-surface references were conservatively reviewed without predictions; labels are not proof of a dry surface or a field safety guarantee. Ten source-negative conflicts/ambiguous inputs are archived by exact source identity.",
+  "deployment_note": "Same public source domains, not a new field study. This pool must not be used to tune a model after first evaluation.",
+  "label_line_ending": "CRLF",
+  "label_line_ending_note": "Exact label bytes were originally written on Windows; reconstruction preserves CRLF on all operating systems."
+}

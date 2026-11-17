@@ -1,0 +1,132 @@
+{
+  "status": "completed",
+  "training_mode": "fresh",
+  "started_at_utc": "2026-11-16T22:56:09.429606Z",
+  "completed_at_utc": "2026-11-16T23:14:13.209823Z",
+  "target_epochs": 80,
+  "completed_epochs": 63,
+  "stopped_early": true,
+  "base_model": "resultados/local/models/best_v2.pt",
+  "base_checkpoint": "resultados/local/models/best_v2.pt",
+  "base_sha256": "01ea7c578783b2a08fc585051b0768a1e9c0d510cb5652173fab0979f8d7d27a",
+  "initial_checkpoint": "resultados/local/models/best_v2.pt",
+  "initial_sha256": "01ea7c578783b2a08fc585051b0768a1e9c0d510cb5652173fab0979f8d7d27a",
+  "resume_from_epoch": null,
+  "interrupted_snapshot": null,
+  "last_checkpoint": "resultados/local/training/yolo26n_water_context_v3_clean/weights/last.pt",
+  "last_sha256": "473d85f91678822ac4e5f25fd262ecd157d3f48d8f763b835c454e424cc14f26",
+  "best_checkpoint": "resultados/local/training/yolo26n_water_context_v3_clean/weights/best.pt",
+  "best_sha256": "12b9e86f223366c3f2ef8c2308f0e1140cda08c55ab55e281e58d300fd554b4b",
+  "published_checkpoint": "resultados/local/models/candidate_v3.pt",
+  "published_sha256": "12b9e86f223366c3f2ef8c2308f0e1140cda08c55ab55e281e58d300fd554b4b",
+  "weights_changed_during_invocation": true,
+  "weights_changed_from_base": true,
+  "device": "cuda:0",
+  "seed": 42,
+  "dataset": {
+    "dataset_yaml": "dados/processed/drenavision_v3_clean/dataset.yaml",
+    "dataset_yaml_sha256": "ea42c1da0376d20f1ec4d31fb006343711a54de48f3bc2701a60bfb7f8533e8e",
+    "dataset_sha256": "a56acc4c4f1f81caf807e5f0980ed264c744fd47b1e0eb5cc5401d0964cbfe66",
+    "files_hashed": 2454,
+    "bytes_hashed": 1948655316,
+    "images_by_split": {
+      "test": 60,
+      "train": 1107,
+      "val": 60
+    },
+    "provenance_sha256": {
+      "dados/dataset_sources.csv": "4e03306338cd07a2ef991fb0512abc8dd2530d5b36b124618dc0918d534afc97",
+      "dados/manifests/dataset_manifest.csv": "7e03032b7a8cc38430e20c4682b4319a231f6559c92b95a34563d281a367c3f0",
+      "dados/manifests/dataset_summary.json": "112329c32e65f8d9ba371aaaa4d829dd016f89f4c88eee7a4a1b47c0ca7834ee",
+      "dados/manifests/research_report.json": "d10f7e5f6593ee47c13cb9f85009c1a0dab590b6c8ac9a3ec5a41436127007e9",
+      "dados/manifests/validation_report.json": "3d963db4a92380d1ec0fa2af44d5f3fbb565a9f5fda461d715e5d0d97a6dc82f",
+      "dados/manifests/validation_report_phash.json": "4a7d8fd726c924f38d2197000f7718d02e01bcfc05f680e435340561725fc093",
+      "dados/processed/drenavision_v3_clean/data_manifest.csv": "7bf12ddc7a164b1d6e36f20170afdb2757d2d7dcfc7d6190e2bf311922c32878"
+    }
+  },
+  "dataset_validation": {
+    "valid": true,
+    "dataset_root": "dados/processed/drenavision_v3_clean",
+    "error_count": 0,
+    "warning_count": 0,
+    "statistics": {
+      "images_by_split": {
+        "train": 1107,
+        "val": 60,
+        "test": 60
+      },
+      "labels_by_split": {
+        "train": 1107,
+        "val": 60,
+        "test": 60
+      },
+      "boxes_by_class": {
+        "obstrucao_visivel": 575,
+        "agua_acumulada": 1573,
+        "animal_visivel": 384
+      },
+      "boxes_by_split_and_class": {
+        "train": {
+          "obstrucao_visivel": 498,
+          "agua_acumulada": 1453,
+          "animal_visivel": 344
+        },
+        "val": {
+          "obstrucao_visivel": 40,
+          "agua_acumulada": 59,
+          "animal_visivel": 20
+        },
+        "test": {
+          "obstrucao_visivel": 37,
+          "agua_acumulada": 61,
+          "animal_visivel": 20
+        }
+      },
+      "negative_images": 6,
+      "exact_duplicate_groups": 0,
+      "phash_enabled": false,
+      "phash_threshold": null
+    },
+    "issues": []
+  },
+  "train_arguments": {
+    "data": "dados/processed/drenavision_v3_clean/dataset.yaml",
+    "epochs": 80,
+    "imgsz": 640,
+    "batch": 12,
+    "patience": 20,
+    "workers": 2,
+    "seed": 42,
+    "device": 0,
+    "optimizer": "auto",
+    "deterministic": true,
+    "amp": true,
+    "cache": false,
+    "pretrained": true,
+    "plots": true,
+    "close_mosaic": 10,
+    "project": "resultados/local/training",
+    "name": "yolo26n_water_context_v3_clean",
+    "exist_ok": false,
+    "verbose": true
+  },
+  "final_metrics": {
+    "metrics/precision(B)": 0.7236080307771235,
+    "metrics/recall(B)": 0.6283978545277981,
+    "metrics/mAP50(B)": 0.6597238596791754,
+    "metrics/mAP50-95(B)": 0.40712065414439863,
+    "fitness": 0.40712065414439863
+  },
+  "environment": {
+    "python": "3.12.10",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "packages": {
+      "torch": "2.14.1+cu130",
+      "torchvision": "0.29.1+cu130",
+      "ultralytics": "8.4.215",
+      "opencv-python": "4.14.0.94",
+      "PyYAML": "6.0.3",
+      "faster-coco-eval": "1.8.0"
+    }
+  }
+}

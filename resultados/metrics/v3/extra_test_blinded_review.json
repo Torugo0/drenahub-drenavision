@@ -1,0 +1,67 @@
+{
+  "reviewed_before_inference": true,
+  "reviewer": "Two Codex agents independently inspected the source-only contact sheets, with no predictions visible.",
+  "scope": "Conservative removal of uncertain/source-mislabelled negatives only; remaining source boxes are not certified masks.",
+  "exclusions": [
+    {
+      "source_path": "Outdoor/Wet surface/Top view/image378.jpeg",
+      "sha256": "616e84e8972b90bf4f20a79f5e71252382047c7f5936b1b5a907e38ee21f59dd",
+      "contact_sheet_index": 41,
+      "reason": "Visible muddy water ripples; source wet-only negative conflicts with visible-water target."
+    },
+    {
+      "source_path": "Outdoor/Wet surface/Side view/image1540.jpeg",
+      "sha256": "0cb013beaa6863caf1e445b5004f11f0ed22316bf1ea14c33a10013d8f849870",
+      "contact_sheet_index": 42,
+      "reason": "Visible water-filled field ruts; not a reliable negative."
+    },
+    {
+      "source_path": "Outdoor/Wet surface/Top view/image493.jpeg",
+      "sha256": "46e34ec6f86cbaa0c1668a45ebabdf08204247cb0dda316920d154946aaf1f7d",
+      "contact_sheet_index": 43,
+      "reason": "Motion blur prevents deciding whether visible liquid is a puddle or only wet pavement."
+    },
+    {
+      "source_path": "Outdoor/Wet surface/Side view/image147.jpeg",
+      "sha256": "dbcd9df66fd6b04cc347fc22d875cad0414d591b3febc9983152fe49ea4a437a",
+      "contact_sheet_index": 44,
+      "reason": "Reflective/white patches make pooled water ambiguous; excluded conservatively."
+    },
+    {
+      "source_path": "Outdoor/Wet surface/Top view/image403.jpeg",
+      "sha256": "edf508acd9046781af6197b7712e1d5a9e323dec58467189a15af68d8461f3bb",
+      "contact_sheet_index": 45,
+      "reason": "Upper portion appears to contain standing or flowing water beside cracked pavement."
+    },
+    {
+      "source_path": "Outdoor/Wet surface/Top view/image437.jpeg",
+      "sha256": "dac7e527284eca3da5fb76f736a799114e7fbba9ee44be54f59e987a69aa9212",
+      "contact_sheet_index": 47,
+      "reason": "Reflective water patch visible; source wet-only label is not a reliable negative."
+    },
+    {
+      "source_path": "Outdoor/Wet surface/Side view/image1684.jpeg",
+      "sha256": "8c26c1edb5c198c442d1de2efcc4f8fcbb9f2e9a929377d99595a054cda2f10d",
+      "contact_sheet_index": 48,
+      "reason": "Bus occludes most of the scene and reflective road background is small/ambiguous."
+    },
+    {
+      "source_path": "Outdoor/Wet surface/Top view/image101.jpeg",
+      "sha256": "797ed77173a64f626dfb4b1a374b2546064079263eaa08e7afbf29b61a90360f",
+      "contact_sheet_index": 51,
+      "reason": "Mirror-like road patch makes pooled water ambiguous; excluded conservatively."
+    },
+    {
+      "source_path": "Outdoor/Wet surface/Top view/image511.jpeg",
+      "sha256": "960f90fb567b47d41f6ecb0992e6da237b3711e80240204281616796b644ea83",
+      "contact_sheet_index": 56,
+      "reason": "Motion blur prevents a reliable wet-surface versus pooled-water decision."
+    },
+    {
+      "source_path": "Outdoor/Wet surface/Side view/image1547.jpeg",
+      "sha256": "f97a8a1d45aadbf200946a7aa7034ee44177a5d3de02aa31db3ba9406f52da3f",
+      "contact_sheet_index": 59,
+      "reason": "Visible water-filled field ruts; not a reliable negative."
+    }
+  ]
+}

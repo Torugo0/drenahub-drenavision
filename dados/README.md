@@ -21,16 +21,23 @@ python ferramentas/scripts/download_datasets.py --source all --seed 42
 python ferramentas/scripts/prepare_negative_crops.py
 python ferramentas/scripts/prepare_domain_annotations.py
 python ferramentas/scripts/prepare_adaptation.py --domain-root dados/interim/adaptation
+python ferramentas/scripts/prepare_rat_context_v3.py
+python ferramentas/scripts/prepare_water_v3.py
+python ferramentas/scripts/prepare_v3_dataset.py --fetch-click --domain-root dados/interim/rat_context_v3 --domain-root dados/interim/water_v3
 python ferramentas/scripts/validate_dataset.py
 python ferramentas/scripts/visualize_annotations.py --samples-per-split 6
 ```
 
 O download convencional é retomável por HTTP Range. O CLICK é um ZIP de vários
 gigabytes; o script abre o diretório central remotamente e baixa somente 140
-pares selecionados, sem transferir o arquivo completo. Repetir os comandos é
+pares da base histórica; `--fetch-click` prepara 250 pares nativos de treino
+em uma pasta suplementar, sendo 150 adicionais. Não transfere o ZIP completo. Repetir os comandos é
 seguro no downloader: arquivos completos e verificados são reutilizados.
-O preparador v2 recusa sobrescrever uma saída já preenchida; para repetir um
-experimento, escolha outro `--output-root` e `--audit-dir`.
+Os preparadores recusam sobrescrever uma saída já preenchida. Para repetir,
+escolha destinos vazios (`--output-root` no v2, `--output` no v3).
+Use os vídeos exatos versionados/da release: reencodar os originais pode alterar
+os hashes exigidos pelos quadros revisados. A instalação detalhada está em
+[REPRODUZIR.md](../docs/REPRODUZIR.md).
 
 A conversão simples `convert_annotations.py` cria `drenavision_corrected` com
 manifesto separado. Ela não substitui a preparação v2 acima nem sobrescreve
@@ -62,19 +69,22 @@ dados/
 │   ├── stagnant_water/
 │   ├── click_trash/
 │   └── irodent/
-└── processed/drenavision_v2/       # ignorado pelo Git; 557/62/62 imagens
+└── processed/drenavision_v3_clean/ # ignorado pelo Git; 1107/60/60 imagens
     ├── images/{train,val,test}/
     ├── labels/{train,val,test}/
     ├── dataset.yaml                    # gerado; usado por treino e avaliação
-    └── data_manifest.csv               # proveniência específica do v2
+    └── data_manifest.csv               # proveniência específica do v3
 ```
 
 O `dados/dataset.yaml` versionado é o template legível que aponta para a
-saída v2. O preparador grava o YAML efetivo ao lado das imagens em
-`dados/processed/drenavision_v2/dataset.yaml`; é esse arquivo portátil que
+saída v3. O preparador grava o YAML efetivo ao lado das imagens em
+`dados/processed/drenavision_v3_clean/dataset.yaml`; é esse arquivo portátil que
 treino, avaliação e validação consomem por padrão. Os manifests na raiz de
 `dados/manifests/` preservam o histórico v1; o manifesto atual tem uma cópia
-versionada em `resultados/metrics/v2/data_manifest.csv`.
+versionada em `resultados/metrics/v3/data_manifest.csv`. O v2 permanece local e
+em `resultados/metrics/v2/` como histórico. Os componentes conectados de água,
+as exclusões de negativos e as 119 imagens adicionais têm protocolo próprio em
+[VALIDACAO_V3.md](../docs/VALIDACAO_V3.md).
 
 Cada nome processado começa com a fonte e inclui os 16 primeiros caracteres do
 SHA-256 da imagem. O manifesto preserva URL, versão, licença, caminho original,

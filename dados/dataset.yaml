@@ -1,6 +1,6 @@
 # Ultralytics YOLO dataset configuration.
 # Paths are resolved relative to this YAML file.
-path: processed/drenavision_v2
+path: processed/drenavision_v3_clean
 train: images/train
 val: images/val
 test: images/test

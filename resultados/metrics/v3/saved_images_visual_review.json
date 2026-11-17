@@ -1,0 +1,561 @@
+{
+  "model_version": "pipeline-1314fcfa94f5f8cf",
+  "selection": "All five historical saved demo inputs, plus both newly observed false water alerts; no omitted failure within this selection. Selection is descriptive after evaluation, not an accuracy sample.",
+  "inputs_unchanged": true,
+  "relabeling_after_evaluation": false,
+  "visual_review_note": "All five historical examples now have genuine visible-class marks. The additional negative examples preserve real false alerts on soil and a window/sky scene. No labels or thresholds were changed after looking at these outputs.",
+  "montage": "resultados/metrics/v3/saved_images_and_false_alerts.jpg",
+  "items": [
+    {
+      "kind": "historical_saved_test_image",
+      "sample_id": "test/click_trash_00c5aac3d4cf1d57",
+      "title": "Resíduos: duas marcações reais",
+      "sample": {
+        "id": "test/click_trash_00c5aac3d4cf1d57",
+        "group": "labelled_split",
+        "input": "dados/processed/drenavision_v3_clean/images/test/click_trash_00c5aac3d4cf1d57.jpg",
+        "sha256": "00c5aac3d4cf1d576dabe41f20af431a6d611d1a740254fcfee65d71bdd1e6ab",
+        "width": 3072,
+        "height": 3072,
+        "split": "test",
+        "source_key": "click_trash",
+        "source_group": "click::trash (1105)",
+        "annotation_note": "reviewed single-class YOLO trash annotation",
+        "label_sha256": "a3f32cf2acc2887522abb2b383269f391d5fb8d481d25cee2bc7b1b6627b5965",
+        "truth": [
+          {
+            "class_id": 0,
+            "bounding_box": [
+              1793.0035200000002,
+              2383.01184,
+              2448.0153600000003,
+              2994.0019199999997
+            ]
+          },
+          {
+            "class_id": 0,
+            "bounding_box": [
+              976.9881600000001,
+              1108.992,
+              1161.0009599999998,
+              1334.9990400000002
+            ]
+          }
+        ]
+      },
+      "prediction": {
+        "sample_id": "test/click_trash_00c5aac3d4cf1d57",
+        "predictions": [
+          {
+            "class_id": 0,
+            "confidence": 0.786629855632782,
+            "bounding_box": [
+              976.6260375976562,
+              1113.1329345703125,
+              1158.8031005859375,
+              1334.3641357421875
+            ]
+          },
+          {
+            "class_id": 0,
+            "confidence": 0.7818074822425842,
+            "bounding_box": [
+              1815.7257080078125,
+              2365.7451171875,
+              2460.4990234375,
+              2983.01611328125
+            ]
+          }
+        ],
+        "score": {
+          "per_class": {
+            "obstrucao_visivel": {
+              "tp": 2,
+              "fp": 0,
+              "fn": 0
+            },
+            "agua_acumulada": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 0
+            },
+            "animal_visivel": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 0
+            }
+          },
+          "matched_truth_indexes": [
+            0,
+            1
+          ],
+          "matched_prediction_indexes": [
+            0,
+            1
+          ]
+        },
+        "annotated_image": "resultados/local/benchmark_v3/final_test60_pipeline/final_s640_full/predictions/test_click_trash_00c5aac3d4cf1d57.jpg"
+      },
+      "source_url": "https://data.mendeley.com/datasets/htcvvz6fm2/2",
+      "source_license": "CC-BY-4.0"
+    },
+    {
+      "kind": "historical_saved_test_image",
+      "sample_id": "test/irodent_02af19356995e059",
+      "title": "Animal visível: caixa sobre o corpo",
+      "sample": {
+        "id": "test/irodent_02af19356995e059",
+        "group": "labelled_split",
+        "input": "dados/processed/drenavision_v3_clean/images/test/irodent_02af19356995e059.jpg",
+        "sha256": "02af19356995e059ad306cd083baacc717bca0d4bf3cd6acb258c2fb131241b7",
+        "width": 2048,
+        "height": 1346,
+        "split": "test",
+        "source_key": "irodent",
+        "source_group": "irodent::new_obs_id_0097.jpg",
+        "annotation_note": "{\"method\":\"visible-keypoints-v2\",\"visible_keypoints\":5,\"invisible_keypoints_excluded\":15,\"source_bbox_xywh\":[877,779,177,70],\"corrected_bbox_xywh\":[859.3,772.0,212.4,84.0],\"padding_per_side\":\"10 percent, minimum 2 pixels\"}",
+        "label_sha256": "0e1037291d6d3a954eb9a72ca2a860fa2be6400a582e3bf66aeef8ee8b1708bd",
+        "truth": [
+          {
+            "class_id": 2,
+            "bounding_box": [
+              859.300864,
+              772.000319,
+              1071.700992,
+              856.0001410000001
+            ]
+          }
+        ]
+      },
+      "prediction": {
+        "sample_id": "test/irodent_02af19356995e059",
+        "predictions": [
+          {
+            "class_id": 2,
+            "confidence": 0.7370877265930176,
+            "bounding_box": [
+              844.1605834960938,
+              793.1708374023438,
+              1315.1090087890625,
+              921.38916015625
+            ]
+          }
+        ],
+        "score": {
+          "per_class": {
+            "obstrucao_visivel": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 0
+            },
+            "agua_acumulada": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 0
+            },
+            "animal_visivel": {
+              "tp": 0,
+              "fp": 1,
+              "fn": 1
+            }
+          },
+          "matched_truth_indexes": [],
+          "matched_prediction_indexes": []
+        },
+        "annotated_image": "resultados/local/benchmark_v3/final_test60_pipeline/final_s640_full/predictions/test_irodent_02af19356995e059.jpg"
+      },
+      "source_url": "https://doi.org/10.5281/zenodo.8250392",
+      "source_license": "Apache-2.0 record; source images CC-BY-NC"
+    },
+    {
+      "kind": "historical_saved_test_image",
+      "sample_id": "test/irodent_311988d4ce1851a6",
+      "title": "Roedor visível: caixa compacta",
+      "sample": {
+        "id": "test/irodent_311988d4ce1851a6",
+        "group": "labelled_split",
+        "input": "dados/processed/drenavision_v3_clean/images/test/irodent_311988d4ce1851a6.jpg",
+        "sha256": "311988d4ce1851a6d24db71478240bbccc8b9f2ed832cab966d56b7ceae05df0",
+        "width": 2048,
+        "height": 1536,
+        "split": "test",
+        "source_key": "irodent",
+        "source_group": "irodent::obs_id_00184.jpg",
+        "annotation_note": "{\"method\":\"visible-keypoints-v2\",\"visible_keypoints\":9,\"invisible_keypoints_excluded\":11,\"source_bbox_xywh\":[0,0,1265,899],\"corrected_bbox_xywh\":[856.9,545.9,445.2,385.2],\"padding_per_side\":\"10 percent, minimum 2 pixels\"}",
+        "label_sha256": "59678bf79bca93beda4cc0aaa8f933ba04e91062d7fe735ecb39881de08ec421",
+        "truth": [
+          {
+            "class_id": 2,
+            "bounding_box": [
+              856.900608,
+              545.899776,
+              1302.1009920000001,
+              931.0993920000001
+            ]
+          }
+        ]
+      },
+      "prediction": {
+        "sample_id": "test/irodent_311988d4ce1851a6",
+        "predictions": [
+          {
+            "class_id": 2,
+            "confidence": 0.8086339831352234,
+            "bounding_box": [
+              869.5070190429688,
+              494.68341064453125,
+              1423.227783203125,
+              904.0193481445312
+            ]
+          }
+        ],
+        "score": {
+          "per_class": {
+            "obstrucao_visivel": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 0
+            },
+            "agua_acumulada": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 0
+            },
+            "animal_visivel": {
+              "tp": 1,
+              "fp": 0,
+              "fn": 0
+            }
+          },
+          "matched_truth_indexes": [
+            0
+          ],
+          "matched_prediction_indexes": [
+            0
+          ]
+        },
+        "annotated_image": "resultados/local/benchmark_v3/final_test60_pipeline/final_s640_full/predictions/test_irodent_311988d4ce1851a6.jpg"
+      },
+      "source_url": "https://doi.org/10.5281/zenodo.8250392",
+      "source_license": "Apache-2.0 record; source images CC-BY-NC"
+    },
+    {
+      "kind": "historical_saved_test_image",
+      "sample_id": "test/stagnant_water_04213a44e43bc933",
+      "title": "Água visível: agora destacada",
+      "sample": {
+        "id": "test/stagnant_water_04213a44e43bc933",
+        "group": "labelled_split",
+        "input": "dados/processed/drenavision_v3_clean/images/test/stagnant_water_04213a44e43bc933.jpg",
+        "sha256": "04213a44e43bc93375d887967c76095301f7826e8125b522e00104037ef51f92",
+        "width": 256,
+        "height": 256,
+        "split": "test",
+        "source_key": "stagnant_water",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-180",
+        "annotation_note": "source YOLO class water retained; wet-surface boxes dropped; v3: union bounds of intersecting/touching source water-box components; no positive gap bridging",
+        "label_sha256": "46a0b69907f5fb4df0e8d4681205876224196da12668de31d7a2862efd1db639",
+        "truth": [
+          {
+            "class_id": 1,
+            "bounding_box": [
+              1.0001919999999984,
+              152.0,
+              196.0,
+              225.99987199999998
+            ]
+          }
+        ]
+      },
+      "prediction": {
+        "sample_id": "test/stagnant_water_04213a44e43bc933",
+        "predictions": [
+          {
+            "class_id": 1,
+            "confidence": 0.9769906401634216,
+            "bounding_box": [
+              0.0,
+              111.0,
+              208.0,
+              239.0
+            ]
+          }
+        ],
+        "score": {
+          "per_class": {
+            "obstrucao_visivel": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 0
+            },
+            "agua_acumulada": {
+              "tp": 1,
+              "fp": 0,
+              "fn": 0
+            },
+            "animal_visivel": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 0
+            }
+          },
+          "matched_truth_indexes": [
+            0
+          ],
+          "matched_prediction_indexes": [
+            0
+          ]
+        },
+        "annotated_image": "resultados/local/benchmark_v3/final_test60_pipeline/final_s640_full/predictions/test_stagnant_water_04213a44e43bc933.jpg"
+      },
+      "source_url": "https://data.mendeley.com/datasets/y6zyrnxbfm/4",
+      "source_license": "CC-BY-4.0"
+    },
+    {
+      "kind": "historical_saved_test_image",
+      "sample_id": "test/stagnant_water_78c5a3feac2bba2c",
+      "title": "Água: três marcações previstas",
+      "sample": {
+        "id": "test/stagnant_water_78c5a3feac2bba2c",
+        "group": "labelled_split",
+        "input": "dados/processed/drenavision_v3_clean/images/test/stagnant_water_78c5a3feac2bba2c.jpg",
+        "sha256": "78c5a3feac2bba2cfb366d11fb96cc94167ddd4074a43baf5dd7dbb54e299a4a",
+        "width": 256,
+        "height": 256,
+        "split": "test",
+        "source_key": "stagnant_water",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-180",
+        "annotation_note": "source YOLO class water retained; wet-surface boxes dropped; v3: union bounds of intersecting/touching source water-box components; no positive gap bridging",
+        "label_sha256": "0dc1372b0b39035a327b9a8b022a74fb1c6a6da1114a4ef7909c6b69d58fa528",
+        "truth": [
+          {
+            "class_id": 1,
+            "bounding_box": [
+              40.0,
+              114.0,
+              103.00006400000001,
+              133.000064
+            ]
+          },
+          {
+            "class_id": 1,
+            "bounding_box": [
+              127.00006400000001,
+              142.00012800000002,
+              144.0,
+              159.000064
+            ]
+          },
+          {
+            "class_id": 1,
+            "bounding_box": [
+              146.000128,
+              144.0,
+              154.000128,
+              160.999936
+            ]
+          },
+          {
+            "class_id": 1,
+            "bounding_box": [
+              156.0,
+              145.99987199999998,
+              171.000064,
+              160.0
+            ]
+          },
+          {
+            "class_id": 1,
+            "bounding_box": [
+              7.000063999999998,
+              124.00000000000001,
+              39.000063999999995,
+              137.00019200000003
+            ]
+          }
+        ]
+      },
+      "prediction": {
+        "sample_id": "test/stagnant_water_78c5a3feac2bba2c",
+        "predictions": [
+          {
+            "class_id": 1,
+            "confidence": 0.8141133189201355,
+            "bounding_box": [
+              38.46479415893555,
+              112.41950988769531,
+              104.3072280883789,
+              131.5511932373047
+            ]
+          },
+          {
+            "class_id": 1,
+            "confidence": 0.8332117199897766,
+            "bounding_box": [
+              127.35841369628906,
+              139.85147094726562,
+              167.78973388671875,
+              161.6846160888672
+            ]
+          },
+          {
+            "class_id": 1,
+            "confidence": 0.39203381538391113,
+            "bounding_box": [
+              3.543039083480835,
+              124.50041961669922,
+              33.08860778808594,
+              137.79100036621094
+            ]
+          }
+        ],
+        "score": {
+          "per_class": {
+            "obstrucao_visivel": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 0
+            },
+            "agua_acumulada": {
+              "tp": 2,
+              "fp": 1,
+              "fn": 3
+            },
+            "animal_visivel": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 0
+            }
+          },
+          "matched_truth_indexes": [
+            0,
+            4
+          ],
+          "matched_prediction_indexes": [
+            0,
+            2
+          ]
+        },
+        "annotated_image": "resultados/local/benchmark_v3/final_test60_pipeline/final_s640_full/predictions/test_stagnant_water_78c5a3feac2bba2c.jpg"
+      },
+      "source_url": "https://data.mendeley.com/datasets/y6zyrnxbfm/4",
+      "source_license": "CC-BY-4.0"
+    },
+    {
+      "kind": "new_extra_test_false_water_alert",
+      "sample_id": "test/water_extra_2df678b5a2f67902",
+      "title": "FALSO ALERTA: solo",
+      "sample": {
+        "id": "test/water_extra_2df678b5a2f67902",
+        "group": "labelled_split",
+        "input": "dados/processed/extra_test_v3/images/test/water_extra_2df678b5a2f67902.jpeg",
+        "sha256": "2df678b5a2f679020f2fb6b6b90aba0cbcb2954b9907a9fb666e653ea941fbbe",
+        "width": 256,
+        "height": 256,
+        "split": "test",
+        "source_key": "stagnant_water",
+        "source_group": "Outdoor/Wet surface/Side view::block-58",
+        "annotation_note": "wet-surface-only negative; water-v3: connected original water boxes; intersection or exact edge/corner contact; zero gap; min/max component envelope; no padding; extra source-assigned test v3; not used for model selection",
+        "label_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "truth": []
+      },
+      "prediction": {
+        "sample_id": "test/water_extra_2df678b5a2f67902",
+        "predictions": [
+          {
+            "class_id": 1,
+            "confidence": 0.640662670135498,
+            "bounding_box": [
+              69.35408782958984,
+              196.97509765625,
+              88.61644744873047,
+              218.02294921875
+            ]
+          }
+        ],
+        "score": {
+          "per_class": {
+            "obstrucao_visivel": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 0
+            },
+            "agua_acumulada": {
+              "tp": 0,
+              "fp": 1,
+              "fn": 0
+            },
+            "animal_visivel": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 0
+            }
+          },
+          "matched_truth_indexes": [],
+          "matched_prediction_indexes": []
+        },
+        "annotated_image": "resultados/local/benchmark_v3/final_extra119_pipeline/final_s640_full/predictions/test_water_extra_2df678b5a2f67902.jpg"
+      },
+      "source_url": "https://data.mendeley.com/datasets/y6zyrnxbfm/4",
+      "source_license": "CC-BY-4.0"
+    },
+    {
+      "kind": "new_extra_test_false_water_alert",
+      "sample_id": "test/water_extra_bb33bdc1e7da839a",
+      "title": "FALSO ALERTA: janela / céu",
+      "sample": {
+        "id": "test/water_extra_bb33bdc1e7da839a",
+        "group": "labelled_split",
+        "input": "dados/processed/extra_test_v3/images/test/water_extra_bb33bdc1e7da839a.jpeg",
+        "sha256": "bb33bdc1e7da839acde65f08c7861ad5f4548c7ee4bf11324541439d2833cc2a",
+        "width": 256,
+        "height": 256,
+        "split": "test",
+        "source_key": "stagnant_water",
+        "source_group": "Outdoor/Wet surface/Side view::block-88",
+        "annotation_note": "wet-surface-only negative; water-v3: connected original water boxes; intersection or exact edge/corner contact; zero gap; min/max component envelope; no padding; extra source-assigned test v3; not used for model selection",
+        "label_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "truth": []
+      },
+      "prediction": {
+        "sample_id": "test/water_extra_bb33bdc1e7da839a",
+        "predictions": [
+          {
+            "class_id": 1,
+            "confidence": 0.4533850848674774,
+            "bounding_box": [
+              199.09942626953125,
+              94.7509765625,
+              256.0,
+              254.33218383789062
+            ]
+          }
+        ],
+        "score": {
+          "per_class": {
+            "obstrucao_visivel": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 0
+            },
+            "agua_acumulada": {
+              "tp": 0,
+              "fp": 1,
+              "fn": 0
+            },
+            "animal_visivel": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 0
+            }
+          },
+          "matched_truth_indexes": [],
+          "matched_prediction_indexes": []
+        },
+        "annotated_image": "resultados/local/benchmark_v3/final_extra119_pipeline/final_s640_full/predictions/test_water_extra_bb33bdc1e7da839a.jpg"
+      },
+      "source_url": "https://data.mendeley.com/datasets/y6zyrnxbfm/4",
+      "source_license": "CC-BY-4.0"
+    }
+  ]
+}

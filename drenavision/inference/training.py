@@ -118,7 +118,7 @@ def _safe_arguments(arguments: Mapping[str, Any]) -> dict[str, Any]:
 
 
 def run_training(
-    config_path: str | Path = "ferramentas/configs/train_v2.yaml",
+    config_path: str | Path = "ferramentas/configs/train_v3.yaml",
     overrides: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Run or resume fine-tuning; publish only after all checks pass."""

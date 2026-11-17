@@ -19,17 +19,17 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--dataset-root",
         type=Path,
-        default=Path("dados/processed/drenavision_v2"),
+        default=Path("dados/processed/drenavision_v3_clean"),
     )
     parser.add_argument(
         "--yaml",
         type=Path,
-        default=Path("dados/processed/drenavision_v2/dataset.yaml"),
+        default=Path("dados/processed/drenavision_v3_clean/dataset.yaml"),
     )
     parser.add_argument(
         "--manifest",
         type=Path,
-        default=Path("dados/processed/drenavision_v2/data_manifest.csv"),
+        default=Path("dados/processed/drenavision_v3_clean/data_manifest.csv"),
     )
     parser.add_argument("--report", type=Path)
     parser.add_argument(

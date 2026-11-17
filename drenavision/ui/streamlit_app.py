@@ -36,12 +36,12 @@ EXAMPLES_DIR = ROOT / "dados/examples"
 RESULTS_DIR = ROOT / "resultados/local"
 LABELS = {
     "obstrucao_visivel": "Resíduos ou possível obstrução",
-    "agua_acumulada": "Água acumulada",
+    "agua_acumulada": "Água visível",
     "animal_visivel": "Possível animal",
 }
 ADVICE = {
     "obstrucao_visivel": "Peça à equipe responsável para verificar os resíduos e a passagem da água.",
-    "agua_acumulada": "Peça uma verificação do acúmulo de água e das condições de drenagem.",
+    "agua_acumulada": "Peça uma verificação da passagem da água e das condições de drenagem.",
     "animal_visivel": "Avise a equipe responsável para verificar a presença do animal no local.",
 }
 COLORS = {
@@ -105,14 +105,21 @@ def render_alerts(counts: dict[str, int], kind: str) -> None:
     if found:
         st.warning("Confira os sinais com a equipe responsável.", icon="⚠️")
     else:
-        st.info("Nenhum sinal encontrado. Confira também o registro.", icon="🔎")
+        st.info(
+            "A análise não marcou objetos. Confira o registro: isso não confirma que o local esteja sem problemas.",
+            icon="🔎",
+        )
     cards = []
     for name, label in zip(
         LABELS, ("Resíduos", "Água", "Possível animal"), strict=True
     ):
         count = counts[name]
-        value = str(count) if count else "—"
-        suffix = "marcação" if count == 1 else "marcações"
+        value = ("Encontrado" if kind == "video" else str(count)) if count else "—"
+        suffix = (
+            "sinal no vídeo"
+            if kind == "video"
+            else ("marcação" if count == 1 else "marcações")
+        )
         cards.append(
             f'<div class="dv-count {"active" if count else ""}"><span>{label}</span><strong>{value}</strong><small>{suffix if count else "sem marcação"}</small></div>'
         )
@@ -147,10 +154,16 @@ def analyze_image(data: bytes, name: str, point: str) -> dict:
             "Não foi possível analisar a foto. Confira se o modelo está disponível e tente novamente."
         )
     payload = response.json()
+    evidence = api_request("GET", f"/vision/evidence/{payload['event_id']}")
+    if evidence.status_code != 200:
+        raise RuntimeError(
+            "A análise foi registrada, mas sua imagem não pôde ser carregada. Consulte os registros anteriores."
+        )
+    analyzed = Image.open(BytesIO(evidence.content)).convert("RGB")
     return {
         "kind": "image",
         "payload": payload,
-        "image": annotate(data, payload["detections"]),
+        "image": analyzed,
     }
 
 
@@ -186,8 +199,29 @@ def analyze_video(source: Path, point: str) -> dict:
         str(runtime.iou_threshold),
         "--device",
         runtime.device,
+        "--imgsz",
+        str(runtime.image_size),
         "--track",
+        "--residue-conf",
+        str(runtime.confidence_threshold),
+        "--animal-conf",
+        str(runtime.animal_confidence_threshold),
+        "--water-confirmation-seconds",
+        str(runtime.video_water_confirmation_seconds),
     ]
+    if runtime.water_model_path is not None:
+        command.extend(
+            [
+                "--water-model",
+                str(runtime.water_model_path),
+                "--water-pixel-confidence",
+                str(runtime.water_pixel_confidence),
+                "--water-min-area-fraction",
+                str(runtime.water_min_area_fraction),
+                "--water-mode",
+                runtime.water_mode,
+            ]
+        )
     if point:
         command.extend(["--point-id", point])
     completed = subprocess.run(
@@ -438,7 +472,7 @@ def analysis_page() -> None:
             finally:
                 if temporary:
                     temporary.unlink(missing_ok=True)
-        st.caption("Resíduos · água acumulada · possíveis animais")
+        st.caption("Resíduos · água visível · possíveis animais")
     with preview, st.container(key="result_panel"):
         result = st.session_state.get("inspection_result")
         if ready and result and result["identity"] == identity:
@@ -531,7 +565,7 @@ def main() -> None:
             "A ferramenta pode errar e deixar passar objetos. As marcações indicam o que a análise encontrou; uma pessoa confirma a situação no local."
         )
         st.write(
-            "O protótipo procura resíduos ou possíveis obstruções, água acumulada e animais visíveis. Ele não mede profundidade nem prevê alagamentos."
+            "O protótipo procura resíduos ou possíveis obstruções, água visível e possíveis animais. A água pode estar parada ou em movimento; a marcação não mede profundidade nem prevê alagamentos."
         )
         st.caption(
             "Os exemplos mantêm seus créditos e licenças. Filmagens e fotos ilustrativas são analisadas pelo mesmo modelo usado nos seus arquivos."

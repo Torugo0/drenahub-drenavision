@@ -11,9 +11,11 @@ if (-not (Test-Path -LiteralPath $pythonPath)) {
     throw 'Ambiente ausente. Siga a preparação inicial no README antes de abrir o projeto.'
 }
 New-Item -ItemType Directory -Force -Path $logRoot | Out-Null
-$settingsJson = & $pythonPath -c "import json,sys;sys.path.insert(0,sys.argv[1]);from drenavision.core.config import get_settings;s=get_settings();print(json.dumps({'port':s.api_port,'host':s.api_host}))" $projectRoot
+$settingsJson = & $pythonPath -c "import json,sys;sys.path.insert(0,sys.argv[1]);from drenavision.core.config import get_settings;s=get_settings();print(json.dumps({'port':s.api_port,'host':s.api_host,'objects_ready':s.model_path.is_file(),'water_ready':s.water_model_path is None or all((s.water_model_path/name).is_file() for name in ['model.safetensors','config.json','preprocessor_config.json','download_manifest.json','LICENSE-NVIDIA-SegFormer.txt'])}))" $projectRoot
 if ($LASTEXITCODE -ne 0) { throw 'Dependências ausentes. Instale requirements-dev.txt conforme o README.' }
 $runtimeConfig = $settingsJson | ConvertFrom-Json
+if (-not $runtimeConfig.objects_ready) { throw 'Modelo de objetos ausente. Baixe best.pt seguindo a preparação inicial no README.' }
+if (-not $runtimeConfig.water_ready) { throw 'Modelo de água ausente. Execute .\.venv\Scripts\python.exe ferramentas\scripts\prepare_water_model.py e inicie novamente.' }
 $apiPort = [int]$runtimeConfig.port
 $apiHost = [string]$runtimeConfig.host
 $clientHost = if ($apiHost -eq '0.0.0.0') { '127.0.0.1' } else { $apiHost }
@@ -61,7 +63,7 @@ for ($attempt = 0; $attempt -lt 45; $attempt++) {
     Start-Sleep -Milliseconds 500
 }
 if (-not $ready) { throw "Não foi possível iniciar. Veja os registros em resultados/local/logs/." }
-if (-not $health.model_loaded) { Write-Warning 'A interface está pronta, mas falta o modelo. Veja no README como baixar best.pt.' }
+if (-not $health.model_loaded) { Write-Warning 'A interface abriu, mas os modelos de visão não estão disponíveis. Confira a preparação dos modelos no README e os registros em resultados/local/logs/.' }
 Write-Host 'DrenaVision pronto: http://127.0.0.1:8501' -ForegroundColor Green
 Write-Host "API técnica: http://${clientHost}:$apiPort/docs"
 if (-not $SemNavegador) { Start-Process 'http://127.0.0.1:8501' }

@@ -1,0 +1,83 @@
+{
+  "scope": "Raw YOLO master comparison on the same 60 images and water-component/visible-keypoint reference protocol; not hybrid mAP.",
+  "baseline": {
+    "aggregate": {
+      "precision": 0.38548804840948714,
+      "recall": 0.4052561651011046,
+      "map50": 0.33486927535917776,
+      "map50_95": 0.17484856373277224
+    },
+    "per_class": {
+      "obstrucao_visivel": {
+        "class_id": 0,
+        "precision": 0.5896994772445601,
+        "recall": 0.6486486486486487,
+        "map50": 0.6233289262131628,
+        "map50_95": 0.36113769502317394
+      },
+      "agua_acumulada": {
+        "class_id": 1,
+        "precision": 0.18401962618619402,
+        "recall": 0.16393442622950818,
+        "map50": 0.06876462067275968,
+        "map50_95": 0.0172495305138533
+      },
+      "animal_visivel": {
+        "class_id": 2,
+        "precision": 0.3827450417977074,
+        "recall": 0.4031854204251571,
+        "map50": 0.31251427919161084,
+        "map50_95": 0.14615846566128932
+      }
+    },
+    "speed_ms_per_image": {
+      "preprocess": 1.5466966666887554,
+      "inference": 25.02077833335837,
+      "loss": 0.00014166665399291864,
+      "postprocess": 1.5518616667274425
+    }
+  },
+  "candidate": {
+    "aggregate": {
+      "precision": 0.6511758595558325,
+      "recall": 0.5331634913602127,
+      "map50": 0.4845241663349529,
+      "map50_95": 0.2574148915114912
+    },
+    "per_class": {
+      "obstrucao_visivel": {
+        "class_id": 0,
+        "precision": 0.6050913693110798,
+        "recall": 0.6216216216216216,
+        "map50": 0.5710346146327895,
+        "map50_95": 0.4088846832309276
+      },
+      "agua_acumulada": {
+        "class_id": 1,
+        "precision": 0.7040579131031092,
+        "recall": 0.32786885245901637,
+        "map50": 0.35652058152883803,
+        "map50_95": 0.15688926630116112
+      },
+      "animal_visivel": {
+        "class_id": 2,
+        "precision": 0.6443782962533084,
+        "recall": 0.65,
+        "map50": 0.526017302843231,
+        "map50_95": 0.20647072500238478
+      }
+    },
+    "speed_ms_per_image": {
+      "preprocess": 1.6966116665571462,
+      "inference": 25.431884999852628,
+      "loss": 0.00015166673013785234,
+      "postprocess": 0.5168883333681151
+    }
+  },
+  "tradeoffs": [
+    "Aggregate mAP50 and mAP50-95 improved.",
+    "Residue AP50 decreased while residue AP50-95 increased.",
+    "Independent extra-pool animal presence and IoU-matched recall decreased slightly; retained without retuning.",
+    "Source boxes are not independently certified full-body boxes or water masks."
+  ]
+}

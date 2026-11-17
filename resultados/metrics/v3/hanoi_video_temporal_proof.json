@@ -1,0 +1,68 @@
+{
+  "scope": "Video-only temporal engineering on a known regression; frozen image profile and all179image results unchanged.",
+  "input_sha256": "5bd947ce05cc3dab49118747622e29f56d8c7ba1131233fe3ff97cbb02da8030",
+  "base_pipeline_version": "pipeline-1314fcfa94f5f8cf",
+  "video_model_version": "pipeline-4d613d5a1d82cb61",
+  "raw_manifest_sha256": "1ffe7264ff8eebb84ade55faabfc4df0c365c46d13b66a2437593e150418c518",
+  "confirmed_manifest_sha256": "325baed5ff480757a0d78d24c19fd321e71878341858eafa9d3c2c9b7aa6fccb",
+  "raw_counts": {
+    "obstrucao_visivel": {
+      "count": 2,
+      "method": "unique_track_ids"
+    },
+    "agua_acumulada": {
+      "count": 1,
+      "method": "max_simultaneous_per_frame"
+    },
+    "animal_visivel": {
+      "count": 4,
+      "method": "unique_track_ids"
+    }
+  },
+  "confirmed_counts": {
+    "obstrucao_visivel": {
+      "count": 2,
+      "method": "unique_track_ids"
+    },
+    "agua_acumulada": {
+      "count": 0,
+      "method": "max_simultaneous_per_frame"
+    },
+    "animal_visivel": {
+      "count": 4,
+      "method": "unique_track_ids"
+    }
+  },
+  "frames_by_class_before": {
+    "0": 227,
+    "1": 7,
+    "2": 187
+  },
+  "frames_by_class_after": {
+    "0": 227,
+    "1": 0,
+    "2": 187
+  },
+  "temporal_policy": {
+    "enabled": true,
+    "confirmation_seconds": 0.5,
+    "fps": 20.0,
+    "required_consecutive_frames": 10,
+    "raw_water_frames": 7,
+    "raw_water_detection_count": 7,
+    "longest_consecutive_water_run": 4,
+    "confirmed": false,
+    "suppressed_frames": 7,
+    "rerendered_from_original": true,
+    "policy": "video-water-longest-run-v1; require a consecutive run of ceil(fps*seconds); otherwise suppress all water for this clip, preserve raw proposals, and redraw from original decoded source frames",
+    "scope": "video-only engineering confirmation; image predictions and the frozen image profile remain unchanged"
+  },
+  "other_per_frame_detections_byte_equivalent_as_json": true,
+  "raw_water_detections_preserved_exactly": true,
+  "raw_semantic_metadata_preserved_exactly": true,
+  "ffmpeg_decoded_frames": 240,
+  "ffmpeg_decoded_seconds": 12.0,
+  "codec": "h264",
+  "water_review_frame_present": false,
+  "poster": "resultados/local/validation_examples_v3_hanoi_confirmed/rato_residuos_annotated.jpg"
+}

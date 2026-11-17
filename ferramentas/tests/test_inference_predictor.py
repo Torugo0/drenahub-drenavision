@@ -57,9 +57,11 @@ class _Model:
     def __init__(self, detections: bool = True) -> None:
         self.detections = detections
         self.last_source = None
+        self.last_kwargs = None
 
     def predict(self, **kwargs):
         self.last_source = kwargs["source"]
+        self.last_kwargs = kwargs
         return [_Result(self.detections)]
 
 
@@ -96,6 +98,20 @@ def test_prediction_returns_canonical_schema_and_rgb_annotation() -> None:
     assert result.inference_ms == pytest.approx(3.25)
     assert result.annotated_image[0, 0].tolist() == [30, 20, 10]
     assert model.last_source[0, 0].tolist() == [0, 0, 255]
+    assert model.last_kwargs["imgsz"] == 640
+
+
+def test_explicit_inference_size_is_forwarded_without_scaling_original_pixel_boxes():
+    model = _Model()
+    predictor = _stub_predictor(model)
+    predictor.image_size = 960
+    image = np.zeros((10, 12, 3), dtype=np.uint8)
+    result = predictor.predict(image)
+    assert model.last_kwargs["imgsz"] == 960
+    assert model.last_source.shape == image.shape
+    assert result.detections[0].bounding_box == (1.0, 2.0, 9.0, 8.0)
+    assert (result.image_width, result.image_height) == (12, 10)
+    assert result.as_dict()["inference"] == {"imgsz": 960}
 
 
 def test_zero_detections_remains_a_successful_real_result() -> None:

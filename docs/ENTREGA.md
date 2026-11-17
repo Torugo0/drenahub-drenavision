@@ -9,7 +9,7 @@ de requisitos; escolhas adicionais de arquitetura pertencem ao DrenaVision.
 | Requisito oficial | Evidência/estado |
 |---|---|
 | Detecção de objetos e/ou realidade aumentada | detector de três classes em fotos/vídeos |
-| Treinamento customizado de arquitetura compatível | YOLO26n v2 ajustado em 60 épocas; manifesto, logs e hash publicados |
+| Treinamento customizado de arquitetura compatível | YOLO26n v3: 63 épocas, melhor na 43; manifesto, logs e hash. SegFormer B1 pré-treinado complementa água; não é apresentado como treinado pela equipe |
 | GitHub com documentação e código completo | este repositório; visibilidade pública ainda pendente |
 | Vídeo da solução funcionando | roteiro abaixo; gravação/publicação pendentes |
 | PDF técnico | etapa posterior; conteúdo exigido no checklist abaixo |
@@ -38,16 +38,19 @@ ambiental ou climático; indicadores de resultado exigem validação em operaç�
 | Tempo | Mostrar | Explicar |
 |---|---|---|
 | 0:00–0:30 | produto, público e três tipos de alerta | apoio à revisão humana de resíduos, água e animal |
-| 0:30–1:10 | fontes, auditoria iRodent, manifesto, splits e treino v2 | defeito das caixas originais, keypoints visíveis e pesos customizados |
+| 0:30–1:10 | fontes, auditorias, manifesto, splits e treino v3 | caixas corrigidas, negativos revistos e pesos customizados |
 | 1:10–2:25 | interface: foto e vídeos variados | enviar/escolher entrada, analisar, ver caixas e alertas |
 | 2:25–3:05 | resultado e histórico | arquivo anotado, ocorrência registrada e encaminhamento |
 | 3:05–3:40 | Swagger e JSON real | integração com evento, UTC, classe, caixa e confiança |
-| 3:40–4:20 | comparação no teste corrigido e exemplo de falha | v2: mAP50 0,3581; animal 0,3102; água com recall 0,1765 e limitações |
+| 3:40–4:20 | teste separado e exemplo de falha | YOLO isolado mAP50 0,4845; produto: água em 33/40 novas fotos, com 2/10 falsos alertas em negativos; animal 46/69, uma perda ante v2 |
 | 4:20–4:30 | produto e próximos passos | coleta no domínio real e confirmação humana |
 
 Execute `iniciar.ps1` antes de gravar. Mostre pelo menos um erro real e use os
-valores de `resultados/metrics/v2/candidate_test_metrics.json` e
-`resultados/metrics/v2/comparison.json`. O arquivo antigo
+valores de `resultados/metrics/v3/independent_comparison.json` e
+`resultados/metrics/v3/master_map_comparison.json`. A avaliação de presença do
+produto é separada do AP do YOLO. A calibração é validação, não teste. A licença
+NVIDIA permite pesquisa/avaliação não comercial; uma startup precisa resolver
+as licenças antes de uso comercial. O arquivo antigo
 `resultados/metrics/evaluation_metrics.json` registra o protocolo histórico
 v1 com caixas de roedor defeituosas. Uma sequência montada
 de fotografias deve ser identificada como tal. Filmagem e sequência de fotos

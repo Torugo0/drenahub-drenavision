@@ -32,16 +32,16 @@ def _merged(path: Path, overrides: Mapping[str, Any] | None) -> dict[str, Any]:
 
 @dataclass(frozen=True, slots=True)
 class TrainConfig:
-    model: str = "resultados/local/models/yolo26n-base.pt"
-    data: Path = Path("dados/processed/drenavision_v2/dataset.yaml")
+    model: str = "resultados/local/models/best_v2.pt"
+    data: Path = Path("dados/processed/drenavision_v3_clean/dataset.yaml")
     project: Path = Path("resultados/local/training")
-    name: str = "yolo26n_corrected_v2"
-    published_checkpoint: Path = Path("resultados/local/models/candidate_v2.pt")
+    name: str = "yolo26n_water_context_v3_clean"
+    published_checkpoint: Path = Path("resultados/local/models/candidate_v3.pt")
     resume: Path | None = None
-    epochs: int = 100
+    epochs: int = 80
     imgsz: int = 640
     batch: int | float = 12
-    patience: int = 25
+    patience: int = 20
     workers: int = 2
     seed: int = 42
     device: str = "auto"
@@ -79,9 +79,9 @@ class TrainConfig:
 @dataclass(frozen=True, slots=True)
 class EvaluateConfig:
     checkpoint: Path = Path("resultados/local/models/best.pt")
-    data: Path = Path("dados/processed/drenavision_v2/dataset.yaml")
+    data: Path = Path("dados/processed/drenavision_v3_clean/dataset.yaml")
     project: Path = Path("resultados/local/evaluation")
-    name: str = "candidate_v2_on_corrected_v2"
+    name: str = "active_master_v3_on_water_regions_v3"
     imgsz: int = 640
     batch: int | float = 8
     confidence: float = 0.001

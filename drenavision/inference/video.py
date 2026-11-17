@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import importlib
 import json
+import math
 import shutil
 import tempfile
 import time
@@ -13,6 +14,7 @@ from typing import Any
 from uuid import uuid4
 
 from drenavision.core.annotations import place_label
+from drenavision.core.config import validate_image_size
 from drenavision.core.constants import OVERLAY_CLASS_LABELS
 from drenavision.core.schemas import Detection, PredictionEvent
 from drenavision.core.storage import EventRepository, EvidenceStore
@@ -23,6 +25,7 @@ from .media_io import write_image
 from .predictor import detections_from_result
 from .utils import sha256_file, utc_now_iso, validate_class_map, write_json
 from .video_codec import prepare_browser_video
+from .water import SemanticWaterPredictor
 
 
 def _serialize_detection(detection: Any) -> dict[str, Any]:
@@ -74,6 +77,81 @@ def annotate_video_frame(frame_bgr: Any, detections: list[Detection]) -> Any:
     return np.asarray(image)[:, :, ::-1].copy()
 
 
+def water_temporal_policy(
+    frames: list[dict[str, Any]], fps: float, confirmation_seconds: float
+) -> dict[str, Any]:
+    """Confirm persistent water presence without changing any image prediction."""
+    current_run = longest_run = raw_water_frames = raw_water_boxes = 0
+    for frame in frames:
+        water = [item for item in frame["detections"] if item["class_id"] == 1]
+        raw_water_boxes += len(water)
+        if water:
+            raw_water_frames += 1
+            current_run += 1
+            longest_run = max(longest_run, current_run)
+        else:
+            current_run = 0
+    required = math.ceil(fps * confirmation_seconds) if confirmation_seconds > 0 else 0
+    confirmed = confirmation_seconds == 0 or longest_run >= required
+    suppressed = raw_water_frames if not confirmed else 0
+    return {
+        "enabled": confirmation_seconds > 0,
+        "confirmation_seconds": confirmation_seconds,
+        "fps": fps,
+        "required_consecutive_frames": required,
+        "raw_water_frames": raw_water_frames,
+        "raw_water_detection_count": raw_water_boxes,
+        "longest_consecutive_water_run": longest_run,
+        "confirmed": confirmed,
+        "suppressed_frames": suppressed,
+        "rerendered_from_original": suppressed > 0,
+        "policy": "video-water-longest-run-v1; require a consecutive run of ceil(fps*seconds); otherwise suppress all water for this clip, preserve raw proposals, and redraw from original decoded source frames",
+        "scope": "video-only engineering confirmation; image predictions and the frozen image profile remain unchanged",
+    }
+
+
+def _summarize_video_counts(
+    track: bool,
+    unique_ids: dict[int, set[int]],
+    fallback_peak: dict[int, int],
+    tracked_representatives: dict[int, dict[int, Any]],
+    peak_representatives: dict[int, list[Any]],
+) -> tuple[dict[str, dict[str, Any]], list[dict[str, Any]]]:
+    counts, representative_detections = {}, []
+    for class_id, class_name in CLASS_NAMES.items():
+        tracked_count = len(unique_ids[class_id])
+        peak_count = fallback_peak[class_id]
+        if track and tracked_count:
+            count = max(tracked_count, peak_count)
+            method = (
+                "unique_track_ids"
+                if tracked_count >= peak_count
+                else "hybrid_max_tracks_and_frame_peak"
+            )
+            representatives = list(tracked_representatives[class_id].values())
+            if len(representatives) < count:
+                tracked_ids = {
+                    int(item.track_id)
+                    for item in representatives
+                    if item.track_id is not None
+                }
+                supplements = [
+                    item
+                    for item in peak_representatives[class_id]
+                    if item.track_id is None or int(item.track_id) not in tracked_ids
+                ]
+                representatives.extend(supplements[: count - len(representatives)])
+        else:
+            count = peak_count
+            method = "max_simultaneous_per_frame"
+            representatives = peak_representatives[class_id]
+        counts[class_name] = {"count": count, "method": method}
+        representative_detections.extend(
+            _serialize_detection(item) for item in representatives[:count]
+        )
+    return counts, representative_detections
+
+
 def persist_video_event(
     manifest: dict[str, Any],
     repository: EventRepository,
@@ -110,6 +188,11 @@ def persist_video_event(
             "counts",
             "representative_detections",
             "device",
+            "inference",
+            "pipeline",
+            "base_pipeline_version",
+            "raw_counts",
+            "water_temporal_policy",
         )
     }
     evidence_payload["event_id"] = event_id
@@ -147,8 +230,16 @@ def process_video(
     confidence: float = 0.35,
     iou: float = 0.45,
     device: str = "auto",
+    image_size: int = 640,
     track: bool = False,
     max_frames: int = 18_000,
+    water_model_path: str | Path | None = None,
+    water_pixel_confidence: float = 0.5,
+    water_min_area_fraction: float = 0.001,
+    water_mode: str = "augment",
+    residue_confidence: float = 0.35,
+    animal_confidence: float = 0.35,
+    water_confirmation_seconds: float = 0.0,
 ) -> dict[str, Any]:
     """Annotate one video and write a structured JSON sidecar.
 
@@ -156,6 +247,14 @@ def process_video(
     conservative maximum simultaneous count is reported instead of summing the
     same object once per frame.
     """
+
+    image_size = validate_image_size(image_size)
+    from .runtime import (
+        filter_detections,
+        merge_water_detections,
+        overlay_water,
+        profile_version,
+    )
 
     source = Path(input_path)
     destination = Path(output_path)
@@ -172,6 +271,79 @@ def process_video(
         raise ValueError("conf/iou devem estar entre 0 e 1")
     if max_frames < 1:
         raise ValueError("max_frames deve ser positivo")
+    if water_mode not in {"augment", "replace"}:
+        raise ValueError("water_mode deve ser augment ou replace")
+    for name, value in (
+        ("water_pixel_confidence", water_pixel_confidence),
+        ("water_min_area_fraction", water_min_area_fraction),
+        ("residue_confidence", residue_confidence),
+        ("animal_confidence", animal_confidence),
+    ):
+        if not math.isfinite(value) or not 0 <= value <= 1:
+            raise ValueError(f"{name} deve ser finito e estar entre 0 e 1")
+    if (
+        not math.isfinite(water_confirmation_seconds)
+        or not 0 <= water_confirmation_seconds <= 10
+    ):
+        raise ValueError(
+            "water_confirmation_seconds deve ser finito e estar entre 0 e 10"
+        )
+    water_confirmation_seconds = float(water_confirmation_seconds)
+
+    water = None
+    water_provenance = None
+    if water_model_path is not None:
+        water = SemanticWaterPredictor(
+            water_model_path,
+            device=device,
+            pixel_confidence=water_pixel_confidence,
+            min_area_fraction=water_min_area_fraction,
+            processing_size=512,
+        )
+        if not water.is_ready:
+            raise RuntimeError(
+                f"segmentador de água configurado indisponível: {water.detail}"
+            )
+        water_provenance = water.provenance
+
+    model_sha256 = sha256_file(checkpoint)
+    master_version = f"{checkpoint.stem}-{model_sha256[:12]}"
+    operating_parameters = {
+        "imgsz": image_size,
+        "confidence": float(confidence),
+        "iou": float(iou),
+        "residue_confidence": float(residue_confidence),
+        "animal_confidence": float(animal_confidence),
+        "water_mode": water_mode,
+    }
+    base_pipeline_version = profile_version(
+        model_sha256, water_provenance, operating_parameters
+    )
+    video_parameters = {
+        **operating_parameters,
+        "video_water_confirmation_seconds": water_confirmation_seconds,
+    }
+    pipeline_version = (
+        profile_version(model_sha256, water_provenance, video_parameters)
+        if water_confirmation_seconds > 0
+        else base_pipeline_version
+    )
+    pipeline = {
+        "model_version": pipeline_version,
+        "base_pipeline_version": base_pipeline_version,
+        "master_model_version": master_version,
+        "master_model_sha256": model_sha256,
+        "water": water_provenance,
+        "operating_parameters": video_parameters
+        if water_confirmation_seconds > 0
+        else operating_parameters,
+        "water_counting_policy": "maximum simultaneous merged water regions; no persistent IDs or unique-puddle claims"
+        if water is not None
+        else "legacy YOLO tracking/peak counting",
+        "water_merge_policy": "same-class contained duplicates only; keep an actual predicted box; never invent a union"
+        if water is not None
+        else None,
+    }
 
     cv2 = importlib.import_module("cv2")
     ultralytics = importlib.import_module("ultralytics")
@@ -246,27 +418,51 @@ def process_video(
                     f"video excede o limite operacional de {max_frames} frames"
                 )
             frame_started = time.perf_counter()
+            inference_arguments = {
+                "source": frame,
+                "conf": confidence,
+                "iou": iou,
+                "device": selected_device,
+                "imgsz": image_size,
+                "verbose": False,
+            }
+            if water is not None:
+                inference_arguments["classes"] = (
+                    [0, 2] if water_mode == "replace" else [0, 1, 2]
+                )
             if track:
                 results = model.track(
-                    source=frame,
                     persist=True,
                     tracker="bytetrack.yaml",
-                    conf=confidence,
-                    iou=iou,
-                    device=selected_device,
-                    verbose=False,
+                    **inference_arguments,
                 )
             else:
-                results = model.predict(
-                    source=frame,
-                    conf=confidence,
-                    iou=iou,
-                    device=selected_device,
-                    verbose=False,
-                )
+                results = model.predict(**inference_arguments)
             if not results:
                 raise RuntimeError(f"modelo nao retornou o frame {frame_index}")
             result = results[0]
+            master_detections = filter_detections(
+                detections_from_result(result, width, height),
+                residue_confidence=residue_confidence,
+                animal_confidence=animal_confidence,
+            )
+            water_result = None
+            display_frame = frame
+            if water is not None:
+                rgb = frame[:, :, ::-1].copy()
+                water_result = water.predict(rgb)
+                master_detections = merge_water_detections(
+                    master_detections, water_result.detections, mode=water_mode
+                )
+                # Water surfaces are not persistent instances, including a
+                # master box retained while augmenting semantic regions.
+                master_detections = [
+                    item.model_copy(update={"track_id": None})
+                    if item.class_id == 1
+                    else item
+                    for item in master_detections
+                ]
+                display_frame = overlay_water(rgb, water_result.mask)[:, :, ::-1].copy()
             detections = [
                 item.model_copy(
                     update={
@@ -274,7 +470,7 @@ def process_video(
                         "timestamp_seconds": frame_index / fps,
                     }
                 )
-                for item in detections_from_result(result, width, height)
+                for item in master_detections
             ]
             for class_id in CLASS_NAMES:
                 class_detections = [
@@ -298,7 +494,7 @@ def process_video(
                         ] = item
             if has_untracked:
                 untracked_frames += 1
-            annotated = annotate_video_frame(frame, detections)
+            annotated = annotate_video_frame(display_frame, detections)
             writer.write(annotated)
             frame_score = sum(item.confidence for item in detections)
             if frame_score > best_frame_score:
@@ -323,19 +519,16 @@ def process_video(
                             ],
                         },
                     )
-            speed = getattr(result, "speed", {})
-            inference_ms = (
-                float(speed["inference"])
-                if isinstance(speed, dict)
-                and isinstance(speed.get("inference"), (int, float))
-                else (time.perf_counter() - frame_started) * 1000.0
-            )
+            inference_ms = (time.perf_counter() - frame_started) * 1000.0
             frames.append(
                 {
                     "frame_index": frame_index,
                     "timestamp_seconds": frame_index / fps,
                     "inference_ms": inference_ms,
                     "detections": [_serialize_detection(item) for item in detections],
+                    "water": water_result.metadata
+                    if water_result is not None
+                    else None,
                 }
             )
             frame_index += 1
@@ -349,7 +542,102 @@ def process_video(
     if frame_index == 0:
         scratch_handle.cleanup()
         raise RuntimeError("video nao contem frames decodificaveis")
+    raw_counts, raw_representatives = _summarize_video_counts(
+        track, unique_ids, fallback_peak, tracked_representatives, peak_representatives
+    )
+    temporal = water_temporal_policy(frames, fps, water_confirmation_seconds)
+    pipeline["video_temporal_policy"] = temporal
     try:
+        if temporal["enabled"]:
+            for frame in frames:
+                frame["raw_water_detections"] = [
+                    item for item in frame["detections"] if item["class_id"] == 1
+                ]
+                frame["water_temporally_suppressed"] = bool(
+                    frame["raw_water_detections"] and temporal["suppressed_frames"]
+                )
+        if temporal["suppressed_frames"]:
+            # Decode the original recording again. No annotated/JPEG frame is
+            # reused, so removed boxes and blue masks cannot leave ghost pixels.
+            rerender_source = cv2.VideoCapture(str(local_source))
+            rerender_path = scratch / "temporally_confirmed.mp4"
+            rerender_writer = cv2.VideoWriter(
+                str(rerender_path),
+                cv2.VideoWriter_fourcc(*"mp4v"),
+                fps,
+                (width, height),
+            )
+            best_frame, best_frame_score, class_highlights = None, -1.0, {}
+            try:
+                if not rerender_source.isOpened() or not rerender_writer.isOpened():
+                    raise RuntimeError(
+                        "não foi possível reconstruir o vídeo a partir do original"
+                    )
+                for frame_record in frames:
+                    ok, original = rerender_source.read()
+                    if not ok:
+                        raise RuntimeError(
+                            "reconstrução temporal perdeu quadros do original"
+                        )
+                    render_started = time.perf_counter()
+                    frame_record["detections"] = [
+                        item
+                        for item in frame_record["detections"]
+                        if item["class_id"] != 1
+                    ]
+                    detections = [
+                        Detection.model_validate(item)
+                        for item in frame_record["detections"]
+                    ]
+                    annotated = annotate_video_frame(original, detections)
+                    rerender_writer.write(annotated)
+                    frame_score = sum(item.confidence for item in detections)
+                    if frame_score > best_frame_score:
+                        best_frame, best_frame_score = annotated.copy(), frame_score
+                    for class_id in CLASS_NAMES:
+                        class_items = [
+                            item for item in detections if item.class_id == class_id
+                        ]
+                        if not class_items:
+                            continue
+                        score = max(item.confidence for item in class_items)
+                        if (
+                            class_id not in class_highlights
+                            or score > class_highlights[class_id][0]
+                        ):
+                            class_highlights[class_id] = (
+                                score,
+                                annotated.copy(),
+                                {
+                                    "class_name": CLASS_NAMES[class_id],
+                                    "frame_index": frame_record["frame_index"],
+                                    "timestamp_seconds": frame_record[
+                                        "timestamp_seconds"
+                                    ],
+                                    "detections": frame_record["detections"],
+                                },
+                            )
+                    frame_record["raw_inference_ms"] = frame_record["inference_ms"]
+                    frame_record["temporal_rerender_ms"] = (
+                        time.perf_counter() - render_started
+                    ) * 1000
+                    frame_record["inference_ms"] += frame_record["temporal_rerender_ms"]
+                if rerender_source.read()[0]:
+                    raise RuntimeError(
+                        "reconstrução temporal encontrou quadros não registrados"
+                    )
+            finally:
+                rerender_writer.release()
+                rerender_source.release()
+            partial = rerender_path
+            unique_ids[1].clear()
+            tracked_representatives[1].clear()
+            fallback_peak[1] = 0
+            peak_representatives[1] = []
+            untracked_frames = sum(
+                any(item["track_id"] is None for item in frame["detections"])
+                for frame in frames
+            )
         encoding = prepare_browser_video(partial, destination)
     finally:
         scratch_handle.cleanup()
@@ -366,45 +654,17 @@ def process_video(
         write_image(highlight_path, highlighted_frame)
         review_frames.append({**details, "image_filename": highlight_path.name})
 
-    counts: dict[str, dict[str, Any]] = {}
-    representative_detections: list[dict[str, Any]] = []
-    for class_id, class_name in CLASS_NAMES.items():
-        tracked_count = len(unique_ids[class_id])
-        peak_count = fallback_peak[class_id]
-        if track and tracked_count:
-            count = max(tracked_count, peak_count)
-            method = (
-                "unique_track_ids"
-                if tracked_count >= peak_count
-                else "hybrid_max_tracks_and_frame_peak"
-            )
-            representatives = list(tracked_representatives[class_id].values())
-            if len(representatives) < count:
-                tracked_ids = {
-                    int(item.track_id)
-                    for item in representatives
-                    if item.track_id is not None
-                }
-                supplements = [
-                    item
-                    for item in peak_representatives[class_id]
-                    if item.track_id is None or int(item.track_id) not in tracked_ids
-                ]
-                representatives.extend(supplements[: count - len(representatives)])
-        else:
-            count = peak_count
-            method = "max_simultaneous_per_frame"
-            representatives = peak_representatives[class_id]
-        counts[class_name] = {"count": count, "method": method}
-        representative_detections.extend(
-            _serialize_detection(item) for item in representatives[:count]
-        )
+    counts, representative_detections = _summarize_video_counts(
+        track, unique_ids, fallback_peak, tracked_representatives, peak_representatives
+    )
     elapsed = time.perf_counter() - started
     manifest = {
         "status": "completed",
         "created_at_utc": utc_now_iso(),
-        "model_version": f"{checkpoint.stem}-{sha256_file(checkpoint)[:12]}",
-        "model_sha256": sha256_file(checkpoint),
+        "model_version": pipeline_version,
+        "base_pipeline_version": base_pipeline_version,
+        "model_sha256": model_sha256,
+        "pipeline": pipeline,
         "input_sha256": sha256_file(source),
         "output_sha256": sha256_file(destination),
         "poster_filename": poster_path.name,
@@ -431,8 +691,25 @@ def process_video(
             ),
         },
         "counts": counts,
+        "raw_counts": raw_counts,
+        "raw_water_representative_detections": [
+            item for item in raw_representatives if item["class_id"] == 1
+        ],
+        "water_temporal_policy": temporal,
         "representative_detections": representative_detections,
         "device": describe_device(selected_device),
+        "inference": {
+            **operating_parameters,
+            "video_water_confirmation_seconds": water_confirmation_seconds,
+            "water_pixel_confidence": water_pixel_confidence
+            if water is not None
+            else None,
+            "water_min_area_fraction": water_min_area_fraction
+            if water is not None
+            else None,
+            "water_processing_size": 512 if water is not None else None,
+            "timing_note": "wall time per frame includes master inference, water inference, filtering, merging, mask/label annotation and writer call",
+        },
         "frames": frames,
     }
     write_json(destination.with_suffix(".json"), manifest)

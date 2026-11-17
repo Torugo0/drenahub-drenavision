@@ -1,0 +1,3370 @@
+{
+  "created_at_utc": "2026-11-16T22:55:42.164041Z",
+  "annotation_protocol": "v3-water-regions",
+  "baseline": "dados/processed/drenavision_v2",
+  "dataset_yaml": "dados/processed/drenavision_v3_clean/dataset.yaml",
+  "split_policy": "V2 positive validation/test identities fixed; source wet-only empty labels excluded before candidate evaluation; extras train-only; no hash/group/pHash<=4 leakage",
+  "water_policy": "Original source water boxes connected by intersection or exact contact form one instance. There is no positive gap threshold. The final bounding envelope may contain dry holes between fragments; it is not a segmentation mask. API id agua_acumulada retained; means visible water, not proof of stagnation.",
+  "comparability": "V3 water targets differ from v2. Re-evaluate BOTH models on v3 ground truth; never compare old v2 metrics directly.",
+  "removed_tight_rat_crops": [
+    "images/train/domain_3c3a6f77bc162caa.jpg",
+    "images/train/domain_4d70351efb7b07ea.jpg",
+    "images/train/domain_1abce0b75d0e9f7c.jpg",
+    "images/train/domain_80deb6523a16e406.jpg",
+    "images/train/domain_0466693554987175.jpg"
+  ],
+  "excluded_source_wet_only": [
+    {
+      "image": "images/train/stagnant_water_890bc1730a38d99a.jpg",
+      "split": "train",
+      "reason": "Unreliable wet-only source negative; excluded before candidate evaluation"
+    },
+    {
+      "image": "images/train/stagnant_water_144636abe32a33fa.jpg",
+      "split": "train",
+      "reason": "Unreliable wet-only source negative; excluded before candidate evaluation"
+    },
+    {
+      "image": "images/train/stagnant_water_72b8857b8069359d.jpg",
+      "split": "train",
+      "reason": "Unreliable wet-only source negative; excluded before candidate evaluation"
+    },
+    {
+      "image": "images/train/stagnant_water_bae404786c413b4a.jpg",
+      "split": "train",
+      "reason": "Unreliable wet-only source negative; excluded before candidate evaluation"
+    },
+    {
+      "image": "images/train/stagnant_water_be98ade1f699bf04.jpg",
+      "split": "train",
+      "reason": "Unreliable wet-only source negative; excluded before candidate evaluation"
+    },
+    {
+      "image": "images/train/stagnant_water_94826a1118be4926.jpg",
+      "split": "train",
+      "reason": "Unreliable wet-only source negative; excluded before candidate evaluation"
+    },
+    {
+      "image": "images/train/stagnant_water_4cfcac14cc712669.jpg",
+      "split": "train",
+      "reason": "Unreliable wet-only source negative; excluded before candidate evaluation"
+    },
+    {
+      "image": "images/train/stagnant_water_a059ac8683bbe058.jpg",
+      "split": "train",
+      "reason": "Unreliable wet-only source negative; excluded before candidate evaluation"
+    },
+    {
+      "image": "images/val/stagnant_water_0b5bab865c3ae868.jpg",
+      "split": "val",
+      "reason": "Unreliable wet-only source negative; excluded before candidate evaluation"
+    },
+    {
+      "image": "images/val/stagnant_water_a460b1ffdab96999.jpg",
+      "split": "val",
+      "reason": "Unreliable wet-only source negative; excluded before candidate evaluation"
+    },
+    {
+      "image": "images/test/stagnant_water_b329c7f0ff7e743f.jpg",
+      "split": "test",
+      "reason": "Unreliable wet-only source negative; excluded before candidate evaluation"
+    },
+    {
+      "image": "images/test/stagnant_water_1338398d2b3747d1.jpg",
+      "split": "test",
+      "reason": "Unreliable wet-only source negative; excluded before candidate evaluation"
+    }
+  ],
+  "baseline_water_boxes_before": 1488,
+  "baseline_water_regions_after": 370,
+  "added_training_images": {
+    "stagnant_water": 400,
+    "domain_reviewed": 13,
+    "click_trash": 150
+  },
+  "skipped": {
+    "duplicate_click_image": 100
+  },
+  "extra_water_selection": {
+    "created_at_utc": "2026-11-16T22:54:24.912229+00:00",
+    "policy": "water-v3: connected original water boxes; intersection or exact edge/corner contact; zero gap; min/max component envelope; no padding",
+    "seed": 43,
+    "baseline_manifest_sha256": "e109a7649b8785184be5312cc20b5f20b08ea62b7cfe8da18330ebb94f74113c",
+    "held_out_images": 124,
+    "held_out_source_groups": 91,
+    "phash_max_distance_excluded": 4,
+    "counts": {
+      "positive_held_group_excluded": 11,
+      "positive_exact_hash_excluded": 51,
+      "positive_selected": 400,
+      "wet_surface_negative_selected": 0
+    },
+    "source_folder_counts": {
+      "Indoor\\Top View": 5,
+      "Outdoor\\Water and wet surface\\Side view": 170,
+      "Outdoor\\Water and wet surface\\Top view": 150,
+      "Outdoor\\Water\\Side view": 55,
+      "Outdoor\\Water\\Top view": 19,
+      "Outdoor\\Wet surface\\Side view": 1
+    },
+    "records": [
+      {
+        "kind": "positive",
+        "source_path": "Indoor/Top View/2s.jpeg",
+        "source_group": "Indoor/Top View::block-0",
+        "sha256": "801db40f50983d13131bccefb40014cb33388d6a4b2fc2d14a601ed0f70679cc",
+        "original_boxes": 12,
+        "merged_boxes": 5
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image129.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-12",
+        "sha256": "9790b41a0f029f0f1f9020c5f6f9d03617be124745577ef02de5a7cc6ea34b87",
+        "original_boxes": 5,
+        "merged_boxes": 3
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image468.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-46",
+        "sha256": "fae67dfa9bd62bf66cd14610ac0b82faa3b47630d743ef12416a51dd3d4fc9cf",
+        "original_boxes": 1,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Side view/image1434.jpeg",
+        "source_group": "Outdoor/Water/Side view::block-143",
+        "sha256": "2b269a0f89e9eb4244dfdfa82175c8371d75085af0fef72eda8ce98dd9876b2d",
+        "original_boxes": 1,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Top view/image1066.jpeg",
+        "source_group": "Outdoor/Water/Top view::block-106",
+        "sha256": "db44828728d061556b58326cd2715a733123bca0b8bb7fa0e9bacc7bd4b68b5f",
+        "original_boxes": 4,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Wet surface/Side view/image1397.jpeg",
+        "source_group": "Outdoor/Wet surface/Side view::block-139",
+        "sha256": "c591518a5c2e049f8d17e09ef90730c0a39dedc5d38243a235b0e216c4da9d93",
+        "original_boxes": 5,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Indoor/Top View/7s.jpeg",
+        "source_group": "Indoor/Top View::block-0",
+        "sha256": "2979838f618f379874fb09125886640ef7ea6532b5b7917114bbe339ae00fe25",
+        "original_boxes": 15,
+        "merged_boxes": 8
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1402.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-140",
+        "sha256": "3c52361dd1e7c1f2afec6bc98d40e310e389702159b93c1f937ef7dbd732465e",
+        "original_boxes": 13,
+        "merged_boxes": 3
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image470.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-47",
+        "sha256": "936b5be3def935c5eaec3da73b3d8f198d29f6bad2a636d98d693629716582f2",
+        "original_boxes": 4,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Side view/image1678.jpeg",
+        "source_group": "Outdoor/Water/Side view::block-167",
+        "sha256": "58c1feba5692c12fabcc82f57c1af978206b4b5d3f70c28a78f630118597ad63",
+        "original_boxes": 11,
+        "merged_boxes": 8
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Top view/image1498.jpeg",
+        "source_group": "Outdoor/Water/Top view::block-149",
+        "sha256": "c438bc9ea2c8cc1bf969eb05bfed827a168e32dbc0e9796093cae581954b1b5d",
+        "original_boxes": 21,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Indoor/Top View/4s.jpeg",
+        "source_group": "Indoor/Top View::block-0",
+        "sha256": "a33af32185a1c8160752cec7b4419faf36d04fd68ca3ec64cf766072bbc8bf5f",
+        "original_boxes": 17,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1840.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-184",
+        "sha256": "65acf1d97e34918d9dcbd57cb22e1fb71456a37d8a4b3491392cb15b3a4a5490",
+        "original_boxes": 10,
+        "merged_boxes": 5
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image428.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-42",
+        "sha256": "9567358dd1ec6a388491a82764a93745fae46a91080e9c2fc9228c31e9e2b076",
+        "original_boxes": 7,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Side view/image32.jpeg",
+        "source_group": "Outdoor/Water/Side view::block-3",
+        "sha256": "cf6d030905f2ce1a8bcb11ad4add922be2b6e54bc8b4887083a75436ff2cc5fd",
+        "original_boxes": 9,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Top view/image765.jpeg",
+        "source_group": "Outdoor/Water/Top view::block-76",
+        "sha256": "2e2f73a588d9bc5c149da04817660628adf67cceeb43e93f96e76bf496947dfa",
+        "original_boxes": 5,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Indoor/Top View/3s.jpeg",
+        "source_group": "Indoor/Top View::block-0",
+        "sha256": "d121eae00299806a12922012a2dfce36808843a4c14aeff17f4b4d95bc708bb9",
+        "original_boxes": 22,
+        "merged_boxes": 8
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image665.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-66",
+        "sha256": "0a494de57a9572fa41583be822ec640cd0eb44682e3bf2cbc9c960dfbba38047",
+        "original_boxes": 9,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Side view/image1865.jpeg",
+        "source_group": "Outdoor/Water/Side view::block-186",
+        "sha256": "1875274378bc5ae7fb6fc8072d0052e755bdd79d803a83d0bc2f5197bdee1410",
+        "original_boxes": 10,
+        "merged_boxes": 5
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Top view/image953.jpeg",
+        "source_group": "Outdoor/Water/Top view::block-95",
+        "sha256": "6d657f05ba7216f9a0ac71754cf99ca2d176e85eaa1b140a6a028358ee255f7a",
+        "original_boxes": 8,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Indoor/Top View/0s.jpeg",
+        "source_group": "Indoor/Top View::block-0",
+        "sha256": "ddf79f80b9569c426b6a8fe4037c5a743d08963616047db7402cd0656caa97cb",
+        "original_boxes": 10,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1812.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-181",
+        "sha256": "2a2b6ef996abc1b60cb451f048ae5451c505e060bfe2aae1e959f845f13aaa5f",
+        "original_boxes": 8,
+        "merged_boxes": 6
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Side view/image1211.jpeg",
+        "source_group": "Outdoor/Water/Side view::block-121",
+        "sha256": "2eeedc155671901801a594477e70bc121df54a8dd305fc19f1bd9379b5dbbfdc",
+        "original_boxes": 20,
+        "merged_boxes": 6
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Top view/image670.jpeg",
+        "source_group": "Outdoor/Water/Top view::block-67",
+        "sha256": "ca4f74a0a0616be5521aea6fa020a9af78b0342e94d33866f436e2ee3d97ae92",
+        "original_boxes": 9,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image476.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-47",
+        "sha256": "dad1a8e10f50b921d4ab89e5ce06fb53cfe3441904d283306bda04ec4662fa6a",
+        "original_boxes": 28,
+        "merged_boxes": 5
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image769.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-76",
+        "sha256": "2cfc8d180284945b831f2974439153f8cc44d5fca3febadd09cf51d35524382d",
+        "original_boxes": 13,
+        "merged_boxes": 3
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Side view/image621.jpeg",
+        "source_group": "Outdoor/Water/Side view::block-62",
+        "sha256": "8d3795a36e7e74237b3142169fa1e097cb475dba0d235870afe27981caa6611b",
+        "original_boxes": 10,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Top view/image1451.jpeg",
+        "source_group": "Outdoor/Water/Top view::block-145",
+        "sha256": "4655f8613b6d43d19453f2aa03a78cc1c52227a89b959a2b449571caf96a738e",
+        "original_boxes": 8,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1068.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-106",
+        "sha256": "aeed076e06085038f1077bcf1ebeb45d36e4105acb4b6fc4d2daf0d56da7f790",
+        "original_boxes": 11,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Side view/image388.jpeg",
+        "source_group": "Outdoor/Water/Side view::block-38",
+        "sha256": "62b5968dbffff484ef715b50d24662efb747fb2b52c8fa4e540f103f4d5b1dc0",
+        "original_boxes": 9,
+        "merged_boxes": 7
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Top view/image969.jpeg",
+        "source_group": "Outdoor/Water/Top view::block-96",
+        "sha256": "d042570c085c9087a8e85a7f1a8a511a90be28928f2efee40413973da8ad8c58",
+        "original_boxes": 12,
+        "merged_boxes": 6
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1459.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-145",
+        "sha256": "fb099f6fbb384be926902d45d81395ecd31f5a6a4f16eca802685af1f5714451",
+        "original_boxes": 24,
+        "merged_boxes": 7
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image1406.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-140",
+        "sha256": "542de69943f2eedc9120d475bb27ce7e25014979e07714f8e251ab127d6bd2be",
+        "original_boxes": 3,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Side view/image1548.jpeg",
+        "source_group": "Outdoor/Water/Side view::block-154",
+        "sha256": "837b58f163ed991ef1dd7d49b821535acacc0fd4c0fbf3323ad2dde9068458b6",
+        "original_boxes": 6,
+        "merged_boxes": 4
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Top view/image1418.jpeg",
+        "source_group": "Outdoor/Water/Top view::block-141",
+        "sha256": "fb797d75a1d83cbe8c8d990dc8bb4cec93792ddf2bf3f27def552d4f55bbf51e",
+        "original_boxes": 4,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1691.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-169",
+        "sha256": "42dacbf7097b17466f4e8353e3d172576ea8b8f53bd7256a218e80838283984b",
+        "original_boxes": 19,
+        "merged_boxes": 4
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image568.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-56",
+        "sha256": "d4febe34f67f15503254d57ba45ac6170e6e1d4161f071370d43e3c986f1187f",
+        "original_boxes": 2,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Side view/image12.jpeg",
+        "source_group": "Outdoor/Water/Side view::block-1",
+        "sha256": "0571726fe6114e7967fa829f52c3677822ccd6d449e9eae74c4f19accd2020f0",
+        "original_boxes": 7,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Top view/image1223.jpeg",
+        "source_group": "Outdoor/Water/Top view::block-122",
+        "sha256": "414b226083aa8d51d44f86a16b995efc2e1c09468d585be99fec1c57d783f0c3",
+        "original_boxes": 4,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1900.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-190",
+        "sha256": "c136f70779c19b732a0a913be04746c1bfaead1eb82693bad72fa29c1c1a34c3",
+        "original_boxes": 14,
+        "merged_boxes": 6
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image916.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-91",
+        "sha256": "e80a1193577ea92ee590e15cf32da49a235642d8f22f3096611824cdb2eacd43",
+        "original_boxes": 14,
+        "merged_boxes": 3
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Side view/image1517.jpeg",
+        "source_group": "Outdoor/Water/Side view::block-151",
+        "sha256": "a4a39e59b85fd8b00f33800da2628adf5cf3e3cf00584e18c78e6132ae865ccd",
+        "original_boxes": 3,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1025.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-102",
+        "sha256": "1dc6e61e5cbc8460284a4bbd825cd1c6b69bfa8f07fbc05129d9236cdcaf7ab9",
+        "original_boxes": 6,
+        "merged_boxes": 5
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image1017.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-101",
+        "sha256": "a31b7dcff92056290ffce07e2987a99d381d537e4a3461500ce74c2353ce6dc0",
+        "original_boxes": 10,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Side view/image1458.jpeg",
+        "source_group": "Outdoor/Water/Side view::block-145",
+        "sha256": "4f36af228544f5fb39ec077ca8510ba62bd147d4c271be616c649ff846fdab6a",
+        "original_boxes": 13,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Top view/image31.jpeg",
+        "source_group": "Outdoor/Water/Top view::block-3",
+        "sha256": "130fb8aba9c8a91a7d994c482d611ba2871b490bab30de04b2af6e82a511058b",
+        "original_boxes": 9,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1280.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-128",
+        "sha256": "54399a4c5bb4ab2cb8a92e8f3733b3f3ebfc3d93c6c278d3fe7940187780d1e0",
+        "original_boxes": 12,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image90.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-9",
+        "sha256": "d4359295c0db250ff495aed0d3d5b198698d5eaaeb79bdd86fd78a6deb7491bf",
+        "original_boxes": 11,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Side view/image1177.jpeg",
+        "source_group": "Outdoor/Water/Side view::block-117",
+        "sha256": "c2a82229f64d89a9684e1c70ef71bf401bc6b148485e96192986e183d560bd0b",
+        "original_boxes": 3,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Top view/image970.jpeg",
+        "source_group": "Outdoor/Water/Top view::block-97",
+        "sha256": "8b09cdb002474887d150df37f707626385de3c26e802e8cf34cb84f3924cfff2",
+        "original_boxes": 10,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image413.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-41",
+        "sha256": "03deee217d9dd21715e78a9b3b11af3152969c9903770cd89e1524d9fd3fbaf8",
+        "original_boxes": 19,
+        "merged_boxes": 9
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image1709.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-170",
+        "sha256": "661974af080761b535143294d00f1f8021ee4acfd8ca8f53f1245d1d7e4ad02a",
+        "original_boxes": 9,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Side view/image1248.jpeg",
+        "source_group": "Outdoor/Water/Side view::block-124",
+        "sha256": "135a504af992a2e2b3af801e283e50169da68e34b7a02983bacec82a00d02bfd",
+        "original_boxes": 3,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1756.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-175",
+        "sha256": "ca60d35885ee201da3f3d640805147552068951b7eceece6cd3dabaadf3d3d22",
+        "original_boxes": 12,
+        "merged_boxes": 7
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image352.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-35",
+        "sha256": "2fc5ac07d3c968fb8823e1fdd2a17cca2c0818013c8fd55101694abfd44eb7f0",
+        "original_boxes": 1,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Side view/image995.jpeg",
+        "source_group": "Outdoor/Water/Side view::block-99",
+        "sha256": "50555f34183f28356d6cb7e8439d7b8c837c462d1bdf25adbe13dec4aa0be62e",
+        "original_boxes": 9,
+        "merged_boxes": 4
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Top view/image123.jpeg",
+        "source_group": "Outdoor/Water/Top view::block-12",
+        "sha256": "f1666664759a0834c6ac59d3a9820a0971e6efbcbcdf7c18f3f211469c1ffb55",
+        "original_boxes": 3,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1078.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-107",
+        "sha256": "af473d6c2fc3fcb259d9724f0a95e26ceda13245118d5f6b5e333bd0aba68553",
+        "original_boxes": 2,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image1100.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-110",
+        "sha256": "787a51cb7c649b2e33a326435b7e467a9ccca1cad35fc1a92e7e58377e7b5b6b",
+        "original_boxes": 5,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Side view/image1082.jpeg",
+        "source_group": "Outdoor/Water/Side view::block-108",
+        "sha256": "1cd059133354b7a093b3c4819b48caad656e2099f49f35f5c73510e664d84cf4",
+        "original_boxes": 14,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Top view/image949.jpeg",
+        "source_group": "Outdoor/Water/Top view::block-94",
+        "sha256": "5b53d77249d6403050c20b1eca528413a05bd6a50c7efd61581100bdca41dcf6",
+        "original_boxes": 8,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image209.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-20",
+        "sha256": "900ba0ff1c2d145a05c9134cbc75bb3440e9224a250227d53949c916e5ebb06a",
+        "original_boxes": 8,
+        "merged_boxes": 3
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Side view/image982.jpeg",
+        "source_group": "Outdoor/Water/Side view::block-98",
+        "sha256": "c485957710d3b594b5f2fbc8426c64a39519e39fe29ef2309f60b49f2e3a6c18",
+        "original_boxes": 16,
+        "merged_boxes": 7
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Top view/image329.jpeg",
+        "source_group": "Outdoor/Water/Top view::block-32",
+        "sha256": "c3a5894d30430d2a3875fa62be621bbb16bd27b78b8f45fff9903c7579fefca5",
+        "original_boxes": 9,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1302.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-130",
+        "sha256": "99c37e1df4cd33dc00086f4ec0ee7acf3074c6bede3a21f8210fc48f259c0143",
+        "original_boxes": 18,
+        "merged_boxes": 3
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image1303.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-130",
+        "sha256": "4db2247d09e4ef5bc34ff0c1d99de6194f6196512dfe6900e7dd18e62f6641df",
+        "original_boxes": 11,
+        "merged_boxes": 3
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Side view/image1345.jpeg",
+        "source_group": "Outdoor/Water/Side view::block-134",
+        "sha256": "8a00797e3414b234e9e318a54ec5e387ee79f1cd9fb47670117c8c0e159019e2",
+        "original_boxes": 11,
+        "merged_boxes": 9
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Top view/image1204.jpeg",
+        "source_group": "Outdoor/Water/Top view::block-120",
+        "sha256": "a8d002b76db6bf55c4a2a1a80ae5bb3ee19cf52ec0cf608fd2f44fc7669ab63e",
+        "original_boxes": 1,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image370.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-37",
+        "sha256": "e5f4036b539dd399ff1bba9f899ad04b0dec1cfb294c9e8da7c69729ab7e86a0",
+        "original_boxes": 13,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Top view/image1424.jpeg",
+        "source_group": "Outdoor/Water/Top view::block-142",
+        "sha256": "1dddfc4f70c1a3e6e6e0d7d8a1b58cfba09956d18b3b18b7aec5d308e03a6583",
+        "original_boxes": 16,
+        "merged_boxes": 5
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1161.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-116",
+        "sha256": "15e1360f69e1b5962f3d6733d8a37ef9dbcb7c97c2cb1e8e35b435067856ba27",
+        "original_boxes": 19,
+        "merged_boxes": 8
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image249.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-24",
+        "sha256": "12beebca84b22d0b43d51fe32f636c54aa7e9a21fb3ec31b636f7a8ecd1a7741",
+        "original_boxes": 7,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Side view/image195.jpeg",
+        "source_group": "Outdoor/Water/Side view::block-19",
+        "sha256": "de119e3c17927acd63aa211616625820af070916733fd8ae3e623927abe95b60",
+        "original_boxes": 10,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Top view/image256.jpeg",
+        "source_group": "Outdoor/Water/Top view::block-25",
+        "sha256": "6cc1836a6596eab3ef56ad633ad7961159521f08f91b40bfe120564cd5f12ca4",
+        "original_boxes": 4,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1673.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-167",
+        "sha256": "4f7d452cf9d9eb37f3ae55e8595fdbf1951a0a443bdda647feb92f4ad2990f01",
+        "original_boxes": 5,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image1732.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-173",
+        "sha256": "ec812b5e89915de3c2ec1237fb34ba3e9149b9e28c322f5b3f8e5d086accbe93",
+        "original_boxes": 6,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Top view/image1067.jpeg",
+        "source_group": "Outdoor/Water/Top view::block-106",
+        "sha256": "e69e4e9730251012fac2fd2fc99deff9b5fd1752833735412a5e8423b5833005",
+        "original_boxes": 5,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1537.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-153",
+        "sha256": "1cb7a294e67d6d2dcb91018d61cda076e25705e7a83bdc150d6034b729634963",
+        "original_boxes": 11,
+        "merged_boxes": 5
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image802.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-80",
+        "sha256": "6ad666c916e7024a2bc6d5c4d920e8c8e9109b7934783941dba9a74186b83a06",
+        "original_boxes": 1,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Side view/image1079.jpeg",
+        "source_group": "Outdoor/Water/Side view::block-107",
+        "sha256": "e7225e860db7559dcce2e66ccea7b433351ad80ead3a32187b05d700b598a2a0",
+        "original_boxes": 11,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Top view/image963.jpeg",
+        "source_group": "Outdoor/Water/Top view::block-96",
+        "sha256": "dcfe7df6effe3a53eeca31ac50fdecd21998639fcdf012518d5ca9935b6dd32c",
+        "original_boxes": 10,
+        "merged_boxes": 4
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1097.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-109",
+        "sha256": "1231a9c463ec72a14bb296ad7d677a347374b044b0e0826576165b3728c4bd83",
+        "original_boxes": 20,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image1788.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-178",
+        "sha256": "0e4862f0ea3787ad334921e37b8d243647185d6c79b437bd8a68e0186480fa52",
+        "original_boxes": 12,
+        "merged_boxes": 7
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Side view/image712.jpeg",
+        "source_group": "Outdoor/Water/Side view::block-71",
+        "sha256": "4defe2aa9e74c6e3e33b2107533d54c3e67b3fbdf06e5b1d753ee5ce8df1f22d",
+        "original_boxes": 5,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image980.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-98",
+        "sha256": "8321724a5516971cb8373a0ac4f4edc8447cdc867373015ecebafecfc232942c",
+        "original_boxes": 6,
+        "merged_boxes": 4
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Side view/image1538.jpeg",
+        "source_group": "Outdoor/Water/Side view::block-153",
+        "sha256": "b4befd7991bec2c268d085c5e926d5ba5911175071937cf669776b00e0b7818d",
+        "original_boxes": 5,
+        "merged_boxes": 3
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image438.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-43",
+        "sha256": "58656a23db97197bfd6217944e3771eb861397d07dc2d88a77b5d26c448bedb5",
+        "original_boxes": 4,
+        "merged_boxes": 3
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image37.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-3",
+        "sha256": "4279fd7eef97624b0ee95e7771bef1f74c4442b0e9c0c43b8ecdedde916d984a",
+        "original_boxes": 14,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Side view/image1745.jpeg",
+        "source_group": "Outdoor/Water/Side view::block-174",
+        "sha256": "6062775f678e51d48361bfbd09b60112a01875f7fcad4a4b09f692cb954adcf7",
+        "original_boxes": 8,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image709.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-70",
+        "sha256": "fb00a4d339553e378c1f70a477257de6c34537839e60dabd8808a43c68b70a6c",
+        "original_boxes": 5,
+        "merged_boxes": 4
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image1497.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-149",
+        "sha256": "a1ab4fdba2d8d8e1b205b578c83bd00b22681c7c71b8ff42a3eaa46ba3d02ebf",
+        "original_boxes": 10,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image480.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-48",
+        "sha256": "1f0a5279e3285338ff1856f5887ab0879c4988c2c9be66ad17ed4968c600bfab",
+        "original_boxes": 15,
+        "merged_boxes": 6
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image188.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-18",
+        "sha256": "d121f5e503e31f8273a4321401a4b52b34e36b0c3da73ebe71d19191ce076a03",
+        "original_boxes": 8,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Side view/image1135.jpeg",
+        "source_group": "Outdoor/Water/Side view::block-113",
+        "sha256": "e8a67cf24723602a21a482b968bfcc3a663917e816d88dbd604f657dcaf158b1",
+        "original_boxes": 22,
+        "merged_boxes": 9
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image448.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-44",
+        "sha256": "9468155d8396ed9fda5399c0f585e3aa73b11dbe59156c1fbb54ed053d2bd811",
+        "original_boxes": 11,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image87.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-8",
+        "sha256": "139b10323b21259ca5a21df0d9e830a216db6b75cfad834e26627c72e0da10a7",
+        "original_boxes": 5,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Side view/image539.jpeg",
+        "source_group": "Outdoor/Water/Side view::block-53",
+        "sha256": "f6cf822280f53eef8568c63acfb6d6a7ea6f1b93499c9d1652610478cd5ec109",
+        "original_boxes": 7,
+        "merged_boxes": 3
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1828.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-182",
+        "sha256": "9e25b0cc6a1eb220a57a696ec2d36c7ca72a06ebdc4fd3107e5236df7b077c33",
+        "original_boxes": 10,
+        "merged_boxes": 3
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image2010.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-201",
+        "sha256": "7bb74d56a4e5a451afdca1027fd35faf7f00ce8295d3c09902e01a8f1bb0caa4",
+        "original_boxes": 32,
+        "merged_boxes": 3
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Side view/image1195.jpeg",
+        "source_group": "Outdoor/Water/Side view::block-119",
+        "sha256": "186898382a91588ad71e70ac956fe08a5cdda1f1bf144f3806bde6996da297f3",
+        "original_boxes": 6,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1122.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-112",
+        "sha256": "06bb8544023e1ff046ce81db4bfcbf7385542bf03e03f834cdec3fb3b1f26c84",
+        "original_boxes": 6,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image1474.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-147",
+        "sha256": "e878b6f91eae8bb645c150893bfe0093a98f06529351d4246f2ef717506f27d3",
+        "original_boxes": 3,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Side view/image1460.jpeg",
+        "source_group": "Outdoor/Water/Side view::block-146",
+        "sha256": "df345f60d74bd73dcd1fc04c60149ede107027794252c78b9f7639a0d86e5f98",
+        "original_boxes": 25,
+        "merged_boxes": 7
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1561.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-156",
+        "sha256": "e2f7af01478aef41f387be6e1c89e5e6492f72810209227ad486ea951ecb1283",
+        "original_boxes": 12,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image160.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-16",
+        "sha256": "b171947f88c092f1e93aae6fa418650c10f8c9162334c478719a8b4300b3d798",
+        "original_boxes": 6,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image675.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-67",
+        "sha256": "cbfea39c831a9909132391b08c31098375ba7f8e62f5e0cbded4dbdd51041204",
+        "original_boxes": 5,
+        "merged_boxes": 5
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Side view/image762.jpeg",
+        "source_group": "Outdoor/Water/Side view::block-76",
+        "sha256": "e6733113ca456ba04dd6f012ce3e1003ab518259d7826a0394da9cab69a9f59f",
+        "original_boxes": 16,
+        "merged_boxes": 8
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image900.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-90",
+        "sha256": "dacc04cc8eca66f2d5285cb6dc1b24cbfe641ef2444f26259fd1840d58c12135",
+        "original_boxes": 6,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Side view/image460.jpeg",
+        "source_group": "Outdoor/Water/Side view::block-46",
+        "sha256": "ab742b320b4a0aa11914453c0026d47d6777f617e401455dcd83db14f9753d17",
+        "original_boxes": 4,
+        "merged_boxes": 3
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image365.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-36",
+        "sha256": "c540a370e7cfc7c9fab208316b0b41d96cb986459495c5d2e059e2eeecca5583",
+        "original_boxes": 6,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image1677.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-167",
+        "sha256": "89164e67c99f4453956d8386cced1c7f7a3c35adbcee0a3145651fd7092f881e",
+        "original_boxes": 16,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image230.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-23",
+        "sha256": "a99d3c0ebf2115b74b69a15bfc3c6007466aef141d7668be2df698b4ecd4ba81",
+        "original_boxes": 5,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Side view/image1105.jpeg",
+        "source_group": "Outdoor/Water/Side view::block-110",
+        "sha256": "d47870ba36d24bf01372ec2fc5dbd677e49faee003f4780b0405fb4bf28ec570",
+        "original_boxes": 13,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image1453.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-145",
+        "sha256": "8eabd35279c8def58467c94479223e521d568dd9c78e765b17d73dba1c85f07f",
+        "original_boxes": 18,
+        "merged_boxes": 3
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Side view/image1844.jpeg",
+        "source_group": "Outdoor/Water/Side view::block-184",
+        "sha256": "f0af4000e688b0da99bcfbf2c82904bc703dc01396ad692e5831e7c56e48db54",
+        "original_boxes": 27,
+        "merged_boxes": 6
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image571.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-57",
+        "sha256": "f5510352c6bc00671733331867273f0450dd90d5d0c8af7143057533ff5c3c4b",
+        "original_boxes": 5,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image1110.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-111",
+        "sha256": "193d78414ebca0c8b13465c981593866204e1c4ace0a05712083c80c6c1f75bb",
+        "original_boxes": 5,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image66.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-6",
+        "sha256": "f3b9c6cc9a90844465dd87d7ebac8e2f6859fbe4d3afd8a13a61065faa877a99",
+        "original_boxes": 24,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image1465.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-146",
+        "sha256": "0e94c59a99dd22896c28058b83f2fee46ec1a9722358e2678eb28cf73ac01340",
+        "original_boxes": 9,
+        "merged_boxes": 4
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Side view/image9.jpeg",
+        "source_group": "Outdoor/Water/Side view::block-0",
+        "sha256": "2bcba7144d9b83a9f9bc1b945c09813021a5b06897e1113136ee8c3d80f29af0",
+        "original_boxes": 10,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image840.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-84",
+        "sha256": "14b5257ef7b32033af0ea1c3efea0129d80da13476b465c530870edb2f6e727e",
+        "original_boxes": 21,
+        "merged_boxes": 11
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image883.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-88",
+        "sha256": "3b6a5b1b755050201c762ece97ea92099a1b01c645d7fbc69b31adfdfbcbb0fa",
+        "original_boxes": 2,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Side view/image967.jpeg",
+        "source_group": "Outdoor/Water/Side view::block-96",
+        "sha256": "b62d9195bd732345b60b15471b7e54513eb598edf6038284c3381df6784aff78",
+        "original_boxes": 9,
+        "merged_boxes": 5
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image284.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-28",
+        "sha256": "5e4b724b0ef96ad186dbb374f874d58494a5efde7b3719688fca05bf0049891b",
+        "original_boxes": 13,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image114.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-11",
+        "sha256": "1d8d7e1a1250602190b4cc31accf085c0668ef58b53f4e08d552ff5d5d5d20f2",
+        "original_boxes": 17,
+        "merged_boxes": 3
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Side view/image317.jpeg",
+        "source_group": "Outdoor/Water/Side view::block-31",
+        "sha256": "f842068dfcf85c243c335a827e19e9c4d3e3f38b68bbd5b626643d27cd458f8b",
+        "original_boxes": 9,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1107.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-110",
+        "sha256": "6cd4986beb734aab3e85aa96ad77ca1fa5b6b937da72afb9a1d9979fef5c3e5b",
+        "original_boxes": 6,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image650.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-65",
+        "sha256": "08694e4a492c65e3b4d3c87a04c3e801d127604fdffe5d63597035589725acf3",
+        "original_boxes": 13,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Side view/image309.jpeg",
+        "source_group": "Outdoor/Water/Side view::block-30",
+        "sha256": "013d72d1c5586125dd7a2b6445be7ddfdefb405d5e727e9369b0e258e778dcec",
+        "original_boxes": 1,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1739.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-173",
+        "sha256": "f92c2bd50ebe4dc186876a763304e20dc9dcc4286537aa14935f03a3e5e73666",
+        "original_boxes": 11,
+        "merged_boxes": 6
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image1142.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-114",
+        "sha256": "7260b9468b09aa4449c59ccc0f38eff173dd56eddb7bccd7e7d3a864e5e520db",
+        "original_boxes": 20,
+        "merged_boxes": 4
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Side view/image869.jpeg",
+        "source_group": "Outdoor/Water/Side view::block-86",
+        "sha256": "0c25ae75589b328a81ee297249d7c1864e8b61c78efc28e93f4eeb3097d85630",
+        "original_boxes": 7,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image269.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-26",
+        "sha256": "6f6e243117bdcb970b62794426fcc00777e56a2b3ec93dd1093780935b694531",
+        "original_boxes": 16,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image131.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-13",
+        "sha256": "8f6b78d706680bb4c084edd04c550bf9d8ab942bcb8a13b703be985b6c209afd",
+        "original_boxes": 3,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Side view/image731.jpeg",
+        "source_group": "Outdoor/Water/Side view::block-73",
+        "sha256": "e997a141bf5dc3ee690a63a8a9a4f4b783c950379e9ddcf423c88a1e1f17f70a",
+        "original_boxes": 13,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image373.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-37",
+        "sha256": "104e0ecfe5789f6ca6680a316ba968ac8ce6ea94dac93dbb3bdd866b4adbecea",
+        "original_boxes": 4,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image15.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-1",
+        "sha256": "0e04955942de379f859b1ffe16ff8af8eebaa2f1eb8e387c56ff8e8d3a622ba6",
+        "original_boxes": 10,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Side view/image1702.jpeg",
+        "source_group": "Outdoor/Water/Side view::block-170",
+        "sha256": "ce0e535bdd23b5fd275ccbd8c6be5dbc19966b11ca036c8b60513a763db7eafc",
+        "original_boxes": 21,
+        "merged_boxes": 9
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image811.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-81",
+        "sha256": "57dd2cd8ea93a5c83c50b50e010c49d3b64209754165b3579472ae0bd98a6510",
+        "original_boxes": 12,
+        "merged_boxes": 3
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image523.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-52",
+        "sha256": "351b33fe8fbb8b58ab3a083a7ab60da6e462b42cd120817ed7fd159686274911",
+        "original_boxes": 3,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Side view/image1415.jpeg",
+        "source_group": "Outdoor/Water/Side view::block-141",
+        "sha256": "1db53d95c7b21eccc470bf8b2a20da82388b65d91134136bc42aee0591ba463b",
+        "original_boxes": 5,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1544.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-154",
+        "sha256": "3c62de7b85cf30b7368c6ff9e37bb650896ec2caa736a6740972a578e9e76e6e",
+        "original_boxes": 28,
+        "merged_boxes": 15
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image1422.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-142",
+        "sha256": "200d25f2c5fb0dd6286b83a48d309aff8db88a52fac92181dc1b2324912328bd",
+        "original_boxes": 3,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Side view/image1297.jpeg",
+        "source_group": "Outdoor/Water/Side view::block-129",
+        "sha256": "deb2005de8f1374801e8f719828cfefee741a43321c22aeb1d22631b460360c6",
+        "original_boxes": 11,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image960.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-96",
+        "sha256": "c9aa61e154ed08a3a860f5e5feffa8ac2d7414bea7e13b460e4c8364ae8cdf1b",
+        "original_boxes": 9,
+        "merged_boxes": 4
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Side view/image1794.jpeg",
+        "source_group": "Outdoor/Water/Side view::block-179",
+        "sha256": "c13f5b3119a4c1d0f20c619f66914575ba524fa934d50fccbeac73c5b3581a1a",
+        "original_boxes": 9,
+        "merged_boxes": 3
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image407.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-40",
+        "sha256": "c0d1e6dfcb635329fa57393c528e488204293d5ac80ad33e73b586cfc1a6b0ee",
+        "original_boxes": 3,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image2004.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-200",
+        "sha256": "7280201a0b5bea64d871170b27fcc145abea98e743372260d4db4c614fae487c",
+        "original_boxes": 13,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1742.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-174",
+        "sha256": "39a14dba93933f9c8c46b68f4a02a0963f823f72b1f3e00db9703370c207cda1",
+        "original_boxes": 8,
+        "merged_boxes": 4
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image1126.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-112",
+        "sha256": "1d441534ae09c2f7eecd09fcb757468148bd1af29ebc31e9853cf4bdfdc0b359",
+        "original_boxes": 10,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1146.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-114",
+        "sha256": "dd3f8084d73b51522246061b804de85afe3999e2fd59381f414f4a771978cebc",
+        "original_boxes": 3,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image1444.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-144",
+        "sha256": "0bd028270c095462c8ec168df91741ae79d4438178a2390847fb2c0501fb31dc",
+        "original_boxes": 27,
+        "merged_boxes": 5
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Side view/image1863.jpeg",
+        "source_group": "Outdoor/Water/Side view::block-186",
+        "sha256": "8645a02cfe7dbd4b8ad06d0c3990a388539370eed66860c84305a603d8c4e7b8",
+        "original_boxes": 5,
+        "merged_boxes": 4
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image601.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-60",
+        "sha256": "420b5b2d6273ba6e50875035d3578046b8a8df73b342192ff883c8b6f4b891a6",
+        "original_boxes": 8,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image1525.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-152",
+        "sha256": "73e365efdaede72c0013df5cc535e089087b87fdd7231ef5169915622c8aab07",
+        "original_boxes": 6,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Side view/image624.jpeg",
+        "source_group": "Outdoor/Water/Side view::block-62",
+        "sha256": "c95d25aca5cb05ca4286b1eecf365cc004345b21fa3063291799850bb2f6fcde",
+        "original_boxes": 8,
+        "merged_boxes": 5
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image679.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-67",
+        "sha256": "d97f07c77c87be1309a02e2e3a8cfdfb3548833ae44530f70cd713bda7df1921",
+        "original_boxes": 8,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Side view/image999.jpeg",
+        "source_group": "Outdoor/Water/Side view::block-99",
+        "sha256": "9354740fd09123e7755c1fc35ae03a8c7986a9cb14f2d7ceea2df930df1acc2f",
+        "original_boxes": 9,
+        "merged_boxes": 4
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image642.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-64",
+        "sha256": "2524d0d641446bfbbf5e2e02cbf107a1b7791b47168175141be5949a79c6e680",
+        "original_boxes": 2,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image510.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-51",
+        "sha256": "2ba7b160ff106be4459dca35b868213d6d1cf3b392ae6c9554a4d961f04bbf22",
+        "original_boxes": 1,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Side view/image987.jpeg",
+        "source_group": "Outdoor/Water/Side view::block-98",
+        "sha256": "dd6ccb170574fd5b4080b9492c207e442eb8be3ebd76bbd47a1bd586595cb241",
+        "original_boxes": 7,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1130.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-113",
+        "sha256": "ef48057d47c77e2e435af219731418f7d5cb7061f0ce1c16bf3a715921a11273",
+        "original_boxes": 17,
+        "merged_boxes": 3
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image43.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-4",
+        "sha256": "7ffd24b1a5a010f8dd49a7e76b124f64c28ff31b78cd8015da32738012d91dfc",
+        "original_boxes": 16,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Side view/image1348.jpeg",
+        "source_group": "Outdoor/Water/Side view::block-134",
+        "sha256": "979e7539778a3307e40119d039b0f571b8c7baf6e6ae9a2282daf9c7a3595415",
+        "original_boxes": 4,
+        "merged_boxes": 3
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image688.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-68",
+        "sha256": "b63580689fbc1b10809307603ccccd1fff3aaa3d4750f1ccc947441fd8548364",
+        "original_boxes": 6,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image70.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-7",
+        "sha256": "0fee2c179b484e33378d9166d46d26ea1e4ae498bd34e101023281e7a13598b5",
+        "original_boxes": 2,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Side view/image1539.jpeg",
+        "source_group": "Outdoor/Water/Side view::block-153",
+        "sha256": "17070e19d9123bc78f3dc4fb8d0e7f4be3a84cf7183cc40bd15a8e153d1e91d7",
+        "original_boxes": 5,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1981.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-198",
+        "sha256": "385451c73044462d5fe9c10025da6606961a1cd5ae264b690254c18c418d5cb6",
+        "original_boxes": 4,
+        "merged_boxes": 3
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Side view/image537.jpeg",
+        "source_group": "Outdoor/Water/Side view::block-53",
+        "sha256": "7c743514a5477e51c43be8a56e795d591eacb01a06f97ed5d64dace80abe9726",
+        "original_boxes": 12,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1884.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-188",
+        "sha256": "fb57c0b56750e5a904cdf7b3fdce63e78172096acfa7eff1838a152d0603e663",
+        "original_boxes": 4,
+        "merged_boxes": 4
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image938.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-93",
+        "sha256": "890e01de3c7d4437439455ad0b424fb670b0b578a3ef19b9024a4fa9a83a530c",
+        "original_boxes": 7,
+        "merged_boxes": 5
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Side view/image1199.jpeg",
+        "source_group": "Outdoor/Water/Side view::block-119",
+        "sha256": "d148243c23292413123a137591f41b5b74e5c7ab6074897a4d1a462ed20d32b9",
+        "original_boxes": 7,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1575.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-157",
+        "sha256": "9ce0fb48e670818adb2aaadc1d4ee09203c538cae4efdc1bbf4c63521fabf082",
+        "original_boxes": 5,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image1072.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-107",
+        "sha256": "33e7d57f50a99f8d30b3fe49cf88986f5cae716cd99185405c480ef0cd9ea14a",
+        "original_boxes": 10,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Side view/image768.jpeg",
+        "source_group": "Outdoor/Water/Side view::block-76",
+        "sha256": "ddf0ba91e8bc086e5500820d64e34e8c0d3a3fe99d45f7c91b9d2c9e0a10ab8f",
+        "original_boxes": 3,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image29.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-2",
+        "sha256": "993e68e44254cb8b6f479c450b99d79b912bc0db3d3234edbdf7021e6b977305",
+        "original_boxes": 22,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image1158.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-115",
+        "sha256": "23fb94b30e6ba7778616593393e319155e00b36b689a01cfa470bab06cc8df40",
+        "original_boxes": 9,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1472.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-147",
+        "sha256": "b9922442d666c80edbc7747a5705d0a9e2da10005e9a3ebf784bcb1f1344c4f5",
+        "original_boxes": 4,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image495.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-49",
+        "sha256": "1c21d30581a896e42ed577c960bfb9dc8cb5859ec682e49986b15ad66b991463",
+        "original_boxes": 6,
+        "merged_boxes": 4
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Side view/image1847.jpeg",
+        "source_group": "Outdoor/Water/Side view::block-184",
+        "sha256": "e960d3906fc327c2c71ad5ea989e8c3fcd65ff716f1800a89859f3756b4fd79f",
+        "original_boxes": 11,
+        "merged_boxes": 4
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image582.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-58",
+        "sha256": "fa19d563ae1454c48173bbe8851fcf4cca52bceac7f4c56d96eadd752823a0c3",
+        "original_boxes": 7,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image254.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-25",
+        "sha256": "d62b95e2c4f5b9ab9a2f8eea460f61dd1f14b4f957c6cef02ab35b74b2ba1577",
+        "original_boxes": 14,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image115.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-11",
+        "sha256": "d6ba3c4475cf09b503c648a0bc4719490b1526bbba1aa57188fc2980d3484792",
+        "original_boxes": 10,
+        "merged_boxes": 3
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image506.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-50",
+        "sha256": "ec87a512d67b2e94e57e8945be8f0c7d3b4e397daeb164ffef6ecacacfa9569c",
+        "original_boxes": 3,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Side view/image1707.jpeg",
+        "source_group": "Outdoor/Water/Side view::block-170",
+        "sha256": "dbd4955c990ddcbbc4dbbe0e071e5d13456fb8279919cb931c26bf643b2cc9cc",
+        "original_boxes": 21,
+        "merged_boxes": 5
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1945.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-194",
+        "sha256": "8cd2e8803bd349beb94e5aed5c5bddf99e26d93e3ad8ad1294e0a932924bb2d9",
+        "original_boxes": 6,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1711.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-171",
+        "sha256": "54e683d34e55dfd984c557b97f064577fae52726dfe6332e27db20862125061d",
+        "original_boxes": 5,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image958.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-95",
+        "sha256": "9a2e73f8f9faf7634fe4bb72b3e7bfec25fb47b1ea5fcb219270a6de13e9756d",
+        "original_boxes": 10,
+        "merged_boxes": 7
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Side view/image1864.jpeg",
+        "source_group": "Outdoor/Water/Side view::block-186",
+        "sha256": "0f0f26fdb8a0aa134c5dc2a7d65d14154a3096a8b275d7537b043210391f085e",
+        "original_boxes": 11,
+        "merged_boxes": 7
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image10.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-1",
+        "sha256": "e25f068f4d2043c0233a6d0e4dcd15e74ae103bc34546beb7f1121229c43f20c",
+        "original_boxes": 22,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Side view/image994.jpeg",
+        "source_group": "Outdoor/Water/Side view::block-99",
+        "sha256": "7c83db283542eac656c5510538158bbcbb0979162667aabfe360bd12df60dd4e",
+        "original_boxes": 12,
+        "merged_boxes": 7
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image947.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-94",
+        "sha256": "24b9ba5660bf44925cd73b2731ba640a5a037ca0f03ee135ec70d65a3496e55e",
+        "original_boxes": 13,
+        "merged_boxes": 3
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Side view/image1845.jpeg",
+        "source_group": "Outdoor/Water/Side view::block-184",
+        "sha256": "41d7e13aa4d73f8593c0c4ac8b744e343b96a9ac37b7cc151f2f2ce02ba32088",
+        "original_boxes": 9,
+        "merged_boxes": 6
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image310.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-31",
+        "sha256": "572af86742ce525d9cebd8c93b954a43bd556a3c7895497a224d70445f6fd75f",
+        "original_boxes": 7,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image336.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-33",
+        "sha256": "b1b420518db1729691e2d4c0edb5437c571cb2c1c4db140951525e5fa71fe476",
+        "original_boxes": 10,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water/Side view/image998.jpeg",
+        "source_group": "Outdoor/Water/Side view::block-99",
+        "sha256": "54ea95c121cec8f09e0d00c17fa54f7cfb9cc1e6a0122c6c58307703747a53e2",
+        "original_boxes": 7,
+        "merged_boxes": 3
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image501.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-50",
+        "sha256": "4dd219b133f01e640856bac1cfeb718d2a36d53c18225c1daeeeab5b52d2eef7",
+        "original_boxes": 13,
+        "merged_boxes": 5
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image1727.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-172",
+        "sha256": "4c7866e018c9103c88f3e30298810d06e0e473392d186a412dec0d5cbcc1f99d",
+        "original_boxes": 8,
+        "merged_boxes": 5
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1593.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-159",
+        "sha256": "f7f75555b5fd776443ca18d0e46ac3087dfa58e43fcabd81a2cc481c7204a7e9",
+        "original_boxes": 2,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image1417.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-141",
+        "sha256": "2a2dac2c48c007ce56b05c21224d62daf5d32c95e84314be743b01940fad9edf",
+        "original_boxes": 13,
+        "merged_boxes": 3
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1381.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-138",
+        "sha256": "b67aa373eca99265222807b97eaf044292167c96012e40fb48ba8a0c7703a35c",
+        "original_boxes": 11,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image1377.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-137",
+        "sha256": "5347b053690f536d34df412999c50c4a401349c9e21a65a395e9261d88a6d9b1",
+        "original_boxes": 4,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1155.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-115",
+        "sha256": "222d8e5b13828eeea366e10cfdb055319fe251e495977074f3a517d8ef5dae80",
+        "original_boxes": 16,
+        "merged_boxes": 4
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image21.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-2",
+        "sha256": "883fa37b350ef36d02bd120c09341a2a9ecc62e533806c0d51a82359896f4869",
+        "original_boxes": 18,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1019.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-101",
+        "sha256": "68a26639818f27b204c9cf27abb6732528d07041f935776b941ab66f7414137e",
+        "original_boxes": 13,
+        "merged_boxes": 5
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image797.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-79",
+        "sha256": "ce1335ff261c8dc4b0b09635abb48796a38951d1fb28f485336ad8a26ceb508c",
+        "original_boxes": 2,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1414.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-141",
+        "sha256": "aa4225266627ef53c2935947e5ac0ca5406f10ca9ab0742db8655bbd15c0a0a3",
+        "original_boxes": 10,
+        "merged_boxes": 6
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1910.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-191",
+        "sha256": "e442744bcc83a34df9a881d68f122a0d5a4a4fe0615928319fa3019deb21658f",
+        "original_boxes": 7,
+        "merged_boxes": 3
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image550.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-55",
+        "sha256": "a70c0d1aa7584c15c40eb43bdd32e15ca3005dc1ad2c553356facb1c8a5f484b",
+        "original_boxes": 6,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image544.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-54",
+        "sha256": "baaa9122eecc544dd06e1cfbe5d711c2a75d0ec038c4955b53f11c023693cbf8",
+        "original_boxes": 13,
+        "merged_boxes": 4
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image1134.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-113",
+        "sha256": "1934f032d3ba24bfaae5df34301d7981f13ef9c0862ea80591e53c01b514a648",
+        "original_boxes": 20,
+        "merged_boxes": 3
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image145.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-14",
+        "sha256": "23c11f6cd3c39bd3bc9f7cf0bea2bf2c48c97c2745c4112745c981fe93286afa",
+        "original_boxes": 10,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image873.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-87",
+        "sha256": "203506cfeabdcd1f5e029f0ce0af7458dfa8d5de5100af73f17707d6fef9b65b",
+        "original_boxes": 5,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image5.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-0",
+        "sha256": "4fc86b3a18523aa4c020d404189f9ba26495934cb35cbc401b897f80554acadf",
+        "original_boxes": 18,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image387.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-38",
+        "sha256": "8f1e3f16fe301de2444862eeb2bb19cd2ea1fcd8b80d4c8a5f00a89c7c52e6ff",
+        "original_boxes": 10,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image1769.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-176",
+        "sha256": "2dac948ccfeab28885ccf6dd77b1df20c7e2162a992d4413e08daea98a132438",
+        "original_boxes": 11,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image306.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-30",
+        "sha256": "93ef327fc9303466ff18d8de8dcac25e40db0fa099e38270af6fd1b789e116bd",
+        "original_boxes": 9,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image842.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-84",
+        "sha256": "4d5dc8bc61235d56276d39bdfb059ced2594b862259aea3d81dca62589e66cba",
+        "original_boxes": 1,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1837.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-183",
+        "sha256": "0d3c522e35f0aaec41bd880f50f552195aa1ba2913acf9fc7cb7a43d1dbe6cd2",
+        "original_boxes": 15,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image1774.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-177",
+        "sha256": "00283b15e0a0340d3be676105956fe5030523c9f2e20f71bbdac72697c82dd4c",
+        "original_boxes": 6,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image597.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-59",
+        "sha256": "1f3b2ef8c32f807331af96d631827e0d9cab8545c981451793f53aa2da5de670",
+        "original_boxes": 11,
+        "merged_boxes": 3
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image704.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-70",
+        "sha256": "a1f23dc8347bbd8b4d818da29c4b22b0d9a3c385d33be9ac368bd46c404d51df",
+        "original_boxes": 9,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image166.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-16",
+        "sha256": "70caf37e3185c55d1a94bbf5a4ae6904accc9a50b4ec126a3c485ce8b866b39a",
+        "original_boxes": 12,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image276.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-27",
+        "sha256": "2be677c723bbbd0774cf5f57b95220ab2788e1cbc86d321c91bd640c6b84a5d5",
+        "original_boxes": 10,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1634.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-163",
+        "sha256": "957c3d8efc5b904c61d05b238a1e74f74e94fc1e94a6e213ac2d8e45da49226a",
+        "original_boxes": 5,
+        "merged_boxes": 5
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image1271.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-127",
+        "sha256": "15c01628f509dff86a063447d6c2a3e4d890ced8bd371111b5fa7b066ce7cb23",
+        "original_boxes": 9,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1516.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-151",
+        "sha256": "f5ff71a7c20bd8116ac10bdfbd137f534ee2f584cace2a0bafa3536d10f58aae",
+        "original_boxes": 9,
+        "merged_boxes": 4
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image813.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-81",
+        "sha256": "a7559cb830b85f2ea0ea1e03c74cc6f9a852ddfb1677de2c0b90c42b38a69543",
+        "original_boxes": 8,
+        "merged_boxes": 5
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1227.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-122",
+        "sha256": "9f30e3e972af83e7e95441f8f7a00e67c7af622adda174b6f404c20e5037acf0",
+        "original_boxes": 8,
+        "merged_boxes": 4
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image1200.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-120",
+        "sha256": "dc560c94868516c5baefc79bcef7b02ba94553bfa4e8cf0d4a28b49674c23dff",
+        "original_boxes": 22,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image850.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-85",
+        "sha256": "d73ae181116d41e5c3b609645b8d1291b45e771afd1dd7fd1f9ba7e90a297bf6",
+        "original_boxes": 9,
+        "merged_boxes": 3
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1528.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-152",
+        "sha256": "16171da5602a5c3b9318b6255213174a95f61b04d7ec14c84a6c0de8fc664c12",
+        "original_boxes": 10,
+        "merged_boxes": 5
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1666.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-166",
+        "sha256": "c1a680c078e5712e602ad18ca31e19021a2efdaf1d6187c1d7b6d28fa733b759",
+        "original_boxes": 22,
+        "merged_boxes": 8
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image1391.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-139",
+        "sha256": "3288fccfb7ebaecb2c025512392fa8a369d295b7cbfc9e1a0247693490284c1f",
+        "original_boxes": 2,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1335.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-133",
+        "sha256": "958eaa72a63f41da5c79fd578266d42a4d0da9edb375237e72af3387511d677f",
+        "original_boxes": 21,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image643.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-64",
+        "sha256": "e351da1617408b3f24a3910fc19c81174fa8f2a12358e5de472aab28491aaec6",
+        "original_boxes": 12,
+        "merged_boxes": 3
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image68.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-6",
+        "sha256": "1363838b0523caef2ae446e8bc17e41e3155a184eff6801d14f8261a7e19ace9",
+        "original_boxes": 11,
+        "merged_boxes": 3
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image95.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-9",
+        "sha256": "61ae697b0e660baf1f56c18f188c253b5e5ae8f62994bc799a1074b029a0a8d4",
+        "original_boxes": 5,
+        "merged_boxes": 3
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image974.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-97",
+        "sha256": "aa344fed6110cbb5cd0f00b2714d6eac265a2b344ce2913cf38de81b6dcd5e32",
+        "original_boxes": 11,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image212.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-21",
+        "sha256": "d277e53796ce371284895a60579ca05bb4441620125acaa647fd846b21e161ce",
+        "original_boxes": 16,
+        "merged_boxes": 5
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image1483.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-148",
+        "sha256": "57d0c1a32208566158a0e6932ea30f4cf1118c2d8480b3014128e2e278fb100d",
+        "original_boxes": 9,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image634.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-63",
+        "sha256": "45bc36787fe9b53d58612ca30f466d0c6299b3dd33b9f7fb43562ce27296fbf3",
+        "original_boxes": 1,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image1317.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-131",
+        "sha256": "3598162ac27d6cb384b9adc64147e6074819290af27ce390ce15400c23667ef2",
+        "original_boxes": 10,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1977.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-197",
+        "sha256": "ba45457fbb2ea380853e5acd84e0fbb4d847b4ea1642788db67c49163c14024e",
+        "original_boxes": 9,
+        "merged_boxes": 3
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image142.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-14",
+        "sha256": "0f578a2b786c644165075dc8af135c6e5bdb9722b8c1ec2398fcccd14cb0f56e",
+        "original_boxes": 8,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1555.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-155",
+        "sha256": "3d0c55394810afb8ecc584afcee465a1a00637d84b45ea5093c523298bdc598f",
+        "original_boxes": 7,
+        "merged_boxes": 3
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image1367.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-136",
+        "sha256": "b4db7d6ded486d2fdf39a61b38bc2215401280390e1ee167c78c4838d3257f9a",
+        "original_boxes": 11,
+        "merged_boxes": 3
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image132.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-13",
+        "sha256": "a5ecc3f4bf450b3633f1539370d5c3c8cd134e421be373cc7b394ebd904e4187",
+        "original_boxes": 9,
+        "merged_boxes": 3
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image733.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-73",
+        "sha256": "ce2c8e3a8b48ecc17062a8c6f704b1c711c20ec322c2f7e76c20c220020aa20c",
+        "original_boxes": 4,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1899.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-189",
+        "sha256": "0d204173807edf77a16b7e3059eba876e58b9a536c46ae354d2e45baf23859e0",
+        "original_boxes": 16,
+        "merged_boxes": 5
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image234.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-23",
+        "sha256": "41b2e0c730c9b12221cd7ba26605224364e8df16718566a540bb6b7f02cde1c0",
+        "original_boxes": 13,
+        "merged_boxes": 3
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1360.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-136",
+        "sha256": "6071e8427ff49c9577c29cea4e542bdd3848bf3ef1d4ecc8acfbb543f4fe97a6",
+        "original_boxes": 11,
+        "merged_boxes": 3
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image1171.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-117",
+        "sha256": "157dd0d79342af24c72e8fe50321d09b887c722e06d2d014e3dd9013b40da38f",
+        "original_boxes": 1,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image173.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-17",
+        "sha256": "ddefdbb1ac3efac2946d9efa34c60090bd04c4eeb4d5c9fe64c598e339557f90",
+        "original_boxes": 5,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image1005.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-100",
+        "sha256": "9527937e5a9fbac6fc082fd005661df79d6c2d1e0df86c020145e7c4aa5be0e2",
+        "original_boxes": 16,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1603.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-160",
+        "sha256": "aa72de495a1a855d04faa71d3176755cd3e326cb5867d8b3fbee55c9b378ae5e",
+        "original_boxes": 2,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image592.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-59",
+        "sha256": "05c178aa8f8faf9bb6aff44db09b910790c9bffda1adb42aea634bd7e068fe3b",
+        "original_boxes": 8,
+        "merged_boxes": 3
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1399.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-139",
+        "sha256": "607fecf6e96dcc46f460e6eeadee615c3ac259ca36286e836ee4f782cf5dfe18",
+        "original_boxes": 12,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1002.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-100",
+        "sha256": "3345d45bf3621952db068a192c3930fae40c9303a1b35c75404a179c8aeb9e9b",
+        "original_boxes": 13,
+        "merged_boxes": 4
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image107.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-10",
+        "sha256": "22857c465e6a7adc0cdfa8e4367b157deb794a8d3292ba56a41ef9a513794f9b",
+        "original_boxes": 16,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1112.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-111",
+        "sha256": "2abe8e6ca29c0cc745dd91d9751960afe81f57178b09835c2da49a2ae79d8cbb",
+        "original_boxes": 6,
+        "merged_boxes": 4
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1704.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-170",
+        "sha256": "9a4f811cf4e154520236e1f40f5cf66f503bdd06a842d8f1d1af486a6a198887",
+        "original_boxes": 3,
+        "merged_boxes": 3
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image860.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-86",
+        "sha256": "09006e63667dd40b6cd62c64a2b6ab0d6d610deb0551b8e31d37a878b04fa1a5",
+        "original_boxes": 10,
+        "merged_boxes": 3
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1581.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-158",
+        "sha256": "e9ba790d39b1c45ddf66390eba9a4b2fbfea13aef635c6f3681c9c34be96be5a",
+        "original_boxes": 3,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image345.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-34",
+        "sha256": "90d5e3c757f312393ef55c564fe2e6a16585d8d7220a384ca5daea5f127b57c8",
+        "original_boxes": 5,
+        "merged_boxes": 4
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image108.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-10",
+        "sha256": "15a0bab7c44938c8bc59ed45e4a2ff4ff03c261887e658910666320f9022cfa6",
+        "original_boxes": 11,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1214.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-121",
+        "sha256": "961dba34fe8d7749df60d8fd401c206525ffd75d49d11104669269a4a0cdc072",
+        "original_boxes": 8,
+        "merged_boxes": 3
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image541.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-54",
+        "sha256": "d6e9aecac8015f62ac539d4ca8ea3ed23b96bf29a2a39613732e323b3deca9c2",
+        "original_boxes": 7,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image1718.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-171",
+        "sha256": "3bb65e162bb8f2a76366903097104b070ae3261e4df6bcbe1fb46d0bdfb18fdb",
+        "original_boxes": 4,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image150.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-15",
+        "sha256": "fee30df06f3fd468ad27f1887c152fb1abff71aa0a2297348b69284b61f58812",
+        "original_boxes": 5,
+        "merged_boxes": 5
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image151.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-15",
+        "sha256": "5c996972e046c52b7d37a8f43dae74a55397631ed159487279d30d5fd96b1cdc",
+        "original_boxes": 3,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1340.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-134",
+        "sha256": "34e9a8992e9a6ca83b3f68557d579dc618b23cc99ee319d8b73f805143d931da",
+        "original_boxes": 10,
+        "merged_boxes": 9
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1270.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-127",
+        "sha256": "cd26f9f3d8b83b612b547f827b703f479132357153c9ef6c075b6f71cb2ca021",
+        "original_boxes": 3,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image1740.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-174",
+        "sha256": "6fa0c86055e516e0373d4651a646cdafe2e98ae2c7ea59499ff14003d004e436",
+        "original_boxes": 12,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image330.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-33",
+        "sha256": "e564f694c019d6c737fcc4bd45722eb6cbaecedfbe77995670f08dbe92feea23",
+        "original_boxes": 11,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image1266.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-126",
+        "sha256": "991d958ce87f0fdc900630e753d11306c46eef498a54be6c4c2597ff108f3156",
+        "original_boxes": 6,
+        "merged_boxes": 6
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1954.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-195",
+        "sha256": "3094673b854f54077097998af6b3e32980bc4b492c14e43f8f5029ff6672079e",
+        "original_boxes": 24,
+        "merged_boxes": 10
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image1035.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-103",
+        "sha256": "9409f0928a554917daacd1c08797ae5acb3551f34d832e451bd155f5b5f5145e",
+        "original_boxes": 13,
+        "merged_boxes": 3
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1925.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-192",
+        "sha256": "d19ffaed4e05478df58cc98d4ac47265a33904d0e2e14c25f33a1cb9a0055257",
+        "original_boxes": 13,
+        "merged_boxes": 6
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image124.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-12",
+        "sha256": "9e0c273dab4e284ad58dd5b4be98917ee1939229209173a27654b51aa42276a4",
+        "original_boxes": 7,
+        "merged_boxes": 4
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image529.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-52",
+        "sha256": "5eaa1fbd6db773ef1c9edf7fd5cec76448c536e4ffede7a97faa0959b1e065f4",
+        "original_boxes": 7,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image469.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-46",
+        "sha256": "ff79e98f6d17fe2539adf3038c7a0f5997eac3596e0ac3c129f4523fd55ab681",
+        "original_boxes": 6,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1379.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-137",
+        "sha256": "800b058318ad7b98fcfb6f2eeeaf951ed1aaa0b988dd0236768615d39a0efc73",
+        "original_boxes": 9,
+        "merged_boxes": 4
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image474.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-47",
+        "sha256": "66668256a07fcc7fd639553a892fdbfb768589de0ee21601e1f8876aff1e02f8",
+        "original_boxes": 6,
+        "merged_boxes": 4
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image47.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-4",
+        "sha256": "183ecfff386ead8eccf5b12e9c93e8982889486a934d82e1d4eac27cdccbc53b",
+        "original_boxes": 12,
+        "merged_boxes": 3
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image979.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-97",
+        "sha256": "845d7819e60a207b1e7d98ff4508188d651e4a7536ca8a1458ca0f52d492c59f",
+        "original_boxes": 6,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image771.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-77",
+        "sha256": "981f0610bc1de4d99852863457c8fc03b00ba8e2685f1c1c7e96d710df591156",
+        "original_boxes": 5,
+        "merged_boxes": 4
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image766.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-76",
+        "sha256": "accaaa187ed0360bb2b184008fab28c23975a6051dc7e6921f37de7de48ca04a",
+        "original_boxes": 5,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1854.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-185",
+        "sha256": "09dbae2f2beaf3100dfe5041d61c99e321814db28c67ffdee3e0d14bae5b6258",
+        "original_boxes": 16,
+        "merged_boxes": 4
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image423.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-42",
+        "sha256": "543dc984b59fd5b2d18ce34cacdd7cc96c59c9d277fdf96e9f6920f49349f42b",
+        "original_boxes": 1,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image1408.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-140",
+        "sha256": "320553837e86b0ffc3df33c48cdaf9a956af54af94acfcbe942d46a1e9070c36",
+        "original_boxes": 3,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1197.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-119",
+        "sha256": "30c3d6dba6272b15197619f7e143fa5e9e17e10823e2a0657ffa678a2e829c90",
+        "original_boxes": 12,
+        "merged_boxes": 3
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image561.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-56",
+        "sha256": "0a676c74f8713f61a81de11c05c84ba63b307340fdf741fab2b6500a2bd9973b",
+        "original_boxes": 1,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1053.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-105",
+        "sha256": "6c3481c23d3899e17da241f2b8f6beab8065b81a27e55e022e807bd550e3b694",
+        "original_boxes": 8,
+        "merged_boxes": 3
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image919.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-91",
+        "sha256": "5b4fe21c88941889a0f491e62cea60ae63a49a98e384707f84b2ff3aa587a2c8",
+        "original_boxes": 7,
+        "merged_boxes": 3
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1048.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-104",
+        "sha256": "02e58a2fcffd182939ab47f2d534e018191dec8711e6e615a8326cfa99441065",
+        "original_boxes": 10,
+        "merged_boxes": 4
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image1011.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-101",
+        "sha256": "dcfc305fc1cf75752bea9a017af7d650be062f262a3161eaa320f19fc8f8bc7b",
+        "original_boxes": 14,
+        "merged_boxes": 4
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1329.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-132",
+        "sha256": "eabe6a650e84594c0821c26b473d8375c2bc07ba68bb15250c454465b43481ab",
+        "original_boxes": 22,
+        "merged_boxes": 7
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image1708.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-170",
+        "sha256": "5b4a5b8527b4ac626ba5b087a47a58cb4e296f7d9f13f48d926ed59062f41bb3",
+        "original_boxes": 5,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image690.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-69",
+        "sha256": "f698066a5ced135dd45462f85b16db09710bafe9ce1909501659e61f898eb17b",
+        "original_boxes": 3,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image358.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-35",
+        "sha256": "484e8ada76c66bd9d4fd8ebff6134f94d9fb269deef16a5d647721d8a3658063",
+        "original_boxes": 2,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image1101.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-110",
+        "sha256": "c5a1253f00480583d9add60f1ee7911e01671a2349b35d1904416a5e562301e9",
+        "original_boxes": 6,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1426.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-142",
+        "sha256": "fb6aee4b163dc9e17c7e1894a8591bb28f2f731134d284234b67efc40e14f7ac",
+        "original_boxes": 14,
+        "merged_boxes": 7
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image801.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-80",
+        "sha256": "9f09e87431457d1fbee455fde4fad987c6dfc702db6710f89ee0e8ee026cfaeb",
+        "original_boxes": 9,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1185.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-118",
+        "sha256": "eeac3f0e679c9818b82de73fc60d52ac06d59f56eee82789564c57c266224cf6",
+        "original_boxes": 15,
+        "merged_boxes": 11
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image247.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-24",
+        "sha256": "2ba0f35ef951e357ba25e6b529684da619538e2231ea35020fa5d6d17ea96364",
+        "original_boxes": 13,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1208.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-120",
+        "sha256": "81c6c8537882ab1f7fa2785bd1b1b0e3170535467e57c6255701e7fd0975b650",
+        "original_boxes": 12,
+        "merged_boxes": 6
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image1734.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-173",
+        "sha256": "3183c5f8107bceaa25e7b9b9beba1bba75dd6cfb0757c70e6dcdb1931d215d0a",
+        "original_boxes": 5,
+        "merged_boxes": 3
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image517.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-51",
+        "sha256": "bf25ed74378703200be8b8795befa8a7c711283d556533f7015647796d8e01af",
+        "original_boxes": 19,
+        "merged_boxes": 4
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image805.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-80",
+        "sha256": "5485b44ef630001d391f4e95e76e320c19346fe8a412eae8770dcb067ed3acef",
+        "original_boxes": 16,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image88.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-8",
+        "sha256": "048740009ab4496bb7c2a58aa56c49798dca1fdfc058c862729a4aaa1f833165",
+        "original_boxes": 10,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image1780.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-178",
+        "sha256": "19d82de839dece07265b038cb66d0622f993c6149745f9a31febb962863edb66",
+        "original_boxes": 8,
+        "merged_boxes": 4
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image881.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-88",
+        "sha256": "bd16ad724b1235d49fd601c099380b9273347ebd6e6e10e1a64e93fde02d3806",
+        "original_boxes": 3,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image321.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-32",
+        "sha256": "8f4bff55c34d8df69fb9031ec8d3af77d1259b6cf446ff323ff0fc5037495fc7",
+        "original_boxes": 5,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image1499.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-149",
+        "sha256": "941a892ff296d6f01b1acf88a9a925f2ae2657a3dbd6cc68e09fd56b28e201ae",
+        "original_boxes": 5,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image991.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-99",
+        "sha256": "02e604ea8aa4046fc775505b37f250a93f7bdb6b35cd747139deab842d1e4ced",
+        "original_boxes": 16,
+        "merged_boxes": 5
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image81.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-8",
+        "sha256": "4a1009b0988f3f5c980e8a6d907038f395855d8b8f7f356808f0620f41bf2e51",
+        "original_boxes": 7,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image164.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-16",
+        "sha256": "9de24df372d53283c9cfbf96b43225e3e0cc9a240d57d3b6be6e54ff734536f0",
+        "original_boxes": 6,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1084.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-108",
+        "sha256": "bb2f31c0e470f969821566c323e7883a19af6f63fc2114c7a209f7c3b9bc50cc",
+        "original_boxes": 13,
+        "merged_boxes": 6
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image907.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-90",
+        "sha256": "63811431eb341f658585dad06259268eea907bdd1eb700e82300ba749693fc5f",
+        "original_boxes": 18,
+        "merged_boxes": 3
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image1675.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-167",
+        "sha256": "d4d251bf98c4cbddc99c5d78eb5b9da411f79d64bf0522b68ed973f90aef3e39",
+        "original_boxes": 1,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1500.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-150",
+        "sha256": "18919e8700882d58bb3f04a6ad403ad7cf77bf9378b2b73c0f6559fef0557350",
+        "original_boxes": 6,
+        "merged_boxes": 4
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image1452.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-145",
+        "sha256": "f91939e2bd61a06a3c93f7fd8de8156a3a2dde964968ba5579ab0b56bff6e63a",
+        "original_boxes": 13,
+        "merged_boxes": 3
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image790.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-79",
+        "sha256": "05b1fd44d6eb1d332fdeea0b20a3030e3e8b043a49b5d09f77213beef301514f",
+        "original_boxes": 34,
+        "merged_boxes": 9
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image880.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-88",
+        "sha256": "9eb89b9cd0c1679b0202a4584f5123a798f8467d77fa3e42d443ef15b2658883",
+        "original_boxes": 2,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1966.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-196",
+        "sha256": "579d05552f38f6fd8bf2f43d0a8cb629526df5139901aa390f72052055300901",
+        "original_boxes": 41,
+        "merged_boxes": 10
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image113.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-11",
+        "sha256": "6b963664fa0f239314ee7958a7295eb2a2e9a257be23486d86f4fef6adc10547",
+        "original_boxes": 11,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1443.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-144",
+        "sha256": "f49880d14b06d3a0340450a4472ea399e154ad12a01b8587777e76c16aeec7a3",
+        "original_boxes": 18,
+        "merged_boxes": 6
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image653.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-65",
+        "sha256": "a2381e0d8e80dcf851a02a679c4f5f757849f75536bc0c636e19fe828758cd92",
+        "original_boxes": 6,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image780.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-78",
+        "sha256": "22f74aac80fad275938ac06d24763878325722c545adcf4748450fbecc7a18b7",
+        "original_boxes": 17,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image1144.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-114",
+        "sha256": "d2960e5768cc2c7919a3d110008566a1dcb44cf9dab0a9e3ef0d704fe8796d72",
+        "original_boxes": 20,
+        "merged_boxes": 3
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1799.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-179",
+        "sha256": "9b1f7ad187651811e7873cb3e9b579526b906cec031b89a6b020e27738d1271b",
+        "original_boxes": 14,
+        "merged_boxes": 7
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image137.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-13",
+        "sha256": "8ceb080eda0da85fc1e3ba643350ca60bb0603af4591e53fe795573be52124ca",
+        "original_boxes": 5,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image17.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-1",
+        "sha256": "6aee02b7c0cbf15e489c6af49e3c306cabdabaef159a4779a529f695dd059e8d",
+        "original_boxes": 14,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1036.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-103",
+        "sha256": "35c796581e9a447bf6f2f2e3a7de7bfd56555d6a0180a2b36586e76f3798ad58",
+        "original_boxes": 19,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image526.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-52",
+        "sha256": "69234e05014eab51cbb1484b76c373550b35de2dda8d9a987706d7ce27d6db6b",
+        "original_boxes": 5,
+        "merged_boxes": 3
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1239.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-123",
+        "sha256": "a675672cbbd8d9530c0eed6ef60e5e2eaf65eb374c874cfa2775420d678b01eb",
+        "original_boxes": 19,
+        "merged_boxes": 9
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image968.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-96",
+        "sha256": "092c17d21ed5c0612f418e0b8f9fbdf32a373b4158d892bfa40a12e3ecaf017f",
+        "original_boxes": 7,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1481.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-148",
+        "sha256": "87ce4e9584d3fe78e3b589515f82d5fb45ad771a1fb2b6ea4103dafd0dd6dd0a",
+        "original_boxes": 2,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image2002.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-200",
+        "sha256": "6b47cd39c37bf74918953001b26f13db2115521ebcd4d6b685c978691a423ba7",
+        "original_boxes": 24,
+        "merged_boxes": 5
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image257.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-25",
+        "sha256": "4710c8de2ec5a24d55d94bc8210ce5d14fbaa1eeae7ca35aaeb57b895bdf2891",
+        "original_boxes": 8,
+        "merged_boxes": 3
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image1125.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-112",
+        "sha256": "40eddda4f32408b1cd4977c2bfd70fbb0346fb521f5cf12a1e4203698c9cf23e",
+        "original_boxes": 8,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image461.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-46",
+        "sha256": "ee8045f3e0ffe292b96b027bd6314bc23eb8f92d05c8a863bbbe2599fbcc5a40",
+        "original_boxes": 2,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image1447.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-144",
+        "sha256": "6c48dbf820277165dc0bd5823547ae5c974ec2b133edc2be179de65ff53ef42f",
+        "original_boxes": 22,
+        "merged_boxes": 8
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image743.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-74",
+        "sha256": "6336340c6cafcaab4d930fafd1d7a566e731834972dd319c355cde56263ed5d8",
+        "original_boxes": 8,
+        "merged_boxes": 4
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image45.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-4",
+        "sha256": "91cce7f900145eda8a52af12f54e46f31dce49ac342ec41ca538506c2c475abf",
+        "original_boxes": 15,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image76.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-7",
+        "sha256": "4a1f775474fe611637133ff3e038dbf8b5080e039131ab7452567e13cc6f5cc9",
+        "original_boxes": 7,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1433.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-143",
+        "sha256": "8b8e311c3054defaa120477f0d60c4dbc04fb2a89eca3c2737e8ca5131de3d72",
+        "original_boxes": 15,
+        "merged_boxes": 8
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image613.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-61",
+        "sha256": "4b4502db89fcbb5d182c4fcf694382a7ae19adbe1ec0e3a6ee60595ea7d8315c",
+        "original_boxes": 9,
+        "merged_boxes": 4
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image935.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-93",
+        "sha256": "34729326c23026389d42622ebd63e45923beaa44f0968faf35e9e0daad37afa6",
+        "original_boxes": 5,
+        "merged_boxes": 3
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1642.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-164",
+        "sha256": "84297a8a3c386fdc4b1dc0109d94c8ae3ffe55fffe1ad199448897f035744b06",
+        "original_boxes": 3,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image1071.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-107",
+        "sha256": "3df7419629d99bb82b719fdc00ab8f8d77c97e2e64b920330554aba9cc84b5fc",
+        "original_boxes": 8,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1766.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-176",
+        "sha256": "5613f103ef8d5420652044878c5dd06840dc94e6d6db19390b96c5dfac3a85ce",
+        "original_boxes": 3,
+        "merged_boxes": 3
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image1153.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-115",
+        "sha256": "f971cabd60277f10389ef57678a5a790e5e4e3f6ae033d31b416e19005cf5aaa",
+        "original_boxes": 10,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image898.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-89",
+        "sha256": "67bb71a756a9ef9cfdf01b678978f423f453a1dc989ec1f93d41d259f7c70a29",
+        "original_boxes": 26,
+        "merged_boxes": 14
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image498.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-49",
+        "sha256": "b117259e9ce1ac236cc54bbdc203de4d928353ebd9af6df5fde355b30c562ddd",
+        "original_boxes": 12,
+        "merged_boxes": 3
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image961.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-96",
+        "sha256": "36aaef66867a772c95674239f5fbf432b3e2aaea5e413934b6dfb6432ff14c80",
+        "original_boxes": 7,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image250.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-25",
+        "sha256": "655beb45486ffe79d30b11628a7421a3b851039e881c6098e4f0beeee44f4986",
+        "original_boxes": 12,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image499.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-49",
+        "sha256": "8291038ebd137c760418f790aae947259622f5b77b52731aa1286d74cf9687d0",
+        "original_boxes": 17,
+        "merged_boxes": 4
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image505.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-50",
+        "sha256": "31e82a9ab422493108063cbf0789ff50958d548f9a2badfdf9d0fc306175a89e",
+        "original_boxes": 11,
+        "merged_boxes": 3
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1861.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-186",
+        "sha256": "d4fee7ade9e52b427b9879d4a4fca304b0b491f90ccd1ecb64f00350b3542e5b",
+        "original_boxes": 11,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image951.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-95",
+        "sha256": "062aae5d83ff2839543e88a3027c40dc6e34ea237238269d2cb8c1d187cfc1ab",
+        "original_boxes": 13,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image73.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-7",
+        "sha256": "a93ed6a6e8f73c7747e7b16a592e97b001aaa6a15cf3e316cb3b86b2da0f320a",
+        "original_boxes": 9,
+        "merged_boxes": 4
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image353.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-35",
+        "sha256": "88f4eeebf8c93352dac5976d3eb5c19770027b2cfc27e7909f1a40892d659f12",
+        "original_boxes": 4,
+        "merged_boxes": 3
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image1729.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-172",
+        "sha256": "a3ccaac31329e2a18a5d30fb8e85b757fa81d0d5e8331ca6952c6716e3218837",
+        "original_boxes": 12,
+        "merged_boxes": 5
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1720.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-172",
+        "sha256": "db32d28d0fc0cbd701d6c557f516c057e8b79bd0e8dac078b1effeb9f927478d",
+        "original_boxes": 9,
+        "merged_boxes": 9
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image1378.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-137",
+        "sha256": "64a6ebfaaf5bbb5fe2c5289d0228deb343c991b28d7f1f16fc7aeeda414e26ce",
+        "original_boxes": 1,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image628.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-62",
+        "sha256": "6e7e1ff67e9c64b4401cbc636a7bca9896942bef21a92c12528ed7a9fd6655b5",
+        "original_boxes": 11,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image25.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-2",
+        "sha256": "cc605141bab80cecfbd87d3bb8dce8010e96b8621ca281152dfba14245a2722f",
+        "original_boxes": 13,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1314.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-131",
+        "sha256": "1c324f32486542b3fcc8fd9c83055689999da9f996b5aff1c765a047bd215ab8",
+        "original_boxes": 14,
+        "merged_boxes": 3
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image799.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-79",
+        "sha256": "a12ca321ca8701932665e54e3be5f905bb5292b44be58c14b517298db295787b",
+        "original_boxes": 3,
+        "merged_boxes": 3
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image755.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-75",
+        "sha256": "5d1155df4b2cef46362f70da295fba83e87519873c262ed821d2ac463248ca49",
+        "original_boxes": 11,
+        "merged_boxes": 5
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image559.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-55",
+        "sha256": "b2c904b21d1c8787ba6254a87b83a714f9d80442a679eba1181525393c44c207",
+        "original_boxes": 6,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1872.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-187",
+        "sha256": "47065e201027513dd470abd1c28bdf3d2aa0d2c73040f0ce9def5b81103d90c9",
+        "original_boxes": 16,
+        "merged_boxes": 8
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image1131.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-113",
+        "sha256": "3f096e48cb2b87e918dc591d121483f7f58fa13ebb29b154dfd44cf7a52b3ac5",
+        "original_boxes": 17,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image728.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-72",
+        "sha256": "f95a369b5feaff006693a7b99b20e207be5c910336006750b2cd9e895c114182",
+        "original_boxes": 12,
+        "merged_boxes": 3
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image879.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-87",
+        "sha256": "8205afa3430c6e5d1b415b01b253c675ba47b40cb0a81c9c6457c41ac7524cb3",
+        "original_boxes": 13,
+        "merged_boxes": 6
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1618.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-161",
+        "sha256": "2ce004df27a63c4ba40a5be85365c5229a74b90bf775798e58e9c6e2dfb6585b",
+        "original_boxes": 6,
+        "merged_boxes": 5
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1175.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-117",
+        "sha256": "7ce2e16ce5fe7aee923f42fe6be90e84caca3314b8ed06e9458f26a105c7d774",
+        "original_boxes": 1,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image1768.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-176",
+        "sha256": "415542a610378fa20bf5c148e4342e0010d614b8788923f6c4e4264f38bc70e6",
+        "original_boxes": 3,
+        "merged_boxes": 3
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1356.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-135",
+        "sha256": "fa12f54a12411e7e5a5f79d4eb56d44a0b8172463a3dec7b26fc45e293cf0049",
+        "original_boxes": 9,
+        "merged_boxes": 3
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image1777.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-177",
+        "sha256": "4b4d79506dd9f16b6c12646ebfeea203d9a77ce953efe99e3bbe2fac6f426205",
+        "original_boxes": 11,
+        "merged_boxes": 3
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1992.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-199",
+        "sha256": "3ada8b341859d116781da68db586db4d1eb4f2a36c2e0ed71dcf26ddd4da8ba1",
+        "original_boxes": 13,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image810.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-81",
+        "sha256": "5fdd485fc273111946050e5bf5bc05b98eb74f8fc2d0f74bbb9dc2364ee33cee",
+        "original_boxes": 5,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image910.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-91",
+        "sha256": "37736140a4d31553808435bf62eea472991155846a89a5edff65809c5ded0023",
+        "original_boxes": 15,
+        "merged_boxes": 9
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image1201.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-120",
+        "sha256": "1aa354dc796dc143251bcb7a853c25b61b1b84cb6ba9fa22b8f282f7c37b0a67",
+        "original_boxes": 12,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1620.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-162",
+        "sha256": "6c86f0d249ecd5420853ca8447ec7dbaee2d17413b1c7a265d5eb67d4533dbea",
+        "original_boxes": 9,
+        "merged_boxes": 6
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image658.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-65",
+        "sha256": "a73608284af917e9f1ccbf53b86641aefeb498d896b1575debbb8e2473b1e0ea",
+        "original_boxes": 8,
+        "merged_boxes": 3
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image648.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-64",
+        "sha256": "d80e76a618fc6527fffc99e4b120c8634af533a930fc1f8fa4be616dee80329d",
+        "original_boxes": 6,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image870.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-87",
+        "sha256": "89fedea9fcc129541a33b47035fec8cccf608c1f7c729a393b789ef806b88928",
+        "original_boxes": 8,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image62.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-6",
+        "sha256": "aa868c629f120efe70d034bad38f85fba2cab55d14a95f25f331ac2e0febc8f4",
+        "original_boxes": 9,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image864.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-86",
+        "sha256": "9931d8cb715d80a5d5701e0d8ea19067015c1bf14ae504b5249d5e15a767a52d",
+        "original_boxes": 4,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image978.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-97",
+        "sha256": "33fb089d6ac6f5580394c95f93d3f0f30557e116913fa8b41076d0864bfa0afb",
+        "original_boxes": 11,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image246.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-24",
+        "sha256": "8102cfa2fd78389ad791b6839fcca08e7167b5db9bec9b02e7e042e0fb2d169d",
+        "original_boxes": 8,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image1485.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-148",
+        "sha256": "2adc2063627c9b0e863270c9a59e300f27a344d61cc4a7d292202687678e34cb",
+        "original_boxes": 4,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image391.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-39",
+        "sha256": "f872cbe62ac2a5a1a400b7ac533c0a70912af8bf1e9ab26a3260b066cdd1467c",
+        "original_boxes": 8,
+        "merged_boxes": 2
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image140.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-14",
+        "sha256": "9f16d9a8882c58fd14e16bd73d9f5b471957ef895d883bbfd162494825366cc0",
+        "original_boxes": 2,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image738.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-73",
+        "sha256": "f5bace40abafacf3d24db966a43f1b99e5552a06054e0471172a24f5f9cf6f08",
+        "original_boxes": 2,
+        "merged_boxes": 1
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Side view/image1932.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Side view::block-193",
+        "sha256": "dbc3b193889c48c3ca2b0dee4e667c2500b8a17491ad039d866d300376651da9",
+        "original_boxes": 13,
+        "merged_boxes": 6
+      },
+      {
+        "kind": "positive",
+        "source_path": "Outdoor/Water and wet surface/Top view/image235.jpeg",
+        "source_group": "Outdoor/Water and wet surface/Top view::block-23",
+        "sha256": "ea83252a105c3d73d37a0da9d35252618eed666c25d2bf21b981cf34f4c2c61a",
+        "original_boxes": 11,
+        "merged_boxes": 2
+      }
+    ],
+    "limitation": "Additional source labels are retained/merged annotations, not individually human-certified masks. The source is 256x256 and does not substitute for new full-frame drainage evaluation."
+  },
+  "images_by_split": {
+    "train": 1107,
+    "val": 60,
+    "test": 60
+  },
+  "images_by_source": {
+    "click_trash": 290,
+    "stagnant_water": 540,
+    "irodent": 373,
+    "domain_reviewed": 24
+  },
+  "validation": {
+    "valid": true,
+    "dataset_root": "dados/processed/drenavision_v3_clean",
+    "error_count": 0,
+    "warning_count": 0,
+    "statistics": {
+      "images_by_split": {
+        "train": 1107,
+        "val": 60,
+        "test": 60
+      },
+      "labels_by_split": {
+        "train": 1107,
+        "val": 60,
+        "test": 60
+      },
+      "boxes_by_class": {
+        "obstrucao_visivel": 575,
+        "agua_acumulada": 1573,
+        "animal_visivel": 384
+      },
+      "boxes_by_split_and_class": {
+        "train": {
+          "obstrucao_visivel": 498,
+          "agua_acumulada": 1453,
+          "animal_visivel": 344
+        },
+        "val": {
+          "obstrucao_visivel": 40,
+          "agua_acumulada": 59,
+          "animal_visivel": 20
+        },
+        "test": {
+          "obstrucao_visivel": 37,
+          "agua_acumulada": 61,
+          "animal_visivel": 20
+        }
+      },
+      "negative_images": 6,
+      "exact_duplicate_groups": 0,
+      "phash_enabled": true,
+      "phash_threshold": 4
+    },
+    "issues": []
+  }
+}

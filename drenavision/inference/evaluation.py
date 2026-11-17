@@ -102,7 +102,7 @@ def extract_detection_metrics(metrics: Any) -> dict[str, Any]:
 
 
 def run_evaluation(
-    config_path: str | Path = "ferramentas/configs/evaluate_v2.yaml",
+    config_path: str | Path = "ferramentas/configs/evaluate_v3.yaml",
     overrides: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Evaluate only the held-out test split and save metrics plus plot inventory."""

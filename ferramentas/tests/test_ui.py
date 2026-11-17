@@ -60,6 +60,7 @@ def test_video_job_uses_current_settings_instead_of_stale_streamlit_state(
     monkeypatch.setenv("DRENAVISION_MODEL_PATH", str(model))
     monkeypatch.setenv("DRENAVISION_DATABASE_PATH", str(tmp_path / "current/events.db"))
     monkeypatch.setenv("DRENAVISION_EVIDENCE_DIR", str(tmp_path / "current/evidence"))
+    monkeypatch.setenv("DRENAVISION_IMAGE_SIZE", "960")
     monkeypatch.setattr(
         streamlit_app,
         "SETTINGS",
@@ -74,6 +75,7 @@ def test_video_job_uses_current_settings_instead_of_stale_streamlit_state(
             == tmp_path / "current/events.db"
         )
         assert kwargs["encoding"] == "utf-8"
+        assert command[command.index("--imgsz") + 1] == "960"
         destination = Path(command[command.index("--output") + 1])
         destination.parent.mkdir(parents=True)
         destination.write_bytes(b"encoded-video-contract")

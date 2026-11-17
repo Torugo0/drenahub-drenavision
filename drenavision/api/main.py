@@ -39,16 +39,24 @@ LOGGER = logging.getLogger(__name__)
 
 def _build_predictor(settings: Settings) -> Predictor | None:
     try:
-        from drenavision.inference.predictor import ModelUnavailableError, YoloPredictor
+        from drenavision.inference.predictor import ModelUnavailableError
+        from drenavision.inference.runtime import create_predictor
     except ImportError as exc:
         LOGGER.warning("Prediction runtime unavailable: %s", exc)
         return None
     try:
-        return YoloPredictor(
+        return create_predictor(
             model_path=settings.model_path,
             confidence_threshold=settings.confidence_threshold,
             iou_threshold=settings.iou_threshold,
             device=settings.device,
+            image_size=settings.image_size,
+            water_model_path=settings.water_model_path,
+            water_pixel_confidence=settings.water_pixel_confidence,
+            water_min_area_fraction=settings.water_min_area_fraction,
+            water_mode=settings.water_mode,
+            residue_confidence=settings.confidence_threshold,
+            animal_confidence=settings.animal_confidence_threshold,
         )
     except (FileNotFoundError, ModelUnavailableError) as exc:
         LOGGER.warning("Prediction model unavailable: %s", exc)
@@ -92,7 +100,7 @@ def create_app(
         title="DrenaVision API",
         version=__version__,
         description=(
-            "Triagem assistida de obstrução, água acumulada e animais visíveis "
+            "Triagem assistida de resíduos, água visível e possíveis animais "
             "em imagens de infraestrutura de drenagem."
         ),
         lifespan=lifespan,

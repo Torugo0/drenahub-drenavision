@@ -8,6 +8,7 @@ import time
 from pathlib import Path
 from typing import Any
 
+from drenavision.core.config import validate_image_size
 from drenavision.core.schemas import Detection
 from drenavision.data.constants import CLASS_NAMES
 
@@ -55,6 +56,7 @@ class YoloPredictor:
         confidence_threshold: float = 0.35,
         iou_threshold: float = 0.45,
         device: str = "auto",
+        image_size: int = 640,
         **legacy: Any,
     ) -> None:
         if "confidence" in legacy:
@@ -72,6 +74,7 @@ class YoloPredictor:
         self.confidence_threshold = float(confidence_threshold)
         self.iou_threshold = float(iou_threshold)
         self.requested_device = device
+        self.image_size = validate_image_size(image_size)
         self._device: str | int | None = None
         self._model: Any | None = None
         self._model_version: str | None = None
@@ -166,6 +169,7 @@ class YoloPredictor:
                     conf=self.confidence_threshold,
                     iou=self.iou_threshold,
                     device=self._device,
+                    imgsz=self.image_size,
                     verbose=False,
                 )
             except Exception as exc:
@@ -190,6 +194,7 @@ class YoloPredictor:
             model_version=self.model_version,
             image_width=image_width,
             image_height=image_height,
+            image_size=self.image_size,
         )
 
 

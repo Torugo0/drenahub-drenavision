@@ -1,0 +1,37 @@
+{
+  "repository": "nvidia/segformer-b1-finetuned-ade-512-512",
+  "revision": "a775b4f5dcb2179e57006dca0e268281306412ef",
+  "license": "NVIDIA Source Code License for SegFormer; non-commercial research/evaluation only",
+  "license_url": "https://raw.githubusercontent.com/NVlabs/SegFormer/master/LICENSE",
+  "files": [
+    {
+      "name": "config.json",
+      "bytes": 6885,
+      "sha256": "8f1b7bcd2e1835ef0ef3a04a0d4dfe87ff9a6374253e7a3ca1751de812a420ff",
+      "expected_hub_lfs_sha256": null
+    },
+    {
+      "name": "preprocessor_config.json",
+      "bytes": 271,
+      "sha256": "8039d1d210abaa7117ad78e58cdfd6141a2ec72c03dae891b3cd76737e422c6c",
+      "expected_hub_lfs_sha256": null
+    },
+    {
+      "name": "pytorch_model.bin",
+      "bytes": 54944801,
+      "sha256": "ac49bf62c8c0578dcf17ff048930b4f886ab0bc080d23f5591669afad5ddf7da",
+      "expected_hub_lfs_sha256": "ac49bf62c8c0578dcf17ff048930b4f886ab0bc080d23f5591669afad5ddf7da"
+    },
+    {
+      "name": "README.md",
+      "bytes": 3090,
+      "sha256": "30449f8712fba60e9e339ebad427153dc30f56d2477b1705b9f51a9bcf457ed5",
+      "expected_hub_lfs_sha256": null
+    },
+    {
+      "name": "model.safetensors",
+      "derivation": "Locally converted official state_dict loaded with torch weights_only=True; all values verified tensors",
+      "sha256": "e0802e077c195d9dbaf48c69b94946ef6a3ae5b6665176fedf363e5e63a1ec93"
+    }
+  ]
+}

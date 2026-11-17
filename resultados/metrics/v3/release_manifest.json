@@ -1,0 +1,56 @@
+{
+  "version": "0.4.0",
+  "prepared_at_utc": "2026-11-17T00:22:41.840654Z",
+  "image_profile": "pipeline-1314fcfa94f5f8cf",
+  "video_profile": "pipeline-4d613d5a1d82cb61",
+  "tests_passed": 148,
+  "image_evaluation_count": 179,
+  "full_original_examples": 8,
+  "decoded_video_frames": 1388,
+  "assets": [
+    {
+      "filename": "best.pt",
+      "bytes": 5492015,
+      "sha256": "12b9e86f223366c3f2ef8c2308f0e1140cda08c55ab55e281e58d300fd554b4b"
+    },
+    {
+      "filename": "best_v2.pt",
+      "bytes": 5490351,
+      "sha256": "01ea7c578783b2a08fc585051b0768a1e9c0d510cb5652173fab0979f8d7d27a"
+    },
+    {
+      "filename": "water_model.zip",
+      "bytes": 50919396,
+      "sha256": "b86df5fc4bc27162a3186e70a1ee1d4e51f78df82be4be12678e605a358cba45"
+    },
+    {
+      "filename": "exemplos_reais.zip",
+      "bytes": 16886124,
+      "sha256": "9863d10de7fd910b3a7b76c588ff38ce747f5f019f387c83e29a5a044a2805d8"
+    },
+    {
+      "filename": "evidencias_pipeline_v3.zip",
+      "bytes": 1574869,
+      "sha256": "8423051d2393fbce6d99a467de83b922faa3d48bab681623210614098270c286"
+    },
+    {
+      "filename": "rato_residuos_analisado.mp4",
+      "bytes": 1739959,
+      "sha256": "a239263286266cf7b20d88d26be99184770230481ba31f19057c2912d690e37d"
+    },
+    {
+      "filename": "bueiro_analisado.jpg",
+      "bytes": 762297,
+      "sha256": "7726162b8d14870182962862e96ec6684640b6dd1e40257f83747d6e2c6a5194"
+    }
+  ],
+  "water_zip_layout": [
+    "model.safetensors",
+    "config.json",
+    "preprocessor_config.json",
+    "download_manifest.json",
+    "LICENSE-NVIDIA-SegFormer.txt"
+  ],
+  "privacy": "Private repository; local history/database/uploads excluded",
+  "licenses": "AGPL code; NVIDIA water weights non-commercial research/evaluation; source-media credits in catalog and model/license manifests"
+}

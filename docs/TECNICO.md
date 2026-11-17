@@ -3,11 +3,11 @@
 ## Componentes
 
 O DrenaVision faz triagem visual de três classes: resíduos/material visível
-(`obstrucao_visivel`), água acumulada (`agua_acumulada`) e animal visível
+(`obstrucao_visivel`), água visível (`agua_acumulada`, parada ou em movimento) e animal visível
 (`animal_visivel`, principalmente roedores nesta versão).
 
 ```text
-Foto ──→ FastAPI ──→ modelo customizado ──→ caixas + evento + evidência
+Foto ──→ FastAPI ──→ YOLO customizado + SegFormer água ──→ caixas/máscara + evento
               ↑                                  ↓
           interface ←──────────────────── resultado visual
               │
@@ -27,7 +27,22 @@ Fontes → conversão → validação → treino → avaliação no teste separa
 O Streamlit usa a API para imagens e histórico. O vídeo executa o mesmo pacote
 de inferência em processo local, com o mesmo modelo, limiares e banco. Não há
 respostas simuladas. Sem checkpoint customizado compatível, a análise fica
-indisponível e o diagnóstico da API informa o problema.
+indisponível e o diagnóstico da API informa o problema. Um segmentador de água
+configurado, mas ausente/incompatível, também torna a análise indisponível;
+não existe troca silenciosa para um resultado incompleto.
+
+A imagem e o vídeo compartilham a política `inference/runtime.py`. O YOLO usa
+640, confiança 0,35 e limiar de animal 0,60 escolhido na validação. O SegFormer
+B1 usa 512, probabilidade de pixel 0,95 e área mínima de componente 5%, sem
+dilatação ou preenchimento de espaços. As coordenadas são devolvidas no tamanho
+original. Somente propostas existentes são mantidas na fusão de água; não se
+cria um retângulo artificial pela união das caixas. Os pesos/configurações e
+esses parâmetros entram no hash do perfil.
+
+`water.py` carrega safetensors localmente, verifica hashes e nomes das classes
+ADE20K e não executa código remoto. A preparação separada
+`prepare_water_model.py` usa revisão oficial fixa e conversão `weights_only=True`.
+Os pesos NVIDIA são restritos à pesquisa/avaliação não comercial.
 
 ## API
 
@@ -66,7 +81,7 @@ evidência e tempo de inferência. Cada detecção inclui:
 | Campo | Significado |
 |---|---|
 | `class_id` / `class_name` | ID e nome estáveis da classe |
-| `confidence` | confiança do detector entre 0 e 1 |
+| `confidence` | escore do detector ou média da probabilidade de água nos pixels aceitos; não é probabilidade de risco |
 | `bounding_box` | `[x_min, y_min, x_max, y_max]` em pixels |
 | `track_id` | ID de rastreamento, quando disponível |
 | `frame_index` / `timestamp_seconds` | quadro e instante da detecção no vídeo |
@@ -101,7 +116,14 @@ O processador analisa os quadros com o checkpoint real e desenha as caixas
 correspondentes às detecções aceitas. A contagem usa o maior valor entre IDs
 únicos rastreados e pico simultâneo por classe, evitando somar a mesma
 detecção em todos os quadros. Oclusões podem provocar troca de IDs; a contagem
-é uma estimativa visual.
+não comprova quantidade de objetos físicos. A interface apresenta presença do
+sinal por classe nos vídeos; o relatório técnico preserva as contagens.
+
+A etapa temporal de vídeo exige uma sequência de pelo menos 0,5 s com água
+marcada para confirmar água no vídeo. Quando esse critério falha, a exportação
+é redesenhada dos quadros originais com as demais classes. As propostas brutas
+de água permanecem no relatório. O perfil de vídeo registra esse parâmetro e
+o perfil-base de imagem. As 179 imagens de teste não avaliam essa regra temporal.
 
 Cada execução produz um vídeo anotado e um JSON com hash da entrada/modelo,
 resolução, FPS, quadros processados, contagens e detecções. Quando o banco é
@@ -125,7 +147,14 @@ usam o prefixo `DRENAVISION_`; o modelo de configuração é `.env.example`.
 | `DRENAVISION_EVIDENCE_DIR` | `resultados/local/events/evidence` |
 | `DRENAVISION_CONFIDENCE_THRESHOLD` | `0.35` |
 | `DRENAVISION_IOU_THRESHOLD` | `0.45` |
-| `DRENAVISION_DEVICE` | `auto`: CUDA, MPS ou CPU |
+| `DRENAVISION_DEVICE` | `auto`: CUDA quando disponível; senão CPU |
+| `DRENAVISION_IMAGE_SIZE` | `640` |
+| `DRENAVISION_ANIMAL_CONFIDENCE_THRESHOLD` | `0.60` |
+| `DRENAVISION_WATER_MODEL_PATH` | `resultados/local/models/water_segformer_b1_ade` |
+| `DRENAVISION_WATER_PIXEL_CONFIDENCE` | `0.95` |
+| `DRENAVISION_WATER_MIN_AREA_FRACTION` | `0.05` |
+| `DRENAVISION_WATER_MODE` | `augment` |
+| `DRENAVISION_VIDEO_WATER_CONFIRMATION_SECONDS` | `0.5` |
 | `DRENAVISION_MAX_IMAGE_BYTES` | 12 MiB |
 | `DRENAVISION_MAX_VIDEO_BYTES` | 500 MiB |
 | `DRENAVISION_MAX_IMAGE_PIXELS` | 40 milhões |
@@ -138,9 +167,11 @@ animal não identifica espécie com confiabilidade validada. A ausência de
 detecção não significa local seguro.
 
 Reflexos, piso molhado, sombras, pouca luz, câmera distante e objetos ocultos
-reduzem a qualidade. O teste mediu recall de apenas 0,1159 para água e contém
-somente 20 instâncias de animal. As fontes ainda têm pouca cobertura do
-ambiente de drenagem pretendido. Resultados completos e erros conhecidos
+reduzem a qualidade. Nas 119 imagens adicionais, o produto encontrou água em
+33/40 positivas e gerou dois alertas em dez negativos revisados. Animal foi
+encontrado em 46/69 positivas; localização por caixa tem referência parcial.
+Esses resultados não são validação de campo. As fontes ainda têm pouca cobertura
+da drenagem pretendida. Resultados completos e erros conhecidos
 estão em [MODEL_CARD.md](MODEL_CARD.md).
 
 Uma pessoa deve confirmar o que foi marcado e decidir o encaminhamento. O

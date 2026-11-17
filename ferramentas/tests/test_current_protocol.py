@@ -17,7 +17,7 @@ from ferramentas.scripts import (
 )
 
 
-def test_current_entry_points_share_v2_ground_truth_and_safe_checkpoint_targets():
+def test_current_entry_points_share_v3_ground_truth_and_safe_checkpoint_targets():
     train_args = train.build_parser().parse_args([])
     eval_args = evaluate.build_parser().parse_args([])
     train_values = yaml.safe_load(train_args.config.read_text(encoding="utf-8"))
@@ -37,12 +37,24 @@ def test_current_entry_points_share_v2_ground_truth_and_safe_checkpoint_targets(
     assert (
         TrainConfig().published_checkpoint
         == Path(train_values["published_checkpoint"])
-        == Path("resultados/local/models/candidate_v2.pt")
+        == Path("resultados/local/models/candidate_v3.pt")
     )
     assert (
         EvaluateConfig().checkpoint
         == Path(eval_values["checkpoint"])
         == Path("resultados/local/models/best.pt")
+    )
+    assert (
+        TrainConfig().model
+        == train_values["model"]
+        == "resultados/local/models/best_v2.pt"
+    )
+    assert TrainConfig().epochs == train_values["epochs"] == 80
+    assert TrainConfig().patience == train_values["patience"] == 20
+    assert TrainConfig().name == train_values["name"]
+    assert EvaluateConfig().name == eval_values["name"]
+    assert TrainConfig().data == Path(
+        "dados/processed/drenavision_v3_clean/dataset.yaml"
     )
     valid_args = validate_dataset.build_parser().parse_args([])
     demo_args = build_demo_video.build_parser().parse_args([])
@@ -55,6 +67,10 @@ def test_current_entry_points_share_v2_ground_truth_and_safe_checkpoint_targets(
         == demo_args.manifest
         == valid_args.dataset_root / "data_manifest.csv"
     )
+    dataset_alias = yaml.safe_load(
+        Path("dados/dataset.yaml").read_text(encoding="utf-8")
+    )
+    assert Path("dados") / dataset_alias["path"] == valid_args.dataset_root
 
 
 def test_historical_configs_and_corrected_conversion_do_not_replace_active_model():
@@ -69,6 +85,19 @@ def test_historical_configs_and_corrected_conversion_do_not_replace_active_model
         == "resultados/local/models/candidate_v1_reproduction.pt"
     )
     assert historical_eval["checkpoint"] == "resultados/local/models/best_v1.pt"
+    historical_v2 = yaml.safe_load(
+        Path("ferramentas/configs/evaluate_v2.yaml").read_text(encoding="utf-8")
+    )
+    assert historical_v2["checkpoint"] == "resultados/local/models/best_v2.pt"
+    assert historical_v2["data"] == "dados/processed/drenavision_v2/dataset.yaml"
+    historical_v2_train = yaml.safe_load(
+        Path("ferramentas/configs/train_v2.yaml").read_text(encoding="utf-8")
+    )
+    assert historical_v2_train["data"] == "dados/processed/drenavision_v2/dataset.yaml"
+    assert (
+        historical_v2_train["published_checkpoint"]
+        == "resultados/local/models/candidate_v2.pt"
+    )
     signature = inspect.signature(convert_dataset)
     assert signature.parameters["output_root"].default == Path(
         "dados/processed/drenavision_corrected"
@@ -92,4 +121,4 @@ def test_annotation_preview_defaults_use_current_labels_and_local_outputs(monkey
     )
     assert visualize_annotations.main() == 0
     assert captured["dataset_root"] == TrainConfig().data.parent
-    assert captured["output_root"] == Path("resultados/local/dataset_preview_v2")
+    assert captured["output_root"] == Path("resultados/local/dataset_preview_v3")

@@ -1,0 +1,141 @@
+{
+  "status": "separately_versioned_video_engineering_confirmation",
+  "created_at_utc": "2026-11-17T00:15:04.374792+00:00",
+  "profiles": {
+    "image_before_and_after": "pipeline-1314fcfa94f5f8cf",
+    "raw_video_without_confirmation": "pipeline-1314fcfa94f5f8cf",
+    "confirmed_video": "pipeline-4d613d5a1d82cb61",
+    "master_checkpoint_sha256": "12b9e86f223366c3f2ef8c2308f0e1140cda08c55ab55e281e58d300fd554b4b",
+    "water_checkpoint_sha256": "e0802e077c195d9dbaf48c69b94946ef6a3ae5b6665176fedf363e5e63a1ec93"
+  },
+  "chronology": [
+    {
+      "order": 1,
+      "event": "Image operating profile frozen before independent image evaluation",
+      "at_utc": "2026-11-16T23:38:47.008600Z",
+      "evidence": "active_profile.json"
+    },
+    {
+      "order": 2,
+      "event": "Independent image evaluation completed:60 source-test images plus119 additional images",
+      "test60_completed_at_utc": "2026-11-16T23:43:03.291408Z",
+      "extra119_completed_at_utc": "2026-11-16T23:43:45.430105Z",
+      "evidence": [
+        "benchmark_test60_final.json",
+        "benchmark_extra119_final.json"
+      ]
+    },
+    {
+      "order": 3,
+      "event": "Subsequent complete review of known catalog videos exposed seven unsupported water predictions in blurred Hanoi frames",
+      "at_utc": "2026-11-16T23:49:05.395611+00:00",
+      "evidence": "product_validation_v3_raw.json"
+    },
+    {
+      "order": 4,
+      "event": "Generic0.5-second water confirmation added only to the video-input stage; image weights and operating thresholds were not changed",
+      "evidence": "hanoi_video_temporal_proof.json"
+    },
+    {
+      "order": 5,
+      "event": "All six known videos and two photos rerun with distinct video identity; raw earlier evaluation preserved",
+      "at_utc": "2026-11-17T00:02:53.115887+00:00",
+      "evidence": "product_validation_v3_confirmed.json"
+    }
+  ],
+  "scope": {
+    "independent_image_results_remain_frozen": true,
+    "independent_image_count": 179,
+    "image_parameters_changed": false,
+    "video_stage_independently_validated": false,
+    "interpretation": "The179image results apply to frozen IMAGE1314 only. The later VIDEO4d613 temporal stage was checked on already-known regression/adaptation clips; this is not an independent video-accuracy benchmark.",
+    "no_filename_color_or_roi_shortcuts": true
+  },
+  "unchanged_image_parameters": {
+    "imgsz": 640,
+    "global_confidence": 0.35,
+    "residue_confidence": 0.35,
+    "animal_confidence": 0.6,
+    "water_pixel_confidence": 0.95,
+    "water_min_area_fraction": 0.05,
+    "water_mode": "augment",
+    "iou": 0.45,
+    "water_processing_size": 512
+  },
+  "video_rule": {
+    "confirmation_seconds": 0.5,
+    "required_run": "ceil(video_fps *0.5) consecutive frames containing an actual water proposal",
+    "whole_clip_action": "If no qualifying run exists, suppress displayed water across this clip, preserve every raw proposal, and redraw from original decoded frames. If a qualifying run exists, retain the raw proposals. No missing boxes/masks are invented or propagated.",
+    "short_event_limitation": "Genuine brief water can be suppressed; a persistent run elsewhere does not guarantee removal of isolated local false proposals."
+  },
+  "hanoi_evidence": {
+    "fps": 20,
+    "raw_water_frames": 7,
+    "longest_consecutive_raw_water_run": 4,
+    "required_consecutive_frames": 10,
+    "displayed_water_frames": 0,
+    "raw_water_peak_count": 1,
+    "displayed_water_peak_count": 0,
+    "all_nonwater_predictions_exactly_preserved": true,
+    "no_blue_ghost_after_original_frame_rerender": true,
+    "comparison": "hanoi_temporal_before_after.jpg"
+  },
+  "full_catalog_integrity": {
+    "examples": 8,
+    "videos": 6,
+    "photos": 2,
+    "processed_and_independently_decoded_frames": 1388,
+    "frame_loss": 0,
+    "all_video_outputs_h264_faststart": true,
+    "all_original_media_hashes_preserved": true,
+    "both_annotated_photo_bytes_identical_to_pre_temporal_run": true,
+    "raw_water_and_nonwater_proposals_preserved_for_all_six_videos": true
+  },
+  "remaining_limitations": [
+    "Fixed pipe/outlet false residue alerts in gutter video.",
+    "Litter photo ralo_lixo remains unmarked despite visible trash.",
+    "Small/hidden rodent in rato_rua remains undetected.",
+    "Animal/residue tracker IDs can fragment; counts are visual marks, not distinct animals/items.",
+    "Water surface coverage remains partial/intermittent."
+  ],
+  "photo_and_preview_credits": {
+    "catalog": "dados/examples/sources.json",
+    "sources": {
+      "rato_residuos": {
+        "source_url": "https://commons.wikimedia.org/wiki/File:Man%C4%9Danta_rato_en_Hanojo.webm",
+        "author": "RG72",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0"
+      },
+      "drenagem_chuva": {
+        "source_url": "https://commons.wikimedia.org/wiki/File:Overflowing_water_drain_Werrington_March_2022.webm",
+        "author": "Xyxyzyz Author is Wikimedia user Xyxyzyz.",
+        "license": "CC BY 3.0",
+        "license_url": "https://creativecommons.org/licenses/by/3.0"
+      },
+      "sarjeta_residuos": {
+        "source_url": "https://commons.wikimedia.org/wiki/File:Gutter_to_the_Alajo_Storm_Drain.webm",
+        "author": "Ibnali1",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0"
+      },
+      "ralo_lixo": {
+        "source_url": "https://commons.wikimedia.org/wiki/File:Sutphin_Bl_Jamaica_Av_td_(2019-08-18)_14.jpg",
+        "author": "Tdorante10",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0"
+      },
+      "bueiro_agua": {
+        "source_url": "https://commons.wikimedia.org/wiki/File:Storm_Drain_Clogged_-_Mid-City_New_Orleans.jpg",
+        "author": "Bart Everson",
+        "license": "CC BY 2.0",
+        "license_url": "https://creativecommons.org/licenses/by/2.0"
+      }
+    },
+    "changes": "Actual decoded/annotated frames assembled into review contact sheets; no model boxes were invented. Original-source attribution and license apply to derived previews."
+  },
+  "frozen_independent_image_report_sha256": {
+    "benchmark_test60_final.json": "493d009a8cc2cf147bdd054414d912163bbcbcb7c1a6cd57f047273f05704a6b",
+    "benchmark_extra119_final.json": "f83aaa3775dda0af2235f4ac4237b4fa3eeb3dbf97e34719732105a03cdfb694"
+  }
+}

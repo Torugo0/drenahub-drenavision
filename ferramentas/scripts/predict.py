@@ -11,8 +11,12 @@ PROJECT_ROOT = Path(__file__).resolve().parents[2]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
+from drenavision.core.config import (  # noqa: E402
+    Settings,
+    validate_image_size,
+)
 from drenavision.inference.media_io import read_image_bgr, write_image  # noqa: E402
-from drenavision.inference.predictor import YoloPredictor  # noqa: E402
+from drenavision.inference.runtime import create_predictor  # noqa: E402
 from drenavision.inference.utils import (  # noqa: E402
     safe_artifact_path,
     sha256_file,
@@ -22,6 +26,7 @@ from drenavision.inference.utils import (  # noqa: E402
 
 
 def build_parser() -> argparse.ArgumentParser:
+    runtime = Settings()
     parser = argparse.ArgumentParser(
         description="Executa inferencia real em uma imagem JPG/PNG."
     )
@@ -39,6 +44,25 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--conf", type=float, default=0.35)
     parser.add_argument("--iou", type=float, default=0.45)
     parser.add_argument("--device", default="auto")
+    parser.add_argument("--water-model", type=Path, default=runtime.water_model_path)
+    parser.add_argument(
+        "--water-pixel-confidence", type=float, default=runtime.water_pixel_confidence
+    )
+    parser.add_argument(
+        "--water-min-area-fraction", type=float, default=runtime.water_min_area_fraction
+    )
+    parser.add_argument(
+        "--water-mode", choices=("augment", "replace"), default=runtime.water_mode
+    )
+    parser.add_argument(
+        "--animal-conf", type=float, default=runtime.animal_confidence_threshold
+    )
+    parser.add_argument(
+        "--imgsz",
+        type=validate_image_size,
+        default=640,
+        help="Lado de inferência, múltiplo de 32 entre 320 e 2048 (padrão: 640)",
+    )
     return parser
 
 
@@ -48,11 +72,18 @@ def main(argv: list[str] | None = None) -> int:
         raise FileNotFoundError(f"imagem ausente: {args.input}")
     image_bgr = read_image_bgr(args.input)
     image_rgb = image_bgr[:, :, ::-1].copy()
-    predictor = YoloPredictor(
+    predictor = create_predictor(
         args.model,
         confidence_threshold=args.conf,
         iou_threshold=args.iou,
         device=args.device,
+        image_size=args.imgsz,
+        water_model_path=args.water_model,
+        water_pixel_confidence=args.water_pixel_confidence,
+        water_min_area_fraction=args.water_min_area_fraction,
+        water_mode=args.water_mode,
+        residue_confidence=args.conf,
+        animal_confidence=args.animal_conf,
     )
     result = predictor.predict(image_rgb)
     args.output_dir.mkdir(parents=True, exist_ok=True)

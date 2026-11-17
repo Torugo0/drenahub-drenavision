@@ -1,0 +1,21 @@
+# Fine-tune the preserved v2 model on connected water regions and full context.
+model: resultados/local/models/best_v2.pt
+data: dados/processed/drenavision_v3_clean/dataset.yaml
+project: resultados/local/training
+name: yolo26n_water_context_v3_clean
+published_checkpoint: resultados/local/models/candidate_v3.pt
+resume: null
+epochs: 80
+imgsz: 640
+batch: 12
+patience: 20
+workers: 2
+seed: 42
+device: auto
+optimizer: auto
+deterministic: true
+amp: true
+cache: false
+pretrained: true
+plots: true
+close_mosaic: 10

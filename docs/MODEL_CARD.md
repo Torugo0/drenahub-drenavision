@@ -1,8 +1,101 @@
-# Model Card - DrenaVision YOLO26n
+# Model Card — DrenaVision
 
-## Modelo ativo — versão 0.3.0, protocolo v2
+## Produto ativo — versão 0.4.0
 
-O checkpoint ativo é `resultados/local/models/best.pt`, SHA-256
+O produto combina um YOLO26n customizado com segmentação de superfícies de
+água por SegFormer B1 ADE20K. As caixas são propostas reais dos modelos;
+o azul preenche somente os pixels aceitos da máscara neural. Não existem
+regras por nome de arquivo, coordenadas fixas ou redução artificial de caixas.
+
+| Componente | Identificação |
+|---|---|
+| YOLO v3, `best.pt` | SHA-256 `12b9e86f223366c3f2ef8c2308f0e1140cda08c55ab55e281e58d300fd554b4b` |
+| Origem do ajuste | v2 preservado em `best_v2.pt`, SHA-256 `01ea7c578783b2a08fc585051b0768a1e9c0d510cb5652173fab0979f8d7d27a` |
+| Segmentador B1 | revisão NVIDIA `a775b4f5dcb2179e57006dca0e268281306412ef` |
+| B1 safetensors | SHA-256 `e0802e077c195d9dbaf48c69b94946ef6a3ae5b6665176fedf363e5e63a1ec93` |
+| Perfil de imagem | `pipeline-1314fcfa94f5f8cf`, [manifesto](../resultados/metrics/v3/active_profile.json) |
+
+O treino YOLO concluiu **63 épocas**, selecionando a **43**, de uma meta de 80
+com paciência 20, semente 42 e RTX 4060. Dados: **1.107/60/60** imagens.
+A primeira montagem com negativos de água incorretos foi rejeitada após seis
+épocas; esse checkpoint não foi usado como origem. O treino válido recomeçou
+do v2 preservado. O B1 é pré-treinado; não alegamos ter treinado seus pesos.
+
+O protocolo v3 agrupa componentes de caixas de água que já se tocam e retira
+negativos inconsistentes da fonte. Esses envelopes podem incluir espaços secos;
+não são máscaras certificadas. Originais, v1 e v2 permanecem preservados.
+[VALIDACAO_V3.md](VALIDACAO_V3.md) registra diagnóstico e isolamento.
+
+### Parâmetros selecionados antes do teste adicional
+
+YOLO: entrada 640, confiança 0,35 para resíduos/água e 0,60 para animal,
+IoU de supressão 0,45. A mudança de animal foi escolhida na validação: F1
+0,7895 → 0,8000, com recall 0,75 → 0,70; reduz falsos alertas e pode perder
+animais de menor confiança.
+
+B1: processamento limitado a 512, probabilidade de pixel 0,95, componente
+mínimo de 5% da imagem e complemento às propostas YOLO de água. Suprimir
+envelopes contidos retém uma proposta existente, sem criar uma caixa de união.
+Os modelos, processador, classes e parâmetros entram no hash do perfil.
+
+A calibração usou **59 referências claras de presença de água**, revisadas
+nas imagens de validação antes da inferência: 24 positivas e 35 negativas.
+Uma imagem incerta foi excluída previamente. O primeiro grid falhou no alvo
+de especificidade; a segunda rodada, nos mesmos mapas, obteve 23 TP, 0 FP,
+1 FN e 35 TN. Isso é resultado de **validação**, não de teste.
+
+### Testes separados e limites
+
+O perfil de imagem foi fixado antes da avaliação das 119 imagens adicionais.
+Elas incluem 69 fotos nativas de teste iRodent antes não utilizadas, 40 novas
+fotos de água e dez negativos revisados. Foram verificadas identidade,
+grupos e distância perceptual contra treino/validação.
+
+| Presença nas imagens adicionais | v2 | Produto 0.4.0 |
+|---|---:|---:|
+| Água encontrada nas 40 positivas | 2/40 | 33/40 |
+| Falso alerta de água nos dez negativos revisados | 0/10 | 2/10 |
+| Animal encontrado nas 69 positivas | 47/69 | 46/69 |
+
+As 69 imagens de animal **não são negativos de água**: suas referências não
+anotam todas as categorias. Algumas também contêm mais animais que as caixas
+da fonte, derivadas de pontos visíveis. TP/FP/FN por caixa medem concordância
+com referências parciais; não certificam contagem de todos os animais nem
+precisão de espécie. Revisão assistida não equivale a anotação humana independente.
+
+O **YOLO isolado**, nas mesmas 60 imagens de teste com caixas v3, teve mAP@50
+0,3349 → 0,4845 e mAP@50–95 0,1748 → 0,2574. O AP@50 de resíduos caiu
+0,6233 → 0,5710; água aumentou 0,0688 → 0,3565 e animal 0,3125 → 0,5260.
+Esses valores não representam mAP do produto composto. Os relatórios
+[do produto](../resultados/metrics/v3/independent_comparison.json) e
+[do detector](../resultados/metrics/v3/master_map_comparison.json) separam os escopos.
+
+Nos exemplos conhecidos, o rato junto ao lixo recebe caixas ajustadas e a
+foto do bueiro passa a destacar água. Permanecem perdas no rato entre
+vegetação, na foto `ralo_lixo`, em pequenos trechos de água e em quadros
+desfocados. Há resíduos marcados indevidamente sobre tubulação fixa e falsos
+alertas de água em pisos molhados. Fontes de adaptação não são teste independente.
+
+Os vídeos acrescentam confirmação temporal de água e apresentam o sinal por
+classe ao operador. Contagens técnicas de IDs não equivalem a vários ratos ou
+objetos físicos. A avaliação de 179 imagens não mede essa etapa temporal.
+
+### Uso e licença
+
+`agua_acumulada` mantém compatibilidade da API e significa água visível,
+parada ou em movimento. Nenhum componente confirma estagnação, profundidade,
+risco sanitário ou hidráulico. Alertas requerem verificação de uma pessoa.
+
+O B1 usa a [licença NVIDIA de pesquisa/avaliação não comercial](https://github.com/NVlabs/SegFormer/blob/master/LICENSE).
+O original oficial é verificado por hash e convertido com `weights_only=True`
+para safetensors. A aplicação carrega somente os cinco arquivos locais
+verificados, sem código remoto ou download durante a análise. O código AGPL
+não relicencia esses pesos. Este é um protótipo acadêmico; uso comercial exige
+resolver essas restrições e as dos dados iRodent.
+
+## Histórico — versão 0.3.0, protocolo v2
+
+O checkpoint v2 foi preservado em `resultados/local/models/best_v2.pt`, SHA-256
 `01ea7c578783b2a08fc585051b0768a1e9c0d510cb5652173fab0979f8d7d27a`.
 É um único YOLO26n, sem ensemble. O treino novo partiu do peso pré-treinado,
 concluiu **60 épocas**, parou por early stopping e selecionou a época **35**.
@@ -18,11 +111,11 @@ anotação da fonte; não torna a caixa uma anotação humana de corpo inteiro.
 | Escopo no teste corrigido | Modelo | Precisão | Recall | mAP@50 | mAP@50–95 |
 |---|---|---:|---:|---:|---:|
 | Agregado | v1 reavaliado | 0,2906 | 0,2842 | 0,2563 | 0,1490 |
-| Agregado | v2 ativo | 0,3828 | 0,4251 | 0,3581 | 0,1810 |
+| Agregado | v2 histórico | 0,3828 | 0,4251 | 0,3581 | 0,1810 |
 | Animal | v1 reavaliado | 0,0322 | 0,0500 | 0,0183 | 0,0059 |
-| Animal | v2 ativo | 0,3769 | 0,4500 | 0,3102 | 0,1454 |
-| Resíduos | v2 ativo | 0,5347 | 0,6486 | 0,6233 | 0,3611 |
-| Água | v2 ativo | 0,2368 | 0,1765 | 0,1409 | 0,0364 |
+| Animal | v2 histórico | 0,3769 | 0,4500 | 0,3102 | 0,1454 |
+| Resíduos | v2 histórico | 0,5347 | 0,6486 | 0,6233 | 0,3611 |
+| Água | v2 histórico | 0,2368 | 0,1765 | 0,1409 | 0,0364 |
 
 Fontes: [comparação](../resultados/metrics/v2/comparison.json),
 [avaliação do v2](../resultados/metrics/v2/candidate_test_metrics.json),
@@ -243,7 +336,7 @@ não representam um teste de campo intocado.
 O treino `ferramentas/configs/train_v2.yaml` gerou `candidate_v2.pt` separado.
 Após a avaliação comparativa e a revisão dos clipes, os mesmos bytes foram
 promovidos a `best.pt`, com backup do v1. A configuração `evaluate_v2.yaml`
-usa o modelo ativo; `evaluate_v2_baseline.yaml` usa `best_v1.pt` e o mesmo
+usa `best_v2.pt`; `evaluate_v2_baseline.yaml` usa `best_v1.pt` e o mesmo
 dataset corrigido. Os mAP v1 e v2 com rótulos distintos não são diretamente
 comparáveis; a tabela inicial reavalia ambos nos rótulos v2. A promoção e seus
 resultados ficam separados da auditoria inicial, cujo estado era anterior ao treino.

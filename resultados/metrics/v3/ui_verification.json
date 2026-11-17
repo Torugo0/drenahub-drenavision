@@ -1,0 +1,45 @@
+{
+  "verified_at_utc": "2026-11-17T00:15:03.194756Z",
+  "health": {
+    "status": "ok",
+    "model_loaded": true,
+    "model_path": "best.pt",
+    "database_ready": true,
+    "version": "0.4.0"
+  },
+  "ui_upload_events": [
+    {
+      "point_id": "validacao-ui-v4-agua",
+      "event_id": "3a6b030e-5ff4-46fc-b0f7-ed1cfaa754f8",
+      "model_version": "pipeline-1314fcfa94f5f8cf",
+      "input_type": "image",
+      "classes": [
+        "agua_acumulada",
+        "obstrucao_visivel"
+      ]
+    },
+    {
+      "point_id": "validacao-ui-v4-video",
+      "event_id": "81bab8e8-fff4-454d-ab05-ae670029275d",
+      "model_version": "pipeline-4d613d5a1d82cb61",
+      "input_type": "video",
+      "classes": [
+        "animal_visivel",
+        "obstrucao_visivel"
+      ]
+    }
+  ],
+  "browser_playback": {
+    "video": "rato_residuos.mp4",
+    "duration_seconds": 12,
+    "observed_current_time": 12,
+    "ended": true,
+    "media_error": null
+  },
+  "history_verified": true,
+  "screenshots": [
+    "frontend_agua_desktop.jpg",
+    "frontend_rato_desktop.jpg",
+    "frontend_historico.jpg"
+  ]
+}

@@ -116,8 +116,8 @@ SOURCES = (
 EVALUATION_ROLES = {
     "rato_close": "adaptation_training_frames",
     "rato_residuos": "adaptation_training_frames",
-    "canal_residuos": "adaptation_background_crops",
-    "drenagem_chuva": "adaptation_background_crops",
+    "canal_residuos": "adaptation_training_frames",
+    "drenagem_chuva": "adaptation_training_frames",
     "rato_rua": "separate_difficult_regression_no_training",
     "sarjeta_residuos": "external_manual_regression",
     "ralo_lixo": "external_manual_regression",
@@ -128,7 +128,7 @@ EVALUATION_ROLES = {
 def evaluation_note(source_id: str) -> str:
     role = EVALUATION_ROLES[source_id]
     if role.startswith("adaptation_"):
-        return "A fonte integra a adaptação v2 por quadros anotados ou recortes de fundo; não é teste independente. As categorias do catálogo não são rótulos de avaliação."
+        return "A fonte integra a adaptação v2/v3 por quadros anotados e/ou recortes de fundo; no v3, chuva e canal também fornecem quadros completos de água. Não é teste independente. As categorias do catálogo não são rótulos de avaliação."
     if source_id == "rato_rua":
         return "Regressão difícil separada do treino, com baixa legibilidade visual. Não possui caixas de referência revisadas; não permite alegar acerto ou calcular IoU sem nova anotação confiável."
     return "Exemplo para regressão manual, fora dos splits oficiais; não possui caixas de referência revisadas nem garante detecção."
