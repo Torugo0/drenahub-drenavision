@@ -1,0 +1,548 @@
+{
+  "schema_version": 1,
+  "frozen_at_utc": "2026-11-18T00:05:05.437377+00:00",
+  "holdout_manifest_sha256": "03b7474f03cb4d6545d9d66db7129f693cdb215ef26bcdce004805896340269e",
+  "purpose": "Post-selection evaluation only; never training, prompting or threshold selection.",
+  "review_method": "Assistant source-only review of two full-scene 20-image contact sheets with the native litter annotation overlays, before any candidate predictions. Not independent human ground truth.",
+  "scope": "Fresh image holdout within a known source/camera; not proof of new-domain generalization. Source native test identities; zero hash/pHash<=4 overlaps with current data, user examples or the sealed extra test.",
+  "presence_definition": "True=recognizable visible target. False=no visible confirmed target in an adequately readable image. null=unreviewed/ambiguous, excluded from scoring; not a negative.",
+  "counts": {
+    "0": {
+      "positive": 40,
+      "negative": 0,
+      "unknown": 0
+    },
+    "1": {
+      "positive": 0,
+      "negative": 0,
+      "unknown": 40
+    },
+    "2": {
+      "positive": 0,
+      "negative": 38,
+      "unknown": 2
+    }
+  },
+  "records": [
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (210).jpg",
+      "sha256": "e624b7a82e93ed098abadd77de3c9862fb5c51d7c152cf76b205ba3aac948709",
+      "source_group": "click::trash (210)",
+      "source_path": "images/test/trash (210).jpg",
+      "presence": {
+        "0": true,
+        "1": null,
+        "2": false
+      },
+      "review_note": "Visible source-annotated litter confirmed on all 40 source scenes. No visible rodent in clear scenes; two strongly blurred scenes excluded from strict rodent-negative scoring. Water unreviewed/out of v4 scope.",
+      "bbox_reference_complete": false
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (284).jpg",
+      "sha256": "47a7781c72d577be303e971f6b63ed08c7dfd0b28a05f22193658fe7280bc966",
+      "source_group": "click::trash (284)",
+      "source_path": "images/test/trash (284).jpg",
+      "presence": {
+        "0": true,
+        "1": null,
+        "2": false
+      },
+      "review_note": "Visible source-annotated litter confirmed on all 40 source scenes. No visible rodent in clear scenes; two strongly blurred scenes excluded from strict rodent-negative scoring. Water unreviewed/out of v4 scope.",
+      "bbox_reference_complete": false
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (1023).jpg",
+      "sha256": "9c07b8cbf5424b535a677743a5a134aa4c0b03bae4053141b4075b4e9252cb7e",
+      "source_group": "click::trash (1023)",
+      "source_path": "images/test/trash (1023).jpg",
+      "presence": {
+        "0": true,
+        "1": null,
+        "2": false
+      },
+      "review_note": "Visible source-annotated litter confirmed on all 40 source scenes. No visible rodent in clear scenes; two strongly blurred scenes excluded from strict rodent-negative scoring. Water unreviewed/out of v4 scope.",
+      "bbox_reference_complete": false
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (966).jpg",
+      "sha256": "08b72799e161f98e6c4f72c935c24e3e9ab9081b9598c91f3be7251de1bf6ba5",
+      "source_group": "click::trash (966)",
+      "source_path": "images/test/trash (966).jpg",
+      "presence": {
+        "0": true,
+        "1": null,
+        "2": false
+      },
+      "review_note": "Visible source-annotated litter confirmed on all 40 source scenes. No visible rodent in clear scenes; two strongly blurred scenes excluded from strict rodent-negative scoring. Water unreviewed/out of v4 scope.",
+      "bbox_reference_complete": false
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (506).jpg",
+      "sha256": "395ac6783ca451772bcfca285aa7814690d895a291ae8969a62c3cb516cf6eb9",
+      "source_group": "click::trash (506)",
+      "source_path": "images/test/trash (506).jpg",
+      "presence": {
+        "0": true,
+        "1": null,
+        "2": false
+      },
+      "review_note": "Visible source-annotated litter confirmed on all 40 source scenes. No visible rodent in clear scenes; two strongly blurred scenes excluded from strict rodent-negative scoring. Water unreviewed/out of v4 scope.",
+      "bbox_reference_complete": false
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (878).jpg",
+      "sha256": "cb0adb2823a3650ff3afbcbd8438e93ad057080712d9c31bb3be79668693add1",
+      "source_group": "click::trash (878)",
+      "source_path": "images/test/trash (878).jpg",
+      "presence": {
+        "0": true,
+        "1": null,
+        "2": false
+      },
+      "review_note": "Visible source-annotated litter confirmed on all 40 source scenes. No visible rodent in clear scenes; two strongly blurred scenes excluded from strict rodent-negative scoring. Water unreviewed/out of v4 scope.",
+      "bbox_reference_complete": false
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (601).jpg",
+      "sha256": "b50b33f70831cc2caf017c4106c07153746f22bd7686fbd9a6d2b1bcf005d675",
+      "source_group": "click::trash (601)",
+      "source_path": "images/test/trash (601).jpg",
+      "presence": {
+        "0": true,
+        "1": null,
+        "2": false
+      },
+      "review_note": "Visible source-annotated litter confirmed on all 40 source scenes. No visible rodent in clear scenes; two strongly blurred scenes excluded from strict rodent-negative scoring. Water unreviewed/out of v4 scope.",
+      "bbox_reference_complete": false
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (564).jpg",
+      "sha256": "8fae28bc83fdcd3b0903533f59724368abbbb07c51bcb7003a1e6827ea42f6cb",
+      "source_group": "click::trash (564)",
+      "source_path": "images/test/trash (564).jpg",
+      "presence": {
+        "0": true,
+        "1": null,
+        "2": false
+      },
+      "review_note": "Visible source-annotated litter confirmed on all 40 source scenes. No visible rodent in clear scenes; two strongly blurred scenes excluded from strict rodent-negative scoring. Water unreviewed/out of v4 scope.",
+      "bbox_reference_complete": false
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (450).jpg",
+      "sha256": "e65bd4a8525142807728259bc0ef139fef8b1a903cdf8d9b093cdf12c7e43026",
+      "source_group": "click::trash (450)",
+      "source_path": "images/test/trash (450).jpg",
+      "presence": {
+        "0": true,
+        "1": null,
+        "2": false
+      },
+      "review_note": "Visible source-annotated litter confirmed on all 40 source scenes. No visible rodent in clear scenes; two strongly blurred scenes excluded from strict rodent-negative scoring. Water unreviewed/out of v4 scope.",
+      "bbox_reference_complete": false
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (97).jpg",
+      "sha256": "bab64ee5d3bbda1986c057c82eb9065c63959136b043f6855b5a84129e2b70c1",
+      "source_group": "click::trash (97)",
+      "source_path": "images/test/trash (97).jpg",
+      "presence": {
+        "0": true,
+        "1": null,
+        "2": false
+      },
+      "review_note": "Visible source-annotated litter confirmed on all 40 source scenes. No visible rodent in clear scenes; two strongly blurred scenes excluded from strict rodent-negative scoring. Water unreviewed/out of v4 scope.",
+      "bbox_reference_complete": false
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (164).jpg",
+      "sha256": "600d4a2c8406883974df65b887cab8daf182e72ff1fee1cde2998101204ebb03",
+      "source_group": "click::trash (164)",
+      "source_path": "images/test/trash (164).jpg",
+      "presence": {
+        "0": true,
+        "1": null,
+        "2": false
+      },
+      "review_note": "Visible source-annotated litter confirmed on all 40 source scenes. No visible rodent in clear scenes; two strongly blurred scenes excluded from strict rodent-negative scoring. Water unreviewed/out of v4 scope.",
+      "bbox_reference_complete": false
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (328).jpg",
+      "sha256": "4af99205b0a669070c846bb7848ac5805906b1a033b3dff8b055472f093925ad",
+      "source_group": "click::trash (328)",
+      "source_path": "images/test/trash (328).jpg",
+      "presence": {
+        "0": true,
+        "1": null,
+        "2": false
+      },
+      "review_note": "Visible source-annotated litter confirmed on all 40 source scenes. No visible rodent in clear scenes; two strongly blurred scenes excluded from strict rodent-negative scoring. Water unreviewed/out of v4 scope.",
+      "bbox_reference_complete": false
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (929).jpg",
+      "sha256": "eef185c230cf2c5149bc2e2e9002a1a690f19b89cf10054505e794db0a08517c",
+      "source_group": "click::trash (929)",
+      "source_path": "images/test/trash (929).jpg",
+      "presence": {
+        "0": true,
+        "1": null,
+        "2": false
+      },
+      "review_note": "Visible source-annotated litter confirmed on all 40 source scenes. No visible rodent in clear scenes; two strongly blurred scenes excluded from strict rodent-negative scoring. Water unreviewed/out of v4 scope.",
+      "bbox_reference_complete": false
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (1123).jpg",
+      "sha256": "804d7a76937e45e472ddc5689ae2e8dc097b2a26a4dd4294aa03cff66d527166",
+      "source_group": "click::trash (1123)",
+      "source_path": "images/test/trash (1123).jpg",
+      "presence": {
+        "0": true,
+        "1": null,
+        "2": false
+      },
+      "review_note": "Visible source-annotated litter confirmed on all 40 source scenes. No visible rodent in clear scenes; two strongly blurred scenes excluded from strict rodent-negative scoring. Water unreviewed/out of v4 scope.",
+      "bbox_reference_complete": false
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (190).jpg",
+      "sha256": "4aef49e2e30e6c347d629a1f852dc16668ad02ade9b00a197f4638773258c259",
+      "source_group": "click::trash (190)",
+      "source_path": "images/test/trash (190).jpg",
+      "presence": {
+        "0": true,
+        "1": null,
+        "2": false
+      },
+      "review_note": "Visible source-annotated litter confirmed on all 40 source scenes. No visible rodent in clear scenes; two strongly blurred scenes excluded from strict rodent-negative scoring. Water unreviewed/out of v4 scope.",
+      "bbox_reference_complete": false
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (477).jpg",
+      "sha256": "2ebd5b05065e0ba640d6b2b455e49496b6e07fd524052e9b61b7daba87290340",
+      "source_group": "click::trash (477)",
+      "source_path": "images/test/trash (477).jpg",
+      "presence": {
+        "0": true,
+        "1": null,
+        "2": false
+      },
+      "review_note": "Visible source-annotated litter confirmed on all 40 source scenes. No visible rodent in clear scenes; two strongly blurred scenes excluded from strict rodent-negative scoring. Water unreviewed/out of v4 scope.",
+      "bbox_reference_complete": false
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (1121).jpg",
+      "sha256": "2f6c222929edaecc5a183e2302c7fab447e7b9709a40064b697bc7adda4b53a4",
+      "source_group": "click::trash (1121)",
+      "source_path": "images/test/trash (1121).jpg",
+      "presence": {
+        "0": true,
+        "1": null,
+        "2": false
+      },
+      "review_note": "Visible source-annotated litter confirmed on all 40 source scenes. No visible rodent in clear scenes; two strongly blurred scenes excluded from strict rodent-negative scoring. Water unreviewed/out of v4 scope.",
+      "bbox_reference_complete": false
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (334).jpg",
+      "sha256": "7d055fb03a64b29b0607cd19f355ea162406380195fa1f003a6a212eb92399b8",
+      "source_group": "click::trash (334)",
+      "source_path": "images/test/trash (334).jpg",
+      "presence": {
+        "0": true,
+        "1": null,
+        "2": false
+      },
+      "review_note": "Visible source-annotated litter confirmed on all 40 source scenes. No visible rodent in clear scenes; two strongly blurred scenes excluded from strict rodent-negative scoring. Water unreviewed/out of v4 scope.",
+      "bbox_reference_complete": false
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (549).jpg",
+      "sha256": "a14d929c02e1e9e7a1c74427206aebbf5e6638e843b70465f2bdd33c467c9d7a",
+      "source_group": "click::trash (549)",
+      "source_path": "images/test/trash (549).jpg",
+      "presence": {
+        "0": true,
+        "1": null,
+        "2": false
+      },
+      "review_note": "Visible source-annotated litter confirmed on all 40 source scenes. No visible rodent in clear scenes; two strongly blurred scenes excluded from strict rodent-negative scoring. Water unreviewed/out of v4 scope.",
+      "bbox_reference_complete": false
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (665).jpg",
+      "sha256": "90ce3f60082e59ba809ef461fc093e3c966355b08e566a0a09b7f23e6b4943e5",
+      "source_group": "click::trash (665)",
+      "source_path": "images/test/trash (665).jpg",
+      "presence": {
+        "0": true,
+        "1": null,
+        "2": null
+      },
+      "review_note": "Visible source-annotated litter confirmed on all 40 source scenes. No visible rodent in clear scenes; two strongly blurred scenes excluded from strict rodent-negative scoring. Water unreviewed/out of v4 scope.",
+      "bbox_reference_complete": false
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (1011).jpg",
+      "sha256": "44ac514b5c5fdb988fb27ed269cac229f81841387474cdf87c7618251b021ccb",
+      "source_group": "click::trash (1011)",
+      "source_path": "images/test/trash (1011).jpg",
+      "presence": {
+        "0": true,
+        "1": null,
+        "2": false
+      },
+      "review_note": "Visible source-annotated litter confirmed on all 40 source scenes. No visible rodent in clear scenes; two strongly blurred scenes excluded from strict rodent-negative scoring. Water unreviewed/out of v4 scope.",
+      "bbox_reference_complete": false
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (782).jpg",
+      "sha256": "d0ceb714176269a24bc4b8df2df88cd2976ccb52f0ba527e9b0128302135643a",
+      "source_group": "click::trash (782)",
+      "source_path": "images/test/trash (782).jpg",
+      "presence": {
+        "0": true,
+        "1": null,
+        "2": false
+      },
+      "review_note": "Visible source-annotated litter confirmed on all 40 source scenes. No visible rodent in clear scenes; two strongly blurred scenes excluded from strict rodent-negative scoring. Water unreviewed/out of v4 scope.",
+      "bbox_reference_complete": false
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (741).jpg",
+      "sha256": "def2744f200749c061095e5f2cc749f068b063cd2950c07d78665babde76afba",
+      "source_group": "click::trash (741)",
+      "source_path": "images/test/trash (741).jpg",
+      "presence": {
+        "0": true,
+        "1": null,
+        "2": false
+      },
+      "review_note": "Visible source-annotated litter confirmed on all 40 source scenes. No visible rodent in clear scenes; two strongly blurred scenes excluded from strict rodent-negative scoring. Water unreviewed/out of v4 scope.",
+      "bbox_reference_complete": false
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (55).jpg",
+      "sha256": "6a952540de4cc506edee19d69b03c308f9db68fa9ba8386ec919e5f8e80dbefe",
+      "source_group": "click::trash (55)",
+      "source_path": "images/test/trash (55).jpg",
+      "presence": {
+        "0": true,
+        "1": null,
+        "2": null
+      },
+      "review_note": "Visible source-annotated litter confirmed on all 40 source scenes. No visible rodent in clear scenes; two strongly blurred scenes excluded from strict rodent-negative scoring. Water unreviewed/out of v4 scope.",
+      "bbox_reference_complete": false
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (1094).jpg",
+      "sha256": "650791ba906ceab834a37eb53a0cf5cfd8c5f7b956838b6fa9166ea197aa2048",
+      "source_group": "click::trash (1094)",
+      "source_path": "images/test/trash (1094).jpg",
+      "presence": {
+        "0": true,
+        "1": null,
+        "2": false
+      },
+      "review_note": "Visible source-annotated litter confirmed on all 40 source scenes. No visible rodent in clear scenes; two strongly blurred scenes excluded from strict rodent-negative scoring. Water unreviewed/out of v4 scope.",
+      "bbox_reference_complete": false
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (811).jpg",
+      "sha256": "5fe2d06546abc6edf6af32ba93afacb9752ecf94ff4a8628bcd864e1865d07b1",
+      "source_group": "click::trash (811)",
+      "source_path": "images/test/trash (811).jpg",
+      "presence": {
+        "0": true,
+        "1": null,
+        "2": false
+      },
+      "review_note": "Visible source-annotated litter confirmed on all 40 source scenes. No visible rodent in clear scenes; two strongly blurred scenes excluded from strict rodent-negative scoring. Water unreviewed/out of v4 scope.",
+      "bbox_reference_complete": false
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (865).jpg",
+      "sha256": "e9d63f92cc2f2fc76566e2ad869cfbdadf1113dd7eb3f5a7431fb8416be5493a",
+      "source_group": "click::trash (865)",
+      "source_path": "images/test/trash (865).jpg",
+      "presence": {
+        "0": true,
+        "1": null,
+        "2": false
+      },
+      "review_note": "Visible source-annotated litter confirmed on all 40 source scenes. No visible rodent in clear scenes; two strongly blurred scenes excluded from strict rodent-negative scoring. Water unreviewed/out of v4 scope.",
+      "bbox_reference_complete": false
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (748).jpg",
+      "sha256": "d4a6d3373c16eb878246574b5b6728b47009908fc5744b344f7a6535b509ba53",
+      "source_group": "click::trash (748)",
+      "source_path": "images/test/trash (748).jpg",
+      "presence": {
+        "0": true,
+        "1": null,
+        "2": false
+      },
+      "review_note": "Visible source-annotated litter confirmed on all 40 source scenes. No visible rodent in clear scenes; two strongly blurred scenes excluded from strict rodent-negative scoring. Water unreviewed/out of v4 scope.",
+      "bbox_reference_complete": false
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (436).jpg",
+      "sha256": "bdee6abfb80383663bc664c2329f51f92f36c624a2147d8e8c842cc690f2fb77",
+      "source_group": "click::trash (436)",
+      "source_path": "images/test/trash (436).jpg",
+      "presence": {
+        "0": true,
+        "1": null,
+        "2": false
+      },
+      "review_note": "Visible source-annotated litter confirmed on all 40 source scenes. No visible rodent in clear scenes; two strongly blurred scenes excluded from strict rodent-negative scoring. Water unreviewed/out of v4 scope.",
+      "bbox_reference_complete": false
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (52).jpg",
+      "sha256": "a4d43b50a7d04079709041d553373e66847aeae6e732cc65d0f4f02cf789dd37",
+      "source_group": "click::trash (52)",
+      "source_path": "images/test/trash (52).jpg",
+      "presence": {
+        "0": true,
+        "1": null,
+        "2": false
+      },
+      "review_note": "Visible source-annotated litter confirmed on all 40 source scenes. No visible rodent in clear scenes; two strongly blurred scenes excluded from strict rodent-negative scoring. Water unreviewed/out of v4 scope.",
+      "bbox_reference_complete": false
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (736).jpg",
+      "sha256": "15fbc6c3d1ea77e75cab1d09eb31e20b3c18a700be70f50c3d6411f277001746",
+      "source_group": "click::trash (736)",
+      "source_path": "images/test/trash (736).jpg",
+      "presence": {
+        "0": true,
+        "1": null,
+        "2": false
+      },
+      "review_note": "Visible source-annotated litter confirmed on all 40 source scenes. No visible rodent in clear scenes; two strongly blurred scenes excluded from strict rodent-negative scoring. Water unreviewed/out of v4 scope.",
+      "bbox_reference_complete": false
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (947).jpg",
+      "sha256": "02d009624049aa57597d5482e1f5a2ebe54d5bbc9430519dd80088456d98e123",
+      "source_group": "click::trash (947)",
+      "source_path": "images/test/trash (947).jpg",
+      "presence": {
+        "0": true,
+        "1": null,
+        "2": false
+      },
+      "review_note": "Visible source-annotated litter confirmed on all 40 source scenes. No visible rodent in clear scenes; two strongly blurred scenes excluded from strict rodent-negative scoring. Water unreviewed/out of v4 scope.",
+      "bbox_reference_complete": false
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (433).jpg",
+      "sha256": "582d4dc27052ce9075014b5c2afdfef9d75b857a2802a8fe3a05ce02983b2278",
+      "source_group": "click::trash (433)",
+      "source_path": "images/test/trash (433).jpg",
+      "presence": {
+        "0": true,
+        "1": null,
+        "2": false
+      },
+      "review_note": "Visible source-annotated litter confirmed on all 40 source scenes. No visible rodent in clear scenes; two strongly blurred scenes excluded from strict rodent-negative scoring. Water unreviewed/out of v4 scope.",
+      "bbox_reference_complete": false
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (547).jpg",
+      "sha256": "033af6118d3718795484df1dbc43945ecd4d37ff4043adb234d60513971a1d3b",
+      "source_group": "click::trash (547)",
+      "source_path": "images/test/trash (547).jpg",
+      "presence": {
+        "0": true,
+        "1": null,
+        "2": false
+      },
+      "review_note": "Visible source-annotated litter confirmed on all 40 source scenes. No visible rodent in clear scenes; two strongly blurred scenes excluded from strict rodent-negative scoring. Water unreviewed/out of v4 scope.",
+      "bbox_reference_complete": false
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (690).jpg",
+      "sha256": "9efbed4acf4ca382d0bc6b09cc6dec424dc01c55f5268c8005567ccbe4aa0907",
+      "source_group": "click::trash (690)",
+      "source_path": "images/test/trash (690).jpg",
+      "presence": {
+        "0": true,
+        "1": null,
+        "2": false
+      },
+      "review_note": "Visible source-annotated litter confirmed on all 40 source scenes. No visible rodent in clear scenes; two strongly blurred scenes excluded from strict rodent-negative scoring. Water unreviewed/out of v4 scope.",
+      "bbox_reference_complete": false
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (314).jpg",
+      "sha256": "375f1cbc6ff1be114ec68896991bcf6c413ab797dbc707527ac3e9d09f114b51",
+      "source_group": "click::trash (314)",
+      "source_path": "images/test/trash (314).jpg",
+      "presence": {
+        "0": true,
+        "1": null,
+        "2": false
+      },
+      "review_note": "Visible source-annotated litter confirmed on all 40 source scenes. No visible rodent in clear scenes; two strongly blurred scenes excluded from strict rodent-negative scoring. Water unreviewed/out of v4 scope.",
+      "bbox_reference_complete": false
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (759).jpg",
+      "sha256": "089a0b00eef6052b8336b69f79ccf72693f959d335372bd214dffb24a07bfcb7",
+      "source_group": "click::trash (759)",
+      "source_path": "images/test/trash (759).jpg",
+      "presence": {
+        "0": true,
+        "1": null,
+        "2": false
+      },
+      "review_note": "Visible source-annotated litter confirmed on all 40 source scenes. No visible rodent in clear scenes; two strongly blurred scenes excluded from strict rodent-negative scoring. Water unreviewed/out of v4 scope.",
+      "bbox_reference_complete": false
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (1116).jpg",
+      "sha256": "37d55810f885e8d63125c74785b70b639f5daa3085d1de96058f21c2cc285ab5",
+      "source_group": "click::trash (1116)",
+      "source_path": "images/test/trash (1116).jpg",
+      "presence": {
+        "0": true,
+        "1": null,
+        "2": false
+      },
+      "review_note": "Visible source-annotated litter confirmed on all 40 source scenes. No visible rodent in clear scenes; two strongly blurred scenes excluded from strict rodent-negative scoring. Water unreviewed/out of v4 scope.",
+      "bbox_reference_complete": false
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (778).jpg",
+      "sha256": "57082b9bc7c3714cbe758eba176c3824a45efbcd23b0ac0b1ec41d3fb8abc003",
+      "source_group": "click::trash (778)",
+      "source_path": "images/test/trash (778).jpg",
+      "presence": {
+        "0": true,
+        "1": null,
+        "2": false
+      },
+      "review_note": "Visible source-annotated litter confirmed on all 40 source scenes. No visible rodent in clear scenes; two strongly blurred scenes excluded from strict rodent-negative scoring. Water unreviewed/out of v4 scope.",
+      "bbox_reference_complete": false
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (776).jpg",
+      "sha256": "0750b26ee073928ed0696ec4f4cc0992167c1b33b5b316b8705443efb235c386",
+      "source_group": "click::trash (776)",
+      "source_path": "images/test/trash (776).jpg",
+      "presence": {
+        "0": true,
+        "1": null,
+        "2": false
+      },
+      "review_note": "Visible source-annotated litter confirmed on all 40 source scenes. No visible rodent in clear scenes; two strongly blurred scenes excluded from strict rodent-negative scoring. Water unreviewed/out of v4 scope.",
+      "bbox_reference_complete": false
+    }
+  ]
+}

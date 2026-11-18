@@ -1,0 +1,715 @@
+{
+  "status": "completed",
+  "scope": "Functional known-catalogue regression; some sources supplied training adaptation frames. Topic tags are not ground truth and no animal accuracy is inferred from them.",
+  "model_version": "pipeline-4c5c993223219929",
+  "client_imports_no_model_runtime": true,
+  "seals": {
+    "catalog_sha256": "2892982e06e3396071f79015489d0c402b3828a7d5a15ef7b8e3159dbda56f51",
+    "frozen_manifest_sha256": "94d20cce07114fe4b6c9e58b4a86daaaebea191989dba9a243c01fcbc5e4b93c"
+  },
+  "entries": [
+    {
+      "id": "rato_residuos",
+      "input": "dados/examples/rato_residuos.mp4",
+      "input_sha256": "5bd947ce05cc3dab49118747622e29f56d8c7ba1131233fe3ff97cbb02da8030",
+      "kind": "video",
+      "evaluation_role": "adaptation_training_frames",
+      "topic_tags_not_ground_truth": [
+        "animal_visivel",
+        "obstrucao_visivel"
+      ],
+      "response_manifest": "resultados/local/v4/product_validation/rato_residuos.response.json",
+      "response_sha256": "5ac54ccdeb2a62b4193aeccf2d4654de0546fe70eec8f6c86f0495eb8ad3d44a",
+      "execution": "reused_fresh_UI_API_execution",
+      "reused_UI_manifest": "C:\\Users\\Vitor\\OneDrive\\Área de Trabalho\\drena_hub_avc\\resultados\\local\\events\\evidence\\videos\\7cd7a3c9-9e31-4e85-b853-7c69f525855d.json",
+      "reused_UI_manifest_sha256": "5ac54ccdeb2a62b4193aeccf2d4654de0546fe70eec8f6c86f0495eb8ad3d44a",
+      "event_id": "7cd7a3c9-9e31-4e85-b853-7c69f525855d",
+      "video_model_version": "pipeline-380203274bf9c28c",
+      "base_pipeline_version": "pipeline-4c5c993223219929",
+      "model_ownership": "borrowed API water/object/verifier instances; independent lightweight master tracker in the same process",
+      "water_confirmation_seconds": 0.5,
+      "water_temporal_policy": {
+        "enabled": true,
+        "confirmation_seconds": 0.5,
+        "fps": 20.0,
+        "required_consecutive_frames": 10,
+        "raw_water_frames": 7,
+        "raw_water_detection_count": 7,
+        "longest_consecutive_water_run": 4,
+        "confirmed": false,
+        "suppressed_frames": 7,
+        "rerendered_from_original": true,
+        "policy": "video-water-longest-run-v1; require a consecutive run of ceil(fps*seconds); otherwise suppress all water for this clip, preserve raw proposals, and redraw from original decoded source frames",
+        "scope": "video-only engineering confirmation; image predictions and the frozen image profile remain unchanged"
+      },
+      "processing_seconds": 90.8149583000004,
+      "processing_fps": 2.642736444443194,
+      "decoded_output": {
+        "width": 640,
+        "height": 480,
+        "fps": 20.0,
+        "declared_frames": 240,
+        "decoded_frames": 240,
+        "duration_seconds": 12.0
+      },
+      "decoded_source": {
+        "width": 640,
+        "height": 480,
+        "fps": 20.0,
+        "declared_frames": 240,
+        "decoded_frames": 240,
+        "duration_seconds": 12.0
+      },
+      "bitstream": {
+        "h264_avc_configuration_present": true,
+        "faststart_moov_before_mdat": true
+      },
+      "range": {
+        "status_code": 206,
+        "content_range": "bytes 0-1023/1825608",
+        "verified_bytes": 1024
+      },
+      "frames_with_detection_by_class": {
+        "obstrucao_visivel": 227,
+        "agua_acumulada": 0,
+        "animal_visivel": 144
+      },
+      "empty_frames": 13,
+      "total_frames": 240,
+      "review_frame_indices": [
+        0,
+        113,
+        239
+      ],
+      "review_sheet": "resultados/local/v4/product_validation/rato_residuos_review.jpg",
+      "output_mp4": "resultados/local/v4/product_validation/rato_residuos.mp4",
+      "output_sha256": "c7a214014f57c7948704dd52f5ef372e102b60a70e52254c92fee8627073e950",
+      "persisted_event_verified": true,
+      "health_after_case": {
+        "status": "ok",
+        "model_loaded": true,
+        "model_path": "best.pt",
+        "database_ready": true,
+        "version": "0.5.0"
+      },
+      "client_elapsed_seconds": 0.4483507000004465
+    },
+    {
+      "id": "rato_close",
+      "input": "dados/examples/rato_close.mp4",
+      "input_sha256": "e2f305a79477c47e7857eead8aa1be75ddb90bb0eaba975909dcd4595d8092db",
+      "kind": "video",
+      "evaluation_role": "adaptation_training_frames",
+      "topic_tags_not_ground_truth": [
+        "animal_visivel"
+      ],
+      "response_manifest": "resultados/local/v4/product_validation/rato_close.response.json",
+      "response_sha256": "76ab2264ed97688086cc195527cbbbea57a959e9eb3f53340af641d74d70a43a",
+      "execution": "fresh_sequential_API_POST",
+      "event_id": "5a1cf5ba-8644-4b1e-bffe-60b6d7876272",
+      "video_model_version": "pipeline-380203274bf9c28c",
+      "base_pipeline_version": "pipeline-4c5c993223219929",
+      "model_ownership": "borrowed API water/object/verifier instances; independent lightweight master tracker in the same process",
+      "water_confirmation_seconds": 0.5,
+      "water_temporal_policy": {
+        "enabled": true,
+        "confirmation_seconds": 0.5,
+        "fps": 20.0,
+        "required_consecutive_frames": 10,
+        "raw_water_frames": 0,
+        "raw_water_detection_count": 0,
+        "longest_consecutive_water_run": 0,
+        "confirmed": false,
+        "suppressed_frames": 0,
+        "rerendered_from_original": false,
+        "policy": "video-water-longest-run-v1; require a consecutive run of ceil(fps*seconds); otherwise suppress all water for this clip, preserve raw proposals, and redraw from original decoded source frames",
+        "scope": "video-only engineering confirmation; image predictions and the frozen image profile remain unchanged"
+      },
+      "processing_seconds": 75.14044240000021,
+      "processing_fps": 2.9278507415335553,
+      "decoded_output": {
+        "width": 640,
+        "height": 480,
+        "fps": 20.0,
+        "declared_frames": 220,
+        "decoded_frames": 220,
+        "duration_seconds": 11.0
+      },
+      "decoded_source": {
+        "width": 640,
+        "height": 480,
+        "fps": 20.0,
+        "declared_frames": 220,
+        "decoded_frames": 220,
+        "duration_seconds": 11.0
+      },
+      "bitstream": {
+        "h264_avc_configuration_present": true,
+        "faststart_moov_before_mdat": true
+      },
+      "range": {
+        "status_code": 206,
+        "content_range": "bytes 0-1023/1264360",
+        "verified_bytes": 1024
+      },
+      "frames_with_detection_by_class": {
+        "obstrucao_visivel": 0,
+        "agua_acumulada": 0,
+        "animal_visivel": 220
+      },
+      "empty_frames": 0,
+      "total_frames": 220,
+      "review_frame_indices": [
+        0,
+        110,
+        219
+      ],
+      "review_sheet": "resultados/local/v4/product_validation/rato_close_review.jpg",
+      "output_mp4": "resultados/local/v4/product_validation/rato_close.mp4",
+      "output_sha256": "3c97255b11cdbd9fda699e3891b3f094f9fddea3c7e93576f0133a3e6e3af716",
+      "persisted_event_verified": true,
+      "health_after_case": {
+        "status": "ok",
+        "model_loaded": true,
+        "model_path": "best.pt",
+        "database_ready": true,
+        "version": "0.5.0"
+      },
+      "client_elapsed_seconds": 75.68477939999957
+    },
+    {
+      "id": "rato_rua",
+      "input": "dados/examples/rato_rua.mp4",
+      "input_sha256": "4f5ae958da80e56adbdaac6f3ca5cc32341176528ef686045d25335634cb5f25",
+      "kind": "video",
+      "evaluation_role": "separate_difficult_regression_no_training",
+      "topic_tags_not_ground_truth": [
+        "animal_visivel"
+      ],
+      "response_manifest": "resultados/local/v4/product_validation/rato_rua.response.json",
+      "response_sha256": "090a08814cb637dbf0bd16eacef73cbad6c6207d44da5076951a8cce75b6a756",
+      "execution": "fresh_sequential_API_POST",
+      "event_id": "06392f46-2064-423c-8172-fa9252b18157",
+      "video_model_version": "pipeline-380203274bf9c28c",
+      "base_pipeline_version": "pipeline-4c5c993223219929",
+      "model_ownership": "borrowed API water/object/verifier instances; independent lightweight master tracker in the same process",
+      "water_confirmation_seconds": 0.5,
+      "water_temporal_policy": {
+        "enabled": true,
+        "confirmation_seconds": 0.5,
+        "fps": 20.0,
+        "required_consecutive_frames": 10,
+        "raw_water_frames": 0,
+        "raw_water_detection_count": 0,
+        "longest_consecutive_water_run": 0,
+        "confirmed": false,
+        "suppressed_frames": 0,
+        "rerendered_from_original": false,
+        "policy": "video-water-longest-run-v1; require a consecutive run of ceil(fps*seconds); otherwise suppress all water for this clip, preserve raw proposals, and redraw from original decoded source frames",
+        "scope": "video-only engineering confirmation; image predictions and the frozen image profile remain unchanged"
+      },
+      "processing_seconds": 82.60062560000006,
+      "processing_fps": 2.9055470010871183,
+      "decoded_output": {
+        "width": 960,
+        "height": 540,
+        "fps": 20.0,
+        "declared_frames": 240,
+        "decoded_frames": 240,
+        "duration_seconds": 12.0
+      },
+      "decoded_source": {
+        "width": 960,
+        "height": 540,
+        "fps": 20.0,
+        "declared_frames": 240,
+        "decoded_frames": 240,
+        "duration_seconds": 12.0
+      },
+      "bitstream": {
+        "h264_avc_configuration_present": true,
+        "faststart_moov_before_mdat": true
+      },
+      "range": {
+        "status_code": 206,
+        "content_range": "bytes 0-1023/5003013",
+        "verified_bytes": 1024
+      },
+      "frames_with_detection_by_class": {
+        "obstrucao_visivel": 64,
+        "agua_acumulada": 0,
+        "animal_visivel": 1
+      },
+      "empty_frames": 175,
+      "total_frames": 240,
+      "review_frame_indices": [
+        3,
+        69,
+        133
+      ],
+      "review_sheet": "resultados/local/v4/product_validation/rato_rua_review.jpg",
+      "output_mp4": "resultados/local/v4/product_validation/rato_rua.mp4",
+      "output_sha256": "91f3f13a214d86f31474825bbbf0aa3e01887473b80a95283e4641df1caa48f4",
+      "persisted_event_verified": true,
+      "health_after_case": {
+        "status": "ok",
+        "model_loaded": true,
+        "model_path": "best.pt",
+        "database_ready": true,
+        "version": "0.5.0"
+      },
+      "client_elapsed_seconds": 83.3260806999997
+    },
+    {
+      "id": "drenagem_chuva",
+      "input": "dados/examples/drenagem_chuva.mp4",
+      "input_sha256": "637a527ed9573eabb255b4b1a9c73f554bc0825df90797b0bc3e78a6b2a5a48c",
+      "kind": "video",
+      "evaluation_role": "adaptation_training_frames",
+      "topic_tags_not_ground_truth": [
+        "agua_acumulada"
+      ],
+      "response_manifest": "resultados/local/v4/product_validation/drenagem_chuva.response.json",
+      "response_sha256": "c2774fca50cea7ec63f9f30acb422b4ed7eb305b39913951bb13762f1bb3a465",
+      "execution": "fresh_sequential_API_POST",
+      "event_id": "044ac0dd-33a0-45c2-8713-ca34329d4650",
+      "video_model_version": "pipeline-380203274bf9c28c",
+      "base_pipeline_version": "pipeline-4c5c993223219929",
+      "model_ownership": "borrowed API water/object/verifier instances; independent lightweight master tracker in the same process",
+      "water_confirmation_seconds": 0.5,
+      "water_temporal_policy": {
+        "enabled": true,
+        "confirmation_seconds": 0.5,
+        "fps": 20.0,
+        "required_consecutive_frames": 10,
+        "raw_water_frames": 224,
+        "raw_water_detection_count": 234,
+        "longest_consecutive_water_run": 141,
+        "confirmed": true,
+        "suppressed_frames": 0,
+        "rerendered_from_original": false,
+        "policy": "video-water-longest-run-v1; require a consecutive run of ceil(fps*seconds); otherwise suppress all water for this clip, preserve raw proposals, and redraw from original decoded source frames",
+        "scope": "video-only engineering confirmation; image predictions and the frozen image profile remain unchanged"
+      },
+      "processing_seconds": 88.80413369999951,
+      "processing_fps": 2.702576895922147,
+      "decoded_output": {
+        "width": 960,
+        "height": 540,
+        "fps": 20.0,
+        "declared_frames": 240,
+        "decoded_frames": 240,
+        "duration_seconds": 12.0
+      },
+      "decoded_source": {
+        "width": 960,
+        "height": 540,
+        "fps": 20.0,
+        "declared_frames": 240,
+        "decoded_frames": 240,
+        "duration_seconds": 12.0
+      },
+      "bitstream": {
+        "h264_avc_configuration_present": true,
+        "faststart_moov_before_mdat": true
+      },
+      "range": {
+        "status_code": 206,
+        "content_range": "bytes 0-1023/6463014",
+        "verified_bytes": 1024
+      },
+      "frames_with_detection_by_class": {
+        "obstrucao_visivel": 84,
+        "agua_acumulada": 224,
+        "animal_visivel": 0
+      },
+      "empty_frames": 16,
+      "total_frames": 240,
+      "review_frame_indices": [
+        0,
+        112,
+        239
+      ],
+      "review_sheet": "resultados/local/v4/product_validation/drenagem_chuva_review.jpg",
+      "output_mp4": "resultados/local/v4/product_validation/drenagem_chuva.mp4",
+      "output_sha256": "67f305841502b066cef564745d034cd60341cbe42e3287ae9772e4eb77e1ed94",
+      "persisted_event_verified": true,
+      "health_after_case": {
+        "status": "ok",
+        "model_loaded": true,
+        "model_path": "best.pt",
+        "database_ready": true,
+        "version": "0.5.0"
+      },
+      "client_elapsed_seconds": 89.65971050000007
+    },
+    {
+      "id": "canal_residuos",
+      "input": "dados/examples/canal_residuos.mp4",
+      "input_sha256": "dd81768eb2c0054db76eaaacb371c12fde876c69d14270e20dbf5c983a5e41b6",
+      "kind": "video",
+      "evaluation_role": "adaptation_training_frames",
+      "topic_tags_not_ground_truth": [
+        "agua_acumulada"
+      ],
+      "response_manifest": "resultados/local/v4/product_validation/canal_residuos.response.json",
+      "response_sha256": "58ed5c6067e7ad46b9ca68e1dc835f9ac27ab85ab25a59907626ce5f589d696e",
+      "execution": "fresh_sequential_API_POST",
+      "event_id": "d353f6bb-f012-443e-9139-75f8fa8dd979",
+      "video_model_version": "pipeline-380203274bf9c28c",
+      "base_pipeline_version": "pipeline-4c5c993223219929",
+      "model_ownership": "borrowed API water/object/verifier instances; independent lightweight master tracker in the same process",
+      "water_confirmation_seconds": 0.5,
+      "water_temporal_policy": {
+        "enabled": true,
+        "confirmation_seconds": 0.5,
+        "fps": 20.0,
+        "required_consecutive_frames": 10,
+        "raw_water_frames": 208,
+        "raw_water_detection_count": 208,
+        "longest_consecutive_water_run": 208,
+        "confirmed": true,
+        "suppressed_frames": 0,
+        "rerendered_from_original": false,
+        "policy": "video-water-longest-run-v1; require a consecutive run of ceil(fps*seconds); otherwise suppress all water for this clip, preserve raw proposals, and redraw from original decoded source frames",
+        "scope": "video-only engineering confirmation; image predictions and the frozen image profile remain unchanged"
+      },
+      "processing_seconds": 67.14395299999978,
+      "processing_fps": 3.097821780019426,
+      "decoded_output": {
+        "width": 406,
+        "height": 720,
+        "fps": 20.0,
+        "declared_frames": 208,
+        "decoded_frames": 208,
+        "duration_seconds": 10.4
+      },
+      "decoded_source": {
+        "width": 406,
+        "height": 720,
+        "fps": 20.0,
+        "declared_frames": 208,
+        "decoded_frames": 208,
+        "duration_seconds": 10.4
+      },
+      "bitstream": {
+        "h264_avc_configuration_present": true,
+        "faststart_moov_before_mdat": true
+      },
+      "range": {
+        "status_code": 206,
+        "content_range": "bytes 0-1023/3564423",
+        "verified_bytes": 1024
+      },
+      "frames_with_detection_by_class": {
+        "obstrucao_visivel": 0,
+        "agua_acumulada": 208,
+        "animal_visivel": 0
+      },
+      "empty_frames": 0,
+      "total_frames": 208,
+      "review_frame_indices": [
+        0,
+        104,
+        207
+      ],
+      "review_sheet": "resultados/local/v4/product_validation/canal_residuos_review.jpg",
+      "output_mp4": "resultados/local/v4/product_validation/canal_residuos.mp4",
+      "output_sha256": "979c6e41bd57e8a61f9f0316aa20a8c63067e8be6c48ddc2c440047074532b86",
+      "persisted_event_verified": true,
+      "health_after_case": {
+        "status": "ok",
+        "model_loaded": true,
+        "model_path": "best.pt",
+        "database_ready": true,
+        "version": "0.5.0"
+      },
+      "client_elapsed_seconds": 67.55972269999984
+    },
+    {
+      "id": "sarjeta_residuos",
+      "input": "dados/examples/sarjeta_residuos.mp4",
+      "input_sha256": "2570ab692eb696003f70cb028c8f28daf92631dc07e1721fc3e8e770cd531e6d",
+      "kind": "video",
+      "evaluation_role": "external_manual_regression",
+      "topic_tags_not_ground_truth": [
+        "agua_acumulada"
+      ],
+      "response_manifest": "resultados/local/v4/product_validation/sarjeta_residuos.response.json",
+      "response_sha256": "c24b3c747a05a4dbd2e433cf4e382b378ff2e55995e38815de526c1615637559",
+      "execution": "fresh_sequential_API_POST",
+      "event_id": "88677418-ef82-484c-86fb-dbd1ed81f102",
+      "video_model_version": "pipeline-380203274bf9c28c",
+      "base_pipeline_version": "pipeline-4c5c993223219929",
+      "model_ownership": "borrowed API water/object/verifier instances; independent lightweight master tracker in the same process",
+      "water_confirmation_seconds": 0.5,
+      "water_temporal_policy": {
+        "enabled": true,
+        "confirmation_seconds": 0.5,
+        "fps": 20.0,
+        "required_consecutive_frames": 10,
+        "raw_water_frames": 139,
+        "raw_water_detection_count": 139,
+        "longest_consecutive_water_run": 22,
+        "confirmed": true,
+        "suppressed_frames": 0,
+        "rerendered_from_original": false,
+        "policy": "video-water-longest-run-v1; require a consecutive run of ceil(fps*seconds); otherwise suppress all water for this clip, preserve raw proposals, and redraw from original decoded source frames",
+        "scope": "video-only engineering confirmation; image predictions and the frozen image profile remain unchanged"
+      },
+      "processing_seconds": 79.88962240000001,
+      "processing_fps": 3.004144878772139,
+      "decoded_output": {
+        "width": 406,
+        "height": 720,
+        "fps": 20.0,
+        "declared_frames": 240,
+        "decoded_frames": 240,
+        "duration_seconds": 12.0
+      },
+      "decoded_source": {
+        "width": 406,
+        "height": 720,
+        "fps": 20.0,
+        "declared_frames": 240,
+        "decoded_frames": 240,
+        "duration_seconds": 12.0
+      },
+      "bitstream": {
+        "h264_avc_configuration_present": true,
+        "faststart_moov_before_mdat": true
+      },
+      "range": {
+        "status_code": 206,
+        "content_range": "bytes 0-1023/3889735",
+        "verified_bytes": 1024
+      },
+      "frames_with_detection_by_class": {
+        "obstrucao_visivel": 40,
+        "agua_acumulada": 139,
+        "animal_visivel": 0
+      },
+      "empty_frames": 89,
+      "total_frames": 240,
+      "review_frame_indices": [
+        0,
+        151,
+        239
+      ],
+      "review_sheet": "resultados/local/v4/product_validation/sarjeta_residuos_review.jpg",
+      "output_mp4": "resultados/local/v4/product_validation/sarjeta_residuos.mp4",
+      "output_sha256": "de231fae635f0b0bdcc75a96d417233fc6e476996df1feb773bed72d4c893c99",
+      "persisted_event_verified": true,
+      "health_after_case": {
+        "status": "ok",
+        "model_loaded": true,
+        "model_path": "best.pt",
+        "database_ready": true,
+        "version": "0.5.0"
+      },
+      "client_elapsed_seconds": 80.52570670000023
+    },
+    {
+      "id": "ralo_lixo",
+      "input": "dados/examples/ralo_lixo.jpg",
+      "input_sha256": "b86282a98ff3f921c734956ab2c23d943e13a167e7e1a6d0ecd4593fb83e9645",
+      "kind": "image",
+      "evaluation_role": "external_manual_regression",
+      "topic_tags_not_ground_truth": [
+        "obstrucao_visivel"
+      ],
+      "response_manifest": "resultados/local/v4/product_validation/ralo_lixo.response.json",
+      "response_sha256": "077db8e77159d93a68128b1aa615ce58d4cff566c319ac691b3a8b34243fe297",
+      "execution": "fresh_sequential_API_POST",
+      "event_id": "f637e912-c80d-4aea-8453-1abb02960c6b",
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "obstrucao_visivel",
+          "confidence": 0.3538111746311188,
+          "bounding_box": [
+            394.7073669433594,
+            106.21630096435547,
+            435.4772644042969,
+            203.8982696533203
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": null,
+          "frame_index": null,
+          "timestamp_seconds": null
+        },
+        {
+          "class_id": 0,
+          "class_name": "obstrucao_visivel",
+          "confidence": 0.31312406063079834,
+          "bounding_box": [
+            757.3408813476562,
+            480.0447082519531,
+            847.1199951171875,
+            538.8084106445312
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": null,
+          "frame_index": null,
+          "timestamp_seconds": null
+        }
+      ],
+      "detection_counts": {
+        "obstrucao_visivel": 2,
+        "agua_acumulada": 0,
+        "animal_visivel": 0
+      },
+      "inspection_recommended": true,
+      "inference_ms": 430.8741999993799,
+      "evidence_jpeg": "resultados/local/v4/product_validation/ralo_lixo.jpg",
+      "evidence_sha256": "ded6927fc8129eb79e6f59ba50fa806604f03843e0d00112ba40ed8a3ef7883e",
+      "width": 1600,
+      "height": 1067,
+      "persisted_event_verified": true,
+      "health_after_case": {
+        "status": "ok",
+        "model_loaded": true,
+        "model_path": "best.pt",
+        "database_ready": true,
+        "version": "0.5.0"
+      },
+      "client_elapsed_seconds": 0.5246396000002278
+    },
+    {
+      "id": "bueiro_agua",
+      "input": "dados/examples/bueiro_agua.jpg",
+      "input_sha256": "e3a1c147532b104628b5c8025784569cf71843c2d5d1692f34c03ad9ac6eeacd",
+      "kind": "image",
+      "evaluation_role": "external_manual_regression",
+      "topic_tags_not_ground_truth": [
+        "obstrucao_visivel",
+        "agua_acumulada"
+      ],
+      "response_manifest": "resultados/local/v4/product_validation/bueiro_agua.response.json",
+      "response_sha256": "dced827c0aea88f8c23b1db21ce531cdb9c4e6ce60ddaa7049bec759916a0a1e",
+      "execution": "fresh_sequential_API_POST",
+      "event_id": "2124ed18-ae16-4c1d-ba10-e0027af510f1",
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "obstrucao_visivel",
+          "confidence": 0.4522443413734436,
+          "bounding_box": [
+            784.50146484375,
+            310.5698547363281,
+            897.325927734375,
+            400.88336181640625
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": null,
+          "frame_index": null,
+          "timestamp_seconds": null
+        },
+        {
+          "class_id": 0,
+          "class_name": "obstrucao_visivel",
+          "confidence": 0.39718419313430786,
+          "bounding_box": [
+            965.6920166015625,
+            288.5593566894531,
+            1150.7796630859375,
+            419.0621337890625
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": null,
+          "frame_index": null,
+          "timestamp_seconds": null
+        },
+        {
+          "class_id": 0,
+          "class_name": "obstrucao_visivel",
+          "confidence": 0.38187575340270996,
+          "bounding_box": [
+            487.44500732421875,
+            235.94566345214844,
+            713.2367553710938,
+            376.8471374511719
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": null,
+          "frame_index": null,
+          "timestamp_seconds": null
+        },
+        {
+          "class_id": 0,
+          "class_name": "obstrucao_visivel",
+          "confidence": 0.6332384347915649,
+          "bounding_box": [
+            734.54833984375,
+            305.4084777832031,
+            788.7417602539062,
+            366.4703674316406
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": null,
+          "frame_index": null,
+          "timestamp_seconds": null
+        },
+        {
+          "class_id": 1,
+          "class_name": "agua_acumulada",
+          "confidence": 0.9977023601531982,
+          "bounding_box": [
+            0.0,
+            336.0,
+            1600.0,
+            778.0
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": null,
+          "frame_index": null,
+          "timestamp_seconds": null
+        },
+        {
+          "class_id": 1,
+          "class_name": "agua_acumulada",
+          "confidence": 0.9905313849449158,
+          "bounding_box": [
+            1073.0,
+            0.0,
+            1600.0,
+            297.0
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": null,
+          "frame_index": null,
+          "timestamp_seconds": null
+        }
+      ],
+      "detection_counts": {
+        "obstrucao_visivel": 4,
+        "agua_acumulada": 2,
+        "animal_visivel": 0
+      },
+      "inspection_recommended": true,
+      "inference_ms": 470.26390000064566,
+      "evidence_jpeg": "resultados/local/v4/product_validation/bueiro_agua.jpg",
+      "evidence_sha256": "ff78c2df6fdaef0bb1f3cd9c1c690c597dd70bc887407451afd32ede6422d6af",
+      "width": 1600,
+      "height": 778,
+      "persisted_event_verified": true,
+      "health_after_case": {
+        "status": "ok",
+        "model_loaded": true,
+        "model_path": "best.pt",
+        "database_ready": true,
+        "version": "0.5.0"
+      },
+      "client_elapsed_seconds": 0.5692415000003166
+    }
+  ],
+  "health": {
+    "status": "ok",
+    "model_loaded": true,
+    "model_path": "best.pt",
+    "database_ready": true,
+    "version": "0.5.0"
+  },
+  "completed_at_utc": "2026-11-18T01:10:42.949939+00:00",
+  "decoded_video_frames": 1388
+}

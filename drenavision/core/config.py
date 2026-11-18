@@ -59,6 +59,16 @@ class Settings(BaseSettings):
     water_min_area_fraction: float = Field(default=0.05, gt=0.0, le=1.0)
     water_mode: str = "augment"
     animal_confidence_threshold: float = Field(default=0.60, ge=0.0, le=1.0)
+    object_model_path: Path | None = Path("resultados/local/models/grounding_dino_tiny")
+    object_verifier_path: Path | None = Path("resultados/local/models/siglip2_base_patch16_224")
+    object_residue_min_margin: float = Field(default=0.04, ge=-2.0, le=2.0)
+    object_animal_min_margin: float = Field(default=0.08, ge=-2.0, le=2.0)
+    object_residue_confidence: float = Field(default=0.30, ge=0.0, le=1.0)
+    object_animal_confidence: float = Field(default=0.25, ge=0.0, le=1.0)
+    object_text_confidence: float = Field(default=0.20, ge=0.0, le=1.0)
+    object_mode: str = "animal_replace"
+    object_shortest_edge: int = Field(default=640, ge=320, le=2048)
+    object_longest_edge: int = Field(default=1024, ge=320, le=2048)
     video_water_confirmation_seconds: float = Field(default=0.5, ge=0.0, le=10.0)
     max_image_bytes: int = Field(default=12 * 1024 * 1024, ge=1024)
     max_video_bytes: int = Field(default=500 * 1024 * 1024, ge=1024)
@@ -102,7 +112,7 @@ class Settings(BaseSettings):
     def validate_inference_image_size(cls, value: int | str) -> int:
         return validate_image_size(value)
 
-    @field_validator("water_model_path", mode="after")
+    @field_validator("water_model_path", "object_model_path", "object_verifier_path", mode="after")
     @classmethod
     def resolve_water_path(cls, value: Path | None) -> Path | None:
         return cls.resolve_project_path(value) if value is not None else None
@@ -112,6 +122,13 @@ class Settings(BaseSettings):
     def validate_water_mode(cls, value: str) -> str:
         if value not in {"augment", "replace"}:
             raise ValueError("water_mode deve ser augment ou replace")
+        return value
+
+    @field_validator("object_mode")
+    @classmethod
+    def validate_object_mode(cls, value: str) -> str:
+        if value not in {"augment", "replace", "animal_replace"}:
+            raise ValueError("object_mode must be augment, replace or animal_replace")
         return value
 
 

@@ -11,7 +11,7 @@ import time
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
-from uuid import uuid4
+from uuid import UUID, uuid4
 
 from drenavision.core.annotations import place_label
 from drenavision.core.config import validate_image_size
@@ -21,7 +21,9 @@ from drenavision.core.storage import EventRepository, EvidenceStore
 from drenavision.data.constants import CLASS_NAMES
 
 from .device import describe_device, select_device
+from .errors import InferenceError
 from .media_io import write_image
+from .objects import GroundedObjectPredictor
 from .predictor import detections_from_result
 from .utils import sha256_file, utc_now_iso, validate_class_map, write_json
 from .video_codec import prepare_browser_video
@@ -52,11 +54,17 @@ def annotate_video_frame(frame_bgr: Any, detections: list[Detection]) -> Any:
         except OSError:
             continue
     thickness = max(3, image.width // 220)
+    # Draw every outline first: a later overlapping box must not strike through
+    # a label that was already rendered. Coordinates and detections stay intact.
+    for detection in detections:
+        x1, y1, x2, y2 = detection.bounding_box
+        draw.rectangle(
+            (x1, y1, x2, y2), outline=colors[detection.class_id], width=thickness
+        )
     occupied_labels = []
     for detection in detections:
         x1, y1, x2, y2 = detection.bounding_box
         color = colors[detection.class_id]
-        draw.rectangle((x1, y1, x2, y2), outline=color, width=thickness)
         label = OVERLAY_CLASS_LABELS[detection.class_name]
         left, top, right, bottom = draw.textbbox((0, 0), label, font=font)
         text_width = right - left
@@ -158,6 +166,7 @@ def persist_video_event(
     evidence_store: EvidenceStore,
     *,
     point_id: str | None = None,
+    event_id: str | None = None,
 ) -> PredictionEvent:
     """Persist one auditable summary event for a completed video run."""
 
@@ -174,7 +183,7 @@ def persist_video_event(
     ]
     inspection_recommended = bool(detections)
     normalized_point = point_id.strip() if point_id and point_id.strip() else None
-    event_id = str(uuid4())
+    event_id = str(UUID(str(event_id))) if event_id is not None else str(uuid4())
     evidence_payload = {
         key: manifest.get(key)
         for key in (
@@ -240,6 +249,17 @@ def process_video(
     residue_confidence: float = 0.35,
     animal_confidence: float = 0.35,
     water_confirmation_seconds: float = 0.0,
+    object_model_path: str | Path | None = None,
+    object_residue_confidence: float = 0.35,
+    object_animal_confidence: float = 0.35,
+    object_text_confidence: float = 0.20,
+    object_mode: str = "animal_replace",
+    object_shortest_edge: int = 800,
+    object_longest_edge: int = 1333,
+    object_verifier_path: str | Path | None = None,
+    object_residue_min_margin: float = 0.0,
+    object_animal_min_margin: float = 0.0,
+    shared_predictor: Any = None,
 ) -> dict[str, Any]:
     """Annotate one video and write a structured JSON sidecar.
 
@@ -251,6 +271,7 @@ def process_video(
     image_size = validate_image_size(image_size)
     from .runtime import (
         filter_detections,
+        merge_object_detections,
         merge_water_detections,
         overlay_water,
         profile_version,
@@ -273,11 +294,16 @@ def process_video(
         raise ValueError("max_frames deve ser positivo")
     if water_mode not in {"augment", "replace"}:
         raise ValueError("water_mode deve ser augment ou replace")
+    if object_mode not in {"augment", "replace", "animal_replace"}:
+        raise ValueError("object_mode deve ser augment, replace ou animal_replace")
     for name, value in (
         ("water_pixel_confidence", water_pixel_confidence),
         ("water_min_area_fraction", water_min_area_fraction),
         ("residue_confidence", residue_confidence),
         ("animal_confidence", animal_confidence),
+        ("object_residue_confidence", object_residue_confidence),
+        ("object_animal_confidence", object_animal_confidence),
+        ("object_text_confidence", object_text_confidence),
     ):
         if not math.isfinite(value) or not 0 <= value <= 1:
             raise ValueError(f"{name} deve ser finito e estar entre 0 e 1")
@@ -290,9 +316,118 @@ def process_video(
         )
     water_confirmation_seconds = float(water_confirmation_seconds)
 
+    expected_parameters = {
+        "imgsz": image_size,
+        "confidence": float(confidence),
+        "iou": float(iou),
+        "residue_confidence": float(residue_confidence),
+        "animal_confidence": float(animal_confidence),
+        "water_mode": water_mode,
+    }
+    objects = None
+    object_provenance = None
     water = None
     water_provenance = None
-    if water_model_path is not None:
+    if shared_predictor is not None:
+        if not shared_predictor.is_ready:
+            raise InferenceError("perfil compartilhado indisponível para vídeo")
+        if getattr(shared_predictor, "parameters", None) != expected_parameters:
+            raise InferenceError(
+                "parâmetros do vídeo divergem do perfil de imagem compartilhado"
+            )
+        shared_master = getattr(shared_predictor, "master", None)
+        if shared_master is None or sha256_file(
+            shared_master.model_path
+        ) != sha256_file(checkpoint):
+            raise InferenceError("checkpoint do vídeo diverge do perfil compartilhado")
+        water = getattr(shared_predictor, "water", None)
+        objects = getattr(shared_predictor, "objects", None)
+        if (water is None) != (water_model_path is None) or (objects is None) != (
+            object_model_path is None
+        ):
+            raise InferenceError(
+                "componentes do vídeo divergem do perfil compartilhado"
+            )
+        if water is not None:
+            water_provenance = water.provenance
+            policy = water_provenance["policy"]
+            if any(
+                policy.get(key) != value
+                for key, value in {
+                    "pixel_confidence": water_pixel_confidence,
+                    "min_area_fraction": water_min_area_fraction,
+                    "processing_size": 512,
+                }.items()
+            ):
+                raise InferenceError(
+                    "política de água do vídeo diverge do perfil compartilhado"
+                )
+            if (
+                hasattr(water, "model_dir")
+                and Path(water.model_dir).resolve() != Path(water_model_path).resolve()
+            ):
+                raise InferenceError(
+                    "modelo de água do vídeo diverge do perfil compartilhado"
+                )
+        if objects is not None:
+            object_provenance = objects.provenance
+            policy = object_provenance["policy"]
+            if (
+                any(
+                    policy.get(key) != value
+                    for key, value in {
+                        "residue_confidence": object_residue_confidence,
+                        "animal_confidence": object_animal_confidence,
+                        "text_confidence": object_text_confidence,
+                        "shortest_edge": object_shortest_edge,
+                        "longest_edge": object_longest_edge,
+                    }.items()
+                )
+                or shared_predictor.object_mode != object_mode
+            ):
+                raise InferenceError(
+                    "política de objetos do vídeo diverge do perfil compartilhado"
+                )
+            verification = object_provenance.get("verifier")
+            if (verification is None) != (object_verifier_path is None):
+                raise InferenceError(
+                    "verificador do vídeo diverge do perfil compartilhado"
+                )
+            if verification is not None and (
+                verification.get("residue_min_margin") != object_residue_min_margin
+                or verification.get("animal_min_margin") != object_animal_min_margin
+            ):
+                raise InferenceError(
+                    "margens do vídeo divergem do perfil compartilhado"
+                )
+            if (
+                hasattr(objects, "model_dir")
+                and Path(objects.model_dir).resolve()
+                != Path(object_model_path).resolve()
+            ):
+                raise InferenceError(
+                    "modelo de objetos do vídeo diverge do perfil compartilhado"
+                )
+    elif object_model_path is not None:
+        objects = GroundedObjectPredictor(
+            object_model_path,
+            device=device,
+            residue_confidence=object_residue_confidence,
+            animal_confidence=object_animal_confidence,
+            text_confidence=object_text_confidence,
+            shortest_edge=object_shortest_edge,
+            longest_edge=object_longest_edge,
+            verifier_model_path=object_verifier_path,
+            residue_min_margin=object_residue_min_margin,
+            animal_min_margin=object_animal_min_margin,
+        )
+        if not objects.is_ready:
+            raise RuntimeError(
+                f"especialista de objetos configurado indisponível: {objects.detail}"
+            )
+        object_provenance = objects.provenance
+
+    if shared_predictor is None and water_model_path is not None:
         water = SemanticWaterPredictor(
             water_model_path,
             device=device,
@@ -308,17 +443,21 @@ def process_video(
 
     model_sha256 = sha256_file(checkpoint)
     master_version = f"{checkpoint.stem}-{model_sha256[:12]}"
-    operating_parameters = {
-        "imgsz": image_size,
-        "confidence": float(confidence),
-        "iou": float(iou),
-        "residue_confidence": float(residue_confidence),
-        "animal_confidence": float(animal_confidence),
-        "water_mode": water_mode,
-    }
+    operating_parameters = dict(expected_parameters)
+    # With no configured specialist, preserve the exact established v3 profile.
+    if objects is not None:
+        operating_parameters["objects"] = object_provenance
+        operating_parameters["object_mode"] = object_mode
     base_pipeline_version = profile_version(
         model_sha256, water_provenance, operating_parameters
     )
+    if (
+        shared_predictor is not None
+        and shared_predictor.model_version != base_pipeline_version
+    ):
+        raise InferenceError(
+            "versão de imagem diverge do perfil compartilhado do vídeo"
+        )
     video_parameters = {
         **operating_parameters,
         "video_water_confirmation_seconds": water_confirmation_seconds,
@@ -344,6 +483,18 @@ def process_video(
         if water is not None
         else None,
     }
+    if objects is not None:
+        pipeline.update(
+            {
+                "objects": object_provenance,
+                "object_processing_policy": "one real specialist forward on every current original RGB frame; no stride, frame-result cache or propagated boxes",
+                "object_counting_policy": "specialist detections have no persistent IDs; use simultaneous-frame peak fallback, retaining genuine master tracker IDs where present",
+            }
+        )
+    if shared_predictor is not None:
+        pipeline["model_ownership"] = (
+            "borrowed API water/object/verifier instances; independent lightweight master tracker in the same process"
+        )
 
     cv2 = importlib.import_module("cv2")
     ultralytics = importlib.import_module("ultralytics")
@@ -446,10 +597,37 @@ def process_video(
                 residue_confidence=residue_confidence,
                 animal_confidence=animal_confidence,
             )
+            object_record = None
+            rgb = (
+                frame[:, :, ::-1].copy()
+                if objects is not None or water is not None
+                else None
+            )
+            if objects is not None:
+                object_started = time.perf_counter()
+                object_result = objects.predict(rgb.copy())
+                object_forward_ms = (time.perf_counter() - object_started) * 1000.0
+                # A specialist forward is object detection, not a tracker.
+                specialist_detections = [
+                    item.model_copy(update={"track_id": None})
+                    for item in object_result.detections
+                ]
+                master_detections = merge_object_detections(
+                    master_detections, specialist_detections, mode=object_mode
+                )
+                object_record = {
+                    "model_version": objects.model_version,
+                    "inference_ms": float(object_result.inference_ms),
+                    "forward_wall_ms": object_forward_ms,
+                    "detections": [
+                        _serialize_detection(item) for item in specialist_detections
+                    ],
+                    "raw_candidates": getattr(object_result, "raw_candidates", []),
+                    "processing": "forward_on_current_original_frame",
+                }
             water_result = None
             display_frame = frame
             if water is not None:
-                rgb = frame[:, :, ::-1].copy()
                 water_result = water.predict(rgb)
                 master_detections = merge_water_detections(
                     master_detections, water_result.detections, mode=water_mode
@@ -529,6 +707,7 @@ def process_video(
                     "water": water_result.metadata
                     if water_result is not None
                     else None,
+                    **({"objects": object_record} if object_record is not None else {}),
                 }
             )
             frame_index += 1
@@ -708,7 +887,7 @@ def process_video(
             if water is not None
             else None,
             "water_processing_size": 512 if water is not None else None,
-            "timing_note": "wall time per frame includes master inference, water inference, filtering, merging, mask/label annotation and writer call",
+            "timing_note": "wall time per frame includes master inference, configured object/water forwards, filtering, merging, mask/label annotation and writer call",
         },
         "frames": frames,
     }

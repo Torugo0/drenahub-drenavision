@@ -1,0 +1,153 @@
+{
+  "status": "validated_local_ready_for_publication",
+  "validated_at_utc": "2026-11-18T02:15:35.606233+00:00",
+  "pdf": "docs/relatorio/DrenaVision_Applied_Computer_Vision_FIAP.pdf",
+  "pdf_sha256": "d77a3a5392b20bcd87b6519082204856a0a09fa2b84049cf1bc90c459c0a2f87",
+  "source_sha256": "50ac8a9eb4107f16d3ad5dccfa86144a29952dc017cfc2f5d04d62602ca19832",
+  "generator_sha256": "eb705899835cb9981fd6260f92427a25c5942cf6921f567cd329c0199ad40fd4",
+  "pages": 20,
+  "paper": "A4",
+  "word_counts_source": {
+    "resumo": 250,
+    "objetivo": 50
+  },
+  "word_counts_pdf": {
+    "resumo": 250,
+    "objetivo": 50
+  },
+  "identity_verified": true,
+  "required_sections": 11,
+  "real_raster_figures": 8,
+  "vector_architecture_diagrams": 1,
+  "figure_manifest_sha256": "695dcfc7cf6e457a6c8b7c4a5e52d5410a8ba42c088208d5510062cfc14e5fd2",
+  "metrics_verified_against_originals": true,
+  "profiles": {
+    "image": "pipeline-4c5c993223219929",
+    "video": "pipeline-380203274bf9c28c"
+  },
+  "automated_tests": {
+    "passed": 239,
+    "failed": 0,
+    "errors": 0,
+    "warning": "One upstream Starlette deprecation warning",
+    "junit_local": "resultados/local/report_audit/pytest_final.xml",
+    "junit_sha256": "fb719c251861d44e98c1ced4769ab85530e9262320949885db41c159a69df86b"
+  },
+  "static_python_files_parsed": 109,
+  "ruff": "passed",
+  "powershell": "syntax passed; real iniciar.ps1 -SemNavegador -PortaInterface8502 passed",
+  "pdf_geometry": [
+    {
+      "page": 1,
+      "outside_page_characters": 0
+    },
+    {
+      "page": 2,
+      "outside_page_characters": 0
+    },
+    {
+      "page": 3,
+      "outside_page_characters": 0
+    },
+    {
+      "page": 4,
+      "outside_page_characters": 0
+    },
+    {
+      "page": 5,
+      "outside_page_characters": 0
+    },
+    {
+      "page": 6,
+      "outside_page_characters": 0
+    },
+    {
+      "page": 7,
+      "outside_page_characters": 0
+    },
+    {
+      "page": 8,
+      "outside_page_characters": 0
+    },
+    {
+      "page": 9,
+      "outside_page_characters": 0
+    },
+    {
+      "page": 10,
+      "outside_page_characters": 0
+    },
+    {
+      "page": 11,
+      "outside_page_characters": 0
+    },
+    {
+      "page": 12,
+      "outside_page_characters": 0
+    },
+    {
+      "page": 13,
+      "outside_page_characters": 0
+    },
+    {
+      "page": 14,
+      "outside_page_characters": 0
+    },
+    {
+      "page": 15,
+      "outside_page_characters": 0
+    },
+    {
+      "page": 16,
+      "outside_page_characters": 0
+    },
+    {
+      "page": 17,
+      "outside_page_characters": 0
+    },
+    {
+      "page": 18,
+      "outside_page_characters": 0
+    },
+    {
+      "page": 19,
+      "outside_page_characters": 0
+    },
+    {
+      "page": 20,
+      "outside_page_characters": 0
+    }
+  ],
+  "visual_review": {
+    "status": "passed",
+    "pages_reviewed": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20
+    ],
+    "method": "All pages rendered to PNG and inspected; tables, figures, captions, names, headers, footers and page breaks checked; sparse orphan page removed."
+  },
+  "delivery_format": "Three separate attachments: original MP4, TXT repository link, PDF; source and PDF also in public GitHub repository",
+  "publication": {
+    "status": "pending_remote_publish_and_anonymous_access_check",
+    "repository": "https://github.com/Torugo0/drenahub-drenavision"
+  },
+  "academic_submission": "Performed by team; not sent by this software"
+}

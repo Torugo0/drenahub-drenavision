@@ -1,112 +1,130 @@
 # Entrega acadêmica — FIAP
 
-## Requisitos e situação
+## Identificação e fonte dos requisitos
 
-Fonte: desafio Global Solution 2026.2 CitizenTech, Engenharia de Software,
-páginas 43–44 (Applied Computer Vision) e regras gerais. O enunciado é fonte
-de requisitos; escolhas adicionais de arquitetura pertencem ao DrenaVision.
+FIAP — Engenharia de Software. Global Solution 2026.2 — CitizenTech.
+Disciplina: **Applied Computer Vision**. Atividade: **Enxergando o Mundo Real**.
+Professores: Arnaldo Viana e Paulo Rodrigues. Projeto: DrenaHub / DrenaVision.
 
-| Requisito oficial | Evidência/estado |
+| Integrante | RM |
 |---|---|
-| Detecção de objetos e/ou realidade aumentada | detector de três classes em fotos/vídeos |
-| Treinamento customizado de arquitetura compatível | YOLO26n v3: 63 épocas, melhor na 43; manifesto, logs e hash. SegFormer B1 pré-treinado complementa água; não é apresentado como treinado pela equipe |
-| GitHub com documentação e código completo | este repositório; visibilidade pública ainda pendente |
-| Vídeo da solução funcionando | roteiro abaixo; gravação/publicação pendentes |
-| PDF técnico | etapa posterior; conteúdo exigido no checklist abaixo |
+| Gabriel Machado Carrara Pimentel | RM99880 |
+| Lourenzo Ramos | RM99951 |
+| Vítor Hugo Rodrigues | RM97758 |
 
-PDF e vídeo valem até 5 pontos cada. O texto “detecção de objetos em tempo”
-parece incompleto; o projeto demonstra vídeo processado e captura de câmera.
-As três classes, FastAPI, Streamlit, SQLite, métricas detalhadas e duração-alvo
-de 3–5 minutos são decisões do projeto. O enunciado de Computer Vision não
-define essa duração; o limite de cinco minutos em outra parte refere-se ao
-pitch de Business Intelligence.
+A referência é o desafio fornecido à equipe, páginas 43–44 e regras gerais.
+O enunciado é fonte de requisitos; escolhas adicionais de arquitetura são do
+projeto. PDF e vídeo valem **até 5 pontos cada**. Applied Computer Vision não
+fixa duração mínima ou máxima do vídeo. O limite de cinco minutos nas páginas
+41–42 pertence ao pitch de Business Intelligence & Startup Development.
 
-Prazo geral: **19/11/2026 às 23h55**, Teams da disciplina. A equipe tem até
-cinco integrantes da mesma turma/produto; somente um realiza o envio. Os links
-devem permanecer públicos e funcionando durante a correção, prevista em até
-uma semana após o encerramento. A ficha técnica abre o README.
+## Documentos da entrega
+
+- [Relatório técnico em PDF](relatorio/DrenaVision_Applied_Computer_Vision_FIAP.pdf).
+- [Fonte editável do relatório](relatorio/relatorio_fonte.md).
+- [Checklist de requisitos e páginas](relatorio/checklist_requisitos.md).
+- [Reprodução do projeto](REPRODUZIR.md), [arquitetura e API](TECNICO.md) e
+  [ficha de modelo](MODEL_CARD.md).
+
+O relatório apresenta a explicação do código e das ferramentas, dataset,
+pré-processamento, treinamento, avaliação, inferência e integração. A
+validação do resumo de 250 palavras e do objetivo de 50 palavras acompanha
+os artefatos do documento. A parte técnica pode ser lida no PDF e no GitHub;
+o vídeo pode concentrar-se na demonstração simples da solução funcionando.
+
+| Requisito oficial | Evidência |
+|---|---|
+| Detecção de objetos e/ou realidade aumentada | Aplicação de detecção em fotos e vídeos, com três classes técnicas e revisão humana |
+| Treinamento customizado compatível com o problema | YOLO26n v3: 63 épocas executadas, melhor checkpoint na 43, manifesto, logs e hash; a revisão 0.5 mantém esse treino |
+| Repositório GitHub com documentação e código | [Repositório real](https://github.com/Torugo0/drenahub-drenavision); publicação pública autorizada, em preparação, com confirmação de acesso após o envio |
+| Vídeo da solução funcionando | `demo_drena_vision.mp4` fornecido pela equipe, 2min13,20s, enviado como arquivo MP4 anexado |
+| PDF com título, integrantes, resumo, introdução, objetivo, ferramentas, metodologia, resultados e conclusão | Relatório oficial em `docs/relatorio/`, com fonte editável e checklist |
+
+Grounding DINO Tiny, SigLIP 2 e SegFormer B1 são componentes pré-treinados,
+com revisões, hashes e licenças registrados. Não foram treinados pela equipe
+nesta revisão. Seus resultados não são apresentados como mAP do YOLO isolado.
+
+## Vídeo simples fornecido pela equipe
+
+Arquivo local fornecido: `C:/Users/Vitor/Downloads/demo_drena_vision.mp4`.
+A revisão confirmou **2min13,20s**, Full HD, 30 FPS, H.264/AAC e decodificação
+integral dos 3.996 quadros sem erro. A gravação mostra seleção/envio de
+arquivos, processamento, marcações de animal, resíduos e água, além de alertas.
+A trilha de áudio está silenciosa. Por orientação da equipe, o vídeo será
+enviado **como arquivo MP4 anexado**, sem compactação do projeto.
+A página 44 exige a demonstração funcionando, sem determinar plataforma de
+publicação ou URL pública do vídeo.
+
+## Três arquivos para enviar ao professor
+
+1. `DrenaVision_Applied_Computer_Vision_FIAP.pdf`, como documento separado.
+2. `demo_drena_vision.mp4`, como vídeo anexado.
+3. Um TXT com a URL real `https://github.com/Torugo0/drenahub-drenavision`.
+
+O PDF também fica visível no GitHub, em `docs/relatorio/`, com acesso destacado
+no início do README. O repositório contém o código, a documentação, os testes,
+as configurações e as evidências selecionadas. Modelos grandes, dados brutos,
+banco de uso, logs, caches, saídas de trabalho e as duas fotos locais de
+regressão sem revisão de origem/licença não são enviados ao histórico do Git.
+As instruções para preparar o ambiente e obter os pesos estão em `REPRODUZIR.md`.
+
+Mostrar código linha por linha não é uma exigência expressa do vídeo na
+página 44. Uma explicação curta, narrada ou legendada, pode apresentar o
+problema, o envio de foto/vídeo e o significado das marcações. As esperas de
+processamento podem ser encurtadas ou aceleradas, desde que isso seja indicado.
+O PDF deve sustentar a explicação técnica, inclusive o treinamento customizado.
+
+A gravação narrada de **9min12,46s** permanece como histórico da **versão 0.4.0**.
+Método, créditos e capítulos estão em [GRAVACAO.md](GRAVACAO.md) e
+[ROTEIRO_GRAVACAO.md](ROTEIRO_GRAVACAO.md). Seus resultados não substituem a
+avaliação do produto 0.5 nem comprovam o comportamento atual.
+
+## Evidências atuais e seus limites
+
+O perfil de imagem 0.5 é `pipeline-4c5c993223219929`; o de vídeo é
+`pipeline-380203274bf9c28c`. A configuração congelada, as provas e as limitações
+estão em [VALIDACAO_V4.md](VALIDACAO_V4.md) e `resultados/metrics/v4/`.
+
+Há avaliação separada de 40 fotos reservadas e 179 regressões conhecidas;
+não são reunidas numa taxa geral de acerto. A presença de animais melhora,
+mas o F1 das caixas cai em ambas as coortes conhecidas. Resíduos apresentam
+maior cobertura e mais falsos positivos. Os resultados de água permanecem
+iguais nesse comparativo; o sistema não mede profundidade ou risco hidráulico.
+
+A verificação funcional cobriu seis vídeos e duas fotos, com 1.388 quadros
+inteiramente decodificados, persistência, H.264 e HTTP Range 206 verificados.
+Isso comprova execução e transporte, não acerto universal. Rua continua sem
+acerto confirmado; Hanoi tem menor cobertura temporal de animal que na 0.4.
+Persistem caixas amplas/duplicadas, falsos resíduos em objetos instalados e
+perdas de resíduos e água rasa. O relatório mantém esses erros.
+
+O treino, pesos, métricas e configurações históricos permanecem para permitir
+reprodução e comparação. Não são apresentados como execução da revisão 0.5.
+Dados completos, checkpoints, histórico de uso e capturas locais permanecem
+fora do Git. As fontes e licenças estão registradas nos manifestos e em
+`THIRD_PARTY_NOTICES.md`; uso acadêmico não implica autorização comercial.
+
+## Checklist de envio
+
+- [x] Integrantes e RM confirmados pelo responsável pelo projeto.
+- [x] Código, preparação dos dados, treino, avaliação, API e interface disponíveis localmente.
+- [x] Treinamento customizado e checkpoint sustentados por logs e hashes.
+- [x] Métricas, classes com baixo desempenho e erros preservados.
+- [x] Vídeo simples fornecido e verificado para envio como MP4 anexado.
+- [ ] Conferir os três arquivos: PDF separado, MP4 e TXT com link do GitHub.
+- [ ] Concluir a publicação pública do repositório e conferir acesso sem login.
+- [ ] Manter os arquivos e o acesso ao repositório disponíveis durante a correção.
+- [ ] Conferir o PDF final, os três integrantes/RM e os arquivos exigidos.
+- [ ] Confirmar a turma e um integrante concluir o envio no Teams.
+
+Prazo geral do enunciado: **19/11/2026 às 23h55**, Teams da disciplina.
+A entrega é realizada por um integrante, identificando toda a equipe. O
+responsável enviará os três arquivos separados. A publicação pública do
+repositório foi autorizada e está em preparação; sua conclusão será registrada
+após a verificação de acesso. O envio acadêmico ainda deve ser feito pela equipe.
 
 ## Contribuição aos ODS
 
-O projeto pode apoiar ODS 3 (inspeção de água parada e animais), 6 (manutenção
-da drenagem), 11 (prevenção local) e 13 (preparação operacional para chuvas).
-Essas são contribuições potenciais. O detector não mede impacto sanitário,
-ambiental ou climático; indicadores de resultado exigem validação em operação.
-
-## Roteiro sugerido — 4min30s
-
-| Tempo | Mostrar | Explicar |
-|---|---|---|
-| 0:00–0:30 | produto, público e três tipos de alerta | apoio à revisão humana de resíduos, água e animal |
-| 0:30–1:10 | fontes, auditorias, manifesto, splits e treino v3 | caixas corrigidas, negativos revistos e pesos customizados |
-| 1:10–2:25 | interface: foto e vídeos variados | enviar/escolher entrada, analisar, ver caixas e alertas |
-| 2:25–3:05 | resultado e histórico | arquivo anotado, ocorrência registrada e encaminhamento |
-| 3:05–3:40 | Swagger e JSON real | integração com evento, UTC, classe, caixa e confiança |
-| 3:40–4:20 | teste separado e exemplo de falha | YOLO isolado mAP50 0,4845; produto: água em 33/40 novas fotos, com 2/10 falsos alertas em negativos; animal 46/69, uma perda ante v2 |
-| 4:20–4:30 | produto e próximos passos | coleta no domínio real e confirmação humana |
-
-Execute `iniciar.ps1` antes de gravar. Mostre pelo menos um erro real e use os
-valores de `resultados/metrics/v3/independent_comparison.json` e
-`resultados/metrics/v3/master_map_comparison.json`. A avaliação de presença do
-produto é separada do AP do YOLO. A calibração é validação, não teste. A licença
-NVIDIA permite pesquisa/avaliação não comercial; uma startup precisa resolver
-as licenças antes de uso comercial. O arquivo antigo
-`resultados/metrics/evaluation_metrics.json` registra o protocolo histórico
-v1 com caixas de roedor defeituosas. Uma sequência montada
-de fotografias deve ser identificada como tal. Filmagem e sequência de fotos
-não são evidências equivalentes de movimento/rastreamento.
-
-Exemplos escolhidos depois da avaliação servem para demonstrar a interface;
-as métricas continuam sendo calculadas no conjunto completo de teste.
-
-O rato em close tem marcação consistente no modelo ativo, mas forneceu frames
-para adaptação e deve ser apresentado como demonstração de uma fonte de treino.
-Não o apresente como teste independente. Mostre também a falha do rato na cena
-com resíduos ou do clipe `rato_rua`, e a regressão da foto de lixo em Queens.
-O desaparecimento da caixa sobre a telha não significa que o rato dessa cena
-foi encontrado. A revisão completa está em
-`resultados/metrics/v2/product_validation_v2.json`.
-
-## Checklist
-
-### Código, dados e modelo
-
-- [x] Código de dados, treino, avaliação, inferência, API e interface disponível.
-- [x] Fontes/licenças, splits e hashes registrados.
-- [x] Dataset validado sem vazamento conhecido no protocolo publicado.
-- [x] Fine-tuning executado e alteração dos pesos comprovada.
-- [x] Avaliação independente, métricas e exemplos de erro publicados.
-- [x] Limitações e baixa qualidade de água declaradas.
-
-### Demonstração e publicação
-
-- [ ] Conferir reprodução do vídeo e marcações na versão final da interface.
-- [ ] Conferir foto/vídeo com e sem detecção e histórico.
-- [ ] Ensaiar roteiro com as entradas e créditos escolhidos.
-- [ ] Gravar áudio e tela legíveis, sem segredo ou dado pessoal.
-- [ ] Mostrar fonte dos exemplos, resultados reais e pelo menos uma falha.
-- [ ] Revisar vídeo e exportar MP4 reproduzível no navegador.
-- [ ] Publicar vídeo, aplicação/protótipo e repositório conforme a entrega.
-- [ ] Registrar URLs no README e conferir sem login em outro dispositivo.
-- [ ] Manter os links ativos durante toda a correção.
-
-### Relatório PDF posterior
-
-- [ ] Título e integrantes/RM.
-- [ ] Resumo com 250 palavras.
-- [ ] Introdução.
-- [ ] Objetivo com 50 palavras.
-- [ ] Ferramentas utilizadas.
-- [ ] Metodologia passo a passo.
-- [ ] Exemplos reais de resultados, métricas e limitações.
-- [ ] Conclusão, links, referências e créditos.
-
-### Envio
-
-- [ ] Confirmar integrantes e turma.
-- [ ] Conferir links públicos e arquivos exigidos.
-- [ ] Um integrante enviar pelo Teams até 19/11/2026 às 23h55.
-
-Nesta etapa, o repositório permanece privado e o vídeo narrado/PDF ainda
-precisam ser produzidos. O código não altera a visibilidade nem faz o envio
-acadêmico automaticamente.
+O projeto pode apoiar inspeção preventiva e manutenção relacionadas aos ODS
+3, 6, 11 e 13. Essas contribuições são potenciais: o detector não comprovou
+redução de alagamentos, impacto sanitário ou benefício climático em operação.

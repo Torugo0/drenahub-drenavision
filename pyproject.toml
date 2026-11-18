@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "drenavision"
-version = "0.4.0"
+version = "0.5.0"
 description = "Visao computacional para triagem assistida de riscos em drenagem urbana."
 readme = "README.md"
 requires-python = ">=3.11,<3.14"
@@ -42,6 +42,11 @@ dev = [
   "pytest==9.2.0",
   "pytest-cov==7.0.0",
   "ruff==0.17.5",
+]
+report = [
+  "reportlab==4.4.9",
+  "pypdf==6.21.4",
+  "pypdfium2==5.13.0",
 ]
 
 [tool.setuptools.packages.find]

@@ -1,0 +1,249 @@
+{
+  "scope": "File/annotation geometry audit; no model inference; no change to training labels.",
+  "dataset": "dados/processed/drenavision_v3_clean",
+  "dataset_manifest_sha256": "7bf12ddc7a164b1d6e36f20170afdb2757d2d7dcfc7d6190e2bf311922c32878",
+  "images_by_split_source": {
+    "train::click_trash": 250,
+    "train::stagnant_water": 500,
+    "train::irodent": 333,
+    "val::click_trash": 20,
+    "val::stagnant_water": 20,
+    "val::irodent": 20,
+    "test::click_trash": 20,
+    "test::stagnant_water": 20,
+    "test::irodent": 20,
+    "train::domain_reviewed": 24
+  },
+  "boxes_by_split_class": {
+    "train::class_0": 498,
+    "train::class_1": 1453,
+    "train::class_2": 344,
+    "val::class_0": 40,
+    "val::class_1": 59,
+    "val::class_2": 20,
+    "test::class_0": 37,
+    "test::class_1": 61,
+    "test::class_2": 20
+  },
+  "group_counts_by_source": {
+    "click_trash": 290,
+    "domain_reviewed": 6,
+    "irodent": 373,
+    "stagnant_water": 359
+  },
+  "negative_train_fraction_nominal": 0.005420054200542005,
+  "negative_review": {
+    "nominal_empty_labels": 6,
+    "previously_reviewed_background_crops": 5,
+    "uncertain_empty_source_image": "images/train/click_trash_3f055cd0459a2095.jpg",
+    "uncertain_note": "Tiny blue/red anthropogenic-looking fragments among leaves; do not assume this source empty label is confidently clean."
+  },
+  "irodent_training_keypoint_coverage": {
+    "images": 333,
+    "no_body_keypoints_visible": 5,
+    "at_most_one_body_keypoint_visible": 53,
+    "at_most_four_total_keypoints_visible": 26,
+    "has_segmentation": 0
+  },
+  "box_geometry": {
+    "test::class_0": {
+      "relative_area": {
+        "count": 37,
+        "min": 0.0009789318,
+        "p10": 0.0032900091,
+        "median": 0.023996662900000004,
+        "p90": 0.0744812982,
+        "max": 0.1799539521
+      },
+      "min_side_at_640": {
+        "count": 37,
+        "min": 12.9152,
+        "p10": 28.195839999999997,
+        "median": 80.0,
+        "p90": 160.1856,
+        "max": 238.72639999999998
+      },
+      "min_side_under_12px_at_640": 0
+    },
+    "test::class_1": {
+      "relative_area": {
+        "count": 61,
+        "min": 0.00036618750000000003,
+        "p10": 0.001388555664,
+        "median": 0.011123604492,
+        "p90": 0.37431346191399995,
+        "max": 0.875151888672
+      },
+      "min_side_at_640": {
+        "count": 61,
+        "min": 2.4998400000000003,
+        "p10": 17.50016,
+        "median": 47.500159999999994,
+        "p90": 287.49952,
+        "max": 592.49984
+      },
+      "min_side_under_12px_at_640": 1
+    },
+    "test::class_2": {
+      "relative_area": {
+        "count": 20,
+        "min": 0.006472292377,
+        "p10": 0.012840366503999999,
+        "median": 0.0540636376195,
+        "p90": 0.12620337855400002,
+        "max": 0.19779494813999998
+      },
+      "min_side_at_640": {
+        "count": 20,
+        "min": 26.249944375,
+        "p10": 55.1250984375,
+        "median": 101.4375271875,
+        "p90": 134.62483125,
+        "max": 200.62528
+      },
+      "min_side_under_12px_at_640": 0
+    },
+    "train::class_0": {
+      "relative_area": {
+        "count": 498,
+        "min": 0.000114651524,
+        "p10": 0.00099846045,
+        "median": 0.0064921657,
+        "p90": 0.07895766440000002,
+        "max": 0.5842641134
+      },
+      "min_side_at_640": {
+        "count": 498,
+        "min": 5.891840000000001,
+        "p10": 16.094399999999997,
+        "median": 41.48864,
+        "p90": 153.28,
+        "max": 431.83360000000005
+      },
+      "min_side_under_12px_at_640": 23
+    },
+    "train::class_1": {
+      "relative_area": {
+        "count": 1453,
+        "min": 0.00018309375000000002,
+        "p10": 0.0031891162109999997,
+        "median": 0.018249652344,
+        "p90": 0.311431958984,
+        "max": 1.0
+      },
+      "min_side_at_640": {
+        "count": 1453,
+        "min": 2.4998400000000003,
+        "p10": 24.999679999999998,
+        "median": 67.49952,
+        "p90": 292.50048,
+        "max": 635.00032
+      },
+      "min_side_under_12px_at_640": 8
+    },
+    "train::class_2": {
+      "relative_area": {
+        "count": 344,
+        "min": 3.1472594999999994e-05,
+        "p10": 0.013598964271999999,
+        "median": 0.08063671875,
+        "p90": 0.279492375,
+        "max": 0.7332554673380001
+      },
+      "min_side_at_640": {
+        "count": 344,
+        "min": 2.8127999999999997,
+        "p10": 39.749759999999995,
+        "median": 119.62515375000001,
+        "p90": 257.0006198339033,
+        "max": 480.3751546875
+      },
+      "min_side_under_12px_at_640": 5
+    },
+    "val::class_0": {
+      "relative_area": {
+        "count": 40,
+        "min": 0.0004940859,
+        "p10": 0.0006704095999999999,
+        "median": 0.0038460205,
+        "p90": 0.08807939840000001,
+        "max": 0.513763866
+      },
+      "min_side_at_640": {
+        "count": 40,
+        "min": 8.164800000000001,
+        "p10": 11.4864,
+        "median": 33.836000000000006,
+        "p90": 145.504,
+        "max": 405.0368
+      },
+      "min_side_under_12px_at_640": 6
+    },
+    "val::class_1": {
+      "relative_area": {
+        "count": 59,
+        "min": 0.004150375,
+        "p10": 0.005371125,
+        "median": 0.021453896484,
+        "p90": 0.36145068750000003,
+        "max": 0.715941566406
+      },
+      "min_side_at_640": {
+        "count": 59,
+        "min": 24.999679999999998,
+        "p10": 40.0,
+        "median": 77.50016,
+        "p90": 320.00064000000003,
+        "max": 522.50048
+      },
+      "min_side_under_12px_at_640": 0
+    },
+    "val::class_2": {
+      "relative_area": {
+        "count": 20,
+        "min": 0.0007572168839999998,
+        "p10": 0.010570213623,
+        "median": 0.08693249150400001,
+        "p90": 0.505185530681,
+        "max": 0.6131697585070001
+      },
+      "min_side_at_640": {
+        "count": 20,
+        "min": 13.125119999999999,
+        "p10": 48.37488,
+        "median": 131.06256000000002,
+        "p90": 340.62516000000005,
+        "max": 384.0001425
+      },
+      "min_side_under_12px_at_640": 0
+    }
+  },
+  "new_user_regression_hashes": [
+    {
+      "path": "dados/examples/teste.jpg",
+      "sha256": "aa34768cfdabc1a95173d7c8b7445edd76c082b4f2c1e60332e578f80185e717",
+      "size": [
+        360,
+        240
+      ],
+      "present_in_training_or_calibration_or_test": false,
+      "role": "user_reported_regression_only; do not train/calibrate on these images"
+    },
+    {
+      "path": "dados/examples/teste1.jpg",
+      "sha256": "1bcf2882a77167ba478172c9f2213ce2e5049f87170dfcfc7fe6e8978ee300bc",
+      "size": [
+        960,
+        640
+      ],
+      "present_in_training_or_calibration_or_test": false,
+      "role": "user_reported_regression_only; do not train/calibrate on these images"
+    }
+  ],
+  "user_media_redistributed": false,
+  "limits": [
+    "Keypoint-derived boxes are not reviewed whole-body bounds.",
+    "Only five training background crops are clearly reviewed negatives.",
+    "Cross-class source labels may be incomplete; empty label is not proof of no target."
+  ]
+}

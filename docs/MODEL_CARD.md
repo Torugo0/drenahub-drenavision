@@ -1,6 +1,168 @@
 # Model Card — DrenaVision
 
-## Produto ativo — versão 0.4.0
+## Inferência ativa — versão 0.5.0
+
+O perfil congelado **`pipeline-4c5c993223219929`** mantém os pesos YOLO
+customizados v3 e acrescenta Grounding DINO Tiny e verificação de recortes
+SigLIP 2. É uma revisão de inferência, **sem novo treinamento nesta etapa**.
+A API 0.5.0 está ativa, com 239 testes automatizados aprovados. O benchmark
+de 219 imagens está concluído em coortes separadas: 40 imagens reservadas e
+179 regressões conhecidas. A verificação funcional de fotos/vídeos foi concluída,
+com os erros de detecção preservados nos relatórios.
+
+| Componente | Função na revisão 0.5 |
+|---|---|
+| YOLO26n customizado v3 | Pesos mantidos; continua propondo resíduos e água. O treinamento de 63 épocas/época 43 permanece como evidência histórica do ajuste customizado. |
+| Grounding DINO Tiny, pré-treinado | Propostas com vocabulário fixado para resíduos e roedores. Complementa resíduos e substitui as caixas de animal do mestre. |
+| SigLIP 2, pré-treinado | Verifica o conteúdo dos recortes contra frases positivas/de fundo; não aumenta a caixa de saída. |
+| SegFormer B1 | Mesmos pesos e parâmetros v3 de água, com confirmação de 0,5 s no vídeo. |
+
+Pesos, revisões oficiais, hashes, vocabulário, margens e configuração efetiva
+estão em [frozen_candidate.json](../resultados/metrics/v4/frozen_candidate.json)
+e [inference_v4.json](../ferramentas/configs/inference_v4.json). Grounding DINO
+usa score 0,30 para resíduos e 0,25 para animal, texto 0,20 e arestas 640/1024;
+SigLIP 2 exige margens 0,04/0,08. Os pesos YOLO, limiares do mestre e a política
+de água não foram retreinados ou recalibrados para os exemplos do usuário.
+
+### Calibração, separada do teste
+
+A coorte de validação possui 60 imagens com presença revisada por assistentes.
+Há 21 positivas/30 negativas/nove incertas de resíduos e 20 positivas/40
+negativas de roedores. Os incertos são excluídos, nunca convertidos em negativos.
+Os animais sinalizados passaram de 15/20 para 20/20, com zero falsos alertas em
+40 negativas nos dois perfis. Isso é **resultado de calibração**, não uma taxa
+geral de detecção ou teste independente.
+
+Para resíduos, o critério de seleção priorizou F2 das caixas CLICK de validação
+antes das previsões no novo holdout, com casamento IoU 0,50: 31 TP/10 FP/9 FN passaram a 34/14/6 nas mesmas 40
+referências de 20 imagens. O F2 candidato é 0,8173. Há mais cobertura e mais
+previsões sem par, com menor precisão de caixas. A presença de resíduos nas
+21 imagens positivas e 30 negativas não mudou. Referências parciais não
+certificam todos os itens físicos ou a contagem completa de animais.
+
+### Resultado reservado CLICK40 após congelamento
+
+Fonte: [evaluation_holdout40.json](../resultados/metrics/v4/evaluation_holdout40.json).
+São 40 identidades novas de teste nativo CLICK, com 60 caixas, excluídas do
+treino/calibração por identidade, hash e pHash. Permanecem da mesma
+fonte/câmera conhecida; não representam um novo domínio. O perfil foi
+congelado antes das previsões e os resultados não foram usados para retuná-lo.
+As identidades e a revisão desse conjunto já estavam seladas antes do
+congelamento do perfil; reservar os dados e fixar os parâmetros são etapas
+distintas. A cronologia dos registros está em [VALIDACAO_V4.md](VALIDACAO_V4.md).
+
+| Medida | Produto 0.4 | Candidato 0.5 congelado |
+|---|---:|---:|
+| Imagens positivas de resíduos sinalizadas | 38/40 | 39/40 |
+| Caixas nativas de resíduos: TP/FP/FN, IoU 0,50 | 43/16/17 | 48/20/12 |
+| Precisão por caixa de resíduos | 0,7288 | 0,7059 |
+| Recall por caixa de resíduos | 0,7167 | 0,8000 |
+| F1 por caixa de resíduos | 0,7227 | 0,7500 |
+| Falso alerta de animal em negativas claras | 0/38 | 0/38 |
+| Latência mediana por foto, RTX 4060 | 0,615 s | 0,965 s |
+
+O custo da maior cobertura inclui quatro previsões sem correspondência a mais
+e aumento da latência. O holdout não tem negativos de resíduos nem positivos
+de animais; portanto não mede sozinho falsos alertas de resíduos nem recall
+de roedores. Duas cenas incertas para animal ficaram fora desse denominador.
+As saídas de água permaneceram iguais nas 40 imagens, dentro da tolerância
+numérica publicada; isso é paridade de saída, não uma nova métrica de acurácia
+de água. As referências/revisões são assistidas, não ground truth humana
+independente. O pré-treinamento dos modelos externos não é integralmente
+auditável para excluir exposição a imagens públicas.
+
+### Regressões conhecidas: 179 imagens
+
+Fonte: [evaluation_regression179.json](../resultados/metrics/v4/evaluation_regression179.json).
+Os parâmetros congelados foram mantidos. Essas imagens já foram examinadas
+em revisões anteriores; **não constituem um novo teste independente**. A
+ausência de rótulo entre classes é proxy de ausência, sem revisão abrangente
+de todas as negativas. Os números não devem ser agregados ao CLICK40 como uma
+única taxa de generalização.
+
+| Medida | Produto 0.4 | Perfil 0.5 congelado |
+|---|---:|---:|
+| Animal: presença nas 20 positivas do test60 | 14/20 | 19/20 |
+| Animal: falso alerta nas 40 negativas proxy do test60 | 0/40 | 0/40 |
+| Animal: caixas TP/FP/FN no test60, IoU 0,50 | 8/6/12 | 9/17/11 |
+| Animal: F1 de caixas no test60 | 0,4706 | 0,3913 |
+| Animal: presença nas 69 positivas do extra119 | 46/69 | 63/69 |
+| Animal: falso alerta nas 50 negativas proxy do extra119 | 0/50 | 0/50 |
+| Animal: caixas TP/FP/FN no extra119, IoU 0,50 | 36/11/33 | 43/31/26 |
+| Animal: F1 de caixas no extra119 | 0,6207 | 0,6014 |
+| Resíduos: caixas TP/FP/FN no test60, IoU 0,50 | 23/14/14 | 25/20/12 |
+| Resíduos: F1 de caixas no test60 | 0,6216 | 0,6098 |
+| Resíduos: alertas nas 119 imagens sem rótulo de resíduos | 1/119 | 2/119 |
+
+O perfil sinaliza animais em mais fotos, mas **piora o F1 de caixas de animal
+nas duas coortes**. Caixas duplicadas, amplas ou imprecisas continuam presentes.
+Algumas referências iRodent são envelopes parciais de pontos de pose e podem
+penalizar corpo completo; isso não permite concluir que todos os FP sejam
+objetos reais sem anotação. A localização precisa de revisão de corpo completo
+e de novos dados. Não foi aplicada regra adicional de contenção após observar
+esses resultados; o perfil congelado continua preservado.
+
+Resíduos mantiveram presença em 20/20 positivas do test60 e zero alertas em
+40 negativas proxy, mas aumentaram previsões de caixas sem correspondência.
+O extra119 não tem resíduos positivos anotados e não estima seu recall.
+Água permaneceu igual em 179/179 saídas, dentro de `1e-5`; no extra119 manteve
+33/40 positivas sinalizadas. Paridade de saída não é acurácia adicional.
+
+As duas fotos do usuário continuam regressões conhecidas, fora do
+treino/calibração. Uma marcação de animal e cinco de resíduos na reexecução
+não significam que todos os objetos foram localizados ou corretamente contados.
+A API e a interface foram reiniciadas; `/health` retornou serviço/modelo prontos
+e versão 0.5.0. Fotos e vídeos passam por HTTP com redes grandes compartilhadas
+na API e rastreador YOLO pequeno por vídeo, sem subprocesso pesado na UI.
+
+### Verificação funcional do produto ativo
+
+[active_profile.json](../resultados/metrics/v4/active_profile.json) registra
+`verified_running_product`: imagem `pipeline-4c5c993223219929` e vídeo
+`pipeline-380203274bf9c28c`, com a mesma confirmação de água por 0,5 s.
+O [relatório do catálogo](../resultados/metrics/v4/product_validation.json)
+concluiu oito casos, seis vídeos e duas fotos, com os 1.388 quadros decodificados
+integralmente, H.264/início rápido, HTTP Range 206, perfis e eventos conferidos.
+A API permaneceu saudável na versão 0.5.0. Na
+[prova de interface](../resultados/metrics/v4/ui_verification.json), as duas
+fotos do usuário foram enviadas e Hanoi foi reproduzido até 12/12 segundos,
+sem erro do player. Capturas do usuário ficam locais e não são republicadas.
+
+Esses são testes funcionais em exemplos conhecidos, alguns usados para
+adaptação de treino, sem referência completa de acurácia por quadro. Em
+Hanoi há propostas de animal em 144/240 quadros, contra 187/240 na 0.4; não
+há evidência de ganho temporal. Rua tem só uma marcação animal ambígua em
+240 quadros e permanece sem acerto confirmado. A revisão visual encontrou
+falsos resíduos numa lixeira fixa em Chuva e num cotovelo de PVC instalado em
+Sarjeta; há também ambiguidades com vegetação. A foto `ralo_lixo` ainda perde
+outros resíduos evidentes e água rasa; em Canal, a caixa de água inclui
+concreto. O funcionamento do envio/player não resolve essas falhas de modelo.
+
+Os clipes de 10,4 a 12 segundos demandaram aproximadamente 67 a 91 segundos
+de processamento nessa máquina. Contagens de quadros previstos não são
+recall, contagens físicas de animais ou promessa de tempo real.
+O [relatório técnico final](relatorio/DrenaVision_Applied_Computer_Vision_FIAP.pdf)
+explica o código, os dados, o treinamento e as avaliações, com fonte editável e
+checklist em `docs/relatorio/`. A entrega acadêmica utiliza três anexos:
+`demo_drena_vision.mp4`, `LINK_REPOSITORIO.txt` e
+`DrenaVision_Applied_Computer_Vision_FIAP.pdf`. O TXT aponta para o
+[repositório do projeto](https://github.com/Torugo0/drenahub-drenavision)
+e para o PDF nessa documentação. O vídeo recente é a gravação original enviada
+pelo usuário, de **2min13,20s**, com trilha silenciosa, entregue como arquivo
+anexo e preservado sem cortes ou recodificação. Ele demonstra a interface;
+não é uma gravação de treinamento. O vídeo narrado anterior de 9min12s continua
+histórico da 0.4 e não comprova a inferência 0.5. A equipe realiza o envio dos
+três arquivos na tarefa acadêmica; disponibilizar código e PDF no GitHub é
+separado de anexar o vídeo.
+
+[VALIDACAO_V4.md](VALIDACAO_V4.md) registra o protocolo e seus limites.
+Os preparadores oficiais `prepare_object_model.py` e
+`prepare_verifier_model.py` verificam cerca de 2,2 GB adicionais de artefatos,
+já presentes neste computador. A inferência usa arquivos locais e não baixa
+pesos durante a análise. Grounding DINO/SigLIP 2 usam Apache-2.0; as condições
+de pesquisa/avaliação não comercial de água NVIDIA e iRodent continuam válidas.
+
+## Histórico — versão 0.4.0, protocolo v3
 
 O produto combina um YOLO26n customizado com segmentação de superfícies de
 água por SegFormer B1 ADE20K. As caixas são propostas reais dos modelos;
@@ -138,6 +300,10 @@ marcadas. Consulte a [revisão visual v2](../resultados/metrics/v2/product_valid
 que mantém esses erros e a origem de cada exemplo.
 
 ## Modelo v1: estado histórico em 16/11/2026
+
+Os tópicos seguintes preservam o experimento original v1. Seus defaults,
+dados e métricas não descrevem a inferência 0.5; para o perfil atual, consulte
+o início desta ficha e `ferramentas/configs/inference_v4.json`.
 
 Uma auditoria posterior encontrou um defeito nas caixas de roedores da fonte
 iRodent: pontos ausentes `(0,0,0)` foram incorporados ao retângulo publicado.
@@ -341,7 +507,7 @@ dataset corrigido. Os mAP v1 e v2 com rótulos distintos não são diretamente
 comparáveis; a tabela inicial reavalia ambos nos rótulos v2. A promoção e seus
 resultados ficam separados da auditoria inicial, cujo estado era anterior ao treino.
 
-## Limitacoes e riscos conhecidos
+## Limitacoes e riscos conhecidos - registro historico v2
 
 - agua rasa, reflexos, piso brilhante e sombras podem se confundir;
 - `agua_acumulada` tem recall 0,1765 e mAP@50-95 0,0364 no teste v2; continua
@@ -360,7 +526,10 @@ resultados ficam separados da auditoria inicial, cujo estado era anterior ao tre
 - imagens podem conter pessoas, placas e enderecos, exigindo minimizacao,
   retencao controlada e revisao LGPD.
 
-## Criterios minimos antes de demonstrar
+## Criterios minimos antes de demonstrar - registro historico v2
+
+Os itens abaixo preservam a situação registrada na revisão v2. A entrega
+atual, com PDF e três anexos, está descrita no início deste documento.
 
 1. concluido: validar estrutura, proveniencia e licencas conhecidas;
 2. concluido: treino com manifesto e hash diferente do peso inicial;
@@ -368,8 +537,9 @@ resultados ficam separados da auditoria inicial, cujo estado era anterior ao tre
 4. concluido: exportacao de exemplos corretos, FP e FN;
 5. concluido para a demonstracao automatica: biblioteca de seis filmagens reais
    e duas fotografias, com exportacao H.264, origem e falhas documentadas;
-6. pendente para a entrega: gravar a apresentacao narrada e, idealmente,
-   acrescentar filmagem propria do dominio de drenagem;
+6. na ocasião do registro v2, ainda se planejava gravar a apresentação narrada
+   e acrescentar filmagem própria do domínio de drenagem; esse apontamento
+   histórico não substitui a gravação original recente entregue como anexo;
 7. obrigatorio na apresentacao: destacar a baixa qualidade medida para agua e
    o tamanho reduzido do teste de animais.
 

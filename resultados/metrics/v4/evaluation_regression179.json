@@ -1,0 +1,327 @@
+{
+  "evaluated_at_utc": "2026-11-18T00:39:18.402681Z",
+  "phase": "regression179",
+  "frozen_manifest_sha256_before_inference": "94d20cce07114fe4b6c9e58b4a86daaaebea191989dba9a243c01fcbc5e4b93c",
+  "configuration_sha256": "35b43502b6957e981895c23a3ff2e2f80e0fdd2c736990f5d61ac96f06e86cbb",
+  "baseline_model_version": "pipeline-1314fcfa94f5f8cf",
+  "candidate_model_version": "pipeline-4c5c993223219929",
+  "selection_used_results": false,
+  "source_samples_sha256": "b06ca8b3898dffdd3182d20392ea01ca6b7a46f04b1947abd7955502c60d3400",
+  "elapsed_seconds": 143.47432739999977,
+  "scope": {
+    "test_dataset_yaml_sha256": "ea42c1da0376d20f1ec4d31fb006343711a54de48f3bc2701a60bfb7f8533e8e",
+    "extra119_source_report_sha256": "cdbbef542f8d4c226d9c759530b823939c32b5f4c8d06fa4517e176eaafb4d02",
+    "scope": "Previously evaluated 179-image engineering regression; not a newly unseen test or parameter selection",
+    "presence_reference": "Positive source labels; absent labels treated as a proxy negative with incomplete cross-class annotation caveat"
+  },
+  "reference_caveat": "Native source boxes can be incomplete or visible-keypoint body envelopes. Box FP may include genuine unannotated objects. Source-box absence is a label proxy, not reviewed absence, except the sealed holdout presence review.",
+  "cohorts": {
+    "test60": {
+      "images": 60,
+      "baseline": {
+        "presence": {
+          "0": {
+            "tp": 20,
+            "fp": 0,
+            "tn": 40,
+            "fn": 0,
+            "unknown": 0,
+            "positive_images": 20,
+            "negative_images": 40,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "false_alert_rate_on_negative_images": 0.0
+          },
+          "1": {
+            "tp": 20,
+            "fp": 3,
+            "tn": 37,
+            "fn": 0,
+            "unknown": 0,
+            "positive_images": 20,
+            "negative_images": 40,
+            "precision": 0.8695652173913043,
+            "recall": 1.0,
+            "f1": 0.9302325581395349,
+            "false_alert_rate_on_negative_images": 0.075
+          },
+          "2": {
+            "tp": 14,
+            "fp": 0,
+            "tn": 40,
+            "fn": 6,
+            "unknown": 0,
+            "positive_images": 20,
+            "negative_images": 40,
+            "precision": 1.0,
+            "recall": 0.7,
+            "f1": 0.8235294117647058,
+            "false_alert_rate_on_negative_images": 0.0
+          }
+        },
+        "source_bbox_iou_0_5": {
+          "obstrucao_visivel": {
+            "tp": 23,
+            "fp": 14,
+            "fn": 14,
+            "precision": 0.6216216216216216,
+            "recall": 0.6216216216216216,
+            "f1": 0.6216216216216216
+          },
+          "agua_acumulada": {
+            "tp": 21,
+            "fp": 8,
+            "fn": 40,
+            "precision": 0.7241379310344828,
+            "recall": 0.3442622950819672,
+            "f1": 0.4666666666666667
+          },
+          "animal_visivel": {
+            "tp": 8,
+            "fp": 6,
+            "fn": 12,
+            "precision": 0.5714285714285714,
+            "recall": 0.4,
+            "f1": 0.47058823529411764
+          }
+        },
+        "latency_ms": {
+          "mean": 375.51935666670033,
+          "median": 215.42574999989483,
+          "p95": 762.374540000269
+        }
+      },
+      "candidate": {
+        "presence": {
+          "0": {
+            "tp": 20,
+            "fp": 0,
+            "tn": 40,
+            "fn": 0,
+            "unknown": 0,
+            "positive_images": 20,
+            "negative_images": 40,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "false_alert_rate_on_negative_images": 0.0
+          },
+          "1": {
+            "tp": 20,
+            "fp": 3,
+            "tn": 37,
+            "fn": 0,
+            "unknown": 0,
+            "positive_images": 20,
+            "negative_images": 40,
+            "precision": 0.8695652173913043,
+            "recall": 1.0,
+            "f1": 0.9302325581395349,
+            "false_alert_rate_on_negative_images": 0.075
+          },
+          "2": {
+            "tp": 19,
+            "fp": 0,
+            "tn": 40,
+            "fn": 1,
+            "unknown": 0,
+            "positive_images": 20,
+            "negative_images": 40,
+            "precision": 1.0,
+            "recall": 0.95,
+            "f1": 0.9743589743589743,
+            "false_alert_rate_on_negative_images": 0.0
+          }
+        },
+        "source_bbox_iou_0_5": {
+          "obstrucao_visivel": {
+            "tp": 25,
+            "fp": 20,
+            "fn": 12,
+            "precision": 0.5555555555555556,
+            "recall": 0.6756756756756757,
+            "f1": 0.6097560975609756
+          },
+          "agua_acumulada": {
+            "tp": 21,
+            "fp": 8,
+            "fn": 40,
+            "precision": 0.7241379310344828,
+            "recall": 0.3442622950819672,
+            "f1": 0.4666666666666667
+          },
+          "animal_visivel": {
+            "tp": 9,
+            "fp": 17,
+            "fn": 11,
+            "precision": 0.34615384615384615,
+            "recall": 0.45,
+            "f1": 0.391304347826087
+          }
+        },
+        "latency_ms": {
+          "mean": 678.3821516666575,
+          "median": 536.3910500000202,
+          "p95": 1213.4474849999376
+        }
+      }
+    },
+    "extra119": {
+      "images": 119,
+      "baseline": {
+        "presence": {
+          "0": {
+            "tp": 0,
+            "fp": 1,
+            "tn": 118,
+            "fn": 0,
+            "unknown": 0,
+            "positive_images": 0,
+            "negative_images": 119,
+            "precision": 0.0,
+            "recall": null,
+            "f1": 0.0,
+            "false_alert_rate_on_negative_images": 0.008403361344537815
+          },
+          "1": {
+            "tp": 33,
+            "fp": 11,
+            "tn": 68,
+            "fn": 7,
+            "unknown": 0,
+            "positive_images": 40,
+            "negative_images": 79,
+            "precision": 0.75,
+            "recall": 0.825,
+            "f1": 0.7857142857142857,
+            "false_alert_rate_on_negative_images": 0.13924050632911392
+          },
+          "2": {
+            "tp": 46,
+            "fp": 0,
+            "tn": 50,
+            "fn": 23,
+            "unknown": 0,
+            "positive_images": 69,
+            "negative_images": 50,
+            "precision": 1.0,
+            "recall": 0.6666666666666666,
+            "f1": 0.8,
+            "false_alert_rate_on_negative_images": 0.0
+          }
+        },
+        "source_bbox_iou_0_5": {
+          "obstrucao_visivel": {
+            "tp": 0,
+            "fp": 1,
+            "fn": 0,
+            "precision": 0.0,
+            "recall": null,
+            "f1": 0.0
+          },
+          "agua_acumulada": {
+            "tp": 34,
+            "fp": 26,
+            "fn": 82,
+            "precision": 0.5666666666666667,
+            "recall": 0.29310344827586204,
+            "f1": 0.38636363636363635
+          },
+          "animal_visivel": {
+            "tp": 36,
+            "fp": 11,
+            "fn": 33,
+            "precision": 0.7659574468085106,
+            "recall": 0.5217391304347826,
+            "f1": 0.6206896551724138
+          }
+        },
+        "latency_ms": {
+          "mean": 160.22026134453904,
+          "median": 104.92599999997765,
+          "p95": 340.2890500001375
+        }
+      },
+      "candidate": {
+        "presence": {
+          "0": {
+            "tp": 0,
+            "fp": 2,
+            "tn": 117,
+            "fn": 0,
+            "unknown": 0,
+            "positive_images": 0,
+            "negative_images": 119,
+            "precision": 0.0,
+            "recall": null,
+            "f1": 0.0,
+            "false_alert_rate_on_negative_images": 0.01680672268907563
+          },
+          "1": {
+            "tp": 33,
+            "fp": 11,
+            "tn": 68,
+            "fn": 7,
+            "unknown": 0,
+            "positive_images": 40,
+            "negative_images": 79,
+            "precision": 0.75,
+            "recall": 0.825,
+            "f1": 0.7857142857142857,
+            "false_alert_rate_on_negative_images": 0.13924050632911392
+          },
+          "2": {
+            "tp": 63,
+            "fp": 0,
+            "tn": 50,
+            "fn": 6,
+            "unknown": 0,
+            "positive_images": 69,
+            "negative_images": 50,
+            "precision": 1.0,
+            "recall": 0.9130434782608695,
+            "f1": 0.9545454545454546,
+            "false_alert_rate_on_negative_images": 0.0
+          }
+        },
+        "source_bbox_iou_0_5": {
+          "obstrucao_visivel": {
+            "tp": 0,
+            "fp": 2,
+            "fn": 0,
+            "precision": 0.0,
+            "recall": null,
+            "f1": 0.0
+          },
+          "agua_acumulada": {
+            "tp": 34,
+            "fp": 26,
+            "fn": 82,
+            "precision": 0.5666666666666667,
+            "recall": 0.29310344827586204,
+            "f1": 0.38636363636363635
+          },
+          "animal_visivel": {
+            "tp": 43,
+            "fp": 31,
+            "fn": 26,
+            "precision": 0.581081081081081,
+            "recall": 0.6231884057971014,
+            "f1": 0.6013986013986014
+          }
+        },
+        "latency_ms": {
+          "mean": 457.78191680673285,
+          "median": 425.30519999991157,
+          "p95": 698.1881900000643
+        }
+      }
+    }
+  },
+  "water_unchanged_images": 179,
+  "water_tolerance": 1e-05,
+  "overlays": [],
+  "detailed_report": "resultados/local/v4/evaluation/regression179_evaluation.json",
+  "detailed_report_sha256": "702d3297c898b6513d180a0748b3646293b22a880c6acc6c3aca719b41634945"
+}

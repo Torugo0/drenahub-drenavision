@@ -40,7 +40,7 @@ os hashes exigidos pelos quadros revisados. A instalação detalhada está em
 [REPRODUZIR.md](../docs/REPRODUZIR.md).
 
 A conversão simples `convert_annotations.py` cria `drenavision_corrected` com
-manifesto separado. Ela não substitui a preparação v2 acima nem sobrescreve
+manifesto separado. Ela não substitui a preparação v3 acima nem sobrescreve
 as evidências v1. O v2 corrige caixas de roedores que incorporavam pontos
 ausentes na origem e registra esse protocolo em
 [resultados/metrics/v2](../resultados/metrics/v2/README.md).

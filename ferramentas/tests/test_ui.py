@@ -1,8 +1,9 @@
 import json
 from io import BytesIO
 from pathlib import Path
-from types import SimpleNamespace
+from uuid import uuid4
 
+import httpx
 import pytest
 from PIL import Image
 
@@ -13,7 +14,7 @@ from drenavision.ui.streamlit_app import annotate, result_counts
 def test_phone_photo_boxes_use_the_same_exif_orientation_as_inference():
     image = Image.new("RGB", (160, 90), "white")
     exif = Image.Exif()
-    exif[274] = 6  # Portrait photograph stored sideways by a phone.
+    exif[274] = 6
     encoded = BytesIO()
     image.save(encoded, format="JPEG", exif=exif)
     marked = annotate(
@@ -51,52 +52,123 @@ def test_image_counts_include_all_detections_and_missing_classes():
     }
 
 
-def test_video_job_uses_current_settings_instead_of_stale_streamlit_state(
+def test_video_upload_and_download_use_api_shared_models_without_subprocess(
     tmp_path, monkeypatch
 ):
-    model = tmp_path / "current/best.pt"
-    model.parent.mkdir()
-    model.write_bytes(b"checkpoint-contract")
-    monkeypatch.setenv("DRENAVISION_MODEL_PATH", str(model))
-    monkeypatch.setenv("DRENAVISION_DATABASE_PATH", str(tmp_path / "current/events.db"))
-    monkeypatch.setenv("DRENAVISION_EVIDENCE_DIR", str(tmp_path / "current/evidence"))
-    monkeypatch.setenv("DRENAVISION_IMAGE_SIZE", "960")
-    monkeypatch.setattr(
-        streamlit_app,
-        "SETTINGS",
-        SimpleNamespace(model_path=tmp_path / "artifacts/models/best.pt"),
-    )
+    source = tmp_path / "uploaded.mp4"
+    source.write_bytes(b"original recorded video")
+    identifier = str(uuid4())
+    payload = {
+        "status": "completed",
+        "event_id": identifier,
+        "video_url": f"/vision/videos/{identifier}",
+        "event": {"event_id": identifier},
+    }
+    calls, handles = [], []
     monkeypatch.setattr(streamlit_app, "RESULTS_DIR", tmp_path / "results")
-
-    def fake_process(command, **kwargs):
-        assert Path(command[command.index("--model") + 1]) == model
-        assert (
-            Path(command[command.index("--database") + 1])
-            == tmp_path / "current/events.db"
-        )
-        assert kwargs["encoding"] == "utf-8"
-        assert command[command.index("--imgsz") + 1] == "960"
-        destination = Path(command[command.index("--output") + 1])
-        destination.parent.mkdir(parents=True)
-        destination.write_bytes(b"encoded-video-contract")
-        destination.with_suffix(".json").write_text(
-            json.dumps({"status": "completed"}), encoding="utf-8"
-        )
-        return SimpleNamespace(returncode=0, stdout="", stderr="")
-
-    monkeypatch.setattr(streamlit_app.subprocess, "run", fake_process)
-    result = streamlit_app.analyze_video(tmp_path / "uploaded.mp4", "garagem")
-    assert result["payload"]["status"] == "completed"
-
-
-def test_missing_model_has_specific_error_before_processing(tmp_path, monkeypatch):
-    monkeypatch.setenv("DRENAVISION_MODEL_PATH", str(tmp_path / "missing.pt"))
     monkeypatch.setattr(
         streamlit_app.subprocess,
         "run",
         lambda *_args, **_kwargs: pytest.fail(
-            "must fail before launching video inference"
+            "UI must not launch a second model process"
         ),
     )
-    with pytest.raises(RuntimeError, match="modelo de análise não foi encontrado"):
-        streamlit_app.analyze_video(tmp_path / "uploaded.mp4", "")
+
+    def api(method, path, **kwargs):
+        calls.append((method, path))
+        assert kwargs["timeout"] == 1800
+        if method == "POST":
+            name, handle, mime = kwargs["files"]["file"]
+            assert name == "uploaded.mp4" and mime == "video/mp4"
+            assert handle.read() == source.read_bytes()
+            assert kwargs["data"] == {"point_id": "garagem"}
+            handles.append(handle)
+            return httpx.Response(200, json=payload)
+        return httpx.Response(
+            200, content=b"browser MP4 bytes", headers={"content-type": "video/mp4"}
+        )
+
+    monkeypatch.setattr(streamlit_app, "api_request", api)
+    result = streamlit_app.analyze_video(source, "garagem")
+    assert calls == [
+        ("POST", "/vision/predict/video"),
+        ("GET", f"/vision/videos/{identifier}"),
+    ]
+    assert handles[0].closed
+    assert Path(result["path"]).read_bytes() == b"browser MP4 bytes"
+    assert (
+        json.loads(
+            Path(result["path"]).with_suffix(".json").read_text(encoding="utf-8")
+        )
+        == payload
+    )
+    assert source.read_bytes() == b"original recorded video"
+
+
+@pytest.mark.parametrize(
+    "status, message",
+    [
+        (503, "não está pronto"),
+        (413, "excede o limite"),
+        (400, "Não foi possível analisar"),
+    ],
+)
+def test_video_api_failure_does_not_create_a_local_result(
+    tmp_path, monkeypatch, status, message
+):
+    source = tmp_path / "uploaded.mp4"
+    source.write_bytes(b"original")
+    monkeypatch.setattr(streamlit_app, "RESULTS_DIR", tmp_path / "results")
+    monkeypatch.setattr(
+        streamlit_app,
+        "api_request",
+        lambda *_a, **_kw: httpx.Response(status, json={"detail": "failure"}),
+    )
+    with pytest.raises(RuntimeError, match=message):
+        streamlit_app.analyze_video(source, "")
+    assert not (tmp_path / "results").exists()
+    assert source.read_bytes() == b"original"
+
+
+def test_api_request_allows_video_timeout_override_without_duplicate_keyword(
+    monkeypatch,
+):
+    timeouts = []
+
+    def request(method, url, *, timeout, **kwargs):
+        timeouts.append(timeout)
+        return httpx.Response(200)
+
+    monkeypatch.setattr(streamlit_app.httpx, "request", request)
+    streamlit_app.api_request("GET", "/health")
+    streamlit_app.api_request("POST", "/vision/predict/video", timeout=1800)
+    assert timeouts == [90, 1800]
+
+
+def test_video_download_failure_keeps_upload_and_does_not_create_broken_player_file(
+    tmp_path, monkeypatch
+):
+    source = tmp_path / "uploaded.mp4"
+    source.write_bytes(b"original")
+    identifier = str(uuid4())
+    monkeypatch.setattr(streamlit_app, "RESULTS_DIR", tmp_path / "results")
+
+    def api(method, *_args, **_kwargs):
+        return (
+            httpx.Response(
+                200,
+                json={
+                    "status": "completed",
+                    "event_id": identifier,
+                    "video_url": f"/vision/videos/{identifier}",
+                },
+            )
+            if method == "POST"
+            else httpx.Response(404)
+        )
+
+    monkeypatch.setattr(streamlit_app, "api_request", api)
+    with pytest.raises(RuntimeError, match="não pôde ser carregado"):
+        streamlit_app.analyze_video(source, "")
+    assert not (tmp_path / "results").exists()
+    assert source.read_bytes() == b"original"

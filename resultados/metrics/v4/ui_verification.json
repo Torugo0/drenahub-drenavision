@@ -1,0 +1,41 @@
+{
+  "checked_at_utc": "2026-11-18T01:05:57.394212+00:00",
+  "application_health": {
+    "status": "ok",
+    "model_loaded": true,
+    "model_path": "best.pt",
+    "database_ready": true,
+    "version": "0.5.0"
+  },
+  "method": "Real browser uploads, visible cards, annotated images and native HTML video playback; no simulated results",
+  "image_profile": "pipeline-4c5c993223219929",
+  "images": [
+    {
+      "input": "teste.jpg",
+      "event_id": "c20287da-dfd3-4823-930f-c75bf8d0e2c0",
+      "animal_marks": 1,
+      "screenshot_local": "resultados/local/v4/ui/rato_interface_v050.jpg"
+    },
+    {
+      "input": "teste1.jpg",
+      "event_id": "8c7c9943-293f-480e-909e-cf6e9e259020",
+      "residue_marks": 5,
+      "screenshot_local": "resultados/local/v4/ui/residuos_interface_v050.jpg"
+    }
+  ],
+  "video": {
+    "input": "rato_residuos.mp4",
+    "event_id": "7cd7a3c9-9e31-4e85-b853-7c69f525855d",
+    "base_pipeline_version": "pipeline-4c5c993223219929",
+    "video_profile": "pipeline-380203274bf9c28c",
+    "model_ownership": "borrowed API water/object/verifier instances; independent lightweight master tracker in the same process",
+    "processed_frames": 240,
+    "processing_seconds": 90.8149583000004,
+    "player_duration_seconds": 12,
+    "player_final_time_seconds": 12,
+    "player_ended": true,
+    "player_error": null,
+    "screenshot_local": "resultados/local/v4/ui/video_interface_v050.jpg"
+  },
+  "scope": "The two new user photos are development regressions, excluded from training and calibration. The demonstration video is a known adaptation source, not independent accuracy evidence."
+}

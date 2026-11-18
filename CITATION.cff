@@ -5,9 +5,15 @@ message: >-
 title: "DrenaVision: visão computacional para inspeção preventiva de drenagem"
 type: software
 authors:
-  - name: "Equipe DrenaHub"
-version: 0.4.0
-date-released: 2026-11-16
+  - given-names: "Gabriel"
+    family-names: "Machado Carrara Pimentel"
+  - given-names: "Lourenzo"
+    family-names: "Ramos"
+  - given-names: "Vítor Hugo"
+    family-names: "Rodrigues"
+version: 0.5.0
+date-released: 2026-11-17
+repository-code: "https://github.com/Torugo0/drenahub-drenavision"
 license: AGPL-3.0-only
 keywords:
   - computer vision

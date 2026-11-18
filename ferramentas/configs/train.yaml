@@ -1,5 +1,6 @@
 # HISTÓRICO V1: usa as caixas originais iRodent defeituosas, preservadas para auditoria.
-# Para o modelo atual, use train_v2.yaml. Não publica sobre o checkpoint ativo.
+# Para reproduzir o YOLO customizado mantido na versão 0.5, use train_v3.yaml.
+# train_v2.yaml preserva o protocolo intermediário. Este arquivo não publica sobre o checkpoint ativo.
 # DrenaVision - fine-tuning reproduzivel. Este arquivo nao prova que o treino ocorreu;
 # a evidencia real e gerada em resultados/local/training/<run>/training_manifest.json.
 model: yolo26n.pt

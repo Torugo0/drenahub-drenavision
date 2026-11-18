@@ -29,6 +29,54 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--iou", type=float, default=settings.iou_threshold)
     parser.add_argument("--device", default=settings.device)
     parser.add_argument(
+        "--object-model",
+        type=Path,
+        default=settings.object_model_path,
+        help="Especialista local de objetos; falha se configurado e indisponível",
+    )
+    parser.add_argument(
+        "--no-objects",
+        action="store_true",
+        help="Desativa explicitamente o especialista de objetos neste comando",
+    )
+    parser.add_argument(
+        "--object-verifier", type=Path, default=settings.object_verifier_path
+    )
+    parser.add_argument(
+        "--object-residue-min-margin",
+        type=float,
+        default=settings.object_residue_min_margin,
+    )
+    parser.add_argument(
+        "--object-animal-min-margin",
+        type=float,
+        default=settings.object_animal_min_margin,
+    )
+    parser.add_argument(
+        "--object-residue-confidence",
+        type=float,
+        default=settings.object_residue_confidence,
+    )
+    parser.add_argument(
+        "--object-animal-confidence",
+        type=float,
+        default=settings.object_animal_confidence,
+    )
+    parser.add_argument(
+        "--object-text-confidence", type=float, default=settings.object_text_confidence
+    )
+    parser.add_argument(
+        "--object-mode",
+        choices=("augment", "replace", "animal_replace"),
+        default=settings.object_mode,
+    )
+    parser.add_argument(
+        "--object-shortest-edge", type=int, default=settings.object_shortest_edge
+    )
+    parser.add_argument(
+        "--object-longest-edge", type=int, default=settings.object_longest_edge
+    )
+    parser.add_argument(
         "--water-model",
         type=Path,
         default=settings.water_model_path,
@@ -116,6 +164,16 @@ def main(argv: list[str] | None = None) -> int:
         residue_confidence=args.residue_conf,
         animal_confidence=args.animal_conf,
         water_confirmation_seconds=args.water_confirmation_seconds,
+        object_model_path=None if args.no_objects else args.object_model,
+        object_residue_confidence=args.object_residue_confidence,
+        object_animal_confidence=args.object_animal_confidence,
+        object_text_confidence=args.object_text_confidence,
+        object_mode=args.object_mode,
+        object_shortest_edge=args.object_shortest_edge,
+        object_longest_edge=args.object_longest_edge,
+        object_verifier_path=None if args.no_objects else args.object_verifier,
+        object_residue_min_margin=args.object_residue_min_margin,
+        object_animal_min_margin=args.object_animal_min_margin,
     )
     if args.database is not None:
         event = persist_video_event(

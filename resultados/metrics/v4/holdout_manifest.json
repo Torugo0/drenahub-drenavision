@@ -1,0 +1,937 @@
+{
+  "schema_version": 1,
+  "frozen_at_utc": "2026-11-18T00:03:08.749904+00:00",
+  "purpose": "New image holdout from known CLICK source for post-selection evaluation, never training or calibration.",
+  "scope": "Known-source/camera holdout, not an unseen-domain generalization claim.",
+  "selection": "seeded shuffle of unused native test identities, no model inference; exact/hash/pHash<=4 exclusion against current full dataset, extra test, all JPG examples and accepted holdout items",
+  "seed": 20261117,
+  "images": 40,
+  "boxes_class_0": 60,
+  "candidate_exclusions": [],
+  "images_by_native_split": {
+    "test": 40
+  },
+  "source_annotations_scope": "Native single-class litter boxes; no absence of other target classes may be inferred from missing labels. Review before scoring.",
+  "records": [
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (210).jpg",
+      "label": "dados/raw/v4/click_holdout/labels/trash (210).txt",
+      "sha256": "e624b7a82e93ed098abadd77de3c9862fb5c51d7c152cf76b205ba3aac948709",
+      "label_sha256": "13773fde8a4bca32b582bb102e0584e602e44a601c5d887b5b7d7191ca11b074",
+      "source_key": "click_trash",
+      "native_split": "test",
+      "source_group": "click::trash (210)",
+      "source_path": "images/test/trash (210).jpg",
+      "source_url": "https://data.mendeley.com/datasets/htcvvz6fm2/2",
+      "source_license": "CC BY 4.0",
+      "size": [
+        2591,
+        2591
+      ],
+      "boxes_class_0": 1,
+      "source_litter_presence": true,
+      "cross_class_presence": {
+        "1": null,
+        "2": null
+      },
+      "review_state": "source annotations retained; cross-class review pending before evaluation"
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (284).jpg",
+      "label": "dados/raw/v4/click_holdout/labels/trash (284).txt",
+      "sha256": "47a7781c72d577be303e971f6b63ed08c7dfd0b28a05f22193658fe7280bc966",
+      "label_sha256": "d3809c9c981bceebb11ceba0be90d9db7dfd2f8f8b876c8af31af4f8856b6e13",
+      "source_key": "click_trash",
+      "native_split": "test",
+      "source_group": "click::trash (284)",
+      "source_path": "images/test/trash (284).jpg",
+      "source_url": "https://data.mendeley.com/datasets/htcvvz6fm2/2",
+      "source_license": "CC BY 4.0",
+      "size": [
+        2003,
+        2003
+      ],
+      "boxes_class_0": 1,
+      "source_litter_presence": true,
+      "cross_class_presence": {
+        "1": null,
+        "2": null
+      },
+      "review_state": "source annotations retained; cross-class review pending before evaluation"
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (1023).jpg",
+      "label": "dados/raw/v4/click_holdout/labels/trash (1023).txt",
+      "sha256": "9c07b8cbf5424b535a677743a5a134aa4c0b03bae4053141b4075b4e9252cb7e",
+      "label_sha256": "182f68780e0417f22e56b6e1ec05c4ce518c8976a01dd15c08bbc4c377e0b9a9",
+      "source_key": "click_trash",
+      "native_split": "test",
+      "source_group": "click::trash (1023)",
+      "source_path": "images/test/trash (1023).jpg",
+      "source_url": "https://data.mendeley.com/datasets/htcvvz6fm2/2",
+      "source_license": "CC BY 4.0",
+      "size": [
+        4000,
+        3000
+      ],
+      "boxes_class_0": 2,
+      "source_litter_presence": true,
+      "cross_class_presence": {
+        "1": null,
+        "2": null
+      },
+      "review_state": "source annotations retained; cross-class review pending before evaluation"
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (966).jpg",
+      "label": "dados/raw/v4/click_holdout/labels/trash (966).txt",
+      "sha256": "08b72799e161f98e6c4f72c935c24e3e9ab9081b9598c91f3be7251de1bf6ba5",
+      "label_sha256": "71cdca615f9d8f0fe1225c567ec8804065fc3a8bdd8347aaa9e080ca827f0714",
+      "source_key": "click_trash",
+      "native_split": "test",
+      "source_group": "click::trash (966)",
+      "source_path": "images/test/trash (966).jpg",
+      "source_url": "https://data.mendeley.com/datasets/htcvvz6fm2/2",
+      "source_license": "CC BY 4.0",
+      "size": [
+        3072,
+        3072
+      ],
+      "boxes_class_0": 1,
+      "source_litter_presence": true,
+      "cross_class_presence": {
+        "1": null,
+        "2": null
+      },
+      "review_state": "source annotations retained; cross-class review pending before evaluation"
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (506).jpg",
+      "label": "dados/raw/v4/click_holdout/labels/trash (506).txt",
+      "sha256": "395ac6783ca451772bcfca285aa7814690d895a291ae8969a62c3cb516cf6eb9",
+      "label_sha256": "0a21f42a363afacd7e8891287a37b68d6b9547a447abd0817d75bd13d8273c1c",
+      "source_key": "click_trash",
+      "native_split": "test",
+      "source_group": "click::trash (506)",
+      "source_path": "images/test/trash (506).jpg",
+      "source_url": "https://data.mendeley.com/datasets/htcvvz6fm2/2",
+      "source_license": "CC BY 4.0",
+      "size": [
+        3072,
+        3072
+      ],
+      "boxes_class_0": 1,
+      "source_litter_presence": true,
+      "cross_class_presence": {
+        "1": null,
+        "2": null
+      },
+      "review_state": "source annotations retained; cross-class review pending before evaluation"
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (878).jpg",
+      "label": "dados/raw/v4/click_holdout/labels/trash (878).txt",
+      "sha256": "cb0adb2823a3650ff3afbcbd8438e93ad057080712d9c31bb3be79668693add1",
+      "label_sha256": "4b2da312857c91ee7427e8f3af45d8fd552eecb02c5aa5984877b4a53e7d5694",
+      "source_key": "click_trash",
+      "native_split": "test",
+      "source_group": "click::trash (878)",
+      "source_path": "images/test/trash (878).jpg",
+      "source_url": "https://data.mendeley.com/datasets/htcvvz6fm2/2",
+      "source_license": "CC BY 4.0",
+      "size": [
+        3072,
+        3072
+      ],
+      "boxes_class_0": 2,
+      "source_litter_presence": true,
+      "cross_class_presence": {
+        "1": null,
+        "2": null
+      },
+      "review_state": "source annotations retained; cross-class review pending before evaluation"
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (601).jpg",
+      "label": "dados/raw/v4/click_holdout/labels/trash (601).txt",
+      "sha256": "b50b33f70831cc2caf017c4106c07153746f22bd7686fbd9a6d2b1bcf005d675",
+      "label_sha256": "4473a60fcde44d206dcd7dcf3de83373e0fefbb1ed8d0c6166665c5358a4621f",
+      "source_key": "click_trash",
+      "native_split": "test",
+      "source_group": "click::trash (601)",
+      "source_path": "images/test/trash (601).jpg",
+      "source_url": "https://data.mendeley.com/datasets/htcvvz6fm2/2",
+      "source_license": "CC BY 4.0",
+      "size": [
+        3468,
+        3468
+      ],
+      "boxes_class_0": 1,
+      "source_litter_presence": true,
+      "cross_class_presence": {
+        "1": null,
+        "2": null
+      },
+      "review_state": "source annotations retained; cross-class review pending before evaluation"
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (564).jpg",
+      "label": "dados/raw/v4/click_holdout/labels/trash (564).txt",
+      "sha256": "8fae28bc83fdcd3b0903533f59724368abbbb07c51bcb7003a1e6827ea42f6cb",
+      "label_sha256": "b3f3f70d1801a171acf37bf8fc002576932be8c3cc0251b8c0300673832740b5",
+      "source_key": "click_trash",
+      "native_split": "test",
+      "source_group": "click::trash (564)",
+      "source_path": "images/test/trash (564).jpg",
+      "source_url": "https://data.mendeley.com/datasets/htcvvz6fm2/2",
+      "source_license": "CC BY 4.0",
+      "size": [
+        3468,
+        3468
+      ],
+      "boxes_class_0": 1,
+      "source_litter_presence": true,
+      "cross_class_presence": {
+        "1": null,
+        "2": null
+      },
+      "review_state": "source annotations retained; cross-class review pending before evaluation"
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (450).jpg",
+      "label": "dados/raw/v4/click_holdout/labels/trash (450).txt",
+      "sha256": "e65bd4a8525142807728259bc0ef139fef8b1a903cdf8d9b093cdf12c7e43026",
+      "label_sha256": "bd7212aa305660b97dcc9dcbf76f4c73d97ce7828978aea391702b53d2eb6d43",
+      "source_key": "click_trash",
+      "native_split": "test",
+      "source_group": "click::trash (450)",
+      "source_path": "images/test/trash (450).jpg",
+      "source_url": "https://data.mendeley.com/datasets/htcvvz6fm2/2",
+      "source_license": "CC BY 4.0",
+      "size": [
+        3024,
+        3024
+      ],
+      "boxes_class_0": 2,
+      "source_litter_presence": true,
+      "cross_class_presence": {
+        "1": null,
+        "2": null
+      },
+      "review_state": "source annotations retained; cross-class review pending before evaluation"
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (97).jpg",
+      "label": "dados/raw/v4/click_holdout/labels/trash (97).txt",
+      "sha256": "bab64ee5d3bbda1986c057c82eb9065c63959136b043f6855b5a84129e2b70c1",
+      "label_sha256": "4094c41aaf575e22a23291c1b59256c32646c30b442861b163fba2a6dfcb5e65",
+      "source_key": "click_trash",
+      "native_split": "test",
+      "source_group": "click::trash (97)",
+      "source_path": "images/test/trash (97).jpg",
+      "source_url": "https://data.mendeley.com/datasets/htcvvz6fm2/2",
+      "source_license": "CC BY 4.0",
+      "size": [
+        3072,
+        3072
+      ],
+      "boxes_class_0": 1,
+      "source_litter_presence": true,
+      "cross_class_presence": {
+        "1": null,
+        "2": null
+      },
+      "review_state": "source annotations retained; cross-class review pending before evaluation"
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (164).jpg",
+      "label": "dados/raw/v4/click_holdout/labels/trash (164).txt",
+      "sha256": "600d4a2c8406883974df65b887cab8daf182e72ff1fee1cde2998101204ebb03",
+      "label_sha256": "536b995a034537fbffec40be76e27bb09dc4377ec3448334eebe9837e1a2d68a",
+      "source_key": "click_trash",
+      "native_split": "test",
+      "source_group": "click::trash (164)",
+      "source_path": "images/test/trash (164).jpg",
+      "source_url": "https://data.mendeley.com/datasets/htcvvz6fm2/2",
+      "source_license": "CC BY 4.0",
+      "size": [
+        4284,
+        4284
+      ],
+      "boxes_class_0": 1,
+      "source_litter_presence": true,
+      "cross_class_presence": {
+        "1": null,
+        "2": null
+      },
+      "review_state": "source annotations retained; cross-class review pending before evaluation"
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (328).jpg",
+      "label": "dados/raw/v4/click_holdout/labels/trash (328).txt",
+      "sha256": "4af99205b0a669070c846bb7848ac5805906b1a033b3dff8b055472f093925ad",
+      "label_sha256": "c7eaa24f3ebb9ad2d643335af9ed96ebe7b277b2ea505937a659e42679ae8ff1",
+      "source_key": "click_trash",
+      "native_split": "test",
+      "source_group": "click::trash (328)",
+      "source_path": "images/test/trash (328).jpg",
+      "source_url": "https://data.mendeley.com/datasets/htcvvz6fm2/2",
+      "source_license": "CC BY 4.0",
+      "size": [
+        2220,
+        2220
+      ],
+      "boxes_class_0": 1,
+      "source_litter_presence": true,
+      "cross_class_presence": {
+        "1": null,
+        "2": null
+      },
+      "review_state": "source annotations retained; cross-class review pending before evaluation"
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (929).jpg",
+      "label": "dados/raw/v4/click_holdout/labels/trash (929).txt",
+      "sha256": "eef185c230cf2c5149bc2e2e9002a1a690f19b89cf10054505e794db0a08517c",
+      "label_sha256": "53952a8d87e5dc3ac74f9b7c63fa251a1bead9e62227f855862dd37377583fca",
+      "source_key": "click_trash",
+      "native_split": "test",
+      "source_group": "click::trash (929)",
+      "source_path": "images/test/trash (929).jpg",
+      "source_url": "https://data.mendeley.com/datasets/htcvvz6fm2/2",
+      "source_license": "CC BY 4.0",
+      "size": [
+        3072,
+        3072
+      ],
+      "boxes_class_0": 1,
+      "source_litter_presence": true,
+      "cross_class_presence": {
+        "1": null,
+        "2": null
+      },
+      "review_state": "source annotations retained; cross-class review pending before evaluation"
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (1123).jpg",
+      "label": "dados/raw/v4/click_holdout/labels/trash (1123).txt",
+      "sha256": "804d7a76937e45e472ddc5689ae2e8dc097b2a26a4dd4294aa03cff66d527166",
+      "label_sha256": "442c7d1abf85e63da516a24943523b52b64390b65c335ca4959e54aa102fdf4a",
+      "source_key": "click_trash",
+      "native_split": "test",
+      "source_group": "click::trash (1123)",
+      "source_path": "images/test/trash (1123).jpg",
+      "source_url": "https://data.mendeley.com/datasets/htcvvz6fm2/2",
+      "source_license": "CC BY 4.0",
+      "size": [
+        3072,
+        3072
+      ],
+      "boxes_class_0": 1,
+      "source_litter_presence": true,
+      "cross_class_presence": {
+        "1": null,
+        "2": null
+      },
+      "review_state": "source annotations retained; cross-class review pending before evaluation"
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (190).jpg",
+      "label": "dados/raw/v4/click_holdout/labels/trash (190).txt",
+      "sha256": "4aef49e2e30e6c347d629a1f852dc16668ad02ade9b00a197f4638773258c259",
+      "label_sha256": "a2bbe60fe77dceb5db1dd28d7ef9bf573305f2aa6e156c6d2107d7087ab970a8",
+      "source_key": "click_trash",
+      "native_split": "test",
+      "source_group": "click::trash (190)",
+      "source_path": "images/test/trash (190).jpg",
+      "source_url": "https://data.mendeley.com/datasets/htcvvz6fm2/2",
+      "source_license": "CC BY 4.0",
+      "size": [
+        3886,
+        3886
+      ],
+      "boxes_class_0": 5,
+      "source_litter_presence": true,
+      "cross_class_presence": {
+        "1": null,
+        "2": null
+      },
+      "review_state": "source annotations retained; cross-class review pending before evaluation"
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (477).jpg",
+      "label": "dados/raw/v4/click_holdout/labels/trash (477).txt",
+      "sha256": "2ebd5b05065e0ba640d6b2b455e49496b6e07fd524052e9b61b7daba87290340",
+      "label_sha256": "861b904f4131214256216e5c4160b04aa1cb24191b29ed288a83a2ed0823e8de",
+      "source_key": "click_trash",
+      "native_split": "test",
+      "source_group": "click::trash (477)",
+      "source_path": "images/test/trash (477).jpg",
+      "source_url": "https://data.mendeley.com/datasets/htcvvz6fm2/2",
+      "source_license": "CC BY 4.0",
+      "size": [
+        3024,
+        3024
+      ],
+      "boxes_class_0": 3,
+      "source_litter_presence": true,
+      "cross_class_presence": {
+        "1": null,
+        "2": null
+      },
+      "review_state": "source annotations retained; cross-class review pending before evaluation"
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (1121).jpg",
+      "label": "dados/raw/v4/click_holdout/labels/trash (1121).txt",
+      "sha256": "2f6c222929edaecc5a183e2302c7fab447e7b9709a40064b697bc7adda4b53a4",
+      "label_sha256": "c3db787c07d673d4cefef093f9aa253aa822f3c35e27e2b6f58e992a74aa2fa3",
+      "source_key": "click_trash",
+      "native_split": "test",
+      "source_group": "click::trash (1121)",
+      "source_path": "images/test/trash (1121).jpg",
+      "source_url": "https://data.mendeley.com/datasets/htcvvz6fm2/2",
+      "source_license": "CC BY 4.0",
+      "size": [
+        3072,
+        3072
+      ],
+      "boxes_class_0": 1,
+      "source_litter_presence": true,
+      "cross_class_presence": {
+        "1": null,
+        "2": null
+      },
+      "review_state": "source annotations retained; cross-class review pending before evaluation"
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (334).jpg",
+      "label": "dados/raw/v4/click_holdout/labels/trash (334).txt",
+      "sha256": "7d055fb03a64b29b0607cd19f355ea162406380195fa1f003a6a212eb92399b8",
+      "label_sha256": "c1934fba2c0e9793e6c5d3ef8111e37f4fece62aa75f13e94824bd60680090e0",
+      "source_key": "click_trash",
+      "native_split": "test",
+      "source_group": "click::trash (334)",
+      "source_path": "images/test/trash (334).jpg",
+      "source_url": "https://data.mendeley.com/datasets/htcvvz6fm2/2",
+      "source_license": "CC BY 4.0",
+      "size": [
+        2109,
+        2109
+      ],
+      "boxes_class_0": 1,
+      "source_litter_presence": true,
+      "cross_class_presence": {
+        "1": null,
+        "2": null
+      },
+      "review_state": "source annotations retained; cross-class review pending before evaluation"
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (549).jpg",
+      "label": "dados/raw/v4/click_holdout/labels/trash (549).txt",
+      "sha256": "a14d929c02e1e9e7a1c74427206aebbf5e6638e843b70465f2bdd33c467c9d7a",
+      "label_sha256": "7f8c9226bdf6491910499876b0f45a84a08b95593521ed74323df6c120b1ecf6",
+      "source_key": "click_trash",
+      "native_split": "test",
+      "source_group": "click::trash (549)",
+      "source_path": "images/test/trash (549).jpg",
+      "source_url": "https://data.mendeley.com/datasets/htcvvz6fm2/2",
+      "source_license": "CC BY 4.0",
+      "size": [
+        3072,
+        3072
+      ],
+      "boxes_class_0": 4,
+      "source_litter_presence": true,
+      "cross_class_presence": {
+        "1": null,
+        "2": null
+      },
+      "review_state": "source annotations retained; cross-class review pending before evaluation"
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (665).jpg",
+      "label": "dados/raw/v4/click_holdout/labels/trash (665).txt",
+      "sha256": "90ce3f60082e59ba809ef461fc093e3c966355b08e566a0a09b7f23e6b4943e5",
+      "label_sha256": "d63717aa322adbf46055bd7da14ec48158d0f8cce8476ee7f52f4b55619b559d",
+      "source_key": "click_trash",
+      "native_split": "test",
+      "source_group": "click::trash (665)",
+      "source_path": "images/test/trash (665).jpg",
+      "source_url": "https://data.mendeley.com/datasets/htcvvz6fm2/2",
+      "source_license": "CC BY 4.0",
+      "size": [
+        3468,
+        3468
+      ],
+      "boxes_class_0": 1,
+      "source_litter_presence": true,
+      "cross_class_presence": {
+        "1": null,
+        "2": null
+      },
+      "review_state": "source annotations retained; cross-class review pending before evaluation"
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (1011).jpg",
+      "label": "dados/raw/v4/click_holdout/labels/trash (1011).txt",
+      "sha256": "44ac514b5c5fdb988fb27ed269cac229f81841387474cdf87c7618251b021ccb",
+      "label_sha256": "f4c3ed891e849628ec93ef45ebb88feac99c847ad9bb684976f3ccebc138a0dc",
+      "source_key": "click_trash",
+      "native_split": "test",
+      "source_group": "click::trash (1011)",
+      "source_path": "images/test/trash (1011).jpg",
+      "source_url": "https://data.mendeley.com/datasets/htcvvz6fm2/2",
+      "source_license": "CC BY 4.0",
+      "size": [
+        4096,
+        3072
+      ],
+      "boxes_class_0": 2,
+      "source_litter_presence": true,
+      "cross_class_presence": {
+        "1": null,
+        "2": null
+      },
+      "review_state": "source annotations retained; cross-class review pending before evaluation"
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (782).jpg",
+      "label": "dados/raw/v4/click_holdout/labels/trash (782).txt",
+      "sha256": "d0ceb714176269a24bc4b8df2df88cd2976ccb52f0ba527e9b0128302135643a",
+      "label_sha256": "94d3fdcd68a29e0f7154fd751c2cec1741dd2be789bd68a86de4cadd5fa9dea0",
+      "source_key": "click_trash",
+      "native_split": "test",
+      "source_group": "click::trash (782)",
+      "source_path": "images/test/trash (782).jpg",
+      "source_url": "https://data.mendeley.com/datasets/htcvvz6fm2/2",
+      "source_license": "CC BY 4.0",
+      "size": [
+        4624,
+        3468
+      ],
+      "boxes_class_0": 1,
+      "source_litter_presence": true,
+      "cross_class_presence": {
+        "1": null,
+        "2": null
+      },
+      "review_state": "source annotations retained; cross-class review pending before evaluation"
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (741).jpg",
+      "label": "dados/raw/v4/click_holdout/labels/trash (741).txt",
+      "sha256": "def2744f200749c061095e5f2cc749f068b063cd2950c07d78665babde76afba",
+      "label_sha256": "269c23e3a6d25b471e722fa59f423311799f3d730722db4250427a07bdfce1f1",
+      "source_key": "click_trash",
+      "native_split": "test",
+      "source_group": "click::trash (741)",
+      "source_path": "images/test/trash (741).jpg",
+      "source_url": "https://data.mendeley.com/datasets/htcvvz6fm2/2",
+      "source_license": "CC BY 4.0",
+      "size": [
+        3468,
+        3468
+      ],
+      "boxes_class_0": 1,
+      "source_litter_presence": true,
+      "cross_class_presence": {
+        "1": null,
+        "2": null
+      },
+      "review_state": "source annotations retained; cross-class review pending before evaluation"
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (55).jpg",
+      "label": "dados/raw/v4/click_holdout/labels/trash (55).txt",
+      "sha256": "6a952540de4cc506edee19d69b03c308f9db68fa9ba8386ec919e5f8e80dbefe",
+      "label_sha256": "957fffc3c3e052abb7766a2fb0548a6f24f05db871d2f8afac9c974b089f2321",
+      "source_key": "click_trash",
+      "native_split": "test",
+      "source_group": "click::trash (55)",
+      "source_path": "images/test/trash (55).jpg",
+      "source_url": "https://data.mendeley.com/datasets/htcvvz6fm2/2",
+      "source_license": "CC BY 4.0",
+      "size": [
+        3072,
+        3072
+      ],
+      "boxes_class_0": 1,
+      "source_litter_presence": true,
+      "cross_class_presence": {
+        "1": null,
+        "2": null
+      },
+      "review_state": "source annotations retained; cross-class review pending before evaluation"
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (1094).jpg",
+      "label": "dados/raw/v4/click_holdout/labels/trash (1094).txt",
+      "sha256": "650791ba906ceab834a37eb53a0cf5cfd8c5f7b956838b6fa9166ea197aa2048",
+      "label_sha256": "a17f272d9359778d17c51897a73dc7e503d15915b1bb1c91b877d4dfd125c677",
+      "source_key": "click_trash",
+      "native_split": "test",
+      "source_group": "click::trash (1094)",
+      "source_path": "images/test/trash (1094).jpg",
+      "source_url": "https://data.mendeley.com/datasets/htcvvz6fm2/2",
+      "source_license": "CC BY 4.0",
+      "size": [
+        3072,
+        3072
+      ],
+      "boxes_class_0": 1,
+      "source_litter_presence": true,
+      "cross_class_presence": {
+        "1": null,
+        "2": null
+      },
+      "review_state": "source annotations retained; cross-class review pending before evaluation"
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (811).jpg",
+      "label": "dados/raw/v4/click_holdout/labels/trash (811).txt",
+      "sha256": "5fe2d06546abc6edf6af32ba93afacb9752ecf94ff4a8628bcd864e1865d07b1",
+      "label_sha256": "a827c302230386330922b8cc30530af22224e76f55ecbebf9e2fafe88ebe5bb1",
+      "source_key": "click_trash",
+      "native_split": "test",
+      "source_group": "click::trash (811)",
+      "source_path": "images/test/trash (811).jpg",
+      "source_url": "https://data.mendeley.com/datasets/htcvvz6fm2/2",
+      "source_license": "CC BY 4.0",
+      "size": [
+        4624,
+        3468
+      ],
+      "boxes_class_0": 2,
+      "source_litter_presence": true,
+      "cross_class_presence": {
+        "1": null,
+        "2": null
+      },
+      "review_state": "source annotations retained; cross-class review pending before evaluation"
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (865).jpg",
+      "label": "dados/raw/v4/click_holdout/labels/trash (865).txt",
+      "sha256": "e9d63f92cc2f2fc76566e2ad869cfbdadf1113dd7eb3f5a7431fb8416be5493a",
+      "label_sha256": "9328857dda0435c13ea96e4c6eba067ec9fb2e753b915f275b7d51f25715d2a0",
+      "source_key": "click_trash",
+      "native_split": "test",
+      "source_group": "click::trash (865)",
+      "source_path": "images/test/trash (865).jpg",
+      "source_url": "https://data.mendeley.com/datasets/htcvvz6fm2/2",
+      "source_license": "CC BY 4.0",
+      "size": [
+        3072,
+        3072
+      ],
+      "boxes_class_0": 1,
+      "source_litter_presence": true,
+      "cross_class_presence": {
+        "1": null,
+        "2": null
+      },
+      "review_state": "source annotations retained; cross-class review pending before evaluation"
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (748).jpg",
+      "label": "dados/raw/v4/click_holdout/labels/trash (748).txt",
+      "sha256": "d4a6d3373c16eb878246574b5b6728b47009908fc5744b344f7a6535b509ba53",
+      "label_sha256": "104a982386a3f59bcb7e5b5b23a3209650d68d8d5a04a2a168bcd56ec76da88e",
+      "source_key": "click_trash",
+      "native_split": "test",
+      "source_group": "click::trash (748)",
+      "source_path": "images/test/trash (748).jpg",
+      "source_url": "https://data.mendeley.com/datasets/htcvvz6fm2/2",
+      "source_license": "CC BY 4.0",
+      "size": [
+        3468,
+        3468
+      ],
+      "boxes_class_0": 1,
+      "source_litter_presence": true,
+      "cross_class_presence": {
+        "1": null,
+        "2": null
+      },
+      "review_state": "source annotations retained; cross-class review pending before evaluation"
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (436).jpg",
+      "label": "dados/raw/v4/click_holdout/labels/trash (436).txt",
+      "sha256": "bdee6abfb80383663bc664c2329f51f92f36c624a2147d8e8c842cc690f2fb77",
+      "label_sha256": "b8d155244386b6532f67595074e8ac940a5a7ca64fd55c3defdf96dd86f0bef8",
+      "source_key": "click_trash",
+      "native_split": "test",
+      "source_group": "click::trash (436)",
+      "source_path": "images/test/trash (436).jpg",
+      "source_url": "https://data.mendeley.com/datasets/htcvvz6fm2/2",
+      "source_license": "CC BY 4.0",
+      "size": [
+        3024,
+        3024
+      ],
+      "boxes_class_0": 4,
+      "source_litter_presence": true,
+      "cross_class_presence": {
+        "1": null,
+        "2": null
+      },
+      "review_state": "source annotations retained; cross-class review pending before evaluation"
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (52).jpg",
+      "label": "dados/raw/v4/click_holdout/labels/trash (52).txt",
+      "sha256": "a4d43b50a7d04079709041d553373e66847aeae6e732cc65d0f4f02cf789dd37",
+      "label_sha256": "a6df8ba13bbade8b198ea728f5b671c40a6931b23eb4ab40b4a5e1ded7db6f88",
+      "source_key": "click_trash",
+      "native_split": "test",
+      "source_group": "click::trash (52)",
+      "source_path": "images/test/trash (52).jpg",
+      "source_url": "https://data.mendeley.com/datasets/htcvvz6fm2/2",
+      "source_license": "CC BY 4.0",
+      "size": [
+        3072,
+        3072
+      ],
+      "boxes_class_0": 2,
+      "source_litter_presence": true,
+      "cross_class_presence": {
+        "1": null,
+        "2": null
+      },
+      "review_state": "source annotations retained; cross-class review pending before evaluation"
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (736).jpg",
+      "label": "dados/raw/v4/click_holdout/labels/trash (736).txt",
+      "sha256": "15fbc6c3d1ea77e75cab1d09eb31e20b3c18a700be70f50c3d6411f277001746",
+      "label_sha256": "79bf259a980848ccef86b586482b1e6569f3ebc1f74c15cfeb1353dc35348fa2",
+      "source_key": "click_trash",
+      "native_split": "test",
+      "source_group": "click::trash (736)",
+      "source_path": "images/test/trash (736).jpg",
+      "source_url": "https://data.mendeley.com/datasets/htcvvz6fm2/2",
+      "source_license": "CC BY 4.0",
+      "size": [
+        3468,
+        3468
+      ],
+      "boxes_class_0": 1,
+      "source_litter_presence": true,
+      "cross_class_presence": {
+        "1": null,
+        "2": null
+      },
+      "review_state": "source annotations retained; cross-class review pending before evaluation"
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (947).jpg",
+      "label": "dados/raw/v4/click_holdout/labels/trash (947).txt",
+      "sha256": "02d009624049aa57597d5482e1f5a2ebe54d5bbc9430519dd80088456d98e123",
+      "label_sha256": "e54ba052bdce2dbeeb56e3e70284c34bc3db9d4e9f271134066f5b69d7602e73",
+      "source_key": "click_trash",
+      "native_split": "test",
+      "source_group": "click::trash (947)",
+      "source_path": "images/test/trash (947).jpg",
+      "source_url": "https://data.mendeley.com/datasets/htcvvz6fm2/2",
+      "source_license": "CC BY 4.0",
+      "size": [
+        3072,
+        3072
+      ],
+      "boxes_class_0": 2,
+      "source_litter_presence": true,
+      "cross_class_presence": {
+        "1": null,
+        "2": null
+      },
+      "review_state": "source annotations retained; cross-class review pending before evaluation"
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (433).jpg",
+      "label": "dados/raw/v4/click_holdout/labels/trash (433).txt",
+      "sha256": "582d4dc27052ce9075014b5c2afdfef9d75b857a2802a8fe3a05ce02983b2278",
+      "label_sha256": "3af4699cd894b94647f58e93a0051497782c5bafafbfa6ff0e75385fe1df8b66",
+      "source_key": "click_trash",
+      "native_split": "test",
+      "source_group": "click::trash (433)",
+      "source_path": "images/test/trash (433).jpg",
+      "source_url": "https://data.mendeley.com/datasets/htcvvz6fm2/2",
+      "source_license": "CC BY 4.0",
+      "size": [
+        3024,
+        3024
+      ],
+      "boxes_class_0": 1,
+      "source_litter_presence": true,
+      "cross_class_presence": {
+        "1": null,
+        "2": null
+      },
+      "review_state": "source annotations retained; cross-class review pending before evaluation"
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (547).jpg",
+      "label": "dados/raw/v4/click_holdout/labels/trash (547).txt",
+      "sha256": "033af6118d3718795484df1dbc43945ecd4d37ff4043adb234d60513971a1d3b",
+      "label_sha256": "8e23fa1d4f84896b287c8303c5d5c289239c718a68bed1f5a38cc5d4f0c7b7cd",
+      "source_key": "click_trash",
+      "native_split": "test",
+      "source_group": "click::trash (547)",
+      "source_path": "images/test/trash (547).jpg",
+      "source_url": "https://data.mendeley.com/datasets/htcvvz6fm2/2",
+      "source_license": "CC BY 4.0",
+      "size": [
+        3024,
+        3024
+      ],
+      "boxes_class_0": 1,
+      "source_litter_presence": true,
+      "cross_class_presence": {
+        "1": null,
+        "2": null
+      },
+      "review_state": "source annotations retained; cross-class review pending before evaluation"
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (690).jpg",
+      "label": "dados/raw/v4/click_holdout/labels/trash (690).txt",
+      "sha256": "9efbed4acf4ca382d0bc6b09cc6dec424dc01c55f5268c8005567ccbe4aa0907",
+      "label_sha256": "c6ff170662d6ff324aba138d368f508885cc054a8a4379c16a30206121ead1ad",
+      "source_key": "click_trash",
+      "native_split": "test",
+      "source_group": "click::trash (690)",
+      "source_path": "images/test/trash (690).jpg",
+      "source_url": "https://data.mendeley.com/datasets/htcvvz6fm2/2",
+      "source_license": "CC BY 4.0",
+      "size": [
+        3468,
+        3468
+      ],
+      "boxes_class_0": 1,
+      "source_litter_presence": true,
+      "cross_class_presence": {
+        "1": null,
+        "2": null
+      },
+      "review_state": "source annotations retained; cross-class review pending before evaluation"
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (314).jpg",
+      "label": "dados/raw/v4/click_holdout/labels/trash (314).txt",
+      "sha256": "375f1cbc6ff1be114ec68896991bcf6c413ab797dbc707527ac3e9d09f114b51",
+      "label_sha256": "ab8d1e274b957dba4f9e833739503569d285b8a5e480839be05ab4f4b9038a2f",
+      "source_key": "click_trash",
+      "native_split": "test",
+      "source_group": "click::trash (314)",
+      "source_path": "images/test/trash (314).jpg",
+      "source_url": "https://data.mendeley.com/datasets/htcvvz6fm2/2",
+      "source_license": "CC BY 4.0",
+      "size": [
+        1715,
+        1715
+      ],
+      "boxes_class_0": 1,
+      "source_litter_presence": true,
+      "cross_class_presence": {
+        "1": null,
+        "2": null
+      },
+      "review_state": "source annotations retained; cross-class review pending before evaluation"
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (759).jpg",
+      "label": "dados/raw/v4/click_holdout/labels/trash (759).txt",
+      "sha256": "089a0b00eef6052b8336b69f79ccf72693f959d335372bd214dffb24a07bfcb7",
+      "label_sha256": "405bf24037a2f268106f35f0507baef58e7af9f39e892d118a1e194336c2d830",
+      "source_key": "click_trash",
+      "native_split": "test",
+      "source_group": "click::trash (759)",
+      "source_path": "images/test/trash (759).jpg",
+      "source_url": "https://data.mendeley.com/datasets/htcvvz6fm2/2",
+      "source_license": "CC BY 4.0",
+      "size": [
+        3468,
+        3468
+      ],
+      "boxes_class_0": 1,
+      "source_litter_presence": true,
+      "cross_class_presence": {
+        "1": null,
+        "2": null
+      },
+      "review_state": "source annotations retained; cross-class review pending before evaluation"
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (1116).jpg",
+      "label": "dados/raw/v4/click_holdout/labels/trash (1116).txt",
+      "sha256": "37d55810f885e8d63125c74785b70b639f5daa3085d1de96058f21c2cc285ab5",
+      "label_sha256": "513432955f839ec741e837b413ca2ff5bd8cd47ae0abcb91edee05c92483170b",
+      "source_key": "click_trash",
+      "native_split": "test",
+      "source_group": "click::trash (1116)",
+      "source_path": "images/test/trash (1116).jpg",
+      "source_url": "https://data.mendeley.com/datasets/htcvvz6fm2/2",
+      "source_license": "CC BY 4.0",
+      "size": [
+        3072,
+        3072
+      ],
+      "boxes_class_0": 1,
+      "source_litter_presence": true,
+      "cross_class_presence": {
+        "1": null,
+        "2": null
+      },
+      "review_state": "source annotations retained; cross-class review pending before evaluation"
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (778).jpg",
+      "label": "dados/raw/v4/click_holdout/labels/trash (778).txt",
+      "sha256": "57082b9bc7c3714cbe758eba176c3824a45efbcd23b0ac0b1ec41d3fb8abc003",
+      "label_sha256": "90b620a1174f3364074ca35cdcd23fb5fbad8bafc3d027cc197d0a685c3722a7",
+      "source_key": "click_trash",
+      "native_split": "test",
+      "source_group": "click::trash (778)",
+      "source_path": "images/test/trash (778).jpg",
+      "source_url": "https://data.mendeley.com/datasets/htcvvz6fm2/2",
+      "source_license": "CC BY 4.0",
+      "size": [
+        4000,
+        3000
+      ],
+      "boxes_class_0": 2,
+      "source_litter_presence": true,
+      "cross_class_presence": {
+        "1": null,
+        "2": null
+      },
+      "review_state": "source annotations retained; cross-class review pending before evaluation"
+    },
+    {
+      "image": "dados/raw/v4/click_holdout/images/trash (776).jpg",
+      "label": "dados/raw/v4/click_holdout/labels/trash (776).txt",
+      "sha256": "0750b26ee073928ed0696ec4f4cc0992167c1b33b5b316b8705443efb235c386",
+      "label_sha256": "838074bf2d6eb20fd9cf08fc7174dfb7d098d95b86330b7900eee45237193a6a",
+      "source_key": "click_trash",
+      "native_split": "test",
+      "source_group": "click::trash (776)",
+      "source_path": "images/test/trash (776).jpg",
+      "source_url": "https://data.mendeley.com/datasets/htcvvz6fm2/2",
+      "source_license": "CC BY 4.0",
+      "size": [
+        4096,
+        3072
+      ],
+      "boxes_class_0": 1,
+      "source_litter_presence": true,
+      "cross_class_presence": {
+        "1": null,
+        "2": null
+      },
+      "review_state": "source annotations retained; cross-class review pending before evaluation"
+    }
+  ]
+}

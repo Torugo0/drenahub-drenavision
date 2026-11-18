@@ -1,0 +1,192 @@
+{
+  "evaluated_at_utc": "2026-11-18T00:25:45.666518Z",
+  "phase": "holdout40",
+  "frozen_manifest_sha256_before_inference": "94d20cce07114fe4b6c9e58b4a86daaaebea191989dba9a243c01fcbc5e4b93c",
+  "configuration_sha256": "35b43502b6957e981895c23a3ff2e2f80e0fdd2c736990f5d61ac96f06e86cbb",
+  "baseline_model_version": "pipeline-1314fcfa94f5f8cf",
+  "candidate_model_version": "pipeline-4c5c993223219929",
+  "selection_used_results": false,
+  "source_samples_sha256": "92d57ff0a87e67d5f6adadca4f2365745aa61e0be88255bd63be966bd5860550",
+  "elapsed_seconds": 82.42293530000006,
+  "scope": {
+    "holdout_review_sha256": "6a3d858f744a4e47a6a522e527a84be88eaf694baf8724d37625f5a3dc03301a",
+    "holdout_manifest_sha256": "03b7474f03cb4d6545d9d66db7129f693cdb215ef26bcdce004805896340269e",
+    "review_method": "Assistant source-only review of two full-scene 20-image contact sheets with the native litter annotation overlays, before any candidate predictions. Not independent human ground truth.",
+    "scope": "Fresh image holdout within a known source/camera; not proof of new-domain generalization. Source native test identities; zero hash/pHash<=4 overlaps with current data, user examples or the sealed extra test.",
+    "presence_reference": "source-only reviewed presence; unknown excluded; no animal-positive images"
+  },
+  "reference_caveat": "Native source boxes can be incomplete or visible-keypoint body envelopes. Box FP may include genuine unannotated objects. Source-box absence is a label proxy, not reviewed absence, except the sealed holdout presence review.",
+  "cohorts": {
+    "holdout40": {
+      "images": 40,
+      "baseline": {
+        "presence": {
+          "0": {
+            "tp": 38,
+            "fp": 0,
+            "tn": 0,
+            "fn": 2,
+            "unknown": 0,
+            "positive_images": 40,
+            "negative_images": 0,
+            "precision": 1.0,
+            "recall": 0.95,
+            "f1": 0.9743589743589743,
+            "false_alert_rate_on_negative_images": null
+          },
+          "1": {
+            "tp": 0,
+            "fp": 0,
+            "tn": 0,
+            "fn": 0,
+            "unknown": 40,
+            "positive_images": 0,
+            "negative_images": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "false_alert_rate_on_negative_images": null
+          },
+          "2": {
+            "tp": 0,
+            "fp": 0,
+            "tn": 38,
+            "fn": 0,
+            "unknown": 2,
+            "positive_images": 0,
+            "negative_images": 38,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "false_alert_rate_on_negative_images": 0.0
+          }
+        },
+        "source_bbox_iou_0_5": {
+          "obstrucao_visivel": {
+            "tp": 43,
+            "fp": 16,
+            "fn": 17,
+            "precision": 0.7288135593220338,
+            "recall": 0.7166666666666667,
+            "f1": 0.7226890756302521
+          },
+          "agua_acumulada": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null
+          },
+          "animal_visivel": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null
+          }
+        },
+        "latency_ms": {
+          "mean": 778.9658625000243,
+          "median": 614.570699999831,
+          "p95": 1128.7593750000492
+        }
+      },
+      "candidate": {
+        "presence": {
+          "0": {
+            "tp": 39,
+            "fp": 0,
+            "tn": 0,
+            "fn": 1,
+            "unknown": 0,
+            "positive_images": 40,
+            "negative_images": 0,
+            "precision": 1.0,
+            "recall": 0.975,
+            "f1": 0.9873417721518988,
+            "false_alert_rate_on_negative_images": null
+          },
+          "1": {
+            "tp": 0,
+            "fp": 0,
+            "tn": 0,
+            "fn": 0,
+            "unknown": 40,
+            "positive_images": 0,
+            "negative_images": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "false_alert_rate_on_negative_images": null
+          },
+          "2": {
+            "tp": 0,
+            "fp": 0,
+            "tn": 38,
+            "fn": 0,
+            "unknown": 2,
+            "positive_images": 0,
+            "negative_images": 38,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "false_alert_rate_on_negative_images": 0.0
+          }
+        },
+        "source_bbox_iou_0_5": {
+          "obstrucao_visivel": {
+            "tp": 48,
+            "fp": 20,
+            "fn": 12,
+            "precision": 0.7058823529411765,
+            "recall": 0.8,
+            "f1": 0.75
+          },
+          "agua_acumulada": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null
+          },
+          "animal_visivel": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null
+          }
+        },
+        "latency_ms": {
+          "mean": 1099.2057050000199,
+          "median": 965.245300000106,
+          "p95": 1508.2796250000456
+        }
+      }
+    }
+  },
+  "water_unchanged_images": 40,
+  "water_tolerance": 1e-05,
+  "overlays": [
+    "resultados/local/v4/evaluation/overlays/holdout_000.jpg",
+    "resultados/local/v4/evaluation/overlays/holdout_001.jpg",
+    "resultados/local/v4/evaluation/overlays/holdout_002.jpg",
+    "resultados/local/v4/evaluation/overlays/holdout_003.jpg",
+    "resultados/local/v4/evaluation/overlays/holdout_004.jpg",
+    "resultados/local/v4/evaluation/overlays/holdout_005.jpg",
+    "resultados/local/v4/evaluation/overlays/holdout_006.jpg",
+    "resultados/local/v4/evaluation/overlays/holdout_007.jpg",
+    "resultados/local/v4/evaluation/overlays/holdout_008.jpg",
+    "resultados/local/v4/evaluation/overlays/holdout_012.jpg",
+    "resultados/local/v4/evaluation/overlays/holdout_014.jpg",
+    "resultados/local/v4/evaluation/overlays/holdout_016.jpg",
+    "resultados/local/v4/evaluation/overlays/holdout_018.jpg",
+    "resultados/local/v4/evaluation/overlays/holdout_026.jpg"
+  ],
+  "detailed_report": "resultados/local/v4/evaluation/holdout40_evaluation.json",
+  "detailed_report_sha256": "149372efe30f1eeb5b1c7ebc3836398489f4b17847af7c7321e78ce9a24cd31e"
+}

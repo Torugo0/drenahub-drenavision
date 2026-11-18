@@ -1,0 +1,359 @@
+{
+  "created_at_utc": "2026-11-17T23:48:36.179243+00:00",
+  "checkpoint": "resultados/local/models/best.pt",
+  "checkpoint_sha256": "12b9e86f223366c3f2ef8c2308f0e1140cda08c55ab55e281e58d300fd554b4b",
+  "operating_policy_v3": {
+    "imgsz": 640,
+    "base_confidence": 0.35,
+    "residue": 0.35,
+    "animal": 0.6,
+    "iou": 0.45
+  },
+  "scope": "User-reported development regressions, never independent evaluation or training/calibration examples.",
+  "media_policy": "No original photo, screenshot, annotated reproduction or embedded media is redistributed here; only hashes, dimensions and numeric model diagnostics.",
+  "findings": [
+    {
+      "case": "teste.jpg",
+      "finding": "At640, neural animal proposal score0.564954 is rejected by the0.60 operational animal threshold. At960, best score0.710648 has poorer coverage, lower body only; larger resolution is not a validated fix.",
+      "box_640_xyxy": [
+        90.53479,
+        86.34506,
+        230.12907,
+        197.8972
+      ],
+      "box_960_xyxy_approx": [
+        92.4,
+        149.8,
+        229.0,
+        200.4
+      ]
+    },
+    {
+      "case": "teste1.jpg",
+      "finding": "At640/0.35 only one residue proposal survives;640/0.15 gives4 and960/0.35 gives2. The visible refuse pile is still incompletely covered. Lowering the global threshold may also admit an erroneous water proposal0.277 at960."
+    }
+  ],
+  "raw_proposal_grid": [
+    {
+      "input": "dados/examples/teste.jpg",
+      "input_sha256": "aa34768cfdabc1a95173d7c8b7445edd76c082b4f2c1e60332e578f80185e717",
+      "input_size": [
+        360,
+        240
+      ],
+      "imgsz": 640,
+      "minimum_score": 0.05,
+      "candidate_count_by_class": {
+        "0": 0,
+        "1": 0,
+        "2": 2
+      },
+      "max_score_by_class": {
+        "0": null,
+        "1": null,
+        "2": 0.5649537444114685
+      }
+    },
+    {
+      "input": "dados/examples/teste.jpg",
+      "input_sha256": "aa34768cfdabc1a95173d7c8b7445edd76c082b4f2c1e60332e578f80185e717",
+      "input_size": [
+        360,
+        240
+      ],
+      "imgsz": 640,
+      "minimum_score": 0.15,
+      "candidate_count_by_class": {
+        "0": 0,
+        "1": 0,
+        "2": 1
+      },
+      "max_score_by_class": {
+        "0": null,
+        "1": null,
+        "2": 0.5649537444114685
+      }
+    },
+    {
+      "input": "dados/examples/teste.jpg",
+      "input_sha256": "aa34768cfdabc1a95173d7c8b7445edd76c082b4f2c1e60332e578f80185e717",
+      "input_size": [
+        360,
+        240
+      ],
+      "imgsz": 640,
+      "minimum_score": 0.35,
+      "candidate_count_by_class": {
+        "0": 0,
+        "1": 0,
+        "2": 1
+      },
+      "max_score_by_class": {
+        "0": null,
+        "1": null,
+        "2": 0.5649537444114685
+      }
+    },
+    {
+      "input": "dados/examples/teste.jpg",
+      "input_sha256": "aa34768cfdabc1a95173d7c8b7445edd76c082b4f2c1e60332e578f80185e717",
+      "input_size": [
+        360,
+        240
+      ],
+      "imgsz": 640,
+      "minimum_score": 0.6,
+      "candidate_count_by_class": {
+        "0": 0,
+        "1": 0,
+        "2": 0
+      },
+      "max_score_by_class": {
+        "0": null,
+        "1": null,
+        "2": null
+      }
+    },
+    {
+      "input": "dados/examples/teste.jpg",
+      "input_sha256": "aa34768cfdabc1a95173d7c8b7445edd76c082b4f2c1e60332e578f80185e717",
+      "input_size": [
+        360,
+        240
+      ],
+      "imgsz": 960,
+      "minimum_score": 0.05,
+      "candidate_count_by_class": {
+        "0": 0,
+        "1": 1,
+        "2": 2
+      },
+      "max_score_by_class": {
+        "0": null,
+        "1": 0.0753229632973671,
+        "2": 0.7106480598449707
+      }
+    },
+    {
+      "input": "dados/examples/teste.jpg",
+      "input_sha256": "aa34768cfdabc1a95173d7c8b7445edd76c082b4f2c1e60332e578f80185e717",
+      "input_size": [
+        360,
+        240
+      ],
+      "imgsz": 960,
+      "minimum_score": 0.15,
+      "candidate_count_by_class": {
+        "0": 0,
+        "1": 0,
+        "2": 1
+      },
+      "max_score_by_class": {
+        "0": null,
+        "1": null,
+        "2": 0.7106480598449707
+      }
+    },
+    {
+      "input": "dados/examples/teste.jpg",
+      "input_sha256": "aa34768cfdabc1a95173d7c8b7445edd76c082b4f2c1e60332e578f80185e717",
+      "input_size": [
+        360,
+        240
+      ],
+      "imgsz": 960,
+      "minimum_score": 0.35,
+      "candidate_count_by_class": {
+        "0": 0,
+        "1": 0,
+        "2": 1
+      },
+      "max_score_by_class": {
+        "0": null,
+        "1": null,
+        "2": 0.7106480598449707
+      }
+    },
+    {
+      "input": "dados/examples/teste.jpg",
+      "input_sha256": "aa34768cfdabc1a95173d7c8b7445edd76c082b4f2c1e60332e578f80185e717",
+      "input_size": [
+        360,
+        240
+      ],
+      "imgsz": 960,
+      "minimum_score": 0.6,
+      "candidate_count_by_class": {
+        "0": 0,
+        "1": 0,
+        "2": 1
+      },
+      "max_score_by_class": {
+        "0": null,
+        "1": null,
+        "2": 0.7106480598449707
+      }
+    },
+    {
+      "input": "dados/examples/teste1.jpg",
+      "input_sha256": "1bcf2882a77167ba478172c9f2213ce2e5049f87170dfcfc7fe6e8978ee300bc",
+      "input_size": [
+        960,
+        640
+      ],
+      "imgsz": 640,
+      "minimum_score": 0.05,
+      "candidate_count_by_class": {
+        "0": 7,
+        "1": 0,
+        "2": 0
+      },
+      "max_score_by_class": {
+        "0": 0.6748934984207153,
+        "1": null,
+        "2": null
+      }
+    },
+    {
+      "input": "dados/examples/teste1.jpg",
+      "input_sha256": "1bcf2882a77167ba478172c9f2213ce2e5049f87170dfcfc7fe6e8978ee300bc",
+      "input_size": [
+        960,
+        640
+      ],
+      "imgsz": 640,
+      "minimum_score": 0.15,
+      "candidate_count_by_class": {
+        "0": 4,
+        "1": 0,
+        "2": 0
+      },
+      "max_score_by_class": {
+        "0": 0.6748934984207153,
+        "1": null,
+        "2": null
+      }
+    },
+    {
+      "input": "dados/examples/teste1.jpg",
+      "input_sha256": "1bcf2882a77167ba478172c9f2213ce2e5049f87170dfcfc7fe6e8978ee300bc",
+      "input_size": [
+        960,
+        640
+      ],
+      "imgsz": 640,
+      "minimum_score": 0.35,
+      "candidate_count_by_class": {
+        "0": 1,
+        "1": 0,
+        "2": 0
+      },
+      "max_score_by_class": {
+        "0": 0.6748934984207153,
+        "1": null,
+        "2": null
+      }
+    },
+    {
+      "input": "dados/examples/teste1.jpg",
+      "input_sha256": "1bcf2882a77167ba478172c9f2213ce2e5049f87170dfcfc7fe6e8978ee300bc",
+      "input_size": [
+        960,
+        640
+      ],
+      "imgsz": 640,
+      "minimum_score": 0.6,
+      "candidate_count_by_class": {
+        "0": 1,
+        "1": 0,
+        "2": 0
+      },
+      "max_score_by_class": {
+        "0": 0.6748934984207153,
+        "1": null,
+        "2": null
+      }
+    },
+    {
+      "input": "dados/examples/teste1.jpg",
+      "input_sha256": "1bcf2882a77167ba478172c9f2213ce2e5049f87170dfcfc7fe6e8978ee300bc",
+      "input_size": [
+        960,
+        640
+      ],
+      "imgsz": 960,
+      "minimum_score": 0.05,
+      "candidate_count_by_class": {
+        "0": 5,
+        "1": 1,
+        "2": 0
+      },
+      "max_score_by_class": {
+        "0": 0.5727730989456177,
+        "1": 0.2773338258266449,
+        "2": null
+      }
+    },
+    {
+      "input": "dados/examples/teste1.jpg",
+      "input_sha256": "1bcf2882a77167ba478172c9f2213ce2e5049f87170dfcfc7fe6e8978ee300bc",
+      "input_size": [
+        960,
+        640
+      ],
+      "imgsz": 960,
+      "minimum_score": 0.15,
+      "candidate_count_by_class": {
+        "0": 5,
+        "1": 1,
+        "2": 0
+      },
+      "max_score_by_class": {
+        "0": 0.5727730989456177,
+        "1": 0.2773338258266449,
+        "2": null
+      }
+    },
+    {
+      "input": "dados/examples/teste1.jpg",
+      "input_sha256": "1bcf2882a77167ba478172c9f2213ce2e5049f87170dfcfc7fe6e8978ee300bc",
+      "input_size": [
+        960,
+        640
+      ],
+      "imgsz": 960,
+      "minimum_score": 0.35,
+      "candidate_count_by_class": {
+        "0": 2,
+        "1": 0,
+        "2": 0
+      },
+      "max_score_by_class": {
+        "0": 0.5727730989456177,
+        "1": null,
+        "2": null
+      }
+    },
+    {
+      "input": "dados/examples/teste1.jpg",
+      "input_sha256": "1bcf2882a77167ba478172c9f2213ce2e5049f87170dfcfc7fe6e8978ee300bc",
+      "input_size": [
+        960,
+        640
+      ],
+      "imgsz": 960,
+      "minimum_score": 0.6,
+      "candidate_count_by_class": {
+        "0": 0,
+        "1": 0,
+        "2": 0
+      },
+      "max_score_by_class": {
+        "0": null,
+        "1": null,
+        "2": null
+      }
+    }
+  ],
+  "no_filename_or_case_specific_inference_rule": true
+}

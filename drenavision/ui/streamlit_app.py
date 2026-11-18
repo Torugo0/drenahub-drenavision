@@ -8,19 +8,18 @@ import json
 import os
 import shutil
 import subprocess
-import sys
 from collections import Counter
 from datetime import datetime
 from io import BytesIO
 from pathlib import Path
-from uuid import uuid4
+from uuid import UUID, uuid4
 
 import httpx
 import streamlit as st
 from PIL import Image, ImageDraw, ImageFont, ImageOps
 
 from drenavision.core.annotations import place_label
-from drenavision.core.config import Settings, get_settings
+from drenavision.core.config import get_settings
 from drenavision.core.constants import OVERLAY_CLASS_LABELS
 from drenavision.core.image_io import InvalidImageError, decode_image
 from drenavision.inference.video_codec import prepare_browser_video
@@ -51,9 +50,9 @@ COLORS = {
 }
 
 
-def api_request(method: str, path: str, **kwargs) -> httpx.Response:
+def api_request(method: str, path: str, *, timeout=90, **kwargs) -> httpx.Response:
     try:
-        return httpx.request(method, f"{API_URL}{path}", timeout=90, **kwargs)
+        return httpx.request(method, f"{API_URL}{path}", timeout=timeout, **kwargs)
     except httpx.RequestError as exc:
         raise RuntimeError(
             "Não foi possível conectar ao serviço de análise. Abra iniciar.ps1 e tente novamente."
@@ -168,92 +167,56 @@ def analyze_image(data: bytes, name: str, point: str) -> dict:
 
 
 def analyze_video(source: Path, point: str) -> dict:
-    # A Streamlit session may outlive configuration changes. Read and validate
-    # the current configuration for every job instead of reusing module state.
-    runtime = Settings()
-    if not runtime.model_path.is_file():
-        raise RuntimeError(
-            "O modelo de análise não foi encontrado. Reinicie com iniciar.ps1 -Reiniciar. "
-            "Se o aviso continuar, confira a instalação do modelo no README."
+    """Submit to the API's shared models; Streamlit never loads a second copy."""
+    mime = {
+        ".mp4": "video/mp4",
+        ".mov": "video/quicktime",
+        ".avi": "video/x-msvideo",
+        ".mkv": "video/x-matroska",
+    }.get(source.suffix.lower())
+    if mime is None:
+        raise RuntimeError("Formato inválido; envie MP4, MOV, AVI ou MKV.")
+    with source.open("rb") as uploaded:
+        response = api_request(
+            "POST",
+            "/vision/predict/video",
+            files={"file": (source.name, uploaded, mime)},
+            data={"point_id": point},
+            timeout=1800,
         )
-    token = uuid4().hex
-    destination = RESULTS_DIR / "videos" / f"{token}.mp4"
-    command = [
-        sys.executable,
-        "-X",
-        "utf8",
-        str(ROOT / "ferramentas/scripts/process_video.py"),
-        "--input",
-        str(source),
-        "--output",
-        str(destination),
-        "--model",
-        str(runtime.model_path),
-        "--database",
-        str(runtime.database_path),
-        "--evidence-dir",
-        str(runtime.evidence_dir),
-        "--conf",
-        str(runtime.confidence_threshold),
-        "--iou",
-        str(runtime.iou_threshold),
-        "--device",
-        runtime.device,
-        "--imgsz",
-        str(runtime.image_size),
-        "--track",
-        "--residue-conf",
-        str(runtime.confidence_threshold),
-        "--animal-conf",
-        str(runtime.animal_confidence_threshold),
-        "--water-confirmation-seconds",
-        str(runtime.video_water_confirmation_seconds),
-    ]
-    if runtime.water_model_path is not None:
-        command.extend(
-            [
-                "--water-model",
-                str(runtime.water_model_path),
-                "--water-pixel-confidence",
-                str(runtime.water_pixel_confidence),
-                "--water-min-area-fraction",
-                str(runtime.water_min_area_fraction),
-                "--water-mode",
-                runtime.water_mode,
-            ]
-        )
-    if point:
-        command.extend(["--point-id", point])
-    completed = subprocess.run(
-        command,
-        cwd=ROOT,
-        capture_output=True,
-        text=True,
-        encoding="utf-8",
-        errors="replace",
-        timeout=7200,
-        check=False,
-        creationflags=subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0,
-    )
-    sidecar = destination.with_suffix(".json")
-    if completed.returncode != 0 or not destination.is_file() or not sidecar.is_file():
-        log = RESULTS_DIR / "logs" / f"video_{token}.log"
-        log.parent.mkdir(parents=True, exist_ok=True)
-        log.write_text(
-            json.dumps(
-                {"command": command, "exit_code": completed.returncode},
-                ensure_ascii=False,
-                indent=2,
+    if response.status_code != 200:
+        if response.status_code == 413:
+            raise RuntimeError(
+                "O vídeo excede o limite de envio. Use um arquivo menor."
             )
-            + "\n"
-            + completed.stderr
-            + completed.stdout,
-            encoding="utf-8",
-        )
+        if response.status_code == 503:
+            raise RuntimeError(
+                "O serviço de análise não está pronto. Abra iniciar.ps1 e tente novamente."
+            )
         raise RuntimeError(
-            "Não foi possível concluir este vídeo. Tente um clipe mais curto ou outro arquivo. O detalhe foi salvo para a equipe técnica."
+            "Não foi possível analisar este vídeo. Confira o arquivo e tente novamente."
         )
-    payload = json.loads(sidecar.read_text(encoding="utf-8"))
+    payload = response.json()
+    identifier = str(UUID(payload["event_id"]))
+    video_url = f"/vision/videos/{identifier}"
+    if payload.get("status") != "completed" or payload.get("video_url") != video_url:
+        raise RuntimeError("O serviço não retornou um vídeo concluído.")
+    media = api_request("GET", video_url, timeout=1800)
+    if media.status_code != 200 or not media.content:
+        raise RuntimeError(
+            "A análise foi registrada, mas o vídeo não pôde ser carregado. Consulte os registros anteriores."
+        )
+    destination = RESULTS_DIR / "videos" / f"{identifier}.mp4"
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    partial = destination.with_suffix(".mp4.part")
+    try:
+        partial.write_bytes(media.content)
+        partial.replace(destination)
+        destination.with_suffix(".json").write_text(
+            json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8"
+        )
+    finally:
+        partial.unlink(missing_ok=True)
     return {"kind": "video", "payload": payload, "path": str(destination)}
 
 
@@ -441,7 +404,12 @@ def analysis_page() -> None:
             st.session_state.pop("inspection_result", None)
             temporary = None
             try:
-                with st.spinner("Analisando o registro…"):
+                progress_message = (
+                    "Analisando o vídeo. Aguarde: o processamento pode levar alguns minutos…"
+                    if kind == "video"
+                    else "Analisando a foto…"
+                )
+                with st.spinner(progress_message):
                     if kind == "image":
                         result = analyze_image(data, name, point)
                     else:

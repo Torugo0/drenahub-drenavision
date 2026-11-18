@@ -1,0 +1,60 @@
+{
+  "created_at_utc": "2026-11-18T00:12:00.785172+00:00",
+  "status": "protocol_and_source_evidence_only; pending final frozen candidate, validation/test parity and promotion decision",
+  "source_root": "Project root; all dataset paths are relative and need locally downloaded data.",
+  "exact_copies": [
+    {
+      "file": "calibration_presence_v4_v2.json",
+      "source_path": "resultados/local/v4/data_audit/calibration_presence_v4_v2.json",
+      "source_sha256": "53c2d92ddfdac9b5a13b5c2a3c103257cd4fd608aba071d47c61644c6d3c7b9f",
+      "copied_without_byte_changes": true
+    },
+    {
+      "file": "holdout_manifest.json",
+      "source_path": "dados/raw/v4/click_holdout/holdout_manifest.json",
+      "source_sha256": "03b7474f03cb4d6545d9d66db7129f693cdb215ef26bcdce004805896340269e",
+      "copied_without_byte_changes": true
+    },
+    {
+      "file": "holdout_presence_review.json",
+      "source_path": "dados/raw/v4/click_holdout/holdout_presence_review.json",
+      "source_sha256": "6a3d858f744a4e47a6a522e527a84be88eaf694baf8724d37625f5a3dc03301a",
+      "copied_without_byte_changes": true
+    }
+  ],
+  "v3_artifacts_overwritten": false,
+  "new_user_media_redistributed": false,
+  "score_interpretation": "No conclusive v4 performance claim is made by this evidence package.",
+  "files": [
+    {
+      "file": "calibration_presence_v4_v2.json",
+      "sha256": "53c2d92ddfdac9b5a13b5c2a3c103257cd4fd608aba071d47c61644c6d3c7b9f",
+      "bytes": 63829
+    },
+    {
+      "file": "data_audit_summary.json",
+      "sha256": "17e960ade44217b7974bd916f9928b58b9c2146535a1a0194bb6f6d5f084132d",
+      "bytes": 7321
+    },
+    {
+      "file": "diagnosis_summary.json",
+      "sha256": "3c5a08910b26e409d2d34f10a52443d966a12ab4650ec4282aa171f63a314409",
+      "bytes": 9067
+    },
+    {
+      "file": "holdout_manifest.json",
+      "sha256": "03b7474f03cb4d6545d9d66db7129f693cdb215ef26bcdce004805896340269e",
+      "bytes": 37119
+    },
+    {
+      "file": "holdout_presence_review.json",
+      "sha256": "6a3d858f744a4e47a6a522e527a84be88eaf694baf8724d37625f5a3dc03301a",
+      "bytes": 26532
+    },
+    {
+      "file": "model_sources.json",
+      "sha256": "76ba216d9b0a90ec7daeea50ae26c6ea48047f2b5d3f844a9cd6069f1adef83e",
+      "bytes": 10083
+    }
+  ]
+}

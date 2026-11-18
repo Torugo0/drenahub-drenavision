@@ -1,0 +1,36 @@
+{
+  "status": "verified_running_product",
+  "application_version": "0.5.0",
+  "image_profile": "pipeline-4c5c993223219929",
+  "video_profile": "pipeline-380203274bf9c28c",
+  "frozen_candidate": "resultados/metrics/v4/frozen_candidate.json",
+  "frozen_candidate_sha256": "94d20cce07114fe4b6c9e58b4a86daaaebea191989dba9a243c01fcbc5e4b93c",
+  "configuration": "ferramentas/configs/inference_v4.json",
+  "configuration_sha256": "35b43502b6957e981895c23a3ff2e2f80e0fdd2c736990f5d61ac96f06e86cbb",
+  "change": "Existing trained YOLO plus frozen pretrained neural object proposals and crop verification; no new custom training in this revision. Water image model and video confirmation policy unchanged.",
+  "verification": {
+    "automated_tests_passed": 236,
+    "additional_HTTP_validation_client_tests_passed": 3,
+    "selection": "resultados/metrics/v4/selection_summary.json",
+    "new_holdout40": "resultados/metrics/v4/evaluation_holdout40.json",
+    "known_regression179": "resultados/metrics/v4/evaluation_regression179.json",
+    "real_browser": "resultados/metrics/v4/ui_verification.json",
+    "running_API_catalogue": "resultados/metrics/v4/product_validation.json",
+    "catalogue_videos": 6,
+    "catalogue_photos": 2,
+    "catalogue_video_frames_decoded": 1388,
+    "catalogue_transport": "All six MP4s: complete decode, matching dimensions/FPS/duration, H.264, faststart, HTTP Range 206 and persisted events verified.",
+    "real_browser_observation": "Two original user photos uploaded; annotated results and alerts visible. Known Hanoi video processed through shared API and played to its 12-second end without a media error."
+  },
+  "limitations": [
+    "Image presence improves on measured cohorts, but localization does not improve uniformly: animal box F1 declines on both known regression cohorts, including duplicate or imprecise boxes.",
+    "The difficult rato_rua clip has only one ambiguous animal proposal in 240 frames; this is not a confirmed detection success.",
+    "The known Hanoi clip has animal proposals in 144/240 frames versus 187/240 in the prior recorded profile; temporal improvement is not established.",
+    "Trash false positives remain, including functional containers and ambiguous vegetation or natural debris. Group envelopes and individual boxes can overlap; marks are not physical object counts.",
+    "The catalogue ralo_lixo photo still misses other visible trash and shallow water. Water rectangles can include surrounding concrete and do not represent exact water contours.",
+    "The extra inference stages increase latency. Catalogue clips of 10.4 to 12 seconds required approximately 67 to 91 seconds on this machine; CPU speed is not established.",
+    "Calibration, new same-domain holdout, known regressions, user examples and functional catalogue checks have separate roles and must not be combined into a single accuracy percentage.",
+    "The existing demonstration recording shows version 0.4.0 and is historical evidence only."
+  ],
+  "scope": "Local deployment and verification only; no repository, model, user image or video publication performed by this activation."
+}

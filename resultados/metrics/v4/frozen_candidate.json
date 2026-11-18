@@ -1,0 +1,215 @@
+{
+  "status": "frozen_before_user_regression_and_new_holdout_inference",
+  "frozen_at_utc": "2026-11-18T00:17:02.594820Z",
+  "model_version": "pipeline-4c5c993223219929",
+  "configuration": "ferramentas\\configs\\inference_v4.json",
+  "configuration_sha256": "35b43502b6957e981895c23a3ff2e2f80e0fdd2c736990f5d61ac96f06e86cbb",
+  "runtime_parameters": {
+    "model_path": "resultados/local/models/best.pt",
+    "confidence_threshold": 0.35,
+    "iou_threshold": 0.45,
+    "device": "auto",
+    "image_size": 640,
+    "water_model_path": "resultados/local/models/water_segformer_b1_ade",
+    "water_pixel_confidence": 0.95,
+    "water_min_area_fraction": 0.05,
+    "water_mode": "augment",
+    "residue_confidence": 0.35,
+    "animal_confidence": 0.6,
+    "object_model_path": "resultados/local/models/grounding_dino_tiny",
+    "object_verifier_path": "resultados/local/models/siglip2_base_patch16_224",
+    "object_residue_confidence": 0.3,
+    "object_animal_confidence": 0.25,
+    "object_residue_min_margin": 0.04,
+    "object_animal_min_margin": 0.08,
+    "object_text_confidence": 0.2,
+    "object_mode": "animal_replace",
+    "object_shortest_edge": 640,
+    "object_longest_edge": 1024
+  },
+  "selection_cohort_sha256": "53c2d92ddfdac9b5a13b5c2a3c103257cd4fd608aba071d47c61644c6d3c7b9f",
+  "validation_predictions_sha256": "3a97d3bf20eefb0d6c3ec20847c136fa33a9207b7eb1a7bce858308a3ca5f198",
+  "selection_policy": {
+    "animal": "maximize reviewed validation presence F1; tie fewer FP then larger verification margin",
+    "residue": "maximize CLICK validation bbox F2 to prioritize coverage; box precision at least 0.70; extra negative-image false alerts at most 2/30; tie fewer bbox FP then larger margin",
+    "validation_source": "60 validation images, not an independent test; residue objective chosen using validation only before new holdout or user predictions"
+  },
+  "objects": {
+    "repository": "IDEA-Research/grounding-dino-tiny",
+    "revision": "a2bb814dd30d776dcf7e30523b00659f4f141c71",
+    "license": "Apache-2.0",
+    "license_url": "https://www.apache.org/licenses/LICENSE-2.0.txt",
+    "file_sha256": {
+      "added_tokens.json": "909e96cb32d92ce728a01bc99850cbba26196d74115c17ebeb019275412588f2",
+      "config.json": "eec82c5ab66e16df12a9a212e68ac011779927c2536cf9078658e35d85f0c67a",
+      "model.safetensors": "1a2412ef99bd74bcd3c2a246fa1e48581f8889a1300c9051974741314fc042f3",
+      "preprocessor_config.json": "8454179ba95e2ad22947835aad7b45862a601fc0055ab88bf1ee70892d3aea60",
+      "special_tokens_map.json": "b6d346be366a7d1d48332dbc9fdf3bf8960b5d879522b7799ddba59e76237ee3",
+      "tokenizer.json": "d241a60d5e8f04cc1b2b3e9ef7a4921b27bf526d9f6050ab90f9267a1f9e5c66",
+      "tokenizer_config.json": "d40ab645b68211910b9170d22433d43186a6ec8ee6fd10ba170524b25bf4fb56",
+      "vocab.txt": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3",
+      "LICENSE-APACHE-2.0.txt": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "download_manifest.json": "1dae298c783eddf13812828e06a35e2f2e4c1203de4e65ca6e4752d80389830f"
+    },
+    "policy": {
+      "version": "grounded-objects-v1",
+      "prompt": "a rat. a mouse. a rodent. litter. plastic waste. discarded bottle. discarded plastic bag. discarded cup. discarded can.",
+      "residue_confidence": 0.3,
+      "animal_confidence": 0.25,
+      "text_confidence": 0.2,
+      "shortest_edge": 640,
+      "longest_edge": 1024,
+      "class_nms_iou": 0.5,
+      "mapping": {
+        "animal_visivel": "\\b(?:rats?|mice|mouse|rodents?)\\b",
+        "obstrucao_visivel": "\\b(?:litter|waste|bottles?|bags?|cups?|cans?)\\b"
+      },
+      "mixed_or_unknown_phrases": "discard",
+      "postprocessing": "rescale neural xyxy to original size; clip to bounds only; per-class confidence and NMS; no expansion or fabricated boxes",
+      "weights_format": "safetensors",
+      "local_files_only": true,
+      "trust_remote_code": false,
+      "disable_custom_kernels": true
+    },
+    "verifier": {
+      "model": {
+        "repository": "google/siglip2-base-patch16-224",
+        "revision": "75de2d55ec2d0b4efc50b3e9ad70dba96a7b2fa2",
+        "license": "Apache-2.0",
+        "license_url": "https://www.apache.org/licenses/LICENSE-2.0.txt",
+        "file_sha256": {
+          "config.json": "fe8b5fe6d5734360678fd71c11c21e1ea3364bd8598d34295d9206335973ffd7",
+          "model.safetensors": "612923381c76ec5a9bed335d1c48827e3f2e506ac31b044b63b2031fadee6a0b",
+          "preprocessor_config.json": "9b36b57ebaf20f09bf4c22100ccc21877ea6bfe5aead0c00c59f8af8ccefacfc",
+          "special_tokens_map.json": "baec30ea10906f16adb8c18af7a34023002c1746542612b8b41c9f09e1351351",
+          "tokenizer.json": "cb9140fae3ac5122c972d37adf83e1248471a38147ad76f8215c8872c6fd8322",
+          "tokenizer_config.json": "14afe629fe4959b9e0d51e1852b8d9f7ad074f90a1a7125a4fcdd17f06e78fc8",
+          "LICENSE-APACHE-2.0.txt": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "download_manifest.json": "dfcd66b650226d874f4fa95aa4e4c6155072561ce765b7cad3285d7d4cd78980"
+        },
+        "policy": {
+          "version": "siglip2-crop-cosine-v1",
+          "candidate_classes": [
+            0,
+            2
+          ],
+          "family_prompts": {
+            "2": {
+              "positive": [
+                "photograph of a rat",
+                "photograph of a mouse",
+                "photograph of a rodent",
+                "photograph of a beaver",
+                "photograph of a muskrat"
+              ],
+              "negative": [
+                "photograph of plastic litter",
+                "photograph of a plastic bottle",
+                "photograph of a stone",
+                "photograph of a leaf",
+                "photograph of a drain pipe",
+                "photograph of a shadow",
+                "photograph of water",
+                "photograph of discarded paper"
+              ]
+            },
+            "0": {
+              "positive": [
+                "photograph of discarded litter or garbage",
+                "photograph of a discarded plastic bottle",
+                "photograph of a discarded plastic bag",
+                "photograph of a discarded can",
+                "photograph of discarded food packaging",
+                "photograph of discarded paper"
+              ],
+              "negative": [
+                "photograph of a leaf",
+                "photograph of a stone",
+                "photograph of a branch",
+                "photograph of water",
+                "photograph of a concrete drain",
+                "photograph of a rodent",
+                "photograph of a clean pipe",
+                "photograph of a plant"
+              ]
+            }
+          },
+          "fixed_texts": [
+            "photograph of a rat",
+            "photograph of a mouse",
+            "photograph of a rodent",
+            "photograph of a beaver",
+            "photograph of a muskrat",
+            "photograph of plastic litter",
+            "photograph of a plastic bottle",
+            "photograph of a stone",
+            "photograph of a leaf",
+            "photograph of a drain pipe",
+            "photograph of a shadow",
+            "photograph of water",
+            "photograph of discarded paper",
+            "photograph of discarded litter or garbage",
+            "photograph of a discarded plastic bottle",
+            "photograph of a discarded plastic bag",
+            "photograph of a discarded can",
+            "photograph of discarded food packaging",
+            "photograph of a branch",
+            "photograph of a concrete drain",
+            "photograph of a clean pipe",
+            "photograph of a plant"
+          ],
+          "text_padding": "max_length",
+          "max_text_length": 64,
+          "text_embedding_dtype": "float32",
+          "text_embedding_device": "cpu",
+          "text_encoder_execution": "once, full model CPU only, retain vision tower and normalized text features",
+          "vision_embedding_dtype": "float32",
+          "crop_padding_fraction_each_side": 0.1,
+          "batch_size": 16,
+          "coordinate_policy": "context only for crop input; original candidate boxes and fields unchanged",
+          "score_definition": "maximum positive cosine minus maximum negative cosine; no sigmoid/softmax; no threshold or risk probability",
+          "trust_remote_code": false,
+          "local_files_only": true,
+          "weights_format": "safetensors"
+        },
+        "profile_sha256": "d01842794803c4e7674215feb66fbe7f109dea5d18599e6768980abb7883f219",
+        "model_version": "object-verifier-d01842794803"
+      },
+      "residue_min_margin": 0.04,
+      "animal_min_margin": 0.08
+    },
+    "profile_sha256": "cd4b420c9fca20ad2e501c400eebf6a48ce2d3e179c1f281f1e304ff68894002",
+    "model_version": "objects-cd4b420c9fca"
+  },
+  "water": {
+    "repository": "nvidia/segformer-b1-finetuned-ade-512-512",
+    "revision": "a775b4f5dcb2179e57006dca0e268281306412ef",
+    "license": "NVIDIA Source Code License for SegFormer; non-commercial research/evaluation only",
+    "license_url": "https://raw.githubusercontent.com/NVlabs/SegFormer/master/LICENSE",
+    "file_sha256": {
+      "model.safetensors": "e0802e077c195d9dbaf48c69b94946ef6a3ae5b6665176fedf363e5e63a1ec93",
+      "config.json": "8f1b7bcd2e1835ef0ef3a04a0d4dfe87ff9a6374253e7a3ca1751de812a420ff",
+      "preprocessor_config.json": "8039d1d210abaa7117ad78e58cdfd6141a2ec72c03dae891b3cd76737e422c6c",
+      "download_manifest.json": "d22e86d4ad23c1c65bf4cfebc730d69501e2db98a800d4ce047778ed222a9dc6",
+      "LICENSE-NVIDIA-SegFormer.txt": "b5a6a3804b12c1b4d37e1e45bcc31761a2e69064fd75b48da13d62e30d69b406"
+    },
+    "policy": {
+      "version": "ade-water-mask-v1",
+      "processing_size": 512,
+      "pixel_confidence": 0.95,
+      "min_area_fraction": 0.05,
+      "water_labels": {
+        "21": "water",
+        "26": "sea",
+        "60": "river",
+        "109": "swimming pool",
+        "113": "waterfall",
+        "128": "lake"
+      },
+      "postprocessing": "bilinear logits at bounded processing_size; nearest labels and bilinear water-family posterior to original size; pixel confidence gate; 8-connected components; actual pixel-area gate; no fill/dilation"
+    },
+    "profile_sha256": "808e8206473b83053f7f675b1d559f6d03a3d26079375a7e9eb71b7d4229527e",
+    "model_version": "water-808e8206473b"
+  },
+  "new_holdout_review_sha256": "6a3d858f744a4e47a6a522e527a84be88eaf694baf8724d37625f5a3dc03301a"
+}

@@ -5,8 +5,14 @@
 *.png binary
 *.mp4 binary
 *.pt binary
+*.pdf binary
 
 # Sealed experimental references and model manifests are hashed byte-for-byte.
 resultados/metrics/v3/**/*.json -text
 resultados/metrics/v3/**/*.csv -text
 resultados/metrics/v3/water_model_source/LICENSE-NVIDIA-SegFormer.txt -text
+resultados/metrics/v4/**/*.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+resultados/metrics/v4/**/*.csv -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+ferramentas/configs/inference_v4.json -text
+docs/relatorio/*.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+docs/relatorio/assets/*.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

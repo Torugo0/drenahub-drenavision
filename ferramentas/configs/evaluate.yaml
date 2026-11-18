@@ -1,5 +1,6 @@
 # HISTÓRICO V1: avalia o backup antigo nas caixas originais defeituosas.
-# Para os rótulos corrigidos e o modelo ativo, use evaluate_v2.yaml.
+# Para avaliar o YOLO customizado v3, use evaluate_v3.yaml.
+# evaluate_v2.yaml preserva o protocolo intermediário; a inferência composta 0.5 tem avaliação separada em metrics/v4.
 checkpoint: resultados/local/models/best_v1.pt
 data: dados/processed/drenavision/dataset.yaml
 project: resultados/local/evaluation

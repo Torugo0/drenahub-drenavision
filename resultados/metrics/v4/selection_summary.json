@@ -1,0 +1,133 @@
+{
+  "scope": "validation-only verifier/threshold selection; presence and CLICK box F1 are development metrics, not independent field accuracy or AP",
+  "cohort_sha256": "53c2d92ddfdac9b5a13b5c2a3c103257cd4fd608aba071d47c61644c6d3c7b9f",
+  "master_checkpoint_sha256": "12b9e86f223366c3f2ef8c2308f0e1140cda08c55ab55e281e58d300fd554b4b",
+  "candidate_policy": {
+    "minimum_dino_confidence": 0.2,
+    "class_ids": [
+      0,
+      2
+    ],
+    "source_record_order_preserved": true,
+    "raw_candidates_preserved": true
+  },
+  "baseline": {
+    "0": {
+      "presence": {
+        "tp": 21,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "f2": 1.0,
+        "tn": 30,
+        "negative_false_alert_rate": 0.0,
+        "unknown_excluded": 9,
+        "known_images": 51
+      },
+      "bbox": {
+        "tp": 31,
+        "fp": 10,
+        "fn": 9,
+        "precision": 0.7560975609756098,
+        "recall": 0.775,
+        "f1": 0.7654320987654321,
+        "f2": 0.7711442786069652,
+        "images": 20,
+        "reference_boxes": 40,
+        "match_iou": 0.5,
+        "scope": "CLICK primary-class validation boxes only; no partial iRodent or cross-source box scoring"
+      }
+    },
+    "2": {
+      "presence": {
+        "tp": 15,
+        "fp": 0,
+        "fn": 5,
+        "precision": 1.0,
+        "recall": 0.75,
+        "f1": 0.8571428571428571,
+        "f2": 0.7894736842105263,
+        "tn": 40,
+        "negative_false_alert_rate": 0.0,
+        "unknown_excluded": 0,
+        "known_images": 60
+      }
+    }
+  },
+  "selected": {
+    "0": {
+      "threshold": 0.3,
+      "margin": 0.04,
+      "mode": "augment",
+      "presence": {
+        "tp": 21,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "f2": 1.0,
+        "tn": 30,
+        "negative_false_alert_rate": 0.0,
+        "unknown_excluded": 9,
+        "known_images": 51
+      },
+      "bbox": {
+        "tp": 34,
+        "fp": 14,
+        "fn": 6,
+        "precision": 0.7083333333333334,
+        "recall": 0.85,
+        "f1": 0.7727272727272727,
+        "f2": 0.8173076923076923,
+        "images": 20,
+        "reference_boxes": 40,
+        "match_iou": 0.5,
+        "scope": "CLICK primary-class validation boxes only; no partial iRodent or cross-source box scoring"
+      },
+      "passes_presence_guard": true,
+      "passes_box_precision_guard": true
+    },
+    "2": {
+      "threshold": 0.25,
+      "margin": 0.08,
+      "mode": "replace",
+      "presence": {
+        "tp": 20,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "f2": 1.0,
+        "tn": 40,
+        "negative_false_alert_rate": 0.0,
+        "unknown_excluded": 0,
+        "known_images": 60
+      }
+    }
+  },
+  "selection_policy": {
+    "residue_primary_metric": "CLICK box F2",
+    "residue_min_box_precision_when_f2": 0.7,
+    "selection_scope": "engineering objective chosen on validation, not an independent test result; freeze parameters before hold-out evaluation",
+    "residue_presence_false_alert_guard": {
+      "baseline_fp": 0,
+      "max_extra_false_alerts": 2,
+      "max_fp": 2,
+      "known_negative_images": 30
+    },
+    "animal_primary_metric": "presence F1; specialist replaces master animals",
+    "tie_breaking": "fewer primary-metric FP, fewer presence FP, larger margin, larger DINO threshold, replace mode",
+    "master_operating_points": {
+      "residue_confidence": 0.35,
+      "animal_confidence": 0.6
+    },
+    "class0_augment": "unverified legacy litter retained at confidence>=0.35; only DINO crops are verified",
+    "deployment": "report only; does not change active weights, thresholds, settings or deployment"
+  },
+  "derived_calibration_report_sha256": "bd90c5636348ce6b6bab0d5eebde72edcee73fc027d5c41ccc0542c188f90f48",
+  "frozen_candidate_sha256": "94d20cce07114fe4b6c9e58b4a86daaaebea191989dba9a243c01fcbc5e4b93c"
+}

@@ -13,7 +13,41 @@ from drenavision.core.schemas import Detection
 
 from .contracts import PredictionResult
 from .predictor import YoloPredictor
-from .utils import sha256_file
+from .utils import box_iou, sha256_file
+
+
+def merge_object_detections(
+    master_detections: list[Detection],
+    specialist_detections: list[Detection],
+    *,
+    mode: str = "animal_replace",
+) -> list[Detection]:
+    """Fuse real neural proposals; no invented, expanded or union coordinates.
+
+    Specialist coordinates have priority for duplicate objects. This policy
+    does not compare the calibration of scores from different architectures.
+    Animal replacement avoids retaining an additional partial-body master box.
+    Water proposals never participate in object NMS.
+    """
+    if mode not in {"augment", "replace", "animal_replace"}:
+        raise ValueError("invalid object fusion mode")
+    other = [item for item in master_detections if item.class_id not in {0, 2}]
+    candidates = [item for item in specialist_detections if item.class_id in {0, 2}]
+    if mode != "replace":
+        candidates.extend(
+            item
+            for item in master_detections
+            if item.class_id == 0 or (item.class_id == 2 and mode == "augment")
+        )
+    retained: list[Detection] = []
+    for item in candidates:
+        if not any(
+            item.class_id == previous.class_id
+            and box_iou(item.bounding_box, previous.bounding_box) >= 0.5
+            for previous in retained
+        ):
+            retained.append(item)
+    return other + retained
 
 
 def filter_detections(
@@ -123,9 +157,15 @@ class InspectionPredictor:
         residue_confidence: float = 0.35,
         animal_confidence: float = 0.60,
         water_mode: str = "augment",
+        objects: Any = None,
+        object_mode: str = "animal_replace",
     ) -> None:
         self.master = master
         self.water = water
+        self.objects = objects
+        self.object_mode = object_mode
+        if object_mode not in {"augment", "replace", "animal_replace"}:
+            raise ValueError("invalid object fusion mode")
         self.parameters = {
             "residue_confidence": residue_confidence,
             "animal_confidence": animal_confidence,
@@ -137,7 +177,11 @@ class InspectionPredictor:
 
     @property
     def is_ready(self) -> bool:
-        return self.master.is_ready and (self.water is None or self.water.is_ready)
+        return (
+            self.master.is_ready
+            and (self.water is None or self.water.is_ready)
+            and (self.objects is None or self.objects.is_ready)
+        )
 
     @property
     def detail(self) -> str:
@@ -145,14 +189,19 @@ class InspectionPredictor:
             return self.master.detail
         if self.water is not None and not self.water.is_ready:
             return self.water.detail
+        if self.objects is not None and not self.objects.is_ready:
+            return self.objects.detail
         return "ready"
 
     @property
     def model_version(self) -> str:
+        parameters = dict(self.parameters)
+        if self.objects is not None:
+            parameters.update(objects=self.objects.provenance, object_mode=self.object_mode)
         return profile_version(
             sha256_file(self.master.model_path),
             self.water.provenance if self.water is not None else None,
-            self.parameters,
+            parameters,
         )
 
     def predict(self, image_rgb: Any) -> PredictionResult:
@@ -165,6 +214,11 @@ class InspectionPredictor:
             residue_confidence=self.parameters["residue_confidence"],
             animal_confidence=self.parameters["animal_confidence"],
         )
+        if self.objects is not None:
+            object_result = self.objects.predict(image_rgb)
+            detections = merge_object_detections(
+                detections, object_result.detections, mode=self.object_mode
+            )
         display = image_rgb
         if self.water is not None:
             water = self.water.predict(image_rgb)
@@ -203,7 +257,19 @@ def create_predictor(
     water_mode: str = "augment",
     residue_confidence: float = 0.35,
     animal_confidence: float = 0.60,
+    object_model_path: str | Path | None = None,
+    object_verifier_path: str | Path | None = None,
+    object_residue_min_margin: float = 0.0,
+    object_animal_min_margin: float = 0.0,
+    object_residue_confidence: float = 0.35,
+    object_animal_confidence: float = 0.35,
+    object_text_confidence: float = 0.20,
+    object_mode: str = "animal_replace",
+    object_shortest_edge: int = 800,
+    object_longest_edge: int = 1333,
 ) -> InspectionPredictor:
+    if object_verifier_path is not None and object_model_path is None:
+        raise ValueError("an object verifier requires a configured object detector")
     master = YoloPredictor(
         model_path,
         confidence_threshold=confidence_threshold,
@@ -222,10 +288,28 @@ def create_predictor(
             min_area_fraction=water_min_area_fraction,
             processing_size=512,
         )
+    objects = None
+    if object_model_path is not None:
+        from .objects import GroundedObjectPredictor
+
+        objects = GroundedObjectPredictor(
+            object_model_path,
+            device=device,
+            residue_confidence=object_residue_confidence,
+            animal_confidence=object_animal_confidence,
+            text_confidence=object_text_confidence,
+            shortest_edge=object_shortest_edge,
+            longest_edge=object_longest_edge,
+            verifier_model_path=object_verifier_path,
+            residue_min_margin=object_residue_min_margin,
+            animal_min_margin=object_animal_min_margin,
+        )
     return InspectionPredictor(
         master,
         water,
         residue_confidence=residue_confidence,
         animal_confidence=animal_confidence,
         water_mode=water_mode,
+        objects=objects,
+        object_mode=object_mode,
     )

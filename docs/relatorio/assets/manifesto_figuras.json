@@ -1,0 +1,204 @@
+{
+  "created_at_utc": "2026-11-18T01:45:21.467738+00:00",
+  "purpose": "Figuras reais do relatório técnico, rastreáveis por hash. Sem nova inferência, imagens sintéticas ou mídias de usuário sem fonte/licença.",
+  "coordinate_policy": "Caixas renderizadas pelos modelos preservadas. Não houve ajuste manual de coordenadas nem exclusão de predições para melhorar aparência.",
+  "figures": [
+    {
+      "role": "residue_water_real_result",
+      "source_path": "dados/examples/bueiro_agua.jpg",
+      "source_author": "Bart Everson",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Storm_Drain_Clogged_-_Mid-City_New_Orleans.jpg",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0",
+      "changes": "Cópia byte a byte do artefato real, sem alteração de pixels, caixas ou valores.",
+      "evidence": "resultados/local/v4/product_validation/bueiro_agua.response.json",
+      "caption": "Foto de Bart Everson, CC BY 2.0, adaptada com predições reais 0.5: quatro marcações de resíduos e duas regiões de água. Exemplo conhecido, sem caixas humanas completas de referência.",
+      "source_result": "resultados/local/v4/product_validation/bueiro_agua.jpg",
+      "source_result_sha256": "ff78c2df6fdaef0bb1f3cd9c1c690c597dd70bc887407451afd32ede6422d6af",
+      "profile": "pipeline-4c5c993223219929",
+      "event_id": "2124ed18-ae16-4c1d-ba10-e0027af510f1",
+      "detections": {
+        "obstrucao_visivel": 4,
+        "agua_acumulada": 2,
+        "animal_visivel": 0
+      },
+      "scope": "Exemplo conhecido, externo aos splits oficiais, sem caixas humanas completas para certificação de contagem/acurácia.",
+      "output": "docs/relatorio/assets/resultado_bueiro_agua_v05.jpg",
+      "output_sha256": "ff78c2df6fdaef0bb1f3cd9c1c690c597dd70bc887407451afd32ede6422d6af"
+    },
+    {
+      "role": "animal_real_result",
+      "source_path": "dados/examples/rato_close.mp4",
+      "source_author": "Ykmyks",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Rat.ogv",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "changes": "Extração do quadro completo já anotado no MP4 processado e codificação JPEG qualidade 96. Sem recorte, redimensionamento, adição ou alteração de caixas.",
+      "evidence": "resultados/local/v4/product_validation/rato_close.response.json",
+      "caption": "Roedor entre grades aos 5,50 s, com caixa real do produto 0.5. Fonte: Ykmyks, CC BY-SA 4.0. O clipe forneceu quadros de adaptação de treino e não é teste independente.",
+      "source_result": "resultados/local/v4/product_validation/rato_close.mp4",
+      "source_result_sha256": "3c97255b11cdbd9fda699e3891b3f094f9fddea3c7e93576f0133a3e6e3af716",
+      "frame_index": 110,
+      "timestamp_seconds": 5.5,
+      "profile": "pipeline-380203274bf9c28c",
+      "base_image_profile": "pipeline-4c5c993223219929",
+      "detections": [
+        {
+          "class_id": 2,
+          "class_name": "animal_visivel",
+          "confidence": 0.4295613467693329,
+          "bounding_box": [
+            165.34832763671875,
+            94.39750671386719,
+            474.6706848144531,
+            378.47991943359375
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": null,
+          "frame_index": 110,
+          "timestamp_seconds": 5.5
+        }
+      ],
+      "event_id": "5a1cf5ba-8644-4b1e-bffe-60b6d7876272",
+      "output": "docs/relatorio/assets/resultado_roedor_grade_v05.jpg",
+      "output_sha256": "a100383f00a7a96a226c0c6a2ae9bb2a3cc0e7f3afdd16af5ffa76bfe7cabd11"
+    },
+    {
+      "role": "residue_misses_real_result",
+      "source_path": "dados/examples/ralo_lixo.jpg",
+      "source_author": "Tdorante10",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Sutphin_Bl_Jamaica_Av_td_(2019-08-18)_14.jpg",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "changes": "Cópia byte a byte do artefato real, sem alteração de pixels, caixas ou valores.",
+      "evidence": "resultados/local/v4/product_validation/ralo_lixo.response.json",
+      "caption": "Falha preservada: somente duas marcações de resíduos, enquanto outros resíduos e água rasa visíveis não são marcados. Tdorante10, CC BY-SA 4.0; exemplo manual fora dos splits, sem contagem humana completa.",
+      "source_result": "resultados/local/v4/product_validation/ralo_lixo.jpg",
+      "source_result_sha256": "ded6927fc8129eb79e6f59ba50fa806604f03843e0d00112ba40ed8a3ef7883e",
+      "profile": "pipeline-4c5c993223219929",
+      "event_id": "f637e912-c80d-4aea-8453-1abb02960c6b",
+      "detections": {
+        "obstrucao_visivel": 2,
+        "agua_acumulada": 0,
+        "animal_visivel": 0
+      },
+      "scope": "Exemplo conhecido, externo aos splits oficiais, sem caixas humanas completas para certificação de contagem/acurácia.",
+      "output": "docs/relatorio/assets/resultado_residuos_incompletos_v05.jpg",
+      "output_sha256": "ded6927fc8129eb79e6f59ba50fa806604f03843e0d00112ba40ed8a3ef7883e"
+    },
+    {
+      "role": "false_positive_real_result",
+      "source_path": "dados/examples/sarjeta_residuos.mp4",
+      "source_author": "Ibnali1",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Gutter_to_the_Alajo_Storm_Drain.webm",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "changes": "Extração do quadro completo já anotado no MP4 processado e codificação JPEG qualidade 96. Sem recorte, redimensionamento, adição ou alteração de caixas.",
+      "evidence": "resultados/local/v4/product_validation/sarjeta_residuos.response.json",
+      "caption": "Erro preservado aos 11,95 s: um cotovelo de PVC instalado é classificado como resíduo; água também recebe marcação. Fonte: Ibnali1, CC BY-SA 4.0. Regressão manual sem referência completa por quadro.",
+      "source_result": "resultados/local/v4/product_validation/sarjeta_residuos.mp4",
+      "source_result_sha256": "de231fae635f0b0bdcc75a96d417233fc6e476996df1feb773bed72d4c893c99",
+      "frame_index": 239,
+      "timestamp_seconds": 11.95,
+      "profile": "pipeline-380203274bf9c28c",
+      "base_image_profile": "pipeline-4c5c993223219929",
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "obstrucao_visivel",
+          "confidence": 0.3701917231082916,
+          "bounding_box": [
+            248.9656524658203,
+            135.41827392578125,
+            279.1000061035156,
+            161.26976013183594
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": 27,
+          "frame_index": 239,
+          "timestamp_seconds": 11.95
+        },
+        {
+          "class_id": 1,
+          "class_name": "agua_acumulada",
+          "confidence": 0.9844915866851807,
+          "bounding_box": [
+            180.0,
+            186.0,
+            283.0,
+            691.0
+          ],
+          "bounding_box_format": "xyxy_pixels",
+          "track_id": null,
+          "frame_index": 239,
+          "timestamp_seconds": 11.95
+        }
+      ],
+      "event_id": "88677418-ef82-484c-86fb-dbd1ed81f102",
+      "output": "docs/relatorio/assets/erro_pvc_sarjeta_v05.jpg",
+      "output_sha256": "c6b263cdfd10868eef75d3b703778119a4f8bd6adb6af3880b1d2518403e031b"
+    },
+    {
+      "role": "no_detection_reviewed_water_negative",
+      "source_path": "Outdoor/Wet surface/Top view/image707.jpeg",
+      "source_author": "Kailas Patil; Sonali Bhutad",
+      "source_url": "https://data.mendeley.com/datasets/y6zyrnxbfm/4",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0",
+      "changes": "Cópia byte a byte do artefato real, sem alteração de pixels, caixas ou valores.",
+      "evidence": "resultados/local/v4/evaluation/regression179_evaluation.json#extra119/test/water_extra_49e2d3853707e266",
+      "caption": "Superfície úmida revisada como negativa de água livre; nenhuma marcação do perfil 0.5. Fonte Kailas Patil e Sonali Bhutad, CC BY 4.0. Não certifica ausência de todas as classes nem segurança do local.",
+      "source_result": "dados/processed/extra_test_v3/images/test/water_extra_49e2d3853707e266.jpeg",
+      "source_result_sha256": "49e2d3853707e2668231c7772aa8e10f4fa430bc2cf6fa68bca6c0c2026e8324",
+      "profile": "pipeline-4c5c993223219929",
+      "evidence_record_id": "extra119/test/water_extra_49e2d3853707e266",
+      "detections": [],
+      "scope": "Regressão extra119 conhecida; negativa revisada de água livre. Ausência de marcações não certifica segurança ou ausência de todas as classes.",
+      "output": "docs/relatorio/assets/negativo_superficie_umida_v05.jpg",
+      "output_sha256": "49e2d3853707e2668231c7772aa8e10f4fa430bc2cf6fa68bca6c0c2026e8324"
+    },
+    {
+      "role": "test_confusion_matrix",
+      "scope": "RAW YOLO ONLY, test60, confidence .001 and default matching IoU .5; normalized predicted-row true-column; background included. P/R table uses best-F1 operating point, so diagonals are not the same recall.",
+      "caption": "Matriz de confusão normalizada do YOLO v3 isolado no teste. Eixos: classe prevista por linha e real por coluna. A matriz e a tabela P/R usam pontos de operação distintos.",
+      "source_result": "resultados/local/evaluation/candidate_v3_on_water_regions_v3/confusion_matrix_normalized.png",
+      "source_result_sha256": "b48df3fb024311947a191543d79c57618981cc643df49406df6f2f811c4f2421",
+      "changes": "Cópia byte a byte do artefato real, sem alteração de pixels, caixas ou valores.",
+      "source_author": "Equipe DrenaHub; gráficos gerados pelo Ultralytics 8.4.215",
+      "source_url": "https://github.com/Torugo0/drenahub-drenavision",
+      "license": "AGPL-3.0-only (código gerador); resultados experimentais da equipe",
+      "license_url": "https://www.gnu.org/licenses/agpl-3.0.html",
+      "profile": "YOLO26n customizado v3 isolado; best.pt SHA12b9e86f...",
+      "evidence": "resultados/metrics/v3/candidate_master_test_metrics.json",
+      "output": "docs/relatorio/assets/matriz_confusao_yolo_v3_teste60.png",
+      "output_sha256": "b48df3fb024311947a191543d79c57618981cc643df49406df6f2f811c4f2421"
+    },
+    {
+      "role": "test_precision_recall_curve",
+      "scope": "RAW YOLO ONLY; 60-image test. AP50 legend .571 trash/.357 water/.526 animal/.485 mean.",
+      "caption": "Curva precisão-recall do YOLO v3 isolado no teste de 60 imagens; não representa o composto 0.5.",
+      "source_result": "resultados/local/evaluation/candidate_v3_on_water_regions_v3/BoxPR_curve.png",
+      "source_result_sha256": "b71a7df5ae196a9be4bc0db80e1046553751f2d5a61408867851db1d1314baad",
+      "changes": "Cópia byte a byte do artefato real, sem alteração de pixels, caixas ou valores.",
+      "source_author": "Equipe DrenaHub; gráficos gerados pelo Ultralytics 8.4.215",
+      "source_url": "https://github.com/Torugo0/drenahub-drenavision",
+      "license": "AGPL-3.0-only (código gerador); resultados experimentais da equipe",
+      "license_url": "https://www.gnu.org/licenses/agpl-3.0.html",
+      "profile": "YOLO26n customizado v3 isolado; best.pt SHA12b9e86f...",
+      "evidence": "resultados/metrics/v3/candidate_master_test_metrics.json",
+      "output": "docs/relatorio/assets/curva_pr_yolo_v3_teste60.png",
+      "output_sha256": "b71a7df5ae196a9be4bc0db80e1046553751f2d5a61408867851db1d1314baad"
+    },
+    {
+      "role": "training_curves_csv63",
+      "source_path": "resultados/metrics/v3/training_results.csv",
+      "source_sha256": "030b5a1f6c2ed0e6b9e255eca6d4565324e75594f49bc9bf74bc9e26eb035b70",
+      "source_author": "Equipe DrenaVision",
+      "license": "Elaboração própria; licença do repositório",
+      "changes": "Gráfico Matplotlib de perdas de caixa e mAP de validação a partir das 63 épocas do CSV, sem suavização ou resultados de teste; época43 indicada.",
+      "scope": "Treinamento/validação YOLOv3; não teste nem mAP do composto0.5",
+      "output": "docs/relatorio/assets/curva_treinamento_yolo_v3.png",
+      "output_sha256": "3f3611cc606cae3270b9126960b930387876fa864996bec4d9c31be5c0b4bbab"
+    }
+  ]
+}

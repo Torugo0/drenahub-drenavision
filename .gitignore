@@ -24,6 +24,10 @@ dados/cache/
 !dados/manifests/
 !dados/manifests/**
 
+# Local user regression photos outside the licensed example catalogue
+dados/examples/teste.jpg
+dados/examples/teste1.jpg
+
 # Model runs, local evidence and databases
 *.pt
 *.onnx

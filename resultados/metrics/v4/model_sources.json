@@ -1,0 +1,187 @@
+{
+  "status": "candidate_components_under_evaluation; not a promotion or final-accuracy record",
+  "custom_detector": {
+    "checkpoint": "resultados/local/models/best.pt",
+    "checkpoint_sha256": "12b9e86f223366c3f2ef8c2308f0e1140cda08c55ab55e281e58d300fd554b4b",
+    "training": "Preserved custom YOLO v3 training; no new v4 training asserted.",
+    "training_manifest": "resultados/metrics/v3/training_manifest.json"
+  },
+  "candidate_components": [
+    {
+      "role": "candidate_open_vocabulary_object_detector",
+      "training_by_this_revision": false,
+      "manifest_path": "resultados/local/models/grounding_dino_tiny/download_manifest.json",
+      "manifest_sha256": "1dae298c783eddf13812828e06a35e2f2e4c1203de4e65ca6e4752d80389830f",
+      "schema_version": 1,
+      "repository": "IDEA-Research/grounding-dino-tiny",
+      "revision": "a2bb814dd30d776dcf7e30523b00659f4f141c71",
+      "model_card_url": "https://huggingface.co/IDEA-Research/grounding-dino-tiny/blob/a2bb814dd30d776dcf7e30523b00659f4f141c71/README.md",
+      "license": "Apache-2.0",
+      "license_url": "https://www.apache.org/licenses/LICENSE-2.0.txt",
+      "weights_format": "safetensors",
+      "remote_code_required": false,
+      "download_scope": "weights, configuration, tokenizer, processor and official license; no pickle or executable code",
+      "files": [
+        {
+          "name": "added_tokens.json",
+          "sha256": "909e96cb32d92ce728a01bc99850cbba26196d74115c17ebeb019275412588f2",
+          "bytes": 82,
+          "source_url": "https://huggingface.co/IDEA-Research/grounding-dino-tiny/resolve/a2bb814dd30d776dcf7e30523b00659f4f141c71/added_tokens.json"
+        },
+        {
+          "name": "config.json",
+          "sha256": "eec82c5ab66e16df12a9a212e68ac011779927c2536cf9078658e35d85f0c67a",
+          "bytes": 1644,
+          "source_url": "https://huggingface.co/IDEA-Research/grounding-dino-tiny/resolve/a2bb814dd30d776dcf7e30523b00659f4f141c71/config.json"
+        },
+        {
+          "name": "model.safetensors",
+          "sha256": "1a2412ef99bd74bcd3c2a246fa1e48581f8889a1300c9051974741314fc042f3",
+          "bytes": 689359096,
+          "source_url": "https://huggingface.co/IDEA-Research/grounding-dino-tiny/resolve/a2bb814dd30d776dcf7e30523b00659f4f141c71/model.safetensors"
+        },
+        {
+          "name": "preprocessor_config.json",
+          "sha256": "8454179ba95e2ad22947835aad7b45862a601fc0055ab88bf1ee70892d3aea60",
+          "bytes": 457,
+          "source_url": "https://huggingface.co/IDEA-Research/grounding-dino-tiny/resolve/a2bb814dd30d776dcf7e30523b00659f4f141c71/preprocessor_config.json"
+        },
+        {
+          "name": "special_tokens_map.json",
+          "sha256": "b6d346be366a7d1d48332dbc9fdf3bf8960b5d879522b7799ddba59e76237ee3",
+          "bytes": 125,
+          "source_url": "https://huggingface.co/IDEA-Research/grounding-dino-tiny/resolve/a2bb814dd30d776dcf7e30523b00659f4f141c71/special_tokens_map.json"
+        },
+        {
+          "name": "tokenizer.json",
+          "sha256": "d241a60d5e8f04cc1b2b3e9ef7a4921b27bf526d9f6050ab90f9267a1f9e5c66",
+          "bytes": 711396,
+          "source_url": "https://huggingface.co/IDEA-Research/grounding-dino-tiny/resolve/a2bb814dd30d776dcf7e30523b00659f4f141c71/tokenizer.json"
+        },
+        {
+          "name": "tokenizer_config.json",
+          "sha256": "d40ab645b68211910b9170d22433d43186a6ec8ee6fd10ba170524b25bf4fb56",
+          "bytes": 1237,
+          "source_url": "https://huggingface.co/IDEA-Research/grounding-dino-tiny/resolve/a2bb814dd30d776dcf7e30523b00659f4f141c71/tokenizer_config.json"
+        },
+        {
+          "name": "vocab.txt",
+          "sha256": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3",
+          "bytes": 231508,
+          "source_url": "https://huggingface.co/IDEA-Research/grounding-dino-tiny/resolve/a2bb814dd30d776dcf7e30523b00659f4f141c71/vocab.txt"
+        },
+        {
+          "name": "LICENSE-APACHE-2.0.txt",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "bytes": 11358,
+          "source_url": "https://www.apache.org/licenses/LICENSE-2.0.txt"
+        }
+      ]
+    },
+    {
+      "role": "candidate_crop_verifier",
+      "training_by_this_revision": false,
+      "manifest_path": "resultados/local/models/siglip2_base_patch16_224/download_manifest.json",
+      "manifest_sha256": "dfcd66b650226d874f4fa95aa4e4c6155072561ce765b7cad3285d7d4cd78980",
+      "schema_version": 1,
+      "repository": "google/siglip2-base-patch16-224",
+      "revision": "75de2d55ec2d0b4efc50b3e9ad70dba96a7b2fa2",
+      "model_card_url": "https://huggingface.co/google/siglip2-base-patch16-224/blob/75de2d55ec2d0b4efc50b3e9ad70dba96a7b2fa2/README.md",
+      "license": "Apache-2.0",
+      "license_url": "https://www.apache.org/licenses/LICENSE-2.0.txt",
+      "weights_format": "safetensors",
+      "remote_code_required": false,
+      "purpose": "Optional zero-shot crop verification; downloading does not activate or calibrate it",
+      "processor": "AutoProcessor with use_fast=True; GemmaTokenizerFast uses tokenizer.json without SentencePiece",
+      "inference_notes": "Fixed-resolution SigLIP 2 uses the Siglip architecture; lowercase text; padding=max_length,max_length=64; score semantics require validation",
+      "files": [
+        {
+          "name": "config.json",
+          "sha256": "fe8b5fe6d5734360678fd71c11c21e1ea3364bd8598d34295d9206335973ffd7",
+          "bytes": 253,
+          "source_url": "https://huggingface.co/google/siglip2-base-patch16-224/resolve/75de2d55ec2d0b4efc50b3e9ad70dba96a7b2fa2/config.json"
+        },
+        {
+          "name": "model.safetensors",
+          "sha256": "612923381c76ec5a9bed335d1c48827e3f2e506ac31b044b63b2031fadee6a0b",
+          "bytes": 1500800904,
+          "source_url": "https://huggingface.co/google/siglip2-base-patch16-224/resolve/75de2d55ec2d0b4efc50b3e9ad70dba96a7b2fa2/model.safetensors"
+        },
+        {
+          "name": "preprocessor_config.json",
+          "sha256": "9b36b57ebaf20f09bf4c22100ccc21877ea6bfe5aead0c00c59f8af8ccefacfc",
+          "bytes": 394,
+          "source_url": "https://huggingface.co/google/siglip2-base-patch16-224/resolve/75de2d55ec2d0b4efc50b3e9ad70dba96a7b2fa2/preprocessor_config.json"
+        },
+        {
+          "name": "special_tokens_map.json",
+          "sha256": "baec30ea10906f16adb8c18af7a34023002c1746542612b8b41c9f09e1351351",
+          "bytes": 636,
+          "source_url": "https://huggingface.co/google/siglip2-base-patch16-224/resolve/75de2d55ec2d0b4efc50b3e9ad70dba96a7b2fa2/special_tokens_map.json"
+        },
+        {
+          "name": "tokenizer.json",
+          "sha256": "cb9140fae3ac5122c972d37adf83e1248471a38147ad76f8215c8872c6fd8322",
+          "bytes": 34363039,
+          "source_url": "https://huggingface.co/google/siglip2-base-patch16-224/resolve/75de2d55ec2d0b4efc50b3e9ad70dba96a7b2fa2/tokenizer.json"
+        },
+        {
+          "name": "tokenizer_config.json",
+          "sha256": "14afe629fe4959b9e0d51e1852b8d9f7ad074f90a1a7125a4fcdd17f06e78fc8",
+          "bytes": 47164,
+          "source_url": "https://huggingface.co/google/siglip2-base-patch16-224/resolve/75de2d55ec2d0b4efc50b3e9ad70dba96a7b2fa2/tokenizer_config.json"
+        },
+        {
+          "name": "LICENSE-APACHE-2.0.txt",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "bytes": 11358,
+          "source_url": "https://www.apache.org/licenses/LICENSE-2.0.txt"
+        }
+      ]
+    }
+  ],
+  "unchanged_water_reference": {
+    "active_profile": "resultados/metrics/v3/active_profile.json",
+    "image_model_version": "pipeline-1314fcfa94f5f8cf",
+    "video_model_version": "pipeline-4d613d5a1d82cb61",
+    "water": {
+      "repository": "nvidia/segformer-b1-finetuned-ade-512-512",
+      "revision": "a775b4f5dcb2179e57006dca0e268281306412ef",
+      "license": "NVIDIA Source Code License for SegFormer; non-commercial research/evaluation only",
+      "license_url": "https://raw.githubusercontent.com/NVlabs/SegFormer/master/LICENSE",
+      "file_sha256": {
+        "model.safetensors": "e0802e077c195d9dbaf48c69b94946ef6a3ae5b6665176fedf363e5e63a1ec93",
+        "config.json": "8f1b7bcd2e1835ef0ef3a04a0d4dfe87ff9a6374253e7a3ca1751de812a420ff",
+        "preprocessor_config.json": "8039d1d210abaa7117ad78e58cdfd6141a2ec72c03dae891b3cd76737e422c6c",
+        "download_manifest.json": "d22e86d4ad23c1c65bf4cfebc730d69501e2db98a800d4ce047778ed222a9dc6",
+        "LICENSE-NVIDIA-SegFormer.txt": "b5a6a3804b12c1b4d37e1e45bcc31761a2e69064fd75b48da13d62e30d69b406"
+      },
+      "policy": {
+        "version": "ade-water-mask-v1",
+        "processing_size": 512,
+        "pixel_confidence": 0.95,
+        "min_area_fraction": 0.05,
+        "water_labels": {
+          "21": "water",
+          "26": "sea",
+          "60": "river",
+          "109": "swimming pool",
+          "113": "waterfall",
+          "128": "lake"
+        },
+        "postprocessing": "bilinear logits at bounded processing_size; nearest labels and bilinear water-family posterior to original size; pixel confidence gate; 8-connected components; actual pixel-area gate; no fill/dilation"
+      },
+      "profile_sha256": "808e8206473b83053f7f675b1d559f6d03a3d26079375a7e9eb71b7d4229527e",
+      "model_version": "water-808e8206473b"
+    },
+    "video_water_confirmation_seconds": 0.5,
+    "retuned_in_v4": false,
+    "presence_reference": "resultados/metrics/v3/val_water_presence_review.json",
+    "presence_counts": {
+      "positive": 24,
+      "negative": 35,
+      "unknown": 1
+    }
+  },
+  "external_pretraining_note": "External pretrained components remain fixed. Their original training data cannot be audited here for overlap with public source images. New project image identities do not prove absence from external pretraining."
+}
