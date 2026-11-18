@@ -39,7 +39,7 @@ duração mínima ou máxima; a explicação técnica está no relatório e nest
 | Solução | Analisar fotos e vídeos, marcar os objetos encontrados e orientar a revisão do local |
 | Tecnologia | YOLO26n customizado v3, Grounding DINO Tiny, verificador SigLIP 2, SegFormer B1 para água, FastAPI, Streamlit e histórico SQLite |
 | ODS | 3, 6, 11 e 13: apoio à inspeção preventiva e à manutenção da drenagem |
-| Entrega | Três arquivos para o professor: PDF separado, vídeo MP4 anexado e TXT com o link do GitHub; código, documentação e PDF também no repositório; publicação pública em preparação |
+| Entrega | Três arquivos para o professor: PDF separado, vídeo MP4 anexado e TXT com o link do GitHub; código, documentação e PDF publicados neste repositório público |
 
 ## Abrir e usar
 
@@ -113,9 +113,9 @@ permanece preservada como histórico em `resultados/local/gravacao/`.
 Essa gravação antiga não comprova o comportamento da versão 0.5.
 
 Antes do envio, a equipe deve abrir o PDF, reproduzir o MP4, conferir o TXT e
-concluir a entrega na tarefa da disciplina. A publicação pública do repositório
-foi autorizada e está em preparação; o acesso sem login será confirmado após
-o envio do código e do relatório. O envio acadêmico continua a cargo da equipe.
+concluir a entrega na tarefa da disciplina. O repositório, o PDF e os assets
+da release foram conferidos sem autenticação. O PDF baixado do GitHub tem
+o mesmo hash da cópia anexada. O envio acadêmico continua a cargo da equipe.
 
 ## Organização das pastas
 
@@ -204,8 +204,8 @@ Os dois componentes adicionais vêm de preparadores com origem oficial, revisão
 e hashes fixados: `prepare_object_model.py` e `prepare_verifier_model.py`.
 Eles já estão presentes neste computador; em uma instalação nova, o download
 adicional é de aproximadamente **2,2 GB**. A API não baixa pesos durante a análise.
-A publicação pública do repositório está em preparação. O estado de acesso
-será confirmado após o envio e a verificação sem autenticação.
+O repositório é público. Código, PDF e assets da release foram conferidos
+sem login; os modelos auxiliares permanecem disponíveis por seus preparadores.
 
 ## Resultados reais e alcance
 

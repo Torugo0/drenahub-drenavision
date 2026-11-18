@@ -1,5 +1,5 @@
 {
-  "status": "validated_local_ready_for_publication",
+  "status": "validated_and_publicly_published",
   "validated_at_utc": "2026-11-18T02:15:35.606233+00:00",
   "pdf": "docs/relatorio/DrenaVision_Applied_Computer_Vision_FIAP.pdf",
   "pdf_sha256": "d77a3a5392b20bcd87b6519082204856a0a09fa2b84049cf1bc90c459c0a2f87",
@@ -146,8 +146,118 @@
   },
   "delivery_format": "Three separate attachments: original MP4, TXT repository link, PDF; source and PDF also in public GitHub repository",
   "publication": {
-    "status": "pending_remote_publish_and_anonymous_access_check",
-    "repository": "https://github.com/Torugo0/drenahub-drenavision"
+    "verified_at_utc": "2026-11-18T02:19:38.320288+00:00",
+    "repository": "https://github.com/Torugo0/drenahub-drenavision",
+    "visibility": "public",
+    "anonymous_access_verified": true,
+    "authentication": "No Authorization header, credentials, cookies, GitHub CLI or authenticated connector used for these requests",
+    "checks": [
+      {
+        "name": "repository",
+        "url": "https://github.com/Torugo0/drenahub-drenavision",
+        "status": 200,
+        "method": "HEAD",
+        "anonymous": true,
+        "final_host": "github.com"
+      },
+      {
+        "name": "pdf_page",
+        "url": "https://github.com/Torugo0/drenahub-drenavision/blob/main/docs/relatorio/DrenaVision_Applied_Computer_Vision_FIAP.pdf",
+        "status": 200,
+        "method": "HEAD",
+        "anonymous": true,
+        "final_host": "github.com"
+      },
+      {
+        "name": "pdf_download",
+        "url": "https://raw.githubusercontent.com/Torugo0/drenahub-drenavision/main/docs/relatorio/DrenaVision_Applied_Computer_Vision_FIAP.pdf",
+        "status": 200,
+        "method": "GET",
+        "anonymous": true,
+        "final_host": "raw.githubusercontent.com",
+        "sha256": "d77a3a5392b20bcd87b6519082204856a0a09fa2b84049cf1bc90c459c0a2f87",
+        "matches_local": true,
+        "bytes": 2352468
+      },
+      {
+        "name": "readme",
+        "url": "https://raw.githubusercontent.com/Torugo0/drenahub-drenavision/main/README.md",
+        "status": 200,
+        "method": "GET",
+        "anonymous": true,
+        "final_host": "raw.githubusercontent.com",
+        "sha256": "17633fcb8ffe9db8e4abd3e882e819986666c8bb4388cf375fe8199a72203714",
+        "matches_local": true,
+        "bytes": 20758
+      },
+      {
+        "name": "sealed_candidate",
+        "url": "https://raw.githubusercontent.com/Torugo0/drenahub-drenavision/main/resultados/metrics/v4/frozen_candidate.json",
+        "status": 200,
+        "method": "GET",
+        "anonymous": true,
+        "final_host": "raw.githubusercontent.com",
+        "sha256": "94d20cce07114fe4b6c9e58b4a86daaaebea191989dba9a243c01fcbc5e4b93c",
+        "matches_local": true,
+        "bytes": 10744
+      },
+      {
+        "name": "sealed_configuration",
+        "url": "https://raw.githubusercontent.com/Torugo0/drenahub-drenavision/main/ferramentas/configs/inference_v4.json",
+        "status": 200,
+        "method": "GET",
+        "anonymous": true,
+        "final_host": "raw.githubusercontent.com",
+        "sha256": "35b43502b6957e981895c23a3ff2e2f80e0fdd2c736990f5d61ac96f06e86cbb",
+        "matches_local": true,
+        "bytes": 804
+      },
+      {
+        "name": "release_best.pt",
+        "url": "https://github.com/Torugo0/drenahub-drenavision/releases/download/v0.4.0-pipeline-v3/best.pt",
+        "status": 200,
+        "method": "HEAD",
+        "anonymous": true,
+        "final_host": "release-assets.githubusercontent.com"
+      },
+      {
+        "name": "release_best_v2.pt",
+        "url": "https://github.com/Torugo0/drenahub-drenavision/releases/download/v0.4.0-pipeline-v3/best_v2.pt",
+        "status": 200,
+        "method": "HEAD",
+        "anonymous": true,
+        "final_host": "release-assets.githubusercontent.com"
+      },
+      {
+        "name": "release_water_model.zip",
+        "url": "https://github.com/Torugo0/drenahub-drenavision/releases/download/v0.4.0-pipeline-v3/water_model.zip",
+        "status": 200,
+        "method": "HEAD",
+        "anonymous": true,
+        "final_host": "release-assets.githubusercontent.com"
+      },
+      {
+        "name": "release_exemplos_reais.zip",
+        "url": "https://github.com/Torugo0/drenahub-drenavision/releases/download/v0.4.0-pipeline-v3/exemplos_reais.zip",
+        "status": 200,
+        "method": "HEAD",
+        "anonymous": true,
+        "final_host": "release-assets.githubusercontent.com"
+      }
+    ],
+    "verified_content_commit": "21526ae",
+    "sealed_files_preserved_byte_for_byte_by_git_attributes": true
   },
-  "academic_submission": "Performed by team; not sent by this software"
+  "academic_submission": "Performed by team; not sent by this software",
+  "local_markdown_links_verified": 128,
+  "broken_local_links": 0,
+  "pip_check": "No broken requirements found",
+  "service_health_at_final_check": {
+    "api_version": "0.5.0",
+    "api_model_loaded": true,
+    "api_port": 8000,
+    "ui_port_this_machine": 8502,
+    "ui_status": 200,
+    "ui_port_note": "8501 is in use by a separate project; iniciar.ps1 -PortaInterface 8502 preserves it."
+  }
 }

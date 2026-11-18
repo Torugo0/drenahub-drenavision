@@ -62,7 +62,7 @@ títulos e palavras-chave não entram nesses denominadores.
 - [x] Estrutura do código e histórico Git auditados; caches, `.env`, banco, datasets completos e pesos fora do versionamento de código.
 - [x] Guias e avisos de terceiros atualizados; configurações e métricas históricas úteis preservadas.
 - [x] Vídeo original copiado sem alteração, com hash e decodificação integral conferidos.
-- [ ] Publicação do código e PDF no GitHub e conferência de acesso sem login: em execução nesta revisão.
+- [x] Código e PDF publicados no GitHub público; dez verificações anônimas HTTP 200, incluindo página/PDF, README, configuração, manifesto selado e quatro assets da release. PDF e arquivos selados baixados com hashes idênticos aos locais.
 
 ## Formato final da entrega
 

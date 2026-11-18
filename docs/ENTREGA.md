@@ -36,7 +36,7 @@ o vídeo pode concentrar-se na demonstração simples da solução funcionando.
 |---|---|
 | Detecção de objetos e/ou realidade aumentada | Aplicação de detecção em fotos e vídeos, com três classes técnicas e revisão humana |
 | Treinamento customizado compatível com o problema | YOLO26n v3: 63 épocas executadas, melhor checkpoint na 43, manifesto, logs e hash; a revisão 0.5 mantém esse treino |
-| Repositório GitHub com documentação e código | [Repositório real](https://github.com/Torugo0/drenahub-drenavision); publicação pública autorizada, em preparação, com confirmação de acesso após o envio |
+| Repositório GitHub com documentação e código | [Repositório público](https://github.com/Torugo0/drenahub-drenavision); código, PDF e assets da release conferidos sem autenticação |
 | Vídeo da solução funcionando | `demo_drena_vision.mp4` fornecido pela equipe, 2min13,20s, enviado como arquivo MP4 anexado |
 | PDF com título, integrantes, resumo, introdução, objetivo, ferramentas, metodologia, resultados e conclusão | Relatório oficial em `docs/relatorio/`, com fonte editável e checklist |
 
@@ -107,21 +107,21 @@ fora do Git. As fontes e licenças estão registradas nos manifestos e em
 ## Checklist de envio
 
 - [x] Integrantes e RM confirmados pelo responsável pelo projeto.
-- [x] Código, preparação dos dados, treino, avaliação, API e interface disponíveis localmente.
+- [x] Código, preparação dos dados, treino, avaliação, API e interface publicados no GitHub.
 - [x] Treinamento customizado e checkpoint sustentados por logs e hashes.
 - [x] Métricas, classes com baixo desempenho e erros preservados.
 - [x] Vídeo simples fornecido e verificado para envio como MP4 anexado.
-- [ ] Conferir os três arquivos: PDF separado, MP4 e TXT com link do GitHub.
-- [ ] Concluir a publicação pública do repositório e conferir acesso sem login.
+- [x] Conferir os três arquivos: PDF separado, MP4 e TXT com link do GitHub.
+- [x] Concluir a publicação pública do repositório e conferir acesso sem login.
 - [ ] Manter os arquivos e o acesso ao repositório disponíveis durante a correção.
-- [ ] Conferir o PDF final, os três integrantes/RM e os arquivos exigidos.
+- [x] Conferir o PDF final, os três integrantes/RM e os arquivos exigidos.
 - [ ] Confirmar a turma e um integrante concluir o envio no Teams.
 
 Prazo geral do enunciado: **19/11/2026 às 23h55**, Teams da disciplina.
 A entrega é realizada por um integrante, identificando toda a equipe. O
-responsável enviará os três arquivos separados. A publicação pública do
-repositório foi autorizada e está em preparação; sua conclusão será registrada
-após a verificação de acesso. O envio acadêmico ainda deve ser feito pela equipe.
+responsável enviará os três arquivos separados. O repositório foi tornado
+público e seu acesso foi verificado sem autenticação, incluindo o PDF e
+os assets da release. O envio acadêmico ainda deve ser feito pela equipe.
 
 ## Contribuição aos ODS
 
